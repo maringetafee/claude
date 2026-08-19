@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAKEMYWEB - Creamos tu página web</title>
+<meta name="description" content="Diseñamos y desarrollamos webs a medida para negocios. Presupuesto claro, calculadora instantánea y planes de mantenimiento.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#050313',
+          ink: '#f3f1ee',
+          muted: '#c9c5c0',
+          accent: '#a855f7',
+        },
+        fontFamily: {
+          sans: ['"General Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<style>
+  :root{
+    --bg:#050313;
+    --ink:#f3f1ee;
+    --muted:#c9c5c0;
+    --hero-sub:#d7d3cb;
+    --accent:#a855f7;
+    --grad: linear-gradient(100deg,#6366f1 0%,#a855f7 55%,#fcd34d 100%);
+    --line: rgba(255,255,255,0.10);
+  }
+  html{scroll-behavior:smooth;background:var(--bg);}
+  body{color:var(--ink);font-family:'General Sans',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  section{scroll-margin-top:88px;}
+
+  .grad-text{
+    background-image:var(--grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .grad-bg{background-image:var(--grad);}
+
+  .liquid-glass{
+    background: rgba(255,255,255,0.02);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(6px);
+    border:none;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.10);
+    position:relative;
+    overflow:hidden;
+  }
+  .liquid-glass::before{
+    content:"";
+    position:absolute; inset:0; border-radius:inherit; padding:1.2px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.12) 22%, rgba(255,255,255,0) 42%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.12) 80%, rgba(255,255,255,0.4) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events:none;
+  }
+
+  /* hero glow (behind hero text, above the background video) */
+  .hero-glow{
+    width:min(984px,90vw); height:527px; opacity:.85;
+    background:#0a0620; filter:blur(82px);
+    position:absolute; top:52%; left:50%; transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+
+  /* full-page animated background video, extends behind every section */
+  .bg-video-fixed{
+    position:fixed; inset:0; z-index:-30; overflow:hidden;
+    transform:translate3d(0,0,0);
+    transition:transform .5s cubic-bezier(.16,1,.3,1);
+  }
+  .bg-video-fixed video{
+    position:absolute; top:50%; left:50%;
+    width:100%; height:100%; object-fit:cover;
+    transform:translate3d(-50%,-50%,0) scale(1.06);
+    opacity:0; will-change:opacity;
+  }
+  .bg-overlay{
+    position:fixed; inset:0; z-index:-25; pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(5,3,19,.32) 0%, rgba(5,3,19,.52) 20%, rgba(5,3,19,.80) 42%, rgba(5,3,19,.92) 65%, var(--bg) 100%);
+  }
+  .bg-spotlight{
+    position:fixed; inset:0; z-index:-20; pointer-events:none;
+    opacity:0; transition:opacity .5s ease;
+    background: radial-gradient(560px circle at var(--mx,50%) var(--my,30%), rgba(168,85,247,.24), rgba(99,102,241,.10) 42%, transparent 70%);
+    mix-blend-mode: screen;
+  }
+  .bg-spotlight.on{ opacity:1; }
+
+  /* marquee */
+  .marquee-track{ animation: marquee 26s linear infinite; }
+  @keyframes marquee{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* reveal */
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* custom radio */
+  .radio-dot{ width:20px;height:20px;border-radius:9999px;border:2px solid rgba(255,255,255,.25); position:relative; flex-shrink:0; transition:border-color .15s ease; }
+  .radio-dot::after{ content:""; position:absolute; inset:0; margin:auto; width:8px;height:8px;border-radius:9999px; background:var(--accent); opacity:0; transition:opacity .15s ease; }
+  input:checked ~ .radio-dot{ border-color:var(--accent); }
+  input:checked ~ .radio-dot::after{ opacity:1; }
+
+  /* custom checkbox */
+  .check-box{ width:20px;height:20px;border-radius:6px;border:2px solid rgba(255,255,255,.25); position:relative; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color .15s ease, background .15s ease; }
+  input:checked ~ .check-box{ border-color:var(--accent); background:var(--accent); }
+  .check-box svg{ opacity:0; transition:opacity .15s ease; width:12px;height:12px; }
+  input:checked ~ .check-box svg{ opacity:1; }
+
+  /* range slider */
+  input[type=range]{ accent-color:var(--accent); height:6px; }
+  input[type=range]::-webkit-slider-runnable-track{ height:6px;border-radius:9999px;background:rgba(255,255,255,.12); }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:18px;height:18px;border-radius:9999px; background:var(--accent); border:3px solid #f3f1ee; margin-top:-6px; cursor:pointer; }
+  input[type=range]::-moz-range-track{ height:6px;border-radius:9999px;background:rgba(255,255,255,.12); }
+  input[type=range]::-moz-range-thumb{ width:18px;height:18px;border-radius:9999px; background:var(--accent); border:3px solid #f3f1ee; cursor:pointer; }
+
+  /* browser frame */
+  .browser-frame{ border-radius:16px; border:1px solid var(--line); background:#0a0716; overflow:hidden; }
+  .browser-bar{ height:34px; display:flex; align-items:center; gap:6px; padding:0 12px; background:#0d0a1a; border-bottom:1px solid var(--line); }
+  .browser-dot{ width:8px;height:8px;border-radius:9999px; }
+
+  /* accordion */
+  .faq-item[open] .faq-icon{ transform:rotate(45deg); }
+  .faq-icon{ transition:transform .25s ease; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary{ cursor:pointer; list-style:none; }
+
+  /* carousel */
+  .snap-x-mand{ scroll-snap-type:x mandatory; }
+  .snap-card{ scroll-snap-align:start; }
+  .no-scrollbar::-webkit-scrollbar{ display:none; }
+  .no-scrollbar{ scrollbar-width:none; -ms-overflow-style:none; }
+
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{ animation:none; }
+    .bg-video-fixed{ transition:none; transform:none !important; }
+    .bg-spotlight{ display:none; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body class="text-ink">
+
+<!-- BACKGROUND: looping video, extends behind the whole page, reacts to cursor -->
+<div class="bg-video-fixed" id="bgVideoWrap">
+  <video id="bgVideo" src="assets/hero-bg.mp4" muted playsinline webkit-playsinline="true" preload="auto" disablepictureinpicture></video>
+</div>
+<div class="bg-overlay"></div>
+<div class="bg-spotlight" id="bgSpotlight"></div>
+
+<!-- NAVBAR -->
+<header class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-bg/75 backdrop-blur-md">
+  <nav class="max-w-7xl mx-auto h-[72px] px-6 lg:px-10 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2 shrink-0">
+      <span class="w-7 h-7 rounded-lg grad-bg"></span>
+      <span class="font-semibold tracking-tight text-lg">MAKEMYWEB</span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-8 text-sm text-ink/80">
+      <a href="#servicios" class="hover:text-ink transition-colors">Servicios</a>
+      <a href="#presupuesto" class="hover:text-ink transition-colors">Precios</a>
+      <a href="#proceso" class="hover:text-ink transition-colors">Proceso</a>
+      <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href="#contacto" class="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">
+        Pide tu presupuesto
+      </a>
+      <button id="menuBtn" aria-label="Abrir menú" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full border border-white/15">
+        <i class="ph ph-list text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-white/10 bg-bg/95 backdrop-blur-md">
+    <div class="px-6 py-4 flex flex-col gap-4 text-sm">
+      <a href="#servicios" class="py-1">Servicios</a>
+      <a href="#presupuesto" class="py-1">Precios</a>
+      <a href="#proceso" class="py-1">Proceso</a>
+      <a href="#faq" class="py-1">FAQ</a>
+      <a href="#contacto" class="inline-flex items-center justify-center h-10 rounded-full bg-ink text-bg font-medium">Pide tu presupuesto</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="relative min-h-[100dvh] flex flex-col overflow-visible pt-[72px]">
+  <div class="hero-glow"></div>
+
+  <div class="relative z-10 flex-1 flex items-center justify-center px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="font-normal leading-[1.03] tracking-[-0.02em]" style="font-size:clamp(2.75rem,8vw,6.5rem)">
+        Diseñamos tu <span class="grad-text">web</span>
+      </h1>
+      <p class="mt-6 text-lg leading-8 max-w-md mx-auto" style="color:var(--hero-sub)">
+        Sitios a medida, listos en semanas, sin líos técnicos ni sorpresas en el precio.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="#contacto" class="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full bg-ink text-bg font-medium hover:bg-white transition-colors">
+          Pide tu presupuesto
+        </a>
+        <a href="#presupuesto" class="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full liquid-glass text-ink font-medium hover:bg-white/5 transition-colors">
+          Calcula el precio
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- marquee -->
+  <div class="relative z-10 pb-10 px-6">
+    <div class="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+      <p class="text-ink/50 text-sm leading-snug shrink-0 max-w-[10rem]">Negocios que ya confían en nosotros</p>
+      <div class="overflow-hidden flex-1 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div class="flex gap-16 w-max marquee-track">
+          <div class="flex gap-16 shrink-0" id="marqueeSetA"></div>
+          <div class="flex gap-16 shrink-0" id="marqueeSetB" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWCASE -->
+<section class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal max-w-2xl mb-14">
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Así lucen los sitios que creamos</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="reveal browser-frame md:translate-y-2">
+        <div class="browser-bar">
+          <span class="browser-dot bg-red-400/70"></span><span class="browser-dot bg-yellow-400/70"></span><span class="browser-dot bg-green-400/70"></span>
+        </div>
+        <img src="https://picsum.photos/seed/makemyweb-restaurante/640/440" alt="Ejemplo de web para restaurante" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <p class="text-sm text-ink/60">Restaurante</p>
+        </div>
+      </div>
+      <div class="reveal browser-frame md:-translate-y-4">
+        <div class="browser-bar">
+          <span class="browser-dot bg-red-400/70"></span><span class="browser-dot bg-yellow-400/70"></span><span class="browser-dot bg-green-400/70"></span>
+        </div>
+        <img src="https://picsum.photos/seed/makemyweb-tienda/640/440" alt="Ejemplo de tienda online" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <p class="text-sm text-ink/60">Tienda online</p>
+        </div>
+      </div>
+      <div class="reveal browser-frame md:translate-y-2">
+        <div class="browser-bar">
+          <span class="browser-dot bg-red-400/70"></span><span class="browser-dot bg-yellow-400/70"></span><span class="browser-dot bg-green-400/70"></span>
+        </div>
+        <img src="https://picsum.photos/seed/makemyweb-clinica/640/440" alt="Ejemplo de web para clínica" class="w-full h-56 object-cover">
+        <div class="p-4">
+          <p class="text-sm text-ink/60">Clínica / servicios</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="py-16 md:py-20 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+    <div class="reveal px-4 md:px-8 first:pl-0">
+      <p class="font-mono text-3xl md:text-4xl grad-text">134</p>
+      <p class="mt-2 text-sm text-ink/60">proyectos entregados</p>
+    </div>
+    <div class="reveal px-4 md:px-8">
+      <p class="font-mono text-3xl md:text-4xl grad-text">4.8/5</p>
+      <p class="mt-2 text-sm text-ink/60">valoración media de clientes</p>
+    </div>
+    <div class="reveal px-4 md:px-8">
+      <p class="font-mono text-3xl md:text-4xl grad-text">17 días</p>
+      <p class="mt-2 text-sm text-ink/60">plazo medio de entrega</p>
+    </div>
+    <div class="reveal px-4 md:px-8">
+      <p class="font-mono text-3xl md:text-4xl grad-text">89%</p>
+      <p class="mt-2 text-sm text-ink/60">renueva el mantenimiento</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios" class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal max-w-2xl mb-14">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent mb-4">Servicios</p>
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Elige cómo quieres que trabajemos</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="reveal lg:col-span-2 rounded-2xl border border-white/10 p-8 md:p-10 flex flex-col justify-between relative overflow-hidden" style="background:linear-gradient(135deg, rgba(99,102,241,.14), rgba(168,85,247,.10) 45%, rgba(252,211,77,.08));">
+        <span class="absolute top-6 right-6 text-xs font-mono px-3 py-1 rounded-full bg-ink text-bg">Recomendado</span>
+        <div>
+          <i class="ph ph-stack text-2xl text-accent"></i>
+          <h3 class="mt-5 text-2xl font-medium">Diseño + Desarrollo</h3>
+          <p class="mt-3 text-ink/65 max-w-sm">Nos encargamos de todo, de la idea al sitio publicado. Diseño, código y puesta en marcha en un solo equipo.</p>
+        </div>
+        <p class="mt-8 font-mono text-3xl">desde $499</p>
+      </div>
+
+      <div class="flex flex-col gap-6 lg:col-span-1">
+        <div class="reveal rounded-2xl border border-white/10 p-7 bg-white/[0.03] flex-1 flex flex-col justify-between">
+          <div>
+            <i class="ph ph-pen-nib text-xl text-accent"></i>
+            <h3 class="mt-4 text-lg font-medium">Solo diseño</h3>
+            <p class="mt-2 text-sm text-ink/60">Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</p>
+          </div>
+          <p class="mt-6 font-mono text-xl">desde $399</p>
+        </div>
+        <div class="reveal rounded-2xl border border-white/10 p-7 bg-white/[0.03] flex-1 flex flex-col justify-between">
+          <div>
+            <i class="ph ph-code text-xl text-accent"></i>
+            <h3 class="mt-4 text-lg font-medium">Solo desarrollo</h3>
+            <p class="mt-2 text-sm text-ink/60">Programamos un diseño que ya tienes, con código limpio y rápido.</p>
+          </div>
+          <p class="mt-6 font-mono text-xl">desde $199</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="presupuesto" class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal max-w-2xl mb-14">
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Calcula tu presupuesto en segundos</h2>
+      <p class="mt-4 text-ink/60 max-w-md">Mueve las opciones y compara lo que cuesta con una agencia grande, un freelancer y con nosotros.</p>
+    </div>
+
+    <div class="reveal grid grid-cols-1 lg:grid-cols-2 rounded-2xl overflow-hidden border border-white/10">
+      <!-- form -->
+      <div class="p-8 lg:p-10 divide-y divide-white/10" style="background:#0a0716">
+
+        <div class="pb-7">
+          <h3 class="text-sm font-medium mb-4">¿Qué necesitas?</h3>
+          <div class="flex flex-col gap-3">
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="service" value="design" class="sr-only peer">
+              <span class="radio-dot"></span>
+              <span class="text-sm text-ink/80">Solo diseño</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="service" value="development" class="sr-only peer">
+              <span class="radio-dot"></span>
+              <span class="text-sm text-ink/80">Solo desarrollo</span>
+            </label>
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="service" value="both" class="sr-only peer" checked>
+              <span class="radio-dot"></span>
+              <span class="text-sm text-ink/80">Diseño + desarrollo</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="py-7">
+          <h3 class="text-sm font-medium mb-4 flex items-center justify-between">
+            <span>¿Cuántas páginas?</span>
+            <span id="pagesValue" class="font-mono text-accent">5</span>
+          </h3>
+          <input type="range" min="1" max="30" step="1" value="5" id="pagesSlider" class="w-full">
+          <div class="flex justify-between text-xs text-ink/40 mt-2"><span>1</span><span>30</span></div>
+        </div>
+
+        <div class="py-7">
+          <h3 class="text-sm font-medium mb-4">Extras</h3>
+          <div class="flex flex-col gap-3">
+            <label class="flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="checkbox" id="needContent" class="sr-only peer">
+                <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#050313" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="text-sm text-ink/80">Ayuda con los contenidos</span>
+              </span>
+              <span class="text-sm font-mono text-accent">+$50/pág</span>
+            </label>
+            <label class="flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="checkbox" id="needSeo" class="sr-only peer">
+                <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#050313" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="text-sm text-ink/80">Optimización SEO</span>
+              </span>
+              <span class="text-sm font-mono text-accent">+$50/pág</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-7">
+          <h3 class="text-sm font-medium mb-4">¿Con qué rapidez lo necesitas?</h3>
+          <div class="flex flex-col gap-3">
+            <label class="flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="radio" name="timeline" value="rush" class="sr-only peer">
+                <span class="radio-dot"></span>
+                <span class="text-sm text-ink/80">En 7 días</span>
+              </span>
+              <span class="text-sm font-mono text-accent">+$100/pág</span>
+            </label>
+            <label class="flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="radio" name="timeline" value="fast" class="sr-only peer">
+                <span class="radio-dot"></span>
+                <span class="text-sm text-ink/80">En 14 días</span>
+              </span>
+              <span class="text-sm font-mono text-accent">+$25/pág</span>
+            </label>
+            <label class="flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="radio" name="timeline" value="regular" class="sr-only peer" checked>
+                <span class="radio-dot"></span>
+                <span class="text-sm text-ink/80">A ritmo normal</span>
+              </span>
+              <span class="text-sm text-ink/40">sin coste extra</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- result -->
+      <div class="p-8 lg:p-10 border-t lg:border-t-0 lg:border-l border-white/10" style="background:#080512">
+        <h3 class="text-lg font-medium">Presupuesto estimado</h3>
+        <p class="mt-2 text-sm text-ink/55">Cifras orientativas, el presupuesto final se confirma tras hablar contigo.</p>
+
+        <div class="mt-7 flex flex-col gap-3">
+          <div class="rounded-2xl p-6 bg-white/[0.04]">
+            <p class="text-sm text-ink/60">Agencia típica cobra un mínimo de</p>
+            <p class="mt-2 font-mono text-3xl" id="agencyPrice">$8,000</p>
+            <p class="mt-1 text-xs text-ink/40">y suele sumar tiempo y costes extra</p>
+          </div>
+          <div class="rounded-2xl p-6 bg-white/[0.04]">
+            <p class="text-sm text-ink/60">Freelancer normal cobra un mínimo de</p>
+            <p class="mt-2 font-mono text-3xl" id="freelancerPrice">$3,000</p>
+            <p class="mt-1 text-xs text-ink/40">y suele implicar idas y vueltas</p>
+          </div>
+          <div class="rounded-2xl p-6 text-white relative overflow-hidden" style="background-image:var(--grad)">
+            <p class="text-sm text-white/85">Con MAKEMYWEB</p>
+            <p class="mt-2 font-mono text-4xl" id="ourPrice">$499</p>
+            <p class="mt-1 text-xs text-white/75" id="savingsLabel">Ahorras tiempo y dolores de cabeza</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANES -->
+<section id="planes" class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-3xl mx-auto text-center reveal">
+    <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Después del lanzamiento, seguimos cuidando tu web</h2>
+    <p class="mt-4 text-ink/60">Hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</p>
+  </div>
+
+  <div class="mt-14 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="reveal rounded-2xl border border-white/10 p-8 flex flex-col" style="background:#0d0a18">
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50">Cuido Básico</p>
+      <div class="mt-6 flex items-baseline gap-1">
+        <span class="text-4xl font-medium">$29</span>
+        <span class="text-ink/50 text-sm">/mes</span>
+      </div>
+      <a href="#contacto" class="mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full liquid-glass text-sm font-medium hover:bg-white/5 transition-colors">Pide tu presupuesto</a>
+      <ul class="mt-7 flex flex-col gap-3 text-sm text-ink/70">
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Hosting incluido</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Certificado SSL</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Copias de seguridad semanales</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Actualizaciones de seguridad</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>1 hora de soporte al mes</li>
+      </ul>
+    </div>
+
+    <div class="reveal rounded-2xl border border-white/10 p-8 flex flex-col relative" style="background:#171025">
+      <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-ink text-bg text-xs font-medium px-3 py-1">Más elegido</span>
+      <p class="text-xs uppercase tracking-[0.15em] text-ink/50">Cuido Pro</p>
+      <div class="mt-6 flex items-baseline gap-1">
+        <span class="text-4xl font-medium">$79</span>
+        <span class="text-ink/50 text-sm">/mes</span>
+      </div>
+      <a href="#contacto" class="mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</a>
+      <ul class="mt-7 flex flex-col gap-3 text-sm text-ink/70">
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Todo lo de Cuido Básico</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Cambios de contenido ilimitados</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Informe de rendimiento cada mes</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Soporte prioritario</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Revisión SEO continua</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="reveal max-w-2xl mb-16">
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Cómo trabajamos</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-6 relative">
+      <div class="hidden md:block absolute top-6 left-0 right-0 h-px bg-white/10"></div>
+      <div class="reveal relative">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-bg border border-white/15 relative z-10">
+          <i class="ph ph-compass text-lg text-accent"></i>
+        </div>
+        <h3 class="mt-5 font-medium">Descubrimos</h3>
+        <p class="mt-2 text-sm text-ink/60">Hablamos de tu negocio, tu público y lo que necesita tu web.</p>
+      </div>
+      <div class="reveal relative">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-bg border border-white/15 relative z-10">
+          <i class="ph ph-pen-nib text-lg text-accent"></i>
+        </div>
+        <h3 class="mt-5 font-medium">Diseñamos</h3>
+        <p class="mt-2 text-sm text-ink/60">Maquetamos y definimos el estilo antes de escribir código.</p>
+      </div>
+      <div class="reveal relative">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-bg border border-white/15 relative z-10">
+          <i class="ph ph-code text-lg text-accent"></i>
+        </div>
+        <h3 class="mt-5 font-medium">Desarrollamos</h3>
+        <p class="mt-2 text-sm text-ink/60">Código limpio, rápido y que se ve bien en cualquier pantalla.</p>
+      </div>
+      <div class="reveal relative">
+        <div class="w-12 h-12 rounded-full flex items-center justify-center bg-bg border border-white/15 relative z-10">
+          <i class="ph ph-rocket-launch text-lg text-accent"></i>
+        </div>
+        <h3 class="mt-5 font-medium">Lanzamos</h3>
+        <p class="mt-2 text-sm text-ink/60">Publicamos el sitio y seguimos cerca las primeras semanas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="py-20 md:py-28 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="reveal max-w-2xl mb-12">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent mb-4">Opiniones</p>
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Lo que dicen quienes ya trabajaron con nosotros</h2>
+    </div>
+  </div>
+
+  <div class="reveal flex gap-6 overflow-x-auto no-scrollbar snap-x-mand px-6 pb-2">
+    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
+      <blockquote class="text-ink/85 leading-relaxed">"Entendieron el negocio antes de tocar una sola línea de código. La web se vendió sola desde el primer mes."</blockquote>
+      <figcaption class="mt-6 text-sm">
+        <p class="font-medium">Marta Off</p>
+        <p class="text-ink/50">Panadería Trigo y Sal</p>
+      </figcaption>
+    </figure>
+    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
+      <blockquote class="text-ink/85 leading-relaxed">"Pedí cambios varias veces y nunca hubo mal gesto ni cobro extra. Eso no lo encuentras fácil."</blockquote>
+      <figcaption class="mt-6 text-sm">
+        <p class="font-medium">Iñaki Sarasola</p>
+        <p class="text-ink/50">Ferretería Sarasola</p>
+      </figcaption>
+    </figure>
+    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
+      <blockquote class="text-ink/85 leading-relaxed">"El presupuesto que me dieron fue el que pagué al final, sin sorpresas."</blockquote>
+      <figcaption class="mt-6 text-sm">
+        <p class="font-medium">Carla Núñez</p>
+        <p class="text-ink/50">Estudio Núñez Arquitectura</p>
+      </figcaption>
+    </figure>
+    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
+      <blockquote class="text-ink/85 leading-relaxed">"Nos entregaron antes del plazo prometido y la web carga muchísimo más rápido que la anterior."</blockquote>
+      <figcaption class="mt-6 text-sm">
+        <p class="font-medium">Yolanda Prat</p>
+        <p class="text-ink/50">Clínica Vitalis</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-20 md:py-28 px-6 border-t border-white/5">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal mb-12">
+      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Preguntas frecuentes</h2>
+    </div>
+
+    <div class="reveal divide-y divide-white/10 border-t border-b border-white/10">
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿Cuánto tarda un proyecto normal?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">Entre 2 y 4 semanas según el número de páginas y si necesitas contenidos o SEO.</p>
+      </details>
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿Qué incluye el precio del presupuesto?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">Diseño, desarrollo, revisión en dispositivos móviles y una ronda de ajustes antes de publicar.</p>
+      </details>
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿Puedo pedir cambios cuando el sitio ya esté publicado?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">Sí, con cualquiera de los planes de cuidado o bajo un presupuesto puntual.</p>
+      </details>
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿El hosting está incluido?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">Está incluido en los planes de cuidado. También podemos configurarlo sobre tu propio hosting.</p>
+      </details>
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿Cómo funciona el pago?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</p>
+      </details>
+      <details class="faq-item py-5">
+        <summary class="flex items-center justify-between gap-4">
+          <span class="font-medium">¿Y si necesito más páginas después de empezar?</span>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
+        </summary>
+        <p class="mt-3 text-sm text-ink/60 max-w-xl">Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contacto" class="py-24 md:py-32 px-6 border-t border-white/5 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-40" style="background:radial-gradient(circle at 50% 30%, rgba(168,85,247,.18), transparent 60%)"></div>
+  <div class="reveal relative max-w-2xl mx-auto text-center">
+    <h2 class="font-normal tracking-tight" style="font-size:clamp(2rem,4.5vw,3.25rem)">Hablemos de tu web</h2>
+    <p class="mt-4 text-ink/60">Cuéntanos qué necesitas y te devolvemos un presupuesto claro en menos de 24 horas.</p>
+    <form class="mt-9 flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); this.reset(); const b=this.querySelector('button'); const t=b.textContent; b.textContent='Enviado'; setTimeout(()=>b.textContent=t,2200);">
+      <label class="sr-only" for="emailInput">Correo electrónico</label>
+      <input id="emailInput" type="email" required placeholder="tu@correo.com" class="flex-1 h-12 px-4 rounded-full bg-white/5 border border-white/15 placeholder:text-ink/35 text-sm focus:outline-none focus:border-accent transition-colors">
+      <button type="submit" class="h-12 px-6 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="border-t border-white/10 px-6 py-14">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <div class="md:col-span-2">
+      <a href="#top" class="flex items-center gap-2">
+        <span class="w-6 h-6 rounded-lg grad-bg"></span>
+        <span class="font-semibold tracking-tight">MAKEMYWEB</span>
+      </a>
+      <p class="mt-4 text-sm text-ink/50 max-w-xs">Webs a medida para negocios que quieren verse tan bien como trabajan.</p>
+      <div class="mt-6 flex items-center gap-4 text-ink/50">
+        <a href="#" aria-label="Instagram" class="hover:text-ink transition-colors"><i class="ph ph-instagram-logo text-lg"></i></a>
+        <a href="#" aria-label="LinkedIn" class="hover:text-ink transition-colors"><i class="ph ph-linkedin-logo text-lg"></i></a>
+        <a href="#" aria-label="Dribbble" class="hover:text-ink transition-colors"><i class="ph ph-dribbble-logo text-lg"></i></a>
+      </div>
+    </div>
+    <div>
+      <p class="text-sm font-medium mb-4">Enlaces</p>
+      <ul class="flex flex-col gap-3 text-sm text-ink/55">
+        <li><a href="#servicios" class="hover:text-ink transition-colors">Servicios</a></li>
+        <li><a href="#presupuesto" class="hover:text-ink transition-colors">Precios</a></li>
+        <li><a href="#planes" class="hover:text-ink transition-colors">Planes</a></li>
+        <li><a href="#faq" class="hover:text-ink transition-colors">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="text-sm font-medium mb-4">Contacto</p>
+      <ul class="flex flex-col gap-3 text-sm text-ink/55">
+        <li>hola@makemyweb.com</li>
+        <li>+1 (555) 019-2044</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink/40">
+    <p>© 2026 MAKEMYWEB. Todos los derechos reservados.</p>
+    <div class="flex items-center gap-6">
+      <a href="#" class="hover:text-ink/70 transition-colors">Aviso legal</a>
+      <a href="#" class="hover:text-ink/70 transition-colors">Privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // background video: fade in at start, fade out at end, replay after a pause
+  const bgVideo = document.getElementById('bgVideo');
+  const bgWrap = document.getElementById('bgVideoWrap');
+  const bgSpotlight = document.getElementById('bgSpotlight');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const FADE = 0.5;
+
+  function tickFade() {
+    if (!bgVideo.duration) { requestAnimationFrame(tickFade); return; }
+    const t = bgVideo.currentTime;
+    const d = bgVideo.duration;
+    let o;
+    if (t < FADE) o = t / FADE;
+    else if (t > d - FADE) o = Math.max(0, (d - t) / FADE);
+    else o = 1;
+    bgVideo.style.opacity = o;
+    if (!bgVideo.paused && !bgVideo.ended) requestAnimationFrame(tickFade);
+  }
+  bgVideo.addEventListener('play', () => requestAnimationFrame(tickFade));
+  // mobile browsers (iOS Safari, Low Power Mode, Data Saver, etc.) can silently
+  // reject a script-triggered play() even when muted+playsinline. Keep retrying
+  // on every plausible signal, and fall back to a visible static frame so the
+  // background is never just missing.
+  bgVideo.muted = true;
+  bgVideo.defaultMuted = true;
+
+  function tryPlay() {
+    const p = bgVideo.play();
+    if (p && p.catch) p.catch(() => {});
+  }
+  bgVideo.addEventListener('ended', () => {
+    bgVideo.style.opacity = 0;
+    setTimeout(() => { bgVideo.currentTime = 0; tryPlay(); }, 100);
+  });
+  tryPlay();
+  ['loadeddata', 'canplay', 'canplaythrough'].forEach(evt => bgVideo.addEventListener(evt, tryPlay, { once: true }));
+
+  setTimeout(() => {
+    if (bgVideo.paused) bgVideo.style.opacity = 1; // show a static frame if it never started
+  }, 1200);
+
+  ['pointerdown', 'touchstart', 'click', 'scroll'].forEach(evt => {
+    document.addEventListener(evt, function retryOnGesture() {
+      tryPlay();
+      document.removeEventListener(evt, retryOnGesture);
+    }, { once: true, passive: true });
+  });
+
+  // cursor reactivity: soft parallax drift + spotlight glow following the pointer
+  if (!reduceMotion) {
+    let spotlightVisible = false;
+    window.addEventListener('pointermove', (e) => {
+      const nx = e.clientX / window.innerWidth;
+      const ny = e.clientY / window.innerHeight;
+      document.documentElement.style.setProperty('--mx', (nx * 100) + '%');
+      document.documentElement.style.setProperty('--my', (ny * 100) + '%');
+      const px = (nx - 0.5) * 22;
+      const py = (ny - 0.5) * 22;
+      bgWrap.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+      if (!spotlightVisible) { bgSpotlight.classList.add('on'); spotlightVisible = true; }
+    }, { passive: true });
+    window.addEventListener('pointerleave', () => {
+      bgSpotlight.classList.remove('on');
+      spotlightVisible = false;
+      bgWrap.style.transform = 'translate3d(0,0,0)';
+    });
+  }
+
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  // marquee logos
+  const clients = [
+    { name: 'Panadería Trigo y Sal', letter: 'T' },
+    { name: 'Taller Ferro', letter: 'F' },
+    { name: 'Clínica Vitalis', letter: 'V' },
+    { name: 'Estudio Núñez', letter: 'N' },
+    { name: 'Ferretería Sarasola', letter: 'S' },
+    { name: 'Café Lumen', letter: 'L' },
+  ];
+  function renderLogos(container) {
+    container.innerHTML = clients.map(c => `
+      <div class="flex items-center gap-3 shrink-0">
+        <span class="liquid-glass w-9 h-9 rounded-lg flex items-center justify-center text-sm font-semibold">${c.letter}</span>
+        <span class="text-base font-medium text-ink/80 whitespace-nowrap">${c.name}</span>
+      </div>
+    `).join('');
+  }
+  renderLogos(document.getElementById('marqueeSetA'));
+  renderLogos(document.getElementById('marqueeSetB'));
+
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // pricing calculator
+  const serviceInputs = document.querySelectorAll('input[name=service]');
+  const timelineInputs = document.querySelectorAll('input[name=timeline]');
+  const pagesSlider = document.getElementById('pagesSlider');
+  const pagesValue = document.getElementById('pagesValue');
+  const needContent = document.getElementById('needContent');
+  const needSeo = document.getElementById('needSeo');
+  const agencyPrice = document.getElementById('agencyPrice');
+  const freelancerPrice = document.getElementById('freelancerPrice');
+  const ourPrice = document.getElementById('ourPrice');
+  const savingsLabel = document.getElementById('savingsLabel');
+
+  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+
+  function currentService() {
+    return [...serviceInputs].find(i => i.checked).value;
+  }
+  function currentTimeline() {
+    return [...timelineInputs].find(i => i.checked).value;
+  }
+
+  function calculate() {
+    const service = currentService();
+    const pages = Number(pagesSlider.value);
+    const timeline = currentTimeline();
+
+    const bases = {
+      design: { base: 399, perPage: 100 },
+      development: { base: 199, perPage: 100 },
+      both: { base: 499, perPage: 200 },
+    };
+    const b = bases[service];
+    let total = Math.max(b.base, b.base + (pages - 1) * b.perPage);
+    if (needContent.checked) total += pages * 50;
+    if (needSeo.checked) total += pages * 50;
+    if (timeline === 'rush') total += pages * 100;
+    if (timeline === 'fast') total += pages * 25;
+
+    const isBoth = service === 'both';
+    const agency = 8000 + (pages - 1) * (isBoth ? 1000 : 400);
+    const freelancer = 3000 + (pages - 1) * (isBoth ? 500 : 200);
+
+    pagesValue.textContent = pages;
+    agencyPrice.textContent = fmt(agency);
+    freelancerPrice.textContent = fmt(freelancer);
+    ourPrice.textContent = fmt(total);
+
+    const savings = freelancer - total;
+    savingsLabel.textContent = savings > 0
+      ? `Ahorras ${fmt(savings)} frente a un freelancer`
+      : 'Ahorras tiempo y dolores de cabeza';
+  }
+
+  [...serviceInputs, ...timelineInputs, needContent, needSeo].forEach(i => i.addEventListener('change', calculate));
+  pagesSlider.addEventListener('input', calculate);
+  calculate();
+</script>
+</body>
+</html>
