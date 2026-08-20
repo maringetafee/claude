@@ -41,6 +41,8 @@
     --accent:#a855f7;
     --grad: linear-gradient(100deg,#6366f1 0%,#a855f7 55%,#fcd34d 100%);
     --line: rgba(255,255,255,0.10);
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
   html{scroll-behavior:smooth;background:var(--bg);}
   body{color:var(--ink);font-family:'General Sans',ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
@@ -137,11 +139,24 @@
   .browser-bar{ height:34px; display:flex; align-items:center; gap:6px; padding:0 12px; background:#0d0a1a; border-bottom:1px solid var(--line); }
   .browser-dot{ width:8px;height:8px;border-radius:9999px; }
 
-  /* accordion */
-  .faq-item[open] .faq-icon{ transform:rotate(45deg); }
-  .faq-icon{ transition:transform .25s ease; }
-  .faq-item summary::-webkit-details-marker{ display:none; }
-  .faq-item summary{ cursor:pointer; list-style:none; }
+  /* accordion: height is measured in JS and transitioned (no transform equivalent for this) */
+  .faq-panel{ height:0; overflow:hidden; transition:height 200ms var(--ease-out); }
+  .faq-icon{ transition:transform 200ms var(--ease-out); }
+  .faq-trigger[aria-expanded="true"] .faq-icon{ transform:rotate(45deg); }
+  .faq-trigger{ background:none; border:none; color:inherit; font:inherit; }
+
+  /* tactile press feedback for buttons and option labels */
+  .press{ transition:transform 160ms var(--ease-out); }
+  .press:active{ transform:scale(0.97); }
+  @media (hover:hover) and (pointer:fine){
+    .press-lift:hover{ transform:translateY(-2px); }
+  }
+
+  /* pricing plan card hover */
+  .plan-card{ transition:transform 200ms var(--ease-out), border-color 200ms var(--ease-out); }
+  @media (hover:hover) and (pointer:fine){
+    .plan-card:hover{ transform:translateY(-4px); border-color:rgba(255,255,255,.22); }
+  }
 
   /* carousel */
   .snap-x-mand{ scroll-snap-type:x mandatory; }
@@ -149,12 +164,135 @@
   .no-scrollbar::-webkit-scrollbar{ display:none; }
   .no-scrollbar{ scrollbar-width:none; -ms-overflow-style:none; }
 
+  /* ===== Zoom-into-laptop intro =====
+     the real hero (.hero-fallback, inside #top) is always in the document, in its
+     normal position right after this 300vh stage. While the stage is pinned it
+     visually covers the top of the page; once scroll passes the pin range it
+     releases like any sticky element and scrolls away, and the real hero — already
+     sitting there, identical content, no separate reveal step — just continues
+     under it. No fade, no swap: the page was there the whole time. */
+
+  .zoom-stage{ position:relative; height:300vh; }
+  .zoom-sticky{
+    position:sticky; top:0; height:100vh; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    /* transparent: the page's own fixed video/overlay layers already paint behind
+       everything, so leaving this see-through keeps the backdrop identical inside
+       and outside the laptop screen — no seam, no color jump at handoff */
+    pointer-events:none;
+    perspective:1800px;
+  }
+  .laptop-mockup{
+    /* sized at its true final (viewport-fit) dimensions so it's crisp when fully
+       zoomed in — the "small, distant" look at rest comes from scaling *down*
+       from this native size, not scaling a small element up (which blurs). */
+    position:relative; width:min(94vw, calc(94vh * 1.6)); aspect-ratio:16/10;
+    transform:rotateX(var(--zoom-tilt,16deg)) scale(var(--zoom-s,1));
+    transform-origin:center var(--zoom-origin-y,85%);
+    will-change:transform;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.4)) drop-shadow(0 46px 80px rgba(0,0,0,.6));
+  }
+  .laptop-bezel{
+    position:absolute; inset:0; border-radius:18px;
+    background:linear-gradient(155deg,#100b1e,#08050f 60%);
+    border:1px solid var(--line);
+    box-sizing:border-box;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.12),
+      inset 0 -1px 0 rgba(0,0,0,.5),
+      inset 1px 0 0 rgba(255,255,255,.06),
+      inset -1px 0 0 rgba(0,0,0,.35);
+    opacity:var(--zoom-bezel,1);
+    pointer-events:none;
+  }
+  .laptop-cam{
+    position:absolute; top:1.6%; left:50%; translate:-50% 0;
+    width:6px; height:6px; border-radius:9999px; background:rgba(255,255,255,.25);
+    box-shadow:0 0 4px rgba(129,140,248,.35);
+  }
+  .laptop-inner{
+    position:absolute;
+    inset: calc(var(--zoom-inset,3.4) * 1%) calc(var(--zoom-inset,3.4) * 1%) calc(var(--zoom-inset-b,8) * 1%);
+    border-radius:calc(8px * (1 - var(--zoom-flat,0)));
+    overflow:hidden;
+    /* transparent for the same reason as .zoom-sticky — same fixed backdrop shows
+       through the "screen" as everywhere else on the page, so once the bezel
+       dissolves there's truly nothing left to tell mockup from real page apart */
+    display:flex; flex-direction:column;
+  }
+  .laptop-inner::after{
+    /* faint glass glare so the screen doesn't read as a flat rectangle */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(115deg,
+      rgba(255,255,255,.09) 0%, rgba(255,255,255,0) 26%,
+      rgba(255,255,255,0) 74%, rgba(255,255,255,.05) 100%);
+  }
+  .laptop-inner-content{
+    flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; gap:.9rem; padding:0 8%;
+    opacity:var(--zoom-content-op,1);
+  }
+  .laptop-inner-content h2{
+    /* identical size to the real hero h1 (not a scaled-down mimic) — the whole
+       mockup box is scaled via transform, so matching sizes 1:1 makes the
+       handoff at full-screen indistinguishable from the real hero */
+    font-size:clamp(2.75rem,8vw,6.5rem); font-weight:400; line-height:1.03; letter-spacing:-.02em; color:var(--ink);
+  }
+  .laptop-inner-content p{
+    font-size:1.125rem; line-height:2rem; color:var(--hero-sub); max-width:28rem;
+  }
+  /* CTAs are real links (not decorative spans) and stay clickable even though the
+     rest of the mockup is pointer-events:none, so they work as soon as they're
+     legible — not just once the scroll finally reaches the real hero section */
+  .laptop-inner-ctas a{ pointer-events:auto; }
+
+  .laptop-base{
+    /* trapezoid: narrower where it meets the hinge, wider at the front edge —
+       reads as a keyboard deck receding in perspective under the tilted screen */
+    position:absolute; left:-9%; right:-9%; bottom:-26px; height:26px;
+    clip-path:polygon(6.5% 0, 93.5% 0, 100% 100%, 0 100%);
+    background:linear-gradient(180deg,#1b1530 0%,#120d21 55%,#0a0716 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      inset 0 -6px 10px rgba(0,0,0,.4),
+      0 16px 28px rgba(0,0,0,.5);
+    opacity:var(--zoom-bezel,1);
+  }
+  .laptop-base::before{
+    /* keyboard key hint */
+    content:""; position:absolute; left:22%; right:22%; top:5px; height:7px;
+    background-image:repeating-linear-gradient(90deg, rgba(255,255,255,.09) 0 5%, transparent 5% 7.5%);
+    opacity:.7;
+  }
+  .laptop-base::after{
+    /* trackpad */
+    content:""; position:absolute; left:50%; top:14px; translate:-50% 0;
+    width:14%; height:9px; border-radius:3px;
+    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10);
+  }
+
+  .zoom-hint{
+    position:absolute; bottom:34px; left:50%; translate:-50% 0;
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.08em;
+    color:rgba(255,255,255,.4); opacity:var(--zoom-hint-op,1);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .zoom-hint::after{
+    content:""; width:1px; height:26px; background:linear-gradient(var(--ink),transparent);
+    animation:hintPulse 1.6s ease-in-out infinite;
+  }
+  @keyframes hintPulse{ 0%,100%{ opacity:.25; } 50%{ opacity:.9; } }
+
   @media (prefers-reduced-motion: reduce){
     .marquee-track{ animation:none; }
     .bg-video-fixed{ transition:none; transform:none !important; }
     .bg-spotlight{ display:none; }
     .reveal{ transition:none; opacity:1; transform:none; }
+    .faq-panel{ transition:none; }
+    .press, .plan-card{ transition:none; }
+    .press:active{ transform:none; }
     html{ scroll-behavior:auto; }
+    .zoom-stage{ display:none; }
   }
 </style>
 </head>
@@ -171,7 +309,19 @@
 <header class="fixed top-0 inset-x-0 z-50 border-b border-white/10 bg-bg/75 backdrop-blur-md">
   <nav class="max-w-7xl mx-auto h-[72px] px-6 lg:px-10 flex items-center justify-between">
     <a href="#top" class="flex items-center gap-2 shrink-0">
-      <span class="w-7 h-7 rounded-lg grad-bg"></span>
+      <svg viewBox="0 0 36 36" class="w-7 h-7 shrink-0" aria-hidden="true">
+        <defs>
+          <linearGradient id="mwLogoNav" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#6366f1"/>
+            <stop offset="55%" stop-color="#a855f7"/>
+            <stop offset="100%" stop-color="#fcd34d"/>
+          </linearGradient>
+        </defs>
+        <rect width="36" height="36" rx="9" fill="url(#mwLogoNav)"/>
+        <rect width="36" height="16" rx="9" fill="white" opacity=".12"/>
+        <text x="18" y="25" text-anchor="middle" font-family="'General Sans', ui-sans-serif, sans-serif" font-weight="700" font-size="19" fill="white">M</text>
+        <path d="M29 6.2l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="white" opacity=".85"/>
+      </svg>
       <span class="font-semibold tracking-tight text-lg">MAKEMYWEB</span>
     </a>
 
@@ -183,7 +333,7 @@
     </div>
 
     <div class="flex items-center gap-3">
-      <a href="#contacto" class="hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">
+      <a href="#contacto" class="press hidden sm:inline-flex items-center justify-center h-9 px-4 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">
         Pide tu presupuesto
       </a>
       <button id="menuBtn" aria-label="Abrir menú" class="lg:hidden w-9 h-9 flex items-center justify-center rounded-full border border-white/15">
@@ -198,28 +348,51 @@
       <a href="#presupuesto" class="py-1">Precios</a>
       <a href="#proceso" class="py-1">Proceso</a>
       <a href="#faq" class="py-1">FAQ</a>
-      <a href="#contacto" class="inline-flex items-center justify-center h-10 rounded-full bg-ink text-bg font-medium">Pide tu presupuesto</a>
+      <a href="#contacto" class="press inline-flex items-center justify-center h-10 rounded-full bg-ink text-bg font-medium">Pide tu presupuesto</a>
     </div>
   </div>
 </header>
 
+<!-- ZOOM INTRO: laptop mockup that scales into the full-screen hero on scroll -->
+<div id="zoomStage" class="zoom-stage">
+  <div class="zoom-sticky">
+    <div class="laptop-mockup" id="laptopMockup">
+      <div class="laptop-bezel" id="laptopBezel">
+        <div class="laptop-cam"></div>
+      </div>
+      <div class="laptop-inner" id="laptopInner">
+        <div class="laptop-inner-content">
+          <h2>Diseñamos tu <span class="grad-text">web</span></h2>
+          <p>Sitios a medida, listos en 24/48h, sin líos técnicos ni sorpresas en el precio.</p>
+          <div class="laptop-inner-ctas flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="#contacto" class="press w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full bg-ink text-bg font-medium hover:bg-white transition-colors">Pide tu presupuesto</a>
+            <a href="#presupuesto" class="press w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full liquid-glass text-ink font-medium hover:bg-white/5 transition-colors">Calcula el precio</a>
+          </div>
+        </div>
+      </div>
+      <div class="laptop-base" id="laptopBase"></div>
+    </div>
+    <p class="zoom-hint" id="zoomHint">sigue bajando</p>
+  </div>
+</div>
+
 <!-- HERO -->
-<section id="top" class="relative min-h-[100dvh] flex flex-col overflow-visible pt-[72px]">
+<section id="top" class="top-section relative min-h-[100dvh] flex flex-col overflow-visible pt-[72px]">
   <div class="hero-glow"></div>
 
-  <div class="relative z-10 flex-1 flex items-center justify-center px-6">
+  <div class="hero-fallback relative z-10 flex-1 flex items-center justify-center px-6">
     <div class="max-w-4xl mx-auto text-center">
       <h1 class="font-normal leading-[1.03] tracking-[-0.02em]" style="font-size:clamp(2.75rem,8vw,6.5rem)">
         Diseñamos tu <span class="grad-text">web</span>
       </h1>
       <p class="mt-6 text-lg leading-8 max-w-md mx-auto" style="color:var(--hero-sub)">
-        Sitios a medida, listos en semanas, sin líos técnicos ni sorpresas en el precio.
+        Sitios a medida, listos en 24/48h, sin líos técnicos ni sorpresas en el precio.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <a href="#contacto" class="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full bg-ink text-bg font-medium hover:bg-white transition-colors">
+        <a href="#contacto" class="press w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full bg-ink text-bg font-medium hover:bg-white transition-colors">
           Pide tu presupuesto
         </a>
-        <a href="#presupuesto" class="w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full liquid-glass text-ink font-medium hover:bg-white/5 transition-colors">
+        <a href="#presupuesto" class="press w-full sm:w-auto whitespace-nowrap inline-flex items-center justify-center h-12 px-7 rounded-full liquid-glass text-ink font-medium hover:bg-white/5 transition-colors">
           Calcula el precio
         </a>
       </div>
@@ -227,7 +400,7 @@
   </div>
 
   <!-- marquee -->
-  <div class="relative z-10 pb-10 px-6">
+  <div class="marquee-wrap relative z-10 pb-10 px-6">
     <div class="max-w-5xl mx-auto flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
       <p class="text-ink/50 text-sm leading-snug shrink-0 max-w-[10rem]">Negocios que ya confían en nosotros</p>
       <div class="overflow-hidden flex-1 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -290,7 +463,7 @@
       <p class="mt-2 text-sm text-ink/60">valoración media de clientes</p>
     </div>
     <div class="reveal px-4 md:px-8">
-      <p class="font-mono text-3xl md:text-4xl grad-text">17 días</p>
+      <p class="font-mono text-3xl md:text-4xl grad-text">24/48h</p>
       <p class="mt-2 text-sm text-ink/60">plazo medio de entrega</p>
     </div>
     <div class="reveal px-4 md:px-8">
@@ -316,7 +489,7 @@
           <h3 class="mt-5 text-2xl font-medium">Diseño + Desarrollo</h3>
           <p class="mt-3 text-ink/65 max-w-sm">Nos encargamos de todo, de la idea al sitio publicado. Diseño, código y puesta en marcha en un solo equipo.</p>
         </div>
-        <p class="mt-8 font-mono text-3xl">desde $499</p>
+        <p class="mt-8 font-mono text-3xl">desde 499 €</p>
       </div>
 
       <div class="flex flex-col gap-6 lg:col-span-1">
@@ -326,7 +499,7 @@
             <h3 class="mt-4 text-lg font-medium">Solo diseño</h3>
             <p class="mt-2 text-sm text-ink/60">Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</p>
           </div>
-          <p class="mt-6 font-mono text-xl">desde $399</p>
+          <p class="mt-6 font-mono text-xl">desde 399 €</p>
         </div>
         <div class="reveal rounded-2xl border border-white/10 p-7 bg-white/[0.03] flex-1 flex flex-col justify-between">
           <div>
@@ -334,7 +507,7 @@
             <h3 class="mt-4 text-lg font-medium">Solo desarrollo</h3>
             <p class="mt-2 text-sm text-ink/60">Programamos un diseño que ya tienes, con código limpio y rápido.</p>
           </div>
-          <p class="mt-6 font-mono text-xl">desde $199</p>
+          <p class="mt-6 font-mono text-xl">desde 199 €</p>
         </div>
       </div>
     </div>
@@ -356,20 +529,20 @@
         <div class="pb-7">
           <h3 class="text-sm font-medium mb-4">¿Qué necesitas?</h3>
           <div class="flex flex-col gap-3">
-            <label class="flex items-center gap-3 cursor-pointer">
+            <label class="press flex items-center gap-3 cursor-pointer">
+              <input type="radio" name="service" value="both" class="sr-only peer" checked>
+              <span class="radio-dot"></span>
+              <span class="text-sm text-ink/80">Diseño + desarrollo</span>
+            </label>
+            <label class="press flex items-center gap-3 cursor-pointer">
               <input type="radio" name="service" value="design" class="sr-only peer">
               <span class="radio-dot"></span>
               <span class="text-sm text-ink/80">Solo diseño</span>
             </label>
-            <label class="flex items-center gap-3 cursor-pointer">
+            <label class="press flex items-center gap-3 cursor-pointer">
               <input type="radio" name="service" value="development" class="sr-only peer">
               <span class="radio-dot"></span>
               <span class="text-sm text-ink/80">Solo desarrollo</span>
-            </label>
-            <label class="flex items-center gap-3 cursor-pointer">
-              <input type="radio" name="service" value="both" class="sr-only peer" checked>
-              <span class="radio-dot"></span>
-              <span class="text-sm text-ink/80">Diseño + desarrollo</span>
             </label>
           </div>
         </div>
@@ -377,30 +550,38 @@
         <div class="py-7">
           <h3 class="text-sm font-medium mb-4 flex items-center justify-between">
             <span>¿Cuántas páginas?</span>
-            <span id="pagesValue" class="font-mono text-accent">5</span>
+            <span id="pagesValue" class="font-mono text-accent">1</span>
           </h3>
-          <input type="range" min="1" max="30" step="1" value="5" id="pagesSlider" class="w-full">
-          <div class="flex justify-between text-xs text-ink/40 mt-2"><span>1</span><span>30</span></div>
+          <input type="range" min="1" max="5" step="1" value="1" id="pagesSlider" class="w-full">
+          <div class="flex justify-between text-xs text-ink/40 mt-2"><span>1</span><span>5</span></div>
         </div>
 
         <div class="py-7">
           <h3 class="text-sm font-medium mb-4">Extras</h3>
           <div class="flex flex-col gap-3">
-            <label class="flex items-center justify-between gap-3 cursor-pointer">
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
               <span class="flex items-center gap-3">
                 <input type="checkbox" id="needContent" class="sr-only peer">
                 <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#050313" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="text-sm text-ink/80">Ayuda con los contenidos</span>
               </span>
-              <span class="text-sm font-mono text-accent">+$50/pág</span>
+              <span class="text-sm font-mono text-accent">+50 €/pág</span>
             </label>
-            <label class="flex items-center justify-between gap-3 cursor-pointer">
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
               <span class="flex items-center gap-3">
                 <input type="checkbox" id="needSeo" class="sr-only peer">
                 <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#050313" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="text-sm text-ink/80">Optimización SEO</span>
               </span>
-              <span class="text-sm font-mono text-accent">+$50/pág</span>
+              <span class="text-sm font-mono text-accent">+50 €/pág</span>
+            </label>
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
+              <span class="flex items-center gap-3">
+                <input type="checkbox" id="need3D" class="sr-only peer">
+                <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#050313" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="text-sm text-ink/80">Página animada 3D</span>
+              </span>
+              <span class="text-sm font-mono text-accent">+200 €</span>
             </label>
           </div>
         </div>
@@ -408,23 +589,23 @@
         <div class="pt-7">
           <h3 class="text-sm font-medium mb-4">¿Con qué rapidez lo necesitas?</h3>
           <div class="flex flex-col gap-3">
-            <label class="flex items-center justify-between gap-3 cursor-pointer">
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
               <span class="flex items-center gap-3">
                 <input type="radio" name="timeline" value="rush" class="sr-only peer">
                 <span class="radio-dot"></span>
-                <span class="text-sm text-ink/80">En 7 días</span>
+                <span class="text-sm text-ink/80">En 24 horas</span>
               </span>
-              <span class="text-sm font-mono text-accent">+$100/pág</span>
+              <span class="text-sm font-mono text-accent">+100 €/pág</span>
             </label>
-            <label class="flex items-center justify-between gap-3 cursor-pointer">
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
               <span class="flex items-center gap-3">
                 <input type="radio" name="timeline" value="fast" class="sr-only peer">
                 <span class="radio-dot"></span>
-                <span class="text-sm text-ink/80">En 14 días</span>
+                <span class="text-sm text-ink/80">En 48 horas</span>
               </span>
-              <span class="text-sm font-mono text-accent">+$25/pág</span>
+              <span class="text-sm font-mono text-accent">+25 €/pág</span>
             </label>
-            <label class="flex items-center justify-between gap-3 cursor-pointer">
+            <label class="press flex items-center justify-between gap-3 cursor-pointer">
               <span class="flex items-center gap-3">
                 <input type="radio" name="timeline" value="regular" class="sr-only peer" checked>
                 <span class="radio-dot"></span>
@@ -444,17 +625,17 @@
         <div class="mt-7 flex flex-col gap-3">
           <div class="rounded-2xl p-6 bg-white/[0.04]">
             <p class="text-sm text-ink/60">Agencia típica cobra un mínimo de</p>
-            <p class="mt-2 font-mono text-3xl" id="agencyPrice">$8,000</p>
+            <p class="mt-2 font-mono text-3xl" id="agencyPrice">8.000 €</p>
             <p class="mt-1 text-xs text-ink/40">y suele sumar tiempo y costes extra</p>
           </div>
           <div class="rounded-2xl p-6 bg-white/[0.04]">
             <p class="text-sm text-ink/60">Freelancer normal cobra un mínimo de</p>
-            <p class="mt-2 font-mono text-3xl" id="freelancerPrice">$3,000</p>
+            <p class="mt-2 font-mono text-3xl" id="freelancerPrice">3.000 €</p>
             <p class="mt-1 text-xs text-ink/40">y suele implicar idas y vueltas</p>
           </div>
           <div class="rounded-2xl p-6 text-white relative overflow-hidden" style="background-image:var(--grad)">
             <p class="text-sm text-white/85">Con MAKEMYWEB</p>
-            <p class="mt-2 font-mono text-4xl" id="ourPrice">$499</p>
+            <p class="mt-2 font-mono text-4xl" id="ourPrice">499 €</p>
             <p class="mt-1 text-xs text-white/75" id="savingsLabel">Ahorras tiempo y dolores de cabeza</p>
           </div>
         </div>
@@ -471,34 +652,33 @@
   </div>
 
   <div class="mt-14 max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="reveal rounded-2xl border border-white/10 p-8 flex flex-col" style="background:#0d0a18">
+    <div class="reveal plan-card rounded-2xl border border-white/10 p-8 flex flex-col" style="background:#0d0a18">
       <p class="text-xs uppercase tracking-[0.15em] text-ink/50">Cuido Básico</p>
       <div class="mt-6 flex items-baseline gap-1">
-        <span class="text-4xl font-medium">$29</span>
+        <span class="text-4xl font-medium">39 €</span>
         <span class="text-ink/50 text-sm">/mes</span>
       </div>
-      <a href="#contacto" class="mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full liquid-glass text-sm font-medium hover:bg-white/5 transition-colors">Pide tu presupuesto</a>
+      <a href="#contacto" class="press mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full liquid-glass text-sm font-medium hover:bg-white/5 transition-colors">Pide tu presupuesto</a>
       <ul class="mt-7 flex flex-col gap-3 text-sm text-ink/70">
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Hosting incluido</li>
-        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Certificado SSL</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Copias de seguridad semanales</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Actualizaciones de seguridad</li>
+        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>1 cambio de contenido al mes incluido (los siguientes a 15 €)</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>1 hora de soporte al mes</li>
       </ul>
     </div>
 
-    <div class="reveal rounded-2xl border border-white/10 p-8 flex flex-col relative" style="background:#171025">
+    <div class="reveal plan-card rounded-2xl border border-white/10 p-8 flex flex-col relative" style="background:#171025">
       <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-ink text-bg text-xs font-medium px-3 py-1">Más elegido</span>
       <p class="text-xs uppercase tracking-[0.15em] text-ink/50">Cuido Pro</p>
       <div class="mt-6 flex items-baseline gap-1">
-        <span class="text-4xl font-medium">$79</span>
+        <span class="text-4xl font-medium">77 €</span>
         <span class="text-ink/50 text-sm">/mes</span>
       </div>
-      <a href="#contacto" class="mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</a>
+      <a href="#contacto" class="press mt-6 inline-flex items-center justify-center h-10 px-5 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</a>
       <ul class="mt-7 flex flex-col gap-3 text-sm text-ink/70">
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Todo lo de Cuido Básico</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Cambios de contenido ilimitados</li>
-        <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Informe de rendimiento cada mes</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Soporte prioritario</li>
         <li class="flex items-center gap-2"><i class="ph ph-check text-accent"></i>Revisión SEO continua</li>
       </ul>
@@ -546,47 +726,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIOS -->
-<section class="py-20 md:py-28 border-t border-white/5">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="reveal max-w-2xl mb-12">
-      <p class="font-mono text-xs uppercase tracking-[0.18em] text-accent mb-4">Opiniones</p>
-      <h2 class="font-normal tracking-tight" style="font-size:clamp(1.9rem,3.2vw,2.75rem)">Lo que dicen quienes ya trabajaron con nosotros</h2>
-    </div>
-  </div>
-
-  <div class="reveal flex gap-6 overflow-x-auto no-scrollbar snap-x-mand px-6 pb-2">
-    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
-      <blockquote class="text-ink/85 leading-relaxed">"Entendieron el negocio antes de tocar una sola línea de código. La web se vendió sola desde el primer mes."</blockquote>
-      <figcaption class="mt-6 text-sm">
-        <p class="font-medium">Marta Off</p>
-        <p class="text-ink/50">Panadería Trigo y Sal</p>
-      </figcaption>
-    </figure>
-    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
-      <blockquote class="text-ink/85 leading-relaxed">"Pedí cambios varias veces y nunca hubo mal gesto ni cobro extra. Eso no lo encuentras fácil."</blockquote>
-      <figcaption class="mt-6 text-sm">
-        <p class="font-medium">Iñaki Sarasola</p>
-        <p class="text-ink/50">Ferretería Sarasola</p>
-      </figcaption>
-    </figure>
-    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
-      <blockquote class="text-ink/85 leading-relaxed">"El presupuesto que me dieron fue el que pagué al final, sin sorpresas."</blockquote>
-      <figcaption class="mt-6 text-sm">
-        <p class="font-medium">Carla Núñez</p>
-        <p class="text-ink/50">Estudio Núñez Arquitectura</p>
-      </figcaption>
-    </figure>
-    <figure class="snap-card shrink-0 w-[320px] md:w-[380px] rounded-2xl border border-white/10 p-7 bg-white/[0.03]">
-      <blockquote class="text-ink/85 leading-relaxed">"Nos entregaron antes del plazo prometido y la web carga muchísimo más rápido que la anterior."</blockquote>
-      <figcaption class="mt-6 text-sm">
-        <p class="font-medium">Yolanda Prat</p>
-        <p class="text-ink/50">Clínica Vitalis</p>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq" class="py-20 md:py-28 px-6 border-t border-white/5">
   <div class="max-w-3xl mx-auto">
@@ -595,48 +734,72 @@
     </div>
 
     <div class="reveal divide-y divide-white/10 border-t border-b border-white/10">
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-1">
           <span class="font-medium">¿Cuánto tarda un proyecto normal?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">Entre 2 y 4 semanas según el número de páginas y si necesitas contenidos o SEO.</p>
-      </details>
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-1">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">En 24/48 horas si el proyecto es sencillo. Para webs con más páginas, contenidos o SEO, acordamos contigo el plazo exacto.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-2">
           <span class="font-medium">¿Qué incluye el precio del presupuesto?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">Diseño, desarrollo, revisión en dispositivos móviles y una ronda de ajustes antes de publicar.</p>
-      </details>
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-2">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">Diseño, desarrollo, revisión en dispositivos móviles y una ronda de ajustes antes de publicar.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-3">
           <span class="font-medium">¿Puedo pedir cambios cuando el sitio ya esté publicado?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">Sí, con cualquiera de los planes de cuidado o bajo un presupuesto puntual.</p>
-      </details>
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-3">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">Sí. El plan Cuido Básico incluye 1 cambio de contenido al mes (los siguientes a 15 €) y el plan Cuido Pro incluye cambios ilimitados.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-4">
           <span class="font-medium">¿El hosting está incluido?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">Está incluido en los planes de cuidado. También podemos configurarlo sobre tu propio hosting.</p>
-      </details>
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-4">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">Está incluido en los planes de cuidado. También podemos configurarlo sobre tu propio hosting.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-5">
           <span class="font-medium">¿Cómo funciona el pago?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</p>
-      </details>
-      <details class="faq-item py-5">
-        <summary class="flex items-center justify-between gap-4">
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-5">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 py-5 text-left cursor-pointer" aria-expanded="false" aria-controls="faq-panel-6">
           <span class="font-medium">¿Y si necesito más páginas después de empezar?</span>
-          <i class="ph ph-plus faq-icon text-lg text-ink/50"></i>
-        </summary>
-        <p class="mt-3 text-sm text-ink/60 max-w-xl">Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.</p>
-      </details>
+          <i class="ph ph-plus faq-icon text-lg text-ink/50 shrink-0"></i>
+        </button>
+        <div class="faq-panel" id="faq-panel-6">
+          <div class="faq-panel-inner">
+            <p class="text-sm text-ink/60 max-w-xl pb-5">Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -650,7 +813,7 @@
     <form class="mt-9 flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="event.preventDefault(); this.reset(); const b=this.querySelector('button'); const t=b.textContent; b.textContent='Enviado'; setTimeout(()=>b.textContent=t,2200);">
       <label class="sr-only" for="emailInput">Correo electrónico</label>
       <input id="emailInput" type="email" required placeholder="tu@correo.com" class="flex-1 h-12 px-4 rounded-full bg-white/5 border border-white/15 placeholder:text-ink/35 text-sm focus:outline-none focus:border-accent transition-colors">
-      <button type="submit" class="h-12 px-6 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</button>
+      <button type="submit" class="press h-12 px-6 rounded-full bg-ink text-bg text-sm font-medium hover:bg-white transition-colors">Pide tu presupuesto</button>
     </form>
   </div>
 </section>
@@ -660,7 +823,19 @@
   <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
     <div class="md:col-span-2">
       <a href="#top" class="flex items-center gap-2">
-        <span class="w-6 h-6 rounded-lg grad-bg"></span>
+        <svg viewBox="0 0 36 36" class="w-6 h-6 shrink-0" aria-hidden="true">
+          <defs>
+            <linearGradient id="mwLogoFooter" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="55%" stop-color="#a855f7"/>
+              <stop offset="100%" stop-color="#fcd34d"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="9" fill="url(#mwLogoFooter)"/>
+          <rect width="36" height="16" rx="9" fill="white" opacity=".12"/>
+          <text x="18" y="25" text-anchor="middle" font-family="'General Sans', ui-sans-serif, sans-serif" font-weight="700" font-size="19" fill="white">M</text>
+          <path d="M29 6.2l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="white" opacity=".85"/>
+        </svg>
         <span class="font-semibold tracking-tight">MAKEMYWEB</span>
       </a>
       <p class="mt-4 text-sm text-ink/50 max-w-xs">Webs a medida para negocios que quieren verse tan bien como trabajan.</p>
@@ -765,6 +940,75 @@
     });
   }
 
+  // zoom-into-laptop intro: scroll-scrubbed scale + bezel fade, transform/opacity only
+  (function initZoomIntro(){
+    const stage = document.getElementById('zoomStage');
+    if (!stage || reduceMotion) return;
+
+    const SCALE_END = 1; // the mockup's native CSS size IS the fitted size — 1 = full crisp resolution
+    const GROW_END = 0.32; // reach full size quickly — a decisive zoom, not a slow crawl
+    const EXIT_START = 0.85; // long hold at full size — CTAs are real, clickable links here, so give people scroll room to actually use them before it zooms past
+    const PUSH_SCALE = 0.14; // the mockup box is only min(94vw, 94vh*1.6) even at "full size" (94% * 1.14 > 100%) — this pushes its edges past the viewport so the frame crops itself out of view instead of fading
+    const TILT_START = 16; // degrees — the laptop starts tilted back, then faces the viewer straight-on as it fills the screen
+
+    // the mockup is already sized (in CSS) at its viewport-fit "native" size, so it's
+    // always crisp once fully zoomed. Rest state instead scales *down* from that,
+    // which never blurs the way scaling text/edges up past their painted resolution does.
+    let scaleStart = 0.5;
+    function computeScaleStart(){
+      const restWidth = window.innerWidth <= 640
+        ? window.innerWidth * 0.82
+        : Math.min(window.innerWidth * 0.6, 860);
+      const nativeWidth = Math.min(window.innerWidth * 0.94, window.innerHeight * 0.94 * 1.6);
+      scaleStart = restWidth / nativeWidth;
+    }
+
+    let ticking = false;
+    function update(){
+      ticking = false;
+      const rect = stage.getBoundingClientRect();
+      const pinRange = stage.offsetHeight - window.innerHeight;
+      if (pinRange <= 0) return;
+      // clamped — once the pin range ends, sticky releases on its own (native
+      // scroll) and everything here just holds its final value. No JS-driven
+      // fade: the page underneath was already there the whole time.
+      const scrolled = Math.min(Math.max(-rect.top, 0), pinRange);
+      const raw = scrolled / pinRange; // 0..1 across the whole pin range
+      const p = Math.min(raw / GROW_END, 1); // 0..1, reaches 1 once the laptop fits the viewport (fast)
+      // between GROW_END and EXIT_START, p and exit both sit still — a real hold,
+      // full-screen, reading the CTA — before the frame zooms itself out of view
+      const exit = Math.max(0, Math.min((raw - EXIT_START) / (1 - EXIT_START), 1));
+
+      // origin recenters as it grows (85% bottom-anchored at rest -> dead center
+      // once full-size) so the final push-past-frame zoom expands symmetrically
+      // instead of drifting toward the bottom anchor
+      const originY = 85 - 35 * p;
+      const scale = scaleStart + (SCALE_END - scaleStart) * p + PUSH_SCALE * exit;
+      const tilt = TILT_START * (1 - p);
+      const hintOpacity = Math.max(0, 1 - p / 0.15);
+
+      stage.style.setProperty('--zoom-s', scale.toFixed(4));
+      stage.style.setProperty('--zoom-tilt', tilt.toFixed(3) + 'deg');
+      stage.style.setProperty('--zoom-origin-y', originY.toFixed(2) + '%');
+      stage.style.setProperty('--zoom-hint-op', hintOpacity.toFixed(3));
+      stage.style.setProperty('--zoom-bezel', (1 - exit).toFixed(3));
+      stage.style.setProperty('--zoom-flat', exit.toFixed(3));
+      stage.style.setProperty('--zoom-inset', (3.4 * (1 - exit)).toFixed(3));
+      stage.style.setProperty('--zoom-inset-b', (8 * (1 - exit)).toFixed(3));
+    }
+    function onScroll(){
+      if (!ticking){ requestAnimationFrame(update); ticking = true; }
+    }
+    function onResize(){
+      computeScaleStart();
+      onScroll();
+    }
+    computeScaleStart();
+    update();
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', onResize);
+  })();
+
   // mobile menu
   const menuBtn = document.getElementById('menuBtn');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -806,12 +1050,13 @@
   const pagesValue = document.getElementById('pagesValue');
   const needContent = document.getElementById('needContent');
   const needSeo = document.getElementById('needSeo');
+  const need3D = document.getElementById('need3D');
   const agencyPrice = document.getElementById('agencyPrice');
   const freelancerPrice = document.getElementById('freelancerPrice');
   const ourPrice = document.getElementById('ourPrice');
   const savingsLabel = document.getElementById('savingsLabel');
 
-  const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+  const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
 
   function currentService() {
     return [...serviceInputs].find(i => i.checked).value;
@@ -834,6 +1079,7 @@
     let total = Math.max(b.base, b.base + (pages - 1) * b.perPage);
     if (needContent.checked) total += pages * 50;
     if (needSeo.checked) total += pages * 50;
+    if (need3D.checked) total += 200;
     if (timeline === 'rush') total += pages * 100;
     if (timeline === 'fast') total += pages * 25;
 
@@ -852,9 +1098,32 @@
       : 'Ahorras tiempo y dolores de cabeza';
   }
 
-  [...serviceInputs, ...timelineInputs, needContent, needSeo].forEach(i => i.addEventListener('change', calculate));
+  [...serviceInputs, ...timelineInputs, needContent, needSeo, need3D].forEach(i => i.addEventListener('change', calculate));
   pagesSlider.addEventListener('input', calculate);
   calculate();
+
+  // FAQ accordion: height is measured then transitioned (see .faq-panel CSS)
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+    const panel = trigger.nextElementSibling;
+    const inner = panel.querySelector('.faq-panel-inner');
+    trigger.addEventListener('click', () => {
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        panel.style.height = inner.offsetHeight + 'px';
+        requestAnimationFrame(() => { panel.style.height = '0px'; });
+        trigger.setAttribute('aria-expanded', 'false');
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        panel.style.height = inner.offsetHeight + 'px';
+        panel.addEventListener('transitionend', function onEnd(e) {
+          if (e.propertyName === 'height' && trigger.getAttribute('aria-expanded') === 'true') {
+            panel.style.height = 'auto';
+          }
+          panel.removeEventListener('transitionend', onEnd);
+        });
+      }
+    });
+  });
 </script>
 </body>
 </html>
