@@ -12,12 +12,13 @@ const SESSION_KEY = "mmw_intro_seen";
 const VIDEO_CUTOFF = 8.3;
 const FINAL_ZOOM = 1.9;
 const ZOOM_START_TIME = 6.2; // start the cinematic zoom-in a couple seconds before the freeze
-const HOLD_MS = 500; // beat on the frozen frame before handing off
+const HOLD_MS = 120; // tiny beat on the frozen frame before handing off
 const SAFETY_TIMEOUT_MS = 9500;
 
 export function IntroExperience({ onDone }: { onDone: () => void }) {
   const prefersReducedMotion = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const zoomTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [skip] = useState(() => {
     try {
@@ -28,7 +29,7 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
   });
 
   const [phase, setPhase] = useState<Phase>(skip ? "done" : "video");
-  const [videoTime, setVideoTime] = useState(0);
+  const [zooming, setZooming] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
   const finishedRef = useRef(false);
   const cutoffTriggeredRef = useRef(false);
@@ -59,6 +60,7 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
     return () => {
       clearTimeout(t);
       clearTimeout(safety);
+      if (zoomTimerRef.current) clearTimeout(zoomTimerRef.current);
     };
   }, [skip]);
 
@@ -68,11 +70,21 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
     return () => clearTimeout(t);
   }, [phase]);
 
+  // Fires once real playback begins (after any buffering). We schedule the
+  // zoom as a single CSS transition instead of driving the transform from
+  // onTimeUpdate on every tick — that used to restart a short transition
+  // dozens of times a second, which stutters on phones under CPU pressure.
+  const handlePlaying = () => {
+    if (zoomTimerRef.current) return;
+    const v = videoRef.current;
+    const delay = Math.max((ZOOM_START_TIME - (v?.currentTime ?? 0)) * 1000, 0);
+    zoomTimerRef.current = setTimeout(() => setZooming(true), delay);
+  };
+
   const handleTimeUpdate = () => {
     const v = videoRef.current;
-    if (!v) return;
-    setVideoTime(v.currentTime);
-    if (v.currentTime >= VIDEO_CUTOFF && !cutoffTriggeredRef.current) {
+    if (!v || cutoffTriggeredRef.current) return;
+    if (v.currentTime >= VIDEO_CUTOFF) {
       cutoffTriggeredRef.current = true;
       v.pause();
       setPhase("frozen");
@@ -85,11 +97,7 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
 
   if (skip) return null;
 
-  const zoomProgress = Math.min(
-    Math.max((videoTime - ZOOM_START_TIME) / (VIDEO_CUTOFF - ZOOM_START_TIME), 0),
-    1,
-  );
-  const zoomAmount = phase === "video" ? 1 + zoomProgress * (FINAL_ZOOM - 1) : FINAL_ZOOM;
+  const zoomAmount = zooming || phase !== "video" ? FINAL_ZOOM : 1;
 
   return (
     <AnimatePresence>
@@ -98,7 +106,7 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
           className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-charcoal"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
         >
           {!prefersReducedMotion && (
             <video
@@ -106,12 +114,14 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
               className="h-full w-full object-cover"
               style={{
                 transform: `scale(${zoomAmount})`,
-                transition: "transform 60ms linear",
+                transition: `transform ${VIDEO_CUTOFF - ZOOM_START_TIME}s linear`,
+                willChange: "transform",
               }}
               src="/video/eye-intro.mp4"
               autoPlay
               muted
               playsInline
+              onPlaying={handlePlaying}
               onTimeUpdate={handleTimeUpdate}
               onEnded={handleEnded}
               onError={handleVideoError}

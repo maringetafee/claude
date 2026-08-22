@@ -22,7 +22,7 @@ function App() {
       <div
         style={{
           opacity: introDone ? 1 : 0,
-          transition: "opacity 0.6s ease",
+          transition: "opacity 0.35s ease",
         }}
       >
         <Header />
