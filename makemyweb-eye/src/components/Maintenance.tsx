@@ -3,7 +3,7 @@ import { Reveal } from "./Reveal";
 
 const PLANS = [
   {
-    name: "Cuido Básico",
+    name: "Mantenimiento Básico",
     price: "39",
     featured: false,
     features: [
@@ -16,12 +16,12 @@ const PLANS = [
     ],
   },
   {
-    name: "Cuido Pro",
+    name: "Mantenimiento Pro",
     tag: "Más elegido",
     price: "77",
     featured: true,
     features: [
-      "Todo lo de Cuido Básico",
+      "Todo lo de Mantenimiento Básico",
       "Cambios de contenido ilimitados",
       "Soporte prioritario",
       "Revisión SEO continua",

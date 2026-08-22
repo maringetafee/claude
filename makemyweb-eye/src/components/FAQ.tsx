@@ -13,7 +13,7 @@ const FAQS = [
   },
   {
     q: "¿Puedo pedir cambios cuando el sitio ya esté publicado?",
-    a: "Sí. El plan Cuido Básico incluye 1 cambio de contenido al mes (los siguientes a 15 €) y el plan Cuido Pro incluye cambios ilimitados.",
+    a: "Sí. El plan Mantenimiento Básico incluye 1 cambio de contenido al mes (los siguientes a 15 €) y el plan Mantenimiento Pro incluye cambios ilimitados.",
   },
   {
     q: "¿El hosting y el dominio están incluidos?",
