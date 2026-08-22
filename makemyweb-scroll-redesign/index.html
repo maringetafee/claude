@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAKEMYWEB — Diseñamos tu web</title>
+<meta name="description" content="Diseñamos y desarrollamos webs a medida para negocios. Presupuesto claro, calculadora instantánea y planes de mantenimiento.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: '#171310',
+          ink: '#f7f2e7',
+          muted: '#b6ab97',
+          gold: '#c6a05e',
+          bronze: '#4a3418',
+        },
+        fontFamily: {
+          serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  }
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-ink">
+
+<!-- NAVBAR -->
+<header class="site-nav" id="siteNav">
+  <nav class="site-nav__row">
+    <a href="#inicio" class="site-nav__brand">
+      <svg viewBox="0 0 36 36" class="w-8 h-8 shrink-0" aria-hidden="true">
+        <defs>
+          <linearGradient id="mwLogoNav" x1="0" y1="36" x2="36" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#4a3418"/>
+            <stop offset="52%" stop-color="#c6a05e"/>
+            <stop offset="100%" stop-color="#f0dcae"/>
+          </linearGradient>
+        </defs>
+        <rect width="36" height="36" rx="10" fill="#1e1812"/>
+        <path d="M18 7 L29 17 H24.5 V29 H20.5 V20 H15.5 V29 H11.5 V17 H7 Z" fill="url(#mwLogoNav)"/>
+      </svg>
+      <span class="site-nav__wordmark">MAKEMYWEB</span>
+    </a>
+
+    <div class="site-nav__links">
+      <a href="#servicios" data-nav="servicios">Servicios</a>
+      <a href="#presupuesto" data-nav="presupuesto">Precios</a>
+      <a href="#proceso" data-nav="proceso">Proceso</a>
+      <a href="#faq" data-nav="faq">FAQ</a>
+    </div>
+
+    <div class="site-nav__actions">
+      <a href="#contacto" class="btn btn--solid site-nav__cta" data-nav="contacto">Pide tu presupuesto</a>
+      <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="site-nav__burger">
+        <i class="ph ph-list text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="site-nav__mobile" hidden>
+    <a href="#servicios">Servicios</a>
+    <a href="#presupuesto">Precios</a>
+    <a href="#proceso">Proceso</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contacto" class="btn btn--solid">Pide tu presupuesto</a>
+  </div>
+</header>
+
+<!-- ROOM PROGRESS RAIL (desktop only) -->
+<nav class="room-rail" id="roomRail" aria-label="Progreso del recorrido"></nav>
+
+<!-- ============================================================
+     THE CINEMA: one long pinned scroll track. Every section of the
+     site (hero through the final CTA) lives inside it as an
+     absolutely-positioned panel that fades in/out over the house
+     tour video as the user scrolls. See app.js for the scroll↔video
+     synchronisation logic. Real, invisible anchor markers give every
+     scene a normal in-flow #id so nav links / footer links / browser
+     history all work without any special-case JS.
+     ============================================================ -->
+<div id="cinema" class="cinema">
+
+  <span id="inicio" class="scene-anchor" data-anchor="inicio"></span>
+  <span id="entrada" class="scene-anchor" data-anchor="entrada"></span>
+  <span id="servicios" class="scene-anchor" data-anchor="servicios"></span>
+  <span id="presupuesto" class="scene-anchor" data-anchor="presupuesto"></span>
+  <span id="planes" class="scene-anchor" data-anchor="planes"></span>
+  <span id="proceso" class="scene-anchor" data-anchor="proceso"></span>
+  <span id="experiencias" class="scene-anchor" data-anchor="experiencias"></span>
+  <span id="showcase" class="scene-anchor" data-anchor="showcase"></span>
+  <span id="faq" class="scene-anchor" data-anchor="faq"></span>
+  <span id="contacto" class="scene-anchor" data-anchor="contacto"></span>
+
+  <div class="cinema__sticky">
+
+    <!-- video layer -->
+    <div class="cinema__video-wrap">
+      <video id="tourVideo" class="cinema__video" muted playsinline webkit-playsinline="true" preload="auto" disablepictureinpicture poster="assets/house-tour-poster.jpg">
+        <source src="assets/house-tour.mp4" type="video/mp4">
+      </video>
+      <img id="tourPoster" class="cinema__poster" src="assets/house-tour-poster.jpg" alt="" aria-hidden="true">
+    </div>
+    <div class="cinema__scrim"></div>
+    <div class="cinema__vignette"></div>
+
+    <!-- scroll hint, only on the very first scene -->
+    <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+      <span>desliza para continuar el recorrido</span>
+      <i class="ph ph-arrow-down"></i>
+    </div>
+
+    <!-- panels -->
+    <div class="cinema__panels">
+
+      <!-- 1. INICIO -->
+      <section class="scene-panel scene-panel--center" data-scene="inicio">
+        <div class="scene-panel__inner max-w-3xl">
+          <p class="eyebrow">MAKEMYWEB</p>
+          <h1 class="display-1">Diseñamos tu <em>web</em></h1>
+          <p class="lede">Sitios a medida, listos en 24/48h, sin líos técnicos ni sorpresas en el precio.</p>
+          <div class="cta-row">
+            <a href="#contacto" class="btn btn--solid">Pide tu presupuesto</a>
+            <a href="#presupuesto" class="btn btn--ghost">Calcula el precio</a>
+          </div>
+        </div>
+        <div class="trust-strip">
+          <p>Negocios que ya confían en nosotros</p>
+          <div class="trust-strip__track">
+            <div class="trust-strip__set" id="marqueeSetA"></div>
+            <div class="trust-strip__set" id="marqueeSetB" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ENTRADA (pure transition beat) -->
+      <section class="scene-panel scene-panel--corner-bl" data-scene="entrada">
+        <div class="scene-panel__inner max-w-sm">
+          <p class="quiet-line">Cada rincón, pensado con la misma atención que un espacio bien construido.</p>
+        </div>
+      </section>
+
+      <!-- 3. SERVICIOS (salón) -->
+      <section class="scene-panel scene-panel--bottom" data-scene="servicios">
+        <div class="scene-panel__inner max-w-5xl">
+          <p class="eyebrow">Servicios</p>
+          <h2 class="display-2">Elige cómo quieres que trabajemos</h2>
+          <div class="service-grid">
+            <div class="service-card service-card--lg">
+              <span class="tag">Recomendado</span>
+              <i class="ph ph-stack"></i>
+              <h3>Diseño + Desarrollo</h3>
+              <p>Nos encargamos de todo, de la idea al sitio publicado. Diseño, código y puesta en marcha en un solo equipo.</p>
+              <p class="price">desde 649&nbsp;€</p>
+            </div>
+            <div class="service-card">
+              <i class="ph ph-pen-nib"></i>
+              <h3>Solo diseño</h3>
+              <p>Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</p>
+              <p class="price price--sm">desde 399&nbsp;€</p>
+            </div>
+            <div class="service-card">
+              <i class="ph ph-code"></i>
+              <h3>Solo desarrollo</h3>
+              <p>Programamos un diseño que ya tienes, con código limpio y rápido.</p>
+              <p class="price price--sm">desde 199&nbsp;€</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. PRESUPUESTO / CALCULADORA (chimenea) -->
+      <section class="scene-panel scene-panel--console" data-scene="presupuesto">
+        <div class="scene-panel__inner max-w-4xl">
+          <p class="eyebrow">Presupuesto</p>
+          <h2 class="display-2">Calcula tu presupuesto en segundos</h2>
+          <p class="lede lede--sm">Mueve las opciones y compara lo que cuesta con una agencia grande, un freelancer y con nosotros.</p>
+
+          <div class="calc">
+            <div class="calc__form">
+              <div class="calc__group">
+                <h3>¿Qué necesitas?</h3>
+                <div class="option-list">
+                  <label class="option-row">
+                    <input type="radio" name="service" value="both" class="sr-only peer" checked>
+                    <span class="radio-dot"></span>
+                    <span>Diseño + desarrollo</span>
+                  </label>
+                  <label class="option-row">
+                    <input type="radio" name="service" value="design" class="sr-only peer">
+                    <span class="radio-dot"></span>
+                    <span>Solo diseño</span>
+                  </label>
+                  <label class="option-row">
+                    <input type="radio" name="service" value="development" class="sr-only peer">
+                    <span class="radio-dot"></span>
+                    <span>Solo desarrollo</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <h3 class="calc__group-head"><span>¿Cuántas páginas?</span><span id="pagesValue" class="calc__figure">1</span></h3>
+                <input type="range" min="1" max="5" step="1" value="1" id="pagesSlider" class="w-full">
+                <div class="calc__range-labels"><span>1</span><span>5</span></div>
+              </div>
+
+              <div class="calc__group">
+                <h3>Extras</h3>
+                <div class="option-list">
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="checkbox" id="needContent" class="sr-only peer">
+                      <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      <span>Ayuda con los contenidos</span>
+                    </span>
+                    <span class="option-row__price">+50&nbsp;€/pág</span>
+                  </label>
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="checkbox" id="needSeo" class="sr-only peer">
+                      <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      <span>Optimización SEO</span>
+                    </span>
+                    <span class="option-row__price">+50&nbsp;€/pág</span>
+                  </label>
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="checkbox" id="need3D" class="sr-only peer">
+                      <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                      <span>Página animada 3D</span>
+                    </span>
+                    <span class="option-row__price">+200&nbsp;€</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="calc__group">
+                <h3>¿Con qué rapidez lo necesitas?</h3>
+                <div class="option-list">
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="radio" name="timeline" value="rush" class="sr-only peer">
+                      <span class="radio-dot"></span>
+                      <span>En 24 horas</span>
+                    </span>
+                    <span class="option-row__price">+100&nbsp;€/pág</span>
+                  </label>
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="radio" name="timeline" value="fast" class="sr-only peer">
+                      <span class="radio-dot"></span>
+                      <span>En 48 horas</span>
+                    </span>
+                    <span class="option-row__price">+25&nbsp;€/pág</span>
+                  </label>
+                  <label class="option-row option-row--split">
+                    <span class="option-row__lead">
+                      <input type="radio" name="timeline" value="regular" class="sr-only peer" checked>
+                      <span class="radio-dot"></span>
+                      <span>A ritmo normal</span>
+                    </span>
+                    <span class="option-row__price option-row__price--muted">sin coste extra</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc__result">
+              <h3>Presupuesto estimado</h3>
+              <p class="calc__result-note">Cifras orientativas, el presupuesto final se confirma tras hablar contigo.</p>
+              <div class="calc__result-cards">
+                <div class="result-card">
+                  <p>Agencia típica cobra un mínimo de</p>
+                  <p class="result-card__figure" id="agencyPrice">8.000&nbsp;€</p>
+                  <p class="result-card__note">y suele sumar tiempo y costes extra</p>
+                </div>
+                <div class="result-card">
+                  <p>Freelancer normal cobra un mínimo de</p>
+                  <p class="result-card__figure" id="freelancerPrice">3.000&nbsp;€</p>
+                  <p class="result-card__note">y suele implicar idas y vueltas</p>
+                </div>
+                <div class="result-card result-card--highlight">
+                  <p>Con MAKEMYWEB</p>
+                  <p class="result-card__figure result-card__figure--lg" id="ourPrice">649&nbsp;€</p>
+                  <p class="result-card__note" id="savingsLabel">Ahorras tiempo y dolores de cabeza</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PLANES (pasillo) -->
+      <section class="scene-panel scene-panel--center" data-scene="planes">
+        <div class="scene-panel__inner max-w-3xl">
+          <p class="eyebrow">Mantenimiento</p>
+          <h2 class="display-2">Después del lanzamiento, seguimos cuidando tu web</h2>
+          <p class="lede lede--sm">Hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</p>
+
+          <div class="plan-grid">
+            <div class="plan-card">
+              <p class="plan-card__kicker">Cuido Básico</p>
+              <p class="plan-card__price"><span>39&nbsp;€</span>/mes</p>
+              <a href="#contacto" class="btn btn--ghost btn--sm">Pide tu presupuesto</a>
+              <ul>
+                <li><i class="ph ph-check"></i>Hosting incluido</li>
+                <li><i class="ph ph-check"></i>Copias de seguridad semanales</li>
+                <li><i class="ph ph-check"></i>Actualizaciones de seguridad</li>
+                <li><i class="ph ph-check"></i>1 cambio de contenido al mes incluido (los siguientes a 15&nbsp;€)</li>
+                <li><i class="ph ph-check"></i>1 hora de soporte al mes</li>
+              </ul>
+            </div>
+            <div class="plan-card plan-card--highlight">
+              <span class="tag tag--float">Más elegido</span>
+              <p class="plan-card__kicker">Cuido Pro</p>
+              <p class="plan-card__price"><span>77&nbsp;€</span>/mes</p>
+              <a href="#contacto" class="btn btn--solid btn--sm">Pide tu presupuesto</a>
+              <ul>
+                <li><i class="ph ph-check"></i>Todo lo de Cuido Básico</li>
+                <li><i class="ph ph-check"></i>Cambios de contenido ilimitados</li>
+                <li><i class="ph ph-check"></i>Soporte prioritario</li>
+                <li><i class="ph ph-check"></i>Revisión SEO continua</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. PROCESO (galería / cocina) -->
+      <section class="scene-panel scene-panel--top" data-scene="proceso">
+        <div class="scene-panel__inner max-w-5xl">
+          <p class="eyebrow">Proceso</p>
+          <h2 class="display-2">Cómo trabajamos</h2>
+          <div class="process-grid">
+            <div class="process-step">
+              <span class="process-step__num"><i class="ph ph-compass"></i></span>
+              <h3>Descubrimos</h3>
+              <p>Hablamos de tu negocio, tu público y lo que necesita tu web.</p>
+            </div>
+            <div class="process-step">
+              <span class="process-step__num"><i class="ph ph-pen-nib"></i></span>
+              <h3>Diseñamos</h3>
+              <p>Maquetamos y definimos el estilo antes de escribir código.</p>
+            </div>
+            <div class="process-step">
+              <span class="process-step__num"><i class="ph ph-code"></i></span>
+              <h3>Desarrollamos</h3>
+              <p>Código limpio, rápido y que se ve bien en cualquier pantalla.</p>
+            </div>
+            <div class="process-step">
+              <span class="process-step__num"><i class="ph ph-rocket-launch"></i></span>
+              <h3>Lanzamos</h3>
+              <p>Publicamos el sitio y seguimos cerca las primeras semanas.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. EXPERIENCIAS (sala gaming) -->
+      <section class="scene-panel scene-panel--corner-r" data-scene="experiencias">
+        <div class="scene-panel__inner max-w-md">
+          <p class="eyebrow">Cuando tu web necesita más</p>
+          <h2 class="display-3">Animación e interacción a medida</h2>
+          <p class="lede lede--sm">Algunos proyectos piden algo más que páginas estáticas: microinteracciones cuidadas y espacios en 3D que se sienten vivos.</p>
+          <span class="chip"><i class="ph ph-cube"></i>Página animada 3D · +200&nbsp;€</span>
+          <div class="cta-row cta-row--tight">
+            <a href="#presupuesto" class="btn btn--ghost btn--sm">Ir a la calculadora</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. SHOWCASE (despacho) -->
+      <section class="scene-panel scene-panel--bottom" data-scene="showcase">
+        <div class="scene-panel__inner max-w-5xl">
+          <p class="eyebrow">Trabajo real</p>
+          <h2 class="display-2">Así lucen los sitios que creamos</h2>
+
+          <div class="showcase-grid">
+            <div class="showcase-card">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <img src="https://picsum.photos/seed/makemyweb-restaurante/640/440" alt="Ejemplo de web para restaurante" loading="lazy">
+              <p>Restaurante</p>
+            </div>
+            <div class="showcase-card showcase-card--raise">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <img src="https://picsum.photos/seed/makemyweb-tienda/640/440" alt="Ejemplo de tienda online" loading="lazy">
+              <p>Tienda online</p>
+            </div>
+            <div class="showcase-card">
+              <div class="browser-bar"><span></span><span></span><span></span></div>
+              <img src="https://picsum.photos/seed/makemyweb-clinica/640/440" alt="Ejemplo de web para clínica" loading="lazy">
+              <p>Clínica / servicios</p>
+            </div>
+          </div>
+
+          <div class="stat-row">
+            <div><p class="stat-row__figure">134</p><p>proyectos entregados</p></div>
+            <div><p class="stat-row__figure">4.8/5</p><p>valoración media de clientes</p></div>
+            <div><p class="stat-row__figure">24/48h</p><p>plazo medio de entrega</p></div>
+            <div><p class="stat-row__figure">89%</p><p>renueva el mantenimiento</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. FAQ (pasillo de salida) -->
+      <section class="scene-panel scene-panel--left" data-scene="faq">
+        <div class="scene-panel__inner max-w-2xl">
+          <p class="eyebrow">Dudas frecuentes</p>
+          <h2 class="display-2">Preguntas frecuentes</h2>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-1">
+                <span>¿Cuánto tarda un proyecto normal?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-1">
+                <div class="faq-panel-inner">
+                  <p>En 24/48 horas si el proyecto es sencillo. Para webs con más páginas, contenidos o SEO, acordamos contigo el plazo exacto.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2">
+                <span>¿Qué incluye el precio del presupuesto?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-2">
+                <div class="faq-panel-inner">
+                  <p>Diseño, desarrollo, revisión en dispositivos móviles y una ronda de ajustes antes de publicar.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3">
+                <span>¿Puedo pedir cambios cuando el sitio ya esté publicado?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-3">
+                <div class="faq-panel-inner">
+                  <p>Sí. El plan Cuido Básico incluye 1 cambio de contenido al mes (los siguientes a 15&nbsp;€) y el plan Cuido Pro incluye cambios ilimitados.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4">
+                <span>¿El hosting está incluido?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-4">
+                <div class="faq-panel-inner">
+                  <p>Está incluido en los planes de cuidado. También podemos configurarlo sobre tu propio hosting.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5">
+                <span>¿Cómo funciona el pago?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-5">
+                <div class="faq-panel-inner">
+                  <p>La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</p>
+                </div>
+              </div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-6">
+                <span>¿Y si necesito más páginas después de empezar?</span>
+                <i class="ph ph-plus faq-icon"></i>
+              </button>
+              <div class="faq-panel" id="faq-panel-6">
+                <div class="faq-panel-inner">
+                  <p>Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. CONTACTO (terraza) -->
+      <section class="scene-panel scene-panel--center" data-scene="contacto">
+        <div class="scene-panel__inner max-w-xl">
+          <p class="eyebrow">Último paso</p>
+          <h2 class="display-2">Hablemos de tu web</h2>
+          <p class="lede lede--sm">Cuéntanos qué necesitas y te devolvemos un presupuesto claro en menos de 24 horas.</p>
+          <form class="contact-form" id="contactForm">
+            <label class="sr-only" for="emailInput">Correo electrónico</label>
+            <input id="emailInput" type="email" required placeholder="tu@correo.com">
+            <button type="submit" class="btn btn--solid">Pide tu presupuesto</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER (normal document flow, after the pinned experience) -->
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__brand">
+      <a href="#inicio" class="site-nav__brand">
+        <svg viewBox="0 0 36 36" class="w-7 h-7 shrink-0" aria-hidden="true">
+          <defs>
+            <linearGradient id="mwLogoFooter" x1="0" y1="36" x2="36" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2c1f52"/>
+              <stop offset="52%" stop-color="#a173ff"/>
+              <stop offset="100%" stop-color="#e8a35c"/>
+            </linearGradient>
+          </defs>
+          <rect width="36" height="36" rx="10" fill="#1e1812"/>
+          <path d="M18 7 L29 17 H24.5 V29 H20.5 V20 H15.5 V29 H11.5 V17 H7 Z" fill="url(#mwLogoFooter)"/>
+        </svg>
+        <span class="site-nav__wordmark">MAKEMYWEB</span>
+      </a>
+      <p>Webs a medida para negocios que quieren verse tan bien como trabajan.</p>
+      <div class="site-footer__social">
+        <a href="#" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="ph ph-linkedin-logo"></i></a>
+        <a href="#" aria-label="Dribbble"><i class="ph ph-dribbble-logo"></i></a>
+      </div>
+    </div>
+    <div>
+      <p class="site-footer__head">Enlaces</p>
+      <ul>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#presupuesto">Precios</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="site-footer__head">Contacto</p>
+      <ul>
+        <li><a href="mailto:makemyweb.info@gmail.com">makemyweb.info@gmail.com</a></li>
+        <li><a href="tel:+34689872320">689 872 320</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="site-footer__bottom">
+    <p>© 2026 MAKEMYWEB. Todos los derechos reservados.</p>
+    <div>
+      <a href="#">Aviso legal</a>
+      <a href="#">Privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
