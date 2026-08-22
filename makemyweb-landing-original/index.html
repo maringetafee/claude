@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MakeMyWeb — Webs a medida para tu negocio</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<canvas id="pageLeaves" class="page-leaves" aria-hidden="true"></canvas>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <canvas id="headerCarCanvas" class="header-car" aria-hidden="true"></canvas>
+      Make<span>My</span>Web
+    </a>
+    <nav class="nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#presupuesto">Presupuesto</a>
+      <a href="#mantenimiento">Mantenimiento</a>
+      <a href="#clientes">Clientes</a>
+      <a href="#contacto" class="nav-cta">Contactar</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<section class="car-scene">
+  <div class="car-sticky">
+    <canvas id="carCanvas" class="car-canvas"></canvas>
+    <div class="car-caption" id="carCaption">
+      <h1>Diseño con motor propio.<span>Webs rápidas y con personalidad.</span></h1>
+      <p>Creamos páginas web con la misma precisión que un buen diseño deportivo, hechas a medida para tu negocio.</p>
+      <div class="hero-buttons">
+        <a href="#presupuesto" class="btn btn-primary">Calcula tu presupuesto</a>
+        <a href="#clientes" class="btn btn-ghost">Ver quién confía en nosotros</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios" class="section">
+  <div class="container">
+    <h2>Qué te ofrecemos</h2>
+    <p class="section-subtitle">Empezamos siempre por lo esencial y crecemos contigo según lo que necesite tu negocio.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>Landing Page</h3>
+        <p>Una página web de presentación clara y profesional: quién eres, qué ofreces y cómo contactarte. La base de todo negocio con presencia online.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📅</div>
+        <h3>Sistema de reservas</h3>
+        <p>Añade un módulo de reservas online para que tus clientes puedan reservar mesa, cita o servicio sin llamarte por teléfono.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Revisiones de boceto</h3>
+        <p>Antes de lanzar tu web, revisamos el diseño contigo tantas veces como necesites hasta que sea exactamente lo que buscabas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Mantenimiento a medida</h3>
+        <p>Cada negocio cambia a un ritmo distinto. Por eso adaptamos el mantenimiento a la frecuencia de cambios que realmente necesitas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="presupuesto" class="section section-alt">
+  <div class="container">
+    <h2>Presupuesta tu web</h2>
+    <p class="section-subtitle">Elige tu paquete base, añade lo que necesites y consulta el precio al momento. Son precios orientativos: al final siempre confirmamos el presupuesto contigo.</p>
+
+    <div class="calculator">
+      <div class="calc-options">
+
+        <div class="calc-block">
+          <h3>1. Elige tu paquete base</h3>
+          <label class="option-row">
+            <input type="radio" name="base" value="350" data-name="Landing Page" checked>
+            <span class="option-main">
+              <span class="option-title">Landing Page</span>
+              <span class="option-desc">1 página · diseño responsive · formulario de contacto · SEO básico</span>
+            </span>
+            <span class="option-price">350€</span>
+          </label>
+          <label class="option-row">
+            <input type="radio" name="base" value="550" data-name="Web Multi-sección">
+            <span class="option-main">
+              <span class="option-title">Web Multi-sección</span>
+              <span class="option-desc">Hasta 4 páginas (inicio, servicios, sobre nosotros, contacto) · responsive · SEO básico</span>
+            </span>
+            <span class="option-price">550€</span>
+          </label>
+        </div>
+
+        <div class="calc-block">
+          <h3>2. Añade extras</h3>
+          <label class="option-row">
+            <input type="checkbox" id="addReservas" value="220">
+            <span class="option-main">
+              <span class="option-title">Sistema de reservas online</span>
+              <span class="option-desc">Tus clientes reservan mesa, cita o servicio directamente desde la web</span>
+            </span>
+            <span class="option-price">+220€</span>
+          </label>
+
+          <div class="option-row option-row-stepper">
+            <span class="option-main">
+              <span class="option-title">Revisiones de boceto adicionales</span>
+              <span class="option-desc">Las 2 primeras revisiones van incluidas. Cada revisión extra: 30€</span>
+            </span>
+            <div class="stepper">
+              <button type="button" class="step-btn" id="revMinus">−</button>
+              <span id="revCount">0</span>
+              <button type="button" class="step-btn" id="revPlus">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-block">
+          <h3>3. Elige el mantenimiento</h3>
+          <p class="calc-hint">¿Tu negocio cambia precios, carta o fotos a menudo (bares, restaurantes) o solo de vez en cuando (peluquerías, tiendas)? Elige el plan que más se ajuste.</p>
+          <label class="option-row">
+            <input type="radio" name="maint" value="0" data-name="Sin mantenimiento" checked>
+            <span class="option-main">
+              <span class="option-title">Sin mantenimiento</span>
+              <span class="option-desc">Tú te encargas de los cambios, o nos avisas puntualmente (20€ por actualización suelta)</span>
+            </span>
+            <span class="option-price">0€/mes</span>
+          </label>
+          <label class="option-row">
+            <input type="radio" name="maint" value="15" data-name="Mantenimiento Esencial">
+            <span class="option-main">
+              <span class="option-title">Mantenimiento Esencial</span>
+              <span class="option-desc">Ideal para peluquerías, tiendas y negocios con cambios poco frecuentes: hasta 2 actualizaciones al mes (fotos, textos, arreglo de fallos)</span>
+            </span>
+            <span class="option-price">15€/mes</span>
+          </label>
+          <label class="option-row">
+            <input type="radio" name="maint" value="35" data-name="Mantenimiento Activo">
+            <span class="option-main">
+              <span class="option-title">Mantenimiento Activo</span>
+              <span class="option-desc">Ideal para bares y restaurantes: actualizaciones frecuentes de carta y precios, hasta 8 actualizaciones al mes</span>
+            </span>
+            <span class="option-price">35€/mes</span>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="calc-summary">
+        <h3>Tu presupuesto</h3>
+        <ul id="summaryList" class="summary-list"></ul>
+        <div class="summary-total">
+          <div class="summary-total-row">
+            <span>Pago único</span>
+            <span id="totalOnce">350€</span>
+          </div>
+          <div class="summary-total-row">
+            <span>Mantenimiento</span>
+            <span id="totalMonthly">0€/mes</span>
+          </div>
+        </div>
+        <a href="#contacto" class="btn btn-primary btn-block">Quiero este presupuesto</a>
+        <p class="summary-note">Precio orientativo, sujeto a confirmación según las necesidades reales de tu proyecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mantenimiento" class="section">
+  <div class="container">
+    <h2>El mantenimiento, a tu ritmo</h2>
+    <p class="section-subtitle">No todos los negocios necesitan lo mismo. Por eso tenemos dos planes pensados para distintos ritmos de cambio.</p>
+    <div class="cards-grid cards-grid-2">
+      <div class="card card-highlight">
+        <h3>Mantenimiento Esencial <span class="price-tag">15€/mes</span></h3>
+        <p class="card-target">Peluquerías, tiendas, clínicas, talleres...</p>
+        <ul class="check-list">
+          <li>Hasta 2 actualizaciones al mes</li>
+          <li>Cambio de fotos o textos puntuales</li>
+          <li>Corrección de fallos técnicos</li>
+          <li>Soporte por email</li>
+        </ul>
+      </div>
+      <div class="card card-highlight">
+        <h3>Mantenimiento Activo <span class="price-tag">35€/mes</span></h3>
+        <p class="card-target">Bares, restaurantes, cafeterías...</p>
+        <ul class="check-list">
+          <li>Hasta 8 actualizaciones al mes</li>
+          <li>Actualización de carta y precios</li>
+          <li>Cambio de fotos, promociones y avisos</li>
+          <li>Soporte prioritario</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" class="section section-alt">
+  <div class="container">
+    <h2>Confían en nosotros</h2>
+    <p class="section-subtitle">Estas son algunas de las empresas con las que hemos trabajado.</p>
+    <div class="clients-grid">
+      <div class="client-card">
+        <div class="client-avatar">LB</div>
+        <h4>Restaurante La Brasa</h4>
+        <p class="client-tag">Landing Page + Reservas + Mantenimiento Activo</p>
+      </div>
+      <div class="client-card">
+        <div class="client-avatar">EN</div>
+        <h4>Peluquería Estilo Nuevo</h4>
+        <p class="client-tag">Landing Page + Mantenimiento Esencial</p>
+      </div>
+      <div class="client-card">
+        <div class="client-avatar">A&C</div>
+        <h4>Cafetería Aroma &amp; Co.</h4>
+        <p class="client-tag">Web Multi-sección + Mantenimiento Activo</p>
+      </div>
+      <div class="client-card">
+        <div class="client-avatar">RF</div>
+        <h4>Taller Mecánico RuedaFix</h4>
+        <p class="client-tag">Landing Page</p>
+      </div>
+      <div class="client-card">
+        <div class="client-avatar">CS</div>
+        <h4>Clínica Dental Sonrisa</h4>
+        <p class="client-tag">Web Multi-sección + Reservas</p>
+      </div>
+      <div class="client-card">
+        <div class="client-avatar">BL</div>
+        <h4>Boutique Luna</h4>
+        <p class="client-tag">Landing Page + Mantenimiento Esencial</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="section">
+  <div class="container contact-inner">
+    <h2>¿Hablamos de tu web?</h2>
+    <p class="section-subtitle">Cuéntanos sobre tu negocio y te enviamos un presupuesto cerrado sin compromiso.</p>
+    <div class="contact-box">
+      <p>📧 hola@makemyweb.es</p>
+      <p>📱 600 000 000</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2026 MakeMyWeb. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>
