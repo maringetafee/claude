@@ -27,7 +27,7 @@ function freelancerPrice(pages: number): number {
 }
 
 function makemywebBasePrice(pages: number): number {
-  const base = 499;
+  const base = 799;
   const perPage = 200;
   return Math.max(base, base + (pages - 1) * perPage);
 }

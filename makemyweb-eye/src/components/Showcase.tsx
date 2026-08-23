@@ -32,6 +32,16 @@ const PROJECTS = [
     image: "/images/showcase/mocca.webp",
     accent: "#c99a4a",
   },
+  {
+    name: "MAKEMYWEB",
+    place: "Demo",
+    kind: "Web animada 3D",
+    eyebrow: "EJEMPLO · DISEÑO ANIMADO",
+    tagline: "Otro ejemplo de web animada, con scroll cinematográfico en 3D.",
+    href: "https://ejemplo-makemyweb.netlify.app/",
+    image: "/images/showcase/makemyweb-demo.webp",
+    accent: "#1687b8",
+  },
 ];
 
 export function Showcase() {
@@ -46,12 +56,12 @@ export function Showcase() {
             Así lucen los sitios que creamos
           </h2>
           <p className="mt-5 text-stone">
-            Tres bares y cafeterías reales, con web ya publicada. Toca
-            cualquiera para verla en vivo.
+            Cuatro webs ya publicadas: tres negocios reales y un ejemplo de
+            diseño animado. Toca cualquiera para verla en vivo.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-8 lg:grid-cols-3">
+        <div className="mt-16 grid gap-8 sm:grid-cols-2">
           {PROJECTS.map((project, i) => (
             <Reveal key={project.name} delay={i * 0.12}>
               <motion.a

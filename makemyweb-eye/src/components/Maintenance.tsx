@@ -13,7 +13,7 @@ const PLANS = [
       "Actualizaciones de seguridad",
       "1 cambio de contenido al mes incluido",
       "Los siguientes cambios a 15 €",
-      "1 hora de soporte al mes",
+      "Optimización SEO solo una vez (al crear la página)",
     ],
   },
   {
