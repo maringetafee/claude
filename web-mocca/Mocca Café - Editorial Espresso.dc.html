@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="ext-resource-dependency" content="./assets/bagel-cafe.jpg" data-resource-id="photoDesayunos" />
+<meta name="ext-resource-dependency" content="./assets/tartar.jpg" data-resource-id="photoPicoteo" />
+<meta name="ext-resource-dependency" content="./assets/poke.jpg" data-resource-id="photoPoke" />
+<meta name="ext-resource-dependency" content="./assets/batido-oreo.jpg" data-resource-id="photoBebidas" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Mocca Café · Getafe</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='10' fill='%23201712'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-style='italic' font-size='34' fill='%23C08A3E' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;family=Space+Grotesk:wght@400;500;600;700&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#F3EEE4;}
+  a{color:#C08A3E;}
+  a:hover{color:#a67433;}
+  .scr::-webkit-scrollbar{width:0;height:0;}
+  .scr{scrollbar-width:none;}
+  :focus-visible{outline:2.5px solid #C08A3E;outline-offset:2px;}
+
+  h1,.section-title{text-wrap:balance;}
+  p{text-wrap:pretty;}
+
+  .grain{position:relative;}
+  .grain::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .btn{transition:transform .18s cubic-bezier(.2,.7,.2,1),box-shadow .18s ease,background-color .18s ease,border-color .18s ease,color .18s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0) scale(.97);}
+  .btn-solid:hover{background:#a67433 !important;box-shadow:0 14px 26px -8px rgba(192,138,62,.45);}
+  .btn-ghost-dark:hover{background:rgba(243,238,228,.08) !important;border-color:rgba(243,238,228,.85) !important;}
+  .btn-ghost-light:hover{background:#241B15 !important;color:#F3EEE4 !important;border-color:#241B15 !important;}
+
+  .cat-chip{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+  .cat-chip:hover{transform:translateY(-2px);box-shadow:0 8px 16px -6px rgba(36,27,21,.22);}
+  .cat-chip:active{transform:translateY(0) scale(.95);}
+  .allergen-chip{transition:transform .15s ease,box-shadow .15s ease;}
+  .allergen-chip:hover{transform:translateY(-1px);}
+  .allergen-chip:active{transform:scale(.94);}
+
+  .cat-grid{-webkit-mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent);mask-image:linear-gradient(to right,transparent,#000 20px,#000 calc(100% - 20px),transparent);}
+
+  .menu-row{transition:background-color .2s ease;border-radius:3px;animation:rowIn .45s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes rowIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  @media (min-width:900px){
+    .menu-row:hover{background:rgba(192,138,62,.06);}
+  }
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  .photo-frame{position:relative;isolation:isolate;}
+  .photo-frame img{transition:transform .6s cubic-bezier(.2,.7,.2,1);animation:photoIn .5s ease both;}
+  @media (min-width:900px){ .photo-frame:hover img{transform:scale(1.035);} }
+  @keyframes photoIn{from{opacity:0;transform:scale(1.02);}to{opacity:1;transform:scale(1);}}
+
+  .social-link{transition:opacity .18s ease;}
+  .social-link:hover{opacity:.65;}
+
+  .map-frame{filter:sepia(.15) saturate(.8) contrast(1.02);transition:filter .35s ease;}
+  .map-frame:hover{filter:none;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  }
+
+  @media (min-width:900px){
+    .hero-grid{grid-template-columns:1.1fr .9fr !important;align-items:center !important;}
+    .hero-title{font-size:76px !important;}
+    .cat-grid{grid-template-columns:repeat(6,1fr) !important;}
+    .menu-wrap{max-width:760px !important;margin:0 auto !important;}
+    .footer-grid{grid-template-columns:1fr 1fr !important;}
+  }
+</style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif;color:#241B15;background:#F3EEE4;" data-screen-label="Mocca Café — Editorial Espresso">
+
+  <!-- nav -->
+  <nav style="display:flex;justify-content:space-between;align-items:center;padding:18px 22px;max-width:1100px;margin:0 auto;">
+    <div style="font-family:'Instrument Serif',serif;font-size:24px;color:#241B15;">Mocca Café</div>
+    <a href="tel:+34916181189" class="btn btn-ghost-light" style="text-decoration:none;color:#241B15;border:1.5px solid #241B15;font-weight:600;font-size:13px;padding:8px 16px;border-radius:2px;">Llamar</a>
+  </nav>
+
+  <!-- hero -->
+  <header class="grain" style="background:#201712;color:#F3EEE4;">
+    <div class="hero-grid" style="max-width:1100px;margin:0 auto;padding:20px 22px 44px;display:grid;grid-template-columns:1fr;gap:26px;">
+      <div>
+        <div style="font-weight:700;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#C08A3E;">Mocca Café · est. Getafe</div>
+        <h1 class="hero-title" style="font-family:'Instrument Serif',serif;font-weight:400;font-size:52px;line-height:.98;margin:16px 0 0;color:#F3EEE4;">Mesa puesta<br><span style="font-style:italic;color:#C08A3E;">desde primera hora</span></h1>
+        <p style="font-size:15px;line-height:1.65;color:rgba(243,238,228,.72);margin:18px 0 0;max-width:440px;">Brunch, picoteo de cocina y poke bowls en el centro de Getafe. Terraza amplia y sala acogedora, C. Toledo 1.</p>
+        <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;">
+          <a href="#carta" class="btn btn-solid" style="text-decoration:none;background:#C08A3E;color:#201712;font-weight:700;font-size:14px;padding:14px 22px;border-radius:2px;">Ver la carta</a>
+          <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn-ghost-dark" style="text-decoration:none;color:#F3EEE4;border:1.5px solid rgba(243,238,228,.4);font-weight:700;font-size:14px;padding:12px 20px;border-radius:2px;">Cómo llegar</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:26px;">
+          <span style="color:#C08A3E;font-size:16px;letter-spacing:2px;">★★★★☆</span>
+          <span style="font-size:13px;color:rgba(243,238,228,.66);">4,2 · +800 opiniones en Google</span>
+        </div>
+      </div>
+      <div class="photo-frame" style="position:relative;aspect-ratio:1/1;max-height:420px;border-radius:6px;overflow:hidden;margin:0 auto;box-shadow:0 30px 60px -20px rgba(10,7,4,.55),0 1px 0 rgba(243,238,228,.06) inset;">
+        <img src="./assets/fachada.jpg" alt="Entrada de Mocca Café" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </div>
+  </header>
+
+  <!-- categorías -->
+  <div id="carta" style="max-width:1100px;margin:0 auto;padding:36px 22px 0;">
+    <div style="font-family:'Instrument Serif',serif;font-style:italic;font-size:17px;color:#8a7d6e;margin-bottom:2px;">La carta</div>
+    <div class="scr cat-grid" style="display:flex;gap:9px;overflow-x:auto;padding:12px 0 4px;">
+      <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="6">
+        <button onClick="{{ cat.onClick }}" class="cat-chip" style="flex:0 0 auto;cursor:pointer;display:flex;align-items:center;gap:10px;background:{{ cat.bg }};color:{{ cat.fg }};border:1.5px solid {{ cat.border }};border-radius:999px;padding:10px 16px 10px 11px;">
+          <span style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;background:{{ cat.iconBg }};">{{ cat.icon }}</span>
+          <span style="font-family:'Instrument Serif',serif;font-size:19px;">{{ cat.label }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- menú -->
+  <div class="menu-wrap" style="max-width:1100px;margin:0 auto;padding:24px 22px 0;">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #241B15;padding-bottom:12px;">
+      <div style="font-family:'Instrument Serif',serif;font-weight:400;font-size:34px;color:#241B15;">{{ activeLabel }}</div>
+      <div style="font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#8a7d6e;">{{ countText }}</div>
+    </div>
+
+    <sc-if value="{{ showFilter }}" hint-placeholder-val="{{ true }}">
+      <div style="margin-top:18px;">
+        <div style="font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8a7d6e;margin-bottom:9px;">Evitar alérgenos</div>
+        <div class="scr" style="display:flex;gap:8px;flex-wrap:wrap;">
+          <sc-for list="{{ allergens }}" as="chip" hint-placeholder-count="10">
+            <button onClick="{{ chip.onClick }}" class="allergen-chip" style="cursor:pointer;display:flex;align-items:center;gap:7px;background:{{ chip.bg }};color:{{ chip.fg }};border:1.5px solid {{ chip.border }};border-radius:2px;padding:7px 12px;font-weight:600;font-size:12.5px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:{{ chip.dot }};"></span>{{ chip.label }}
+            </button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:22px;">
+      <sc-for list="{{ items }}" as="item" hint-placeholder-count="6">
+        <div class="menu-row" style="display:flex;justify-content:space-between;gap:16px;padding:18px 12px;margin:0 -12px;border-bottom:1px solid #DCD2C0;">
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'Instrument Serif',serif;font-weight:400;font-size:21px;line-height:1.15;color:#241B15;">{{ item.name }}<sc-if value="{{ item.hasTag }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Work Sans',sans-serif;font-weight:700;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;background:#241B15;color:#F3EEE4;padding:2px 7px;border-radius:2px;margin-left:9px;vertical-align:middle;">{{ item.tag }}</span></sc-if></div>
+            <sc-if value="{{ item.hasDesc }}" hint-placeholder-val="{{ false }}"><div style="font-size:13px;line-height:1.55;color:#8a7d6e;margin-top:5px;max-width:520px;">{{ item.desc }}</div></sc-if>
+            <sc-if value="{{ item.hasBadges }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;">
+                <sc-for list="{{ item.badges }}" as="b" hint-placeholder-count="2">
+                  <sc-if value="{{ b.isVeg }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;border:1px solid #9aa06f;color:#6b7346;padding:2px 8px;border-radius:2px;">{{ b.label }}</span></sc-if>
+                  <sc-if value="{{ b.isNodata }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;border:1px dashed #c3b69f;color:#8a7d6e;padding:2px 8px;border-radius:2px;">{{ b.label }}</span></sc-if>
+                  <sc-if value="{{ b.isAll }}" hint-placeholder-val="{{ false }}"><span style="font-weight:600;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;border:1px solid #DCD2C0;color:#8a7d6e;padding:2px 8px;border-radius:2px;">{{ b.label }}</span></sc-if>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ item.hasNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:11.5px;font-style:italic;color:#C08A3E;margin-top:7px;">{{ item.note }}</div></sc-if>
+          </div>
+          <div style="font-family:'Instrument Serif',serif;font-weight:400;font-size:22px;white-space:nowrap;color:#241B15;font-variant-numeric:tabular-nums;">{{ item.price }}</div>
+        </div>
+      </sc-for>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}"><div style="padding:34px 0;text-align:center;color:#8a7d6e;font-weight:600;font-size:14px;">Ningún plato cumple ese filtro. Prueba a quitar alguno.</div></sc-if>
+    </div>
+
+    <sc-if value="{{ hasPhoto }}" hint-placeholder-val="{{ false }}">
+      <div class="photo-frame" style="margin:8px auto 0;max-width:420px;max-height:460px;aspect-ratio:{{ activePhotoRatio }};border-radius:6px;overflow:hidden;box-shadow:0 24px 44px -18px rgba(36,27,21,.32);">
+        <img src="{{ activePhoto }}" alt="{{ activeLabel }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- reseñas -->
+  <div class="grain reveal" style="margin-top:44px;background:radial-gradient(120% 160% at 50% -30%, rgba(192,138,62,.14), transparent 60%), #201712;color:#F3EEE4;padding:56px 22px;text-align:center;">
+    <div style="color:#C08A3E;font-size:22px;letter-spacing:4px;">★★★★☆</div>
+    <div style="font-family:'Instrument Serif',serif;font-size:56px;line-height:1;margin-top:10px;">4,2 <span style="font-style:italic;font-size:26px;color:rgba(243,238,228,.6);">/ 5</span></div>
+    <div style="font-size:13px;color:rgba(243,238,228,.66);margin:10px 0 26px;">+800 opiniones en Google</div>
+    <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn-solid" style="display:inline-block;text-decoration:none;background:#C08A3E;color:#201712;font-weight:700;font-size:14px;padding:14px 28px;border-radius:2px;">Déjanos tu reseña</a>
+  </div>
+
+  <!-- footer -->
+  <footer class="reveal" style="max-width:1100px;margin:0 auto;padding:40px 22px 50px;">
+    <div class="footer-grid" style="display:grid;grid-template-columns:1fr;gap:32px;">
+      <div>
+        <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#241B15;">Mocca Café</div>
+        <div style="font-size:13.5px;line-height:1.7;color:#8a7d6e;margin-top:8px;">C. Toledo, 1 · 28901 Getafe<br><a href="tel:+34916181189" style="text-decoration:underline;">916 18 11 89</a></div>
+        <div style="display:flex;gap:18px;margin-top:18px;font-weight:700;font-size:13.5px;">
+          <a href="https://www.instagram.com/lamoccacafe/" target="_blank" rel="noopener" class="social-link" style="text-decoration:underline;">Instagram</a>
+          <a href="https://www.facebook.com/lamoccacafe/" target="_blank" rel="noopener" class="social-link" style="text-decoration:underline;">Facebook</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr auto;gap:3px 16px;font-size:13px;color:#8a7d6e;margin-top:22px;max-width:250px;">
+          <span>Lun – Vie</span><span style="text-align: right; font-weight: 600; color: rgb(36, 27, 21);">7:00 – 00:00</span>
+          <span>Sáb</span><span style="text-align: right; font-weight: 600; color: rgb(36, 27, 21);">10:00 – 1:30</span>
+          <span>Dom</span><span style="text-align: right; font-weight: 600; color: rgb(36, 27, 21);">10:00 – 1:30</span>
+        </div>
+      </div>
+      <div class="map-frame" style="position:relative;min-height:180px;border-radius:6px;overflow:hidden;box-shadow:0 16px 32px -16px rgba(36,27,21,.28);">
+        <iframe src="https://www.google.com/maps?q=Mocca+Caf%C3%A9,+Calle+Toledo+1,+Getafe&amp;output=embed" style="width:100%;height:100%;min-height:180px;border:0;display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Mocca Café"></iframe>
+      </div>
+    </div>
+  </footer>
+
+</div>
+<template id="__bundler_thumbnail" data-bg-color="#201712">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#201712"></rect>
+    <text x="600" y="430" font-family="Georgia, serif" font-style="italic" font-size="120" fill="#F3EEE4" text-anchor="middle">Mocca</text>
+    <text x="600" y="500" font-family="Arial, sans-serif" font-size="34" letter-spacing="10" fill="#C08A3E" text-anchor="middle">CAFÉ · GETAFE</text>
+  </svg>
+</template>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  ALLERGENS = [
+    {code:'leche', label:'Leche'}, {code:'huevo', label:'Huevo'}, {code:'trigo', label:'Gluten'},
+    {code:'pescado', label:'Pescado'}, {code:'crustaceos', label:'Crustáceos'}, {code:'soja', label:'Soja'},
+    {code:'sesamo', label:'Sésamo'}, {code:'mostaza', label:'Mostaza'}, {code:'frutossecos', label:'Frutos secos'},
+    {code:'moluscos', label:'Moluscos'},
+  ];
+  MENU = [
+    {cat:'desayunos', name:'Barrita con tomate y aceite', price:3.10, all:[], veg:true, noData:true},
+    {cat:'desayunos', name:'Barrita con mermelada y mantequilla', price:3.10, all:[], veg:true, noData:true},
+    {cat:'desayunos', name:'Barrita con tomate, aceite y jamón ibérico', price:4.30, all:[], veg:false, noData:true},
+    {cat:'desayunos', name:'Pan de cereales con tomate y aceite', price:3.20, all:[], veg:true, noData:true},
+    {cat:'desayunos', name:'Pincho de tortilla de patatas con pan', price:4.90, all:[], veg:true, noData:true},
+    {cat:'desayunos', name:'Montado de salmón, aguacate y queso crema', price:5.50, all:[], veg:false, noData:true, tag:'Novedad'},
+    {cat:'desayunos', name:'Montado de bacon y queso cheddar', price:3.50, all:[], veg:false, noData:true},
+    {cat:'desayunos', name:'Churros (3 unidades)', price:2.90, all:[], veg:true, noData:true},
+    {cat:'picoteo', name:'Croquetas de jamón ibérico', desc:'Caseras, con fina bechamel y panko.', price:10.90, all:['leche','huevo','trigo']},
+    {cat:'picoteo', name:'Croquetas de chipirones', desc:'Caseras, con chipirones frescos.', price:10.90, all:['crustaceos','leche','huevo','trigo']},
+    {cat:'picoteo', name:'Tiradito de lubina salvaje', desc:'Marinada con leche de tigre de mango y cítricos.', price:13.50, all:['pescado']},
+    {cat:'picoteo', name:'Carpaccio de atún rojo', desc:'Vinagreta de alcaparras, rúcula y grana padano.', price:12.90, all:['pescado','mostaza','leche']},
+    {cat:'picoteo', name:'Tartar Mocca', desc:'Atún o salmón, salsa japo, aguacate y alga wakame.', price:18.00, all:['soja','pescado','sesamo']},
+    {cat:'picoteo', name:'Tulipas crujientes de gambón', desc:'En wantón, con verduritas y salsa tokio.', price:11.50, all:['crustaceos','soja','sesamo','frutossecos','trigo']},
+    {cat:'picoteo', name:'Gambones al ajillo', desc:'Norteños, ajillo tradicional y guindilla.', price:13.90, all:['crustaceos']},
+    {cat:'poke', name:'Poke Bowl Hawaiano Mocca Style', desc:'Base de arroz de sushi o quinoa + salmón, atún marinado o pollo teriyaki. Con aguacate, zanahoria, pepino, rabanitos, remolacha y wakame.', price:14.90, all:['soja','pescado','sesamo'], note:'Los alérgenos pueden variar según la proteína elegida'},
+    {cat:'ensaladas', name:'Ensaladilla rusa', desc:'Con mix de picos.', price:11.90, all:['soja','pescado','huevo']},
+    {cat:'ensaladas', name:'Ensalada de queso de cabra', desc:'Mezclum, cherrys asados, mostaza y miel, frutos secos.', price:12.90, all:['mostaza','frutossecos','leche'], veg:true},
+    {cat:'ensaladas', name:'Ensalada primavera', desc:'Mezclum, jamón ibérico, pera marinada y queso manchego.', price:12.90, all:[], noData:true},
+    {cat:'ensaladas', name:'Ensalada de calabacín al pesto', desc:'Queso feta, anacardos, cherrys asados y pesto genovés.', price:12.90, all:['frutossecos','leche'], veg:true},
+    {cat:'postres', name:'Coulant casero de chocolate', price:6.50, all:['leche','huevo','trigo'], veg:true},
+    {cat:'postres', name:'Strudel casero de manzana', price:6.50, all:['leche','trigo'], veg:true},
+    {cat:'postres', name:'Tarta tres leches casera', price:6.50, all:['leche','huevo','trigo'], veg:true},
+    {cat:'postres', name:'Tarta de queso con toque blue', desc:'Con mermelada de fresas casera.', price:6.50, all:['leche','huevo'], veg:true},
+    {cat:'postres', name:'Barca de helados napolitana', price:6.50, all:['leche'], veg:true},
+    {cat:'bebidas', name:'Espresso', price:1.80, all:[], noData:true},
+    {cat:'bebidas', name:'Café con leche', price:1.80, all:[], noData:true},
+    {cat:'bebidas', name:'Cappuccino', price:2.80, all:[], noData:true},
+    {cat:'bebidas', name:'Mocca', price:2.90, all:[], noData:true},
+    {cat:'bebidas', name:'Frappé Mocca', price:4.60, all:[], noData:true},
+    {cat:'bebidas', name:'Batido Oreo', price:6.00, all:[], noData:true},
+    {cat:'bebidas', name:'Infusiones orgánicas', price:1.80, all:[], noData:true},
+  ];
+  CATS = [
+    {id:'desayunos', label:'Desayunos', icon:'🥐', sub:'Barritas, montados y churros', photo:(window.__resources&&window.__resources.photoDesayunos)||'./assets/bagel-cafe.jpg', ratio:'811/845'},
+    {id:'picoteo', label:'Picoteo', icon:'🍤', sub:'Croquetas, tartar y gambones', photo:(window.__resources&&window.__resources.photoPicoteo)||'./assets/tartar.jpg', ratio:'639/814'},
+    {id:'poke', label:'Poke Bowl', icon:'🥗', sub:'Hawaiano Mocca Style', photo:(window.__resources&&window.__resources.photoPoke)||'./assets/poke.jpg', ratio:'669/839'},
+    {id:'ensaladas', label:'Ensaladas', icon:'🥬', sub:'Frescas y de temporada'},
+    {id:'postres', label:'Postres', icon:'🍰', sub:'Caseros del día'},
+    {id:'bebidas', label:'Bebidas', icon:'☕', sub:'Cafés, batidos e infusiones', photo:(window.__resources&&window.__resources.photoBebidas)||'./assets/batido-oreo.jpg', ratio:'757/835'},
+  ];
+  NO_FILTER = new Set(['desayunos','bebidas']);
+  TH = {catActiveBg:'#241B15',catActiveFg:'#F3EEE4',catActiveBorder:'#241B15',catActiveIcon:'#3a2c22',catActiveSub:'rgba(243,238,228,.75)',
+       catBg:'transparent',catFg:'#241B15',catBorder:'#DCD2C0',catIcon:'#EFE7D8',catSub:'#8A7D6E',
+       chipOnBg:'#C08A3E',chipOnFg:'#241B15',chipOnBorder:'#C08A3E',chipOnDot:'#241B15',
+       chipBg:'#FBF7EE',chipFg:'#241B15',chipBorder:'#DCD2C0',chipDot:'#B7A88f'};
+  state = { activeCat:'desayunos', excl:new Set() };
+  fmt(p){ return p.toFixed(2).replace('.', ',') + '€'; }
+  staggerRows(){
+    document.querySelectorAll('.menu-row').forEach((el, i) => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+      el.style.animationDelay = (i * 35) + 'ms';
+    });
+  }
+  componentDidMount(){
+    document.addEventListener('touchstart', function(){}, { passive:true });
+    this.staggerRows();
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting){ entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+        });
+      }, { threshold:.15 });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+  }
+  componentDidUpdate(){ this.staggerRows(); }
+  renderVals(){
+    const TH = this.TH;
+    const activeCat = this.state.activeCat, excl = this.state.excl;
+    const catObj = this.CATS.find(c => c.id === activeCat) || {};
+    const noFilter = this.NO_FILTER.has(activeCat);
+    const pool = this.MENU.filter(i => i.cat === activeCat);
+    const visible = pool.filter(i => noFilter ? true : !i.all.some(a => excl.has(a)));
+    const selectCat = (id) => this.setState({ activeCat:id, excl:new Set() });
+    const toggle = (code) => this.setState(s => { const set = new Set(s.excl); set.has(code)?set.delete(code):set.add(code); return { excl:set }; });
+    const cats = this.CATS.map(c => {
+      const active = c.id === activeCat;
+      return { label:c.label, icon:c.icon,
+        bg: active?TH.catActiveBg:TH.catBg, fg: active?TH.catActiveFg:TH.catFg,
+        border: active?TH.catActiveBorder:TH.catBorder, iconBg: active?TH.catActiveIcon:TH.catIcon,
+        onClick:()=>selectCat(c.id) };
+    });
+    const allergens = this.ALLERGENS.map(a => {
+      const pressed = excl.has(a.code);
+      return { label:a.label,
+        bg: pressed?TH.chipOnBg:TH.chipBg, fg: pressed?TH.chipOnFg:TH.chipFg,
+        border: pressed?TH.chipOnBorder:TH.chipBorder, dot: pressed?TH.chipOnDot:TH.chipDot,
+        onClick:()=>toggle(a.code) };
+    });
+    const items = visible.map(i => {
+      const badges = [];
+      if (i.veg) badges.push({label:'vegetariano', isVeg:true});
+      if (i.noData) badges.push({label:'sin datos', isNodata:true});
+      else i.all.forEach(code => badges.push({label:(this.ALLERGENS.find(x=>x.code===code)||{}).label, isAll:true}));
+      return { name:i.name, price:this.fmt(i.price),
+        hasDesc:!!i.desc, desc:i.desc||'', hasTag:!!i.tag, tag:i.tag||'',
+        hasNote:!!i.note, note:i.note||'', badges, hasBadges:badges.length>0 };
+    });
+    return { cats, allergens, items,
+      activeLabel:catObj.label||'', countText:`${visible.length} de ${pool.length} platos`,
+      showFilter:!noFilter, isEmpty:visible.length===0,
+      hasPhoto:!!catObj.photo, activePhoto:catObj.photo||'', activePhotoRatio:catObj.ratio||'1/1' };
+  }
+}
+</script>
+</body>
+</html>
