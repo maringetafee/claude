@@ -1,24 +1,43 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-
-type Phase = "video" | "frozen" | "done";
+import { useEffect, useRef, useState } from "react";
+import { useReducedMotion } from "framer-motion";
 
 const SESSION_KEY = "mmw_intro_seen";
-// Sampled the actual clip: it settles into the deep turquoise "inside the
-// iris" tone by ~8s and holds. We freeze here — public/images/iris-bg.jpg
-// is this exact frame, pre-cropped to the same zoom, and is the site's
-// permanent background (see BackgroundField). Because both are identical
-// pixels, fading the video out over it reads as no transition at all.
-const VIDEO_CUTOFF = 8.3;
-const FINAL_ZOOM = 1.9;
-const ZOOM_START_TIME = 6.2; // start the cinematic zoom-in a couple seconds before the freeze
-const HOLD_MS = 120; // tiny beat on the frozen frame before handing off
-const SAFETY_TIMEOUT_MS = 9500;
+const FRAME_COUNT = 100;
+// How many viewport-heights of scroll it takes to scrub through every frame.
+const TRACK_VH = 260;
+// Cap the canvas backing store on very-high-DPR phones so each redraw stays cheap.
+const MAX_DPR = 2;
+const SKIP_DELAY_MS = 900;
 
-export function IntroExperience({ onDone }: { onDone: () => void }) {
+const framePath = (i: number) =>
+  `/images/intro-frames/f${String(i).padStart(3, "0")}.webp`;
+
+function loadImage(src: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      if (img.decode) {
+        img
+          .decode()
+          .then(() => resolve(img))
+          .catch(() => resolve(img));
+      } else {
+        resolve(img);
+      }
+    };
+    img.onerror = () => reject(new Error(`failed to load ${src}`));
+    img.src = src;
+  });
+}
+
+export function IntroExperience() {
   const prefersReducedMotion = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const zoomTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const lastFrameRef = useRef(-1);
+  const trackHeightRef = useRef(0);
+  const finishedRef = useRef(false);
 
   const [skip] = useState(() => {
     try {
@@ -28,13 +47,13 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
     }
   });
 
-  const [phase, setPhase] = useState<Phase>(skip ? "done" : "video");
-  const [zooming, setZooming] = useState(false);
+  const [ready, setReady] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
-  const finishedRef = useRef(false);
-  const cutoffTriggeredRef = useRef(false);
+  const [dismissed, setDismissed] = useState(false);
 
-  const finish = useCallback(() => {
+  const active = !skip && !prefersReducedMotion && !dismissed;
+
+  const finish = () => {
     if (finishedRef.current) return;
     finishedRef.current = true;
     try {
@@ -42,128 +61,174 @@ export function IntroExperience({ onDone }: { onDone: () => void }) {
     } catch {
       /* storage unavailable */
     }
-    document.body.style.overflow = "";
-    onDone();
-  }, [onDone]);
+  };
 
+  // A reload can restore the browser's previous scroll position before this
+  // component ever mounts, which would desync the frame from actual scroll.
   useEffect(() => {
-    if (phase === "done") finish();
-  }, [phase, finish]);
+    if (!active) return;
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  }, [active]);
 
+  // Preload every frame up front so scrubbing never hits a missing image.
+  // Scrolling stays locked until this resolves.
   useEffect(() => {
-    if (skip) return;
+    if (!active) return;
     document.body.style.overflow = "hidden";
-    const t = setTimeout(() => setShowSkip(true), 1200);
-    const safety = setTimeout(() => {
-      setPhase((p) => (p === "video" ? "frozen" : p));
-    }, SAFETY_TIMEOUT_MS);
+    let cancelled = false;
+
+    const skipTimer = setTimeout(() => setShowSkip(true), SKIP_DELAY_MS);
+
+    Promise.all(
+      Array.from({ length: FRAME_COUNT }, (_, i) => loadImage(framePath(i))),
+    )
+      .then((imgs) => {
+        if (cancelled) return;
+        imagesRef.current = imgs;
+        document.body.style.overflow = "";
+        setReady(true);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        finish();
+        document.body.style.overflow = "";
+        setDismissed(true);
+      });
+
     return () => {
-      clearTimeout(t);
-      clearTimeout(safety);
-      if (zoomTimerRef.current) clearTimeout(zoomTimerRef.current);
+      cancelled = true;
+      clearTimeout(skipTimer);
     };
-  }, [skip]);
+  }, [active]);
 
+  // The actual scroll-scrub loop: rAF-throttled so it draws at most once per
+  // frame no matter how many scroll events fire.
   useEffect(() => {
-    if (phase !== "frozen") return;
-    const t = setTimeout(() => setPhase("done"), HOLD_MS);
-    return () => clearTimeout(t);
-  }, [phase]);
+    if (!active || !ready) return;
 
-  // Fires once real playback begins (after any buffering). We schedule the
-  // zoom as a single CSS transition instead of driving the transform from
-  // onTimeUpdate on every tick — that used to restart a short transition
-  // dozens of times a second, which stutters on phones under CPU pressure.
-  const handlePlaying = () => {
-    if (zoomTimerRef.current) return;
-    const v = videoRef.current;
-    const delay = Math.max((ZOOM_START_TIME - (v?.currentTime ?? 0)) * 1000, 0);
-    zoomTimerRef.current = setTimeout(() => setZooming(true), delay);
-  };
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
 
-  const handleTimeUpdate = () => {
-    const v = videoRef.current;
-    if (!v || cutoffTriggeredRef.current) return;
-    if (v.currentTime >= VIDEO_CUTOFF) {
-      cutoffTriggeredRef.current = true;
-      v.pause();
-      setPhase("frozen");
+    let ticking = false;
+
+    const drawCover = (img: HTMLImageElement) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const imgRatio = img.width / img.height;
+      const canvasRatio = w / h;
+      let sx = 0;
+      let sy = 0;
+      let sw = img.width;
+      let sh = img.height;
+      if (imgRatio > canvasRatio) {
+        sh = img.height;
+        sw = sh * canvasRatio;
+        sx = (img.width - sw) / 2;
+      } else {
+        sw = img.width;
+        sh = sw / canvasRatio;
+        sy = (img.height - sh) / 2;
+      }
+      ctx.drawImage(img, sx, sy, sw, sh, 0, 0, w, h);
+    };
+
+    const getProgress = () => {
+      const total = trackHeightRef.current - window.innerHeight;
+      if (total <= 0) return 1;
+      return Math.min(1, Math.max(0, window.scrollY / total));
+    };
+
+    const draw = () => {
+      ticking = false;
+      const progress = getProgress();
+      const frameIndex = Math.min(
+        FRAME_COUNT - 1,
+        Math.floor(progress * FRAME_COUNT),
+      );
+      if (frameIndex !== lastFrameRef.current) {
+        lastFrameRef.current = frameIndex;
+        const img = imagesRef.current[frameIndex];
+        if (img) drawCover(img);
+      }
+      if (progress >= 1) finish();
+    };
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      trackHeightRef.current = trackRef.current?.offsetHeight ?? 0;
+      lastFrameRef.current = -1;
+      draw();
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(draw);
+    };
+
+    resize();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", resize);
+    window.addEventListener("orientationchange", resize);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("orientationchange", resize);
+    };
+  }, [active, ready]);
+
+  const handleSkip = () => {
+    if (!ready) {
+      finish();
+      document.body.style.overflow = "";
+      setDismissed(true);
+      return;
     }
+    const total = trackHeightRef.current - window.innerHeight;
+    window.scrollTo({ top: Math.max(total, 0) + 4, behavior: "smooth" });
   };
 
-  const handleEnded = () => setPhase("frozen");
-  const handleVideoError = () => setPhase("frozen");
-  const handleSkip = () => setPhase("frozen");
-
-  if (skip) return null;
-
-  const zoomAmount = zooming || phase !== "video" ? FINAL_ZOOM : 1;
+  if (!active) return null;
 
   return (
-    <AnimatePresence>
-      {phase !== "done" && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-charcoal"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.35, ease: "easeInOut" }}
-        >
-          {!prefersReducedMotion && (
-            <video
-              ref={videoRef}
-              className="h-full w-full object-cover"
-              style={{
-                transform: `scale(${zoomAmount})`,
-                transition: `transform ${VIDEO_CUTOFF - ZOOM_START_TIME}s linear`,
-                willChange: "transform",
-              }}
-              src="/video/eye-intro.mp4"
-              autoPlay
-              muted
-              playsInline
-              onPlaying={handlePlaying}
-              onTimeUpdate={handleTimeUpdate}
-              onEnded={handleEnded}
-              onError={handleVideoError}
-            />
-          )}
+    <div ref={trackRef} style={{ height: `${TRACK_VH}vh` }} className="relative">
+      <div className="sticky top-0 z-50 h-[100dvh] overflow-hidden bg-charcoal">
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
-          {prefersReducedMotion && (
-            <div
-              className="h-full w-full bg-cover bg-center"
-              style={{ backgroundImage: "url(/images/iris-bg.jpg)" }}
-            />
-          )}
+        {!ready && (
+          <div className="absolute inset-0 flex items-center justify-center bg-charcoal">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-marble/20 border-t-iris" />
+          </div>
+        )}
 
-          {phase === "video" && (
-            <motion.div
-              className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              <p className="font-display text-sm tracking-[0.35em] text-marble/70 uppercase">
-                Entra en el ojo
-              </p>
-            </motion.div>
-          )}
+        {ready && (
+          <div className="pointer-events-none absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
+            <p className="font-display text-sm tracking-[0.35em] text-marble/70 uppercase">
+              Desliza para entrar
+            </p>
+          </div>
+        )}
 
-          <AnimatePresence>
-            {showSkip && phase === "video" && (
-              <motion.button
-                type="button"
-                onClick={handleSkip}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="absolute top-6 right-6 z-10 rounded-full border border-marble/20 px-4 py-2 text-xs tracking-widest text-marble/60 uppercase transition-colors hover:border-iris/50 hover:text-marble cursor-pointer"
-              >
-                Saltar intro →
-              </motion.button>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        {showSkip && (
+          <button
+            type="button"
+            onClick={handleSkip}
+            className="absolute top-6 right-6 z-10 rounded-full border border-marble/20 px-4 py-2 text-xs tracking-widest text-marble/60 uppercase transition-colors hover:border-iris/50 hover:text-marble cursor-pointer"
+          >
+            Saltar intro →
+          </button>
+        )}
+      </div>
+    </div>
   );
 }

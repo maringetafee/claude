@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="es">
   <head>
+    <script>
+      // Must run before anything scrolls: a reload can otherwise restore
+      // the previous scroll position before the scroll-driven intro mounts,
+      // desyncing it from where the browser thinks the page already is.
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

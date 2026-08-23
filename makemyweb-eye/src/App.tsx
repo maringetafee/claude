@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { IntroExperience } from "./components/IntroExperience";
 import { BackgroundField } from "./components/BackgroundField";
 import { Header } from "./components/Header";
@@ -12,31 +11,22 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
 function App() {
-  const [introDone, setIntroDone] = useState(false);
-
   return (
     <>
-      <IntroExperience onDone={() => setIntroDone(true)} />
+      <IntroExperience />
       <BackgroundField />
 
-      <div
-        style={{
-          opacity: introDone ? 1 : 0,
-          transition: "opacity 0.35s ease",
-        }}
-      >
-        <Header />
-        <main>
-          <Hero />
-          <PriceCalculator />
-          <Maintenance />
-          <Process />
-          <Showcase />
-          <FAQ />
-          <Contact />
-        </main>
-        <Footer />
-      </div>
+      <Header />
+      <main>
+        <Hero />
+        <PriceCalculator />
+        <Maintenance />
+        <Process />
+        <Showcase />
+        <FAQ />
+        <Contact />
+      </main>
+      <Footer />
     </>
   );
 }
