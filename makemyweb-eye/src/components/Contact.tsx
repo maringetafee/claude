@@ -27,6 +27,11 @@ export function Contact() {
       });
       if (!res.ok) throw new Error("submit failed");
       setSent(true);
+      fetch("/.netlify/functions/notify-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      }).catch(() => {});
     } catch {
       setError(true);
     } finally {
