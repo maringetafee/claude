@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  /* Base surfaces — architecture, not SaaS */
+  --color-carbon-950: #08090b;
+  --color-carbon-900: #0c0e11;
+  --color-carbon-800: #121519;
+  --color-carbon-700: #1a1e24;
+  --color-carbon-600: #262b33;
+  --color-carbon-500: #3a414c;
+
+  /* Off-white ink */
+  --color-bone-100: #f5f3ee;
+  --color-bone-200: #e7e4dc;
+  --color-bone-300: #c7c4bb;
+  --color-bone-400: #a8a9a6;
+  --color-bone-500: #8b8d90;
+  --color-bone-600: #74767a;
+
+  /* Signal amber — controlled accent */
+  --color-signal-400: #ffb066;
+  --color-signal-500: #ff7a29;
+  --color-signal-600: #e5620f;
+  --color-signal-950: #2a1608;
+
+  --ease-precise: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-carbon-950: var(--color-carbon-950);
+  --color-carbon-900: var(--color-carbon-900);
+  --color-carbon-800: var(--color-carbon-800);
+  --color-carbon-700: var(--color-carbon-700);
+  --color-carbon-600: var(--color-carbon-600);
+  --color-carbon-500: var(--color-carbon-500);
+
+  --color-bone-100: var(--color-bone-100);
+  --color-bone-200: var(--color-bone-200);
+  --color-bone-300: var(--color-bone-300);
+  --color-bone-400: var(--color-bone-400);
+  --color-bone-500: var(--color-bone-500);
+  --color-bone-600: var(--color-bone-600);
+
+  --color-signal-400: var(--color-signal-400);
+  --color-signal-500: var(--color-signal-500);
+  --color-signal-600: var(--color-signal-600);
+  --color-signal-950: var(--color-signal-950);
+
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s var(--ease-precise) infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(0.6);
+      opacity: 0.9;
+    }
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+}
+
+* {
+  border-color: var(--color-carbon-600);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-carbon-950);
+  color: var(--color-bone-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-signal-500);
+  color: var(--color-carbon-950);
+}
+
+/* Focus ring — visible, never suppressed */
+:focus-visible {
+  outline: 2px solid var(--color-signal-500);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
