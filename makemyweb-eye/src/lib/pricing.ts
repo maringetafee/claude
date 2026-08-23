@@ -38,7 +38,7 @@ export function calculatePricing(state: CalculatorState): PricingResult {
   const makemywebBase = makemywebBasePrice(pages);
 
   let extrasTotal = 0;
-  if (animated3d) extrasTotal += 200;
+  if (animated3d) extrasTotal += 279;
 
   return {
     agency: agencyPrice(pages),

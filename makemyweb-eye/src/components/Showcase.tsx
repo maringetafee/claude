@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
-import { useCountUp } from "../hooks/useCountUp";
 
 const PROJECTS = [
   {
@@ -10,8 +9,7 @@ const PROJECTS = [
     eyebrow: "CAFÉ · CAÑAS · VINOS · TAPAS",
     tagline: "El rincón de tapas de siempre en el corazón de Getafe.",
     href: "https://esquinita.netlify.app/",
-    bg: "#efe9da",
-    fg: "#211d16",
+    image: "/images/showcase/esquinita.webp",
     accent: "#b79a5a",
   },
   {
@@ -21,8 +19,7 @@ const PROJECTS = [
     eyebrow: "GETAFE · C. MAGDALENA 16",
     tagline: "Desayunos, brunch y platos healthy con producto fresco.",
     href: "https://lolitagetafe.netlify.app/",
-    bg: "#f6efe6",
-    fg: "#2a1f1a",
+    image: "/images/showcase/lolita.webp",
     accent: "#e0568f",
   },
   {
@@ -32,46 +29,10 @@ const PROJECTS = [
     eyebrow: "MOCCA CAFÉ · EST. GETAFE",
     tagline: "★★★★☆ 4,2 · +800 opiniones en Google.",
     href: "https://moccacafe.netlify.app/",
-    bg: "#2a1e14",
-    fg: "#f3ead9",
+    image: "/images/showcase/mocca.webp",
     accent: "#c99a4a",
   },
 ];
-
-const STATS = [
-  { value: 134, suffix: "", label: "proyectos entregados" },
-  { value: 4.8, suffix: "/5", label: "valoración media de clientes", decimals: 1 },
-  { value: 48, suffix: "h", label: "plazo medio de entrega", prefix: "24/" },
-  { value: 89, suffix: "%", label: "renueva el mantenimiento" },
-];
-
-function Stat({
-  value,
-  suffix,
-  prefix,
-  label,
-  decimals,
-}: {
-  value: number;
-  suffix: string;
-  prefix?: string;
-  label: string;
-  decimals?: number;
-}) {
-  const { ref, value: animated } = useCountUp(value);
-  return (
-    <div className="text-center">
-      <p className="font-display text-4xl text-marble sm:text-5xl">
-        {prefix}
-        <span ref={ref}>
-          {decimals ? animated.toFixed(decimals) : Math.round(animated)}
-        </span>
-        {suffix}
-      </p>
-      <p className="mt-2 text-sm text-stone">{label}</p>
-    </div>
-  );
-}
 
 export function Showcase() {
   return (
@@ -119,27 +80,30 @@ export function Showcase() {
                   </span>
                 </div>
 
-                <div
-                  className="flex h-56 flex-col justify-center gap-3 p-6"
-                  style={{ background: project.bg, color: project.fg }}
-                >
-                  <p
-                    className="text-[10px] tracking-[0.2em] opacity-70"
-                    style={{ color: project.accent }}
-                  >
-                    {project.eyebrow}
-                  </p>
-                  <p className="font-display text-2xl leading-tight">
-                    {project.name}
-                  </p>
-                  <p className="text-xs leading-relaxed opacity-70">
-                    {project.tagline}
-                  </p>
+                <div className="relative h-56 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={`Captura de la web de ${project.name}`}
+                    loading="lazy"
+                    className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/25 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <p
+                      className="text-[10px] tracking-[0.2em] opacity-80"
+                      style={{ color: project.accent }}
+                    >
+                      {project.eyebrow}
+                    </p>
+                    <p className="font-display text-2xl leading-tight text-warm-white">
+                      {project.name}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between px-5 py-4">
-                  <p className="text-sm text-marble/80">{project.name}</p>
-                  <p className="text-xs text-stone">
+                <div className="flex items-start justify-between gap-4 px-5 py-4">
+                  <p className="text-sm text-marble/80">{project.tagline}</p>
+                  <p className="shrink-0 text-xs text-stone">
                     {project.kind} · {project.place}
                   </p>
                 </div>
@@ -147,14 +111,6 @@ export function Showcase() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal delay={0.2}>
-          <div className="mt-24 grid grid-cols-2 gap-10 border-t border-marble/10 pt-16 lg:grid-cols-4">
-            {STATS.map((s) => (
-              <Stat key={s.label} {...s} />
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   );

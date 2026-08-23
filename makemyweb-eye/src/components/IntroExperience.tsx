@@ -8,6 +8,10 @@ const TRACK_VH = 260;
 // Cap the canvas backing store on very-high-DPR phones so each redraw stays cheap.
 const MAX_DPR = 2;
 const SKIP_DELAY_MS = 900;
+// Progress (0-1) at which the intro starts dissolving into the page. It reaches
+// full transparency right as the sticky frame releases, so the handoff to the
+// header/hero underneath reads as one continuous transition, not a scroll-reveal.
+const FADE_START = 0.88;
 
 const framePath = (i: number) =>
   `/images/intro-frames/f${String(i).padStart(3, "0")}.webp`;
@@ -33,6 +37,7 @@ function loadImage(src: string) {
 export function IntroExperience() {
   const prefersReducedMotion = useReducedMotion();
   const trackRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const lastFrameRef = useRef(-1);
@@ -152,6 +157,16 @@ export function IntroExperience() {
         const img = imagesRef.current[frameIndex];
         if (img) drawCover(img);
       }
+
+      const fade =
+        progress <= FADE_START
+          ? 1
+          : 1 - (progress - FADE_START) / (1 - FADE_START);
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity = String(fade);
+        wrapperRef.current.style.pointerEvents = fade <= 0 ? "none" : "auto";
+      }
+
       if (progress >= 1) finish();
     };
 
@@ -202,7 +217,10 @@ export function IntroExperience() {
 
   return (
     <div ref={trackRef} style={{ height: `${TRACK_VH}vh` }} className="relative">
-      <div className="sticky top-0 z-50 h-[100dvh] overflow-hidden bg-charcoal">
+      <div
+        ref={wrapperRef}
+        className="sticky top-0 z-50 h-[100dvh] overflow-hidden bg-charcoal"
+      >
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
         {!ready && (

@@ -15,6 +15,7 @@ export function BackgroundField() {
       {/* light wash so text stays legible without hiding the photo */}
       <div className="absolute inset-0 bg-charcoal/35" />
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-charcoal/15 to-charcoal/55" />
+      <div className="noise-overlay" />
     </div>
   );
 }

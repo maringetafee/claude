@@ -1,6 +1,6 @@
 const LINKS = [
   { label: "Precios", href: "#presupuesto" },
-  { label: "Planes", href: "#" },
+  { label: "Planes", href: "#mantenimiento" },
   { label: "FAQ", href: "#faq" },
 ];
 

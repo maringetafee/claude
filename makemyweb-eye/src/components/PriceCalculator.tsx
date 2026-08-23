@@ -99,7 +99,7 @@ export function PriceCalculator() {
                     />
                     Página animada 3D (esta web es un ejemplo)
                   </span>
-                  <span className="text-xs text-gold">+200 €</span>
+                  <span className="text-xs text-gold">+279 €</span>
                 </label>
               </div>
               <p className="mt-4 text-xs text-stone/70">
