@@ -11,27 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
 <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          bg: '#171310',
-          ink: '#f7f2e7',
-          muted: '#b6ab97',
-          gold: '#c6a05e',
-          bronze: '#4a3418',
-        },
-        fontFamily: {
-          serif: ['"Playfair Display"', 'ui-serif', 'Georgia', 'serif'],
-          sans: ['"Inter"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-        },
-      },
-    },
-  }
-</script>
+<!-- Tailwind is compiled ahead of time (see tailwind.config.js) instead of
+     loaded as the CDN's runtime JIT compiler, which recompiles every class
+     in-browser on every page load. Regenerate after adding new Tailwind
+     classes: npx tailwindcss -i ./tailwind-src.css -o ./tailwind.css --minify -->
+<link rel="stylesheet" href="tailwind.css">
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -163,19 +147,16 @@
               <i class="ph ph-stack"></i>
               <h3>Diseño + Desarrollo</h3>
               <p>Nos encargamos de todo, de la idea al sitio publicado. Diseño, código y puesta en marcha en un solo equipo.</p>
-              <p class="price">desde 499&nbsp;€</p>
             </div>
             <div class="service-card">
               <i class="ph ph-pen-nib"></i>
               <h3>Solo diseño</h3>
               <p>Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</p>
-              <p class="price price--sm">desde 399&nbsp;€</p>
             </div>
             <div class="service-card">
               <i class="ph ph-code"></i>
               <h3>Solo desarrollo</h3>
               <p>Programamos un diseño que ya tienes, con código limpio y rápido.</p>
-              <p class="price price--sm">desde 199&nbsp;€</p>
             </div>
           </div>
         </div>
@@ -226,7 +207,7 @@
                       <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                       <span>Ayuda con los contenidos</span>
                     </span>
-                    <span class="option-row__price">+50&nbsp;€/pág</span>
+                    <span class="option-row__price">coste adicional</span>
                   </label>
                   <label class="option-row option-row--split">
                     <span class="option-row__lead">
@@ -234,7 +215,7 @@
                       <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                       <span>Optimización SEO</span>
                     </span>
-                    <span class="option-row__price">+50&nbsp;€/pág</span>
+                    <span class="option-row__price">coste adicional</span>
                   </label>
                   <label class="option-row option-row--split">
                     <span class="option-row__lead">
@@ -242,7 +223,7 @@
                       <span class="check-box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l2.5 2.5L10 3" stroke="#0b0e13" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                       <span>Página animada 3D</span>
                     </span>
-                    <span class="option-row__price">+200&nbsp;€</span>
+                    <span class="option-row__price">coste adicional</span>
                   </label>
                 </div>
               </div>
@@ -256,7 +237,7 @@
                       <span class="radio-dot"></span>
                       <span>En 24 horas</span>
                     </span>
-                    <span class="option-row__price">+100&nbsp;€/pág</span>
+                    <span class="option-row__price">coste adicional</span>
                   </label>
                   <label class="option-row option-row--split">
                     <span class="option-row__lead">
@@ -264,7 +245,7 @@
                       <span class="radio-dot"></span>
                       <span>En 48 horas</span>
                     </span>
-                    <span class="option-row__price">+25&nbsp;€/pág</span>
+                    <span class="option-row__price">coste adicional</span>
                   </label>
                   <label class="option-row option-row--split">
                     <span class="option-row__lead">
@@ -284,17 +265,17 @@
               <div class="calc__result-cards">
                 <div class="result-card">
                   <p>Agencia típica cobra un mínimo de</p>
-                  <p class="result-card__figure" id="agencyPrice">8.000&nbsp;€</p>
+                  <p class="result-card__figure" id="agencyPrice">Consultar</p>
                   <p class="result-card__note">y suele sumar tiempo y costes extra</p>
                 </div>
                 <div class="result-card">
                   <p>Freelancer normal cobra un mínimo de</p>
-                  <p class="result-card__figure" id="freelancerPrice">3.000&nbsp;€</p>
+                  <p class="result-card__figure" id="freelancerPrice">Consultar</p>
                   <p class="result-card__note">y suele implicar idas y vueltas</p>
                 </div>
                 <div class="result-card result-card--highlight">
                   <p>Con MAKEMYWEB</p>
-                  <p class="result-card__figure result-card__figure--lg" id="ourPrice">499&nbsp;€</p>
+                  <p class="result-card__figure result-card__figure--lg" id="ourPrice">Consultar</p>
                   <p class="result-card__note" id="savingsLabel">Ahorras tiempo y dolores de cabeza</p>
                 </div>
               </div>
@@ -313,20 +294,20 @@
           <div class="plan-grid">
             <div class="plan-card">
               <p class="plan-card__kicker">Cuido Básico</p>
-              <p class="plan-card__price"><span>39&nbsp;€</span>/mes</p>
+              <p class="plan-card__price">Consultar precio</p>
               <a href="#contacto" class="btn btn--ghost btn--sm">Pide tu presupuesto</a>
               <ul>
                 <li><i class="ph ph-check"></i>Hosting incluido</li>
                 <li><i class="ph ph-check"></i>Copias de seguridad semanales</li>
                 <li><i class="ph ph-check"></i>Actualizaciones de seguridad</li>
-                <li><i class="ph ph-check"></i>1 cambio de contenido al mes incluido (los siguientes a 15&nbsp;€)</li>
+                <li><i class="ph ph-check"></i>1 cambio de contenido al mes incluido (los siguientes con coste adicional)</li>
                 <li><i class="ph ph-check"></i>1 hora de soporte al mes</li>
               </ul>
             </div>
             <div class="plan-card plan-card--highlight">
               <span class="tag tag--float">Más elegido</span>
               <p class="plan-card__kicker">Cuido Pro</p>
-              <p class="plan-card__price"><span>77&nbsp;€</span>/mes</p>
+              <p class="plan-card__price">Consultar precio</p>
               <a href="#contacto" class="btn btn--solid btn--sm">Pide tu presupuesto</a>
               <ul>
                 <li><i class="ph ph-check"></i>Todo lo de Cuido Básico</li>
@@ -375,7 +356,7 @@
           <p class="eyebrow">Cuando tu web necesita más</p>
           <h2 class="display-3">Animación e interacción a medida</h2>
           <p class="lede lede--sm">Algunos proyectos piden algo más que páginas estáticas: microinteracciones cuidadas y espacios en 3D que se sienten vivos.</p>
-          <span class="chip"><i class="ph ph-cube"></i>Página animada 3D · +200&nbsp;€</span>
+          <span class="chip"><i class="ph ph-cube"></i>Página animada 3D</span>
           <div class="cta-row cta-row--tight">
             <a href="#presupuesto" class="btn btn--ghost btn--sm">Ir a la calculadora</a>
           </div>
@@ -451,7 +432,7 @@
               </button>
               <div class="faq-panel" id="faq-panel-3">
                 <div class="faq-panel-inner">
-                  <p>Sí. El plan Cuido Básico incluye 1 cambio de contenido al mes (los siguientes a 15&nbsp;€) y el plan Cuido Pro incluye cambios ilimitados.</p>
+                  <p>Sí. El plan Cuido Básico incluye 1 cambio de contenido al mes (los siguientes con coste adicional) y el plan Cuido Pro incluye cambios ilimitados.</p>
                 </div>
               </div>
             </div>

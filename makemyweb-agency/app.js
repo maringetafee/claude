@@ -75,7 +75,7 @@ if (prefersReducedMotion) document.documentElement.classList.add('reduced-motion
   const savingsLabel = document.getElementById('savingsLabel');
   if (!pagesSlider) return;
 
-  const fmt = n => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €';
+  const fmt = () => 'Consultar';
   const currentService = () => [...serviceInputs].find(i => i.checked).value;
   const currentTimeline = () => [...timelineInputs].find(i => i.checked).value;
 
@@ -106,10 +106,7 @@ if (prefersReducedMotion) document.documentElement.classList.add('reduced-motion
     freelancerPrice.textContent = fmt(freelancer);
     ourPrice.textContent = fmt(total);
 
-    const savings = freelancer - total;
-    savingsLabel.textContent = savings > 0
-      ? `Ahorras ${fmt(savings)} frente a un freelancer`
-      : 'Ahorras tiempo y dolores de cabeza';
+    savingsLabel.textContent = 'Ahorras tiempo y dolores de cabeza';
   }
 
   [...serviceInputs, ...timelineInputs, needContent, needSeo, need3D].forEach(i => i.addEventListener('change', calculate));
@@ -366,7 +363,11 @@ if (prefersReducedMotion) document.documentElement.classList.add('reduced-motion
   if (!prefersReducedMotion) {
     layout();
     window.addEventListener('scroll', requestTick, { passive: true });
-    window.addEventListener('resize', () => { layout(); requestTick(); });
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { layout(); requestTick(); }, 120);
+    }, { passive: true });
     requestTick();
   } else {
     // static fallback: no pin math, just make sure the poster is showing
