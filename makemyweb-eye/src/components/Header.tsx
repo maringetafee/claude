@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { LogoMark } from "./Logo";
 
 const NAV_LINKS = [
   { label: "Precios", href: "#presupuesto" },
@@ -36,8 +37,9 @@ export function Header() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
           <a
             href="#top"
-            className="font-display text-lg tracking-[0.15em] text-marble"
+            className="flex items-center gap-2.5 font-display text-lg tracking-[0.15em] text-marble"
           >
+            <LogoMark className="h-6 w-6" />
             MAKEMY<span className="text-iris">WEB</span>
           </a>
 
@@ -82,7 +84,8 @@ export function Header() {
             transition={{ duration: 0.35 }}
           >
             <div className="flex items-center justify-between px-6 py-5">
-              <span className="font-display text-lg tracking-[0.15em] text-marble">
+              <span className="flex items-center gap-2.5 font-display text-lg tracking-[0.15em] text-marble">
+                <LogoMark className="h-6 w-6" />
                 MAKEMY<span className="text-iris">WEB</span>
               </span>
               <button
