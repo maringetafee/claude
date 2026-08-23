@@ -135,6 +135,10 @@ export function Contact() {
                 <p className="text-sm text-stone">
                   Te escribiremos a {email} en menos de 24 horas.
                 </p>
+                <p className="max-w-sm text-xs text-stone/70">
+                  Te hemos enviado ya un correo a {email} con todos los
+                  detalles. Si no lo ves, revisa la carpeta de spam.
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
