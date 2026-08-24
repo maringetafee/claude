@@ -161,11 +161,11 @@ export function Hero() {
           >
             <ResponsivePhoto
               src="/images/rooftop-wide.jpg"
-              alt="Técnicos de S.B.S Telecomunicaciones instalando antenas parabólicas en una azotea de Madrid"
+              alt="Instalación de un portero automático por un técnico de S.B.S Telecomunicaciones"
               priority
               sizes="(min-width: 1024px) 40vw, 90vw"
               className="object-cover"
-              style={{ filter: "grayscale(0.55) contrast(1.15) brightness(0.62) sepia(0.15)" }}
+              style={{ objectPosition: "78% center", filter: "grayscale(0.55) contrast(1.15) brightness(0.62) sepia(0.15)" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-carbon-950 via-carbon-950/10 to-signal-950/30" />
             <div className="absolute inset-0 bg-gradient-to-br from-carbon-950/40 via-transparent to-transparent" />

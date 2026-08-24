@@ -102,6 +102,20 @@ export function Contact() {
                 </dd>
               </div>
             </dl>
+
+            <div className="grain relative mt-10 aspect-[4/3] overflow-hidden rounded-sm bg-carbon-800">
+              <iframe
+                src={`https://www.google.com/maps?q=${encodeURIComponent(
+                  `${company.address.street}, ${company.address.postalCode} ${company.address.city}, ${company.address.country}`
+                )}&output=embed`}
+                title="Ubicación de S.B.S Telecomunicaciones en Madrid"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 h-full w-full grayscale invert-[0.92] contrast-[0.9]"
+                style={{ border: 0 }}
+              />
+              <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-bone-100/10" />
+            </div>
           </Reveal>
 
           <Reveal delay={0.1}>
