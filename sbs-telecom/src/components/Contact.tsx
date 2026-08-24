@@ -111,7 +111,7 @@ export function Contact() {
                 title="Ubicación de S.B.S Telecomunicaciones en Madrid"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="absolute inset-0 h-full w-full grayscale invert-[0.92] contrast-[0.9]"
+                className="absolute inset-0 h-full w-full invert-[0.9] hue-rotate-180 contrast-[0.85] saturate-[1.4]"
                 style={{ border: 0 }}
               />
               <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-bone-100/10" />
