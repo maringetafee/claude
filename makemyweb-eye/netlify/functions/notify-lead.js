@@ -29,11 +29,6 @@ function leadEmailHtml(email) {
       Respondiendo a este correo nos vale.
     </p>
 
-    <h2 style="font-size: 16px; margin: 28px 0 8px;">Cómo funciona el pago</h2>
-    <p style="font-size: 14px; line-height: 1.6;">
-      La mitad al empezar el proyecto y la otra mitad al publicar el sitio. Sin sorpresas.
-    </p>
-
     <h2 style="font-size: 16px; margin: 28px 0 8px;">Después del lanzamiento</h2>
     <p style="font-size: 14px; line-height: 1.6;">
       Seguimos cuidando tu web con hosting, dominio, copias de seguridad y soporte:
