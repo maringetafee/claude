@@ -508,7 +508,7 @@ address { font-style: normal; }
    Reviews
    ========================================================================== */
 .reviews {
-  background: radial-gradient(120% 160% at 50% -30%, rgba(192, 138, 62, .16), transparent 60%), var(--coffee);
+  background: var(--coffee);
   color: var(--on-dark);
   padding: clamp(80px, 14vw, 140px) var(--gutter);
   text-align: center;
