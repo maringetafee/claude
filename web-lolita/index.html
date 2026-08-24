@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html lang="es"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -12,6 +12,8 @@
 <meta name="description" content="Lolita Café en Getafe: desayunos, brunch y platos healthy con producto fresco. Carta completa y reserva de mesa online. C. Magdalena 16.">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
+<link rel="canonical" href="https://lolitagetafe.netlify.app/">
+<meta property="og:locale" content="es_ES">
 <meta property="og:type" content="restaurant">
 <meta property="og:site_name" content="Lolita Café">
 <meta property="og:title" content="Lolita Café — Getafe">
@@ -1256,90 +1258,98 @@
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  body { background: #E9E3D2; }
+  body { background: #F5ECE6; }
   @keyframes lolitaSpin { to { transform: rotate(360deg); } }
   @keyframes lolitaHeroZoom { from { transform: scale(1); } to { transform: scale(1.06); } }
   @keyframes lolitaStaggerIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   h1, h2, h3 { text-wrap: pretty; }
   a, button { -webkit-tap-highlight-color: transparent; }
-  .lolita-cat-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(46,93,58,0.24) !important; }
-  .lolita-item-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -8px rgba(46,93,58,0.18) !important; }
+  .lolita-cat-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(180,53,106,0.24) !important; }
+  .lolita-item-card:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -8px rgba(180,53,106,0.18) !important; }
   .lolita-btn:hover { transform: translateY(-1px); filter: brightness(1.04); }
   .lolita-btn-outline:hover { background: rgba(255,255,255,0.16) !important; border-color: rgba(255,255,255,0.6) !important; }
-  .lolita-fab:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 18px 38px -8px rgba(217,82,126,0.62), 0 6px 14px rgba(35,48,30,0.18) !important; }
-  .lolita-cat-card:active { transform: scale(0.97); box-shadow: 0 4px 14px -6px rgba(46,93,58,0.22) !important; }
+  .lolita-fab:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 18px 38px -8px rgba(201,61,110,0.62), 0 6px 14px rgba(74,15,40,0.18) !important; }
+  .lolita-cat-card:active { transform: scale(0.97); box-shadow: 0 4px 14px -6px rgba(180,53,106,0.22) !important; }
   .lolita-item-card:active { transform: scale(0.98); }
   .lolita-btn:active { transform: scale(0.96); filter: brightness(0.96); }
   .lolita-btn-outline:active { background: rgba(255,255,255,0.22) !important; transform: scale(0.97); }
   .lolita-fab:active { transform: scale(0.94); }
   .lolita-chip:active { transform: scale(0.95); }
   .lolita-stagger-in { animation: lolitaStaggerIn 0.42s cubic-bezier(0.22,0.8,0.32,1) both; }
+  .lolita-hero-in-1 { animation: lolitaStaggerIn 0.5s cubic-bezier(0.22,0.8,0.32,1) both; animation-delay: .05s; }
+  .lolita-hero-in-2 { animation: lolitaStaggerIn 0.5s cubic-bezier(0.22,0.8,0.32,1) both; animation-delay: .15s; }
+  .lolita-hero-in-3 { animation: lolitaStaggerIn 0.5s cubic-bezier(0.22,0.8,0.32,1) both; animation-delay: .25s; }
+  .lolita-hero-in-4 { animation: lolitaStaggerIn 0.5s cubic-bezier(0.22,0.8,0.32,1) both; animation-delay: .35s; }
+  .lolita-mobile-menu { animation: lolitaStaggerIn 0.28s cubic-bezier(0.22,0.8,0.32,1) both; }
+  .lolita-mobile-menu a:active, .lolita-mobile-menu button:active { transform: scale(0.97); }
   .lolita-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .lolita-reveal.is-visible { opacity: 1; transform: translateY(0); }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: #2E5D3A !important; box-shadow: 0 0 0 3px rgba(46,93,58,0.12); }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #B4356A !important; box-shadow: 0 0 0 3px rgba(180,53,106,0.12); }
+  .lolita-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   @media (prefers-reduced-motion: reduce) {
     image-slot img, image-slot { animation: none !important; }
     .lolita-cat-card, .lolita-item-card, .lolita-btn, .lolita-btn-outline, .lolita-fab, .lolita-chip { transition: none !important; }
-    .lolita-stagger-in { animation: none !important; }
+    .lolita-stagger-in, .lolita-hero-in-1, .lolita-hero-in-2, .lolita-hero-in-3, .lolita-hero-in-4, .lolita-mobile-menu { animation: none !important; }
     .lolita-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    header { transition: none !important; }
   }
 </style>
 </helmet>
 
 <sc-if value="{{ mostrarCancelacion }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed; inset:0; background:rgba(35,48,30,0.55); display:flex; align-items:center; justify-content:center; z-index:999; padding:16px;">
+  <div style="position:fixed; inset:0; background:rgba(74,15,40,0.55); display:flex; align-items:center; justify-content:center; z-index:999; padding:16px;">
     <div style="background:#FAF6EC; border-radius:18px; padding:32px 28px; max-width:380px; width:100%; text-align:center; font-family:'Bricolage Grotesque',sans-serif;">
       <div style="font-size:36px; margin-bottom:10px;">🌸</div>
       <sc-if value="{{ cancelLoading }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
-          <span style="width:16px; height:16px; border-radius:50%; border:2px solid #D8CFC2; border-top-color:#2E5D3A; animation:lolitaSpin 0.7s linear infinite; display:block;"></span>
-          <p style="font-size:14px; color:#7A8670; margin:0;">{{ cancelLoadingTexto }}</p>
+          <span style="width:16px; height:16px; border-radius:50%; border:2px solid #D8CFC2; border-top-color:#B4356A; animation:lolitaSpin 0.7s linear infinite; display:block;"></span>
+          <p style="font-size:14px; color:#7D5D6A; margin:0;">{{ cancelLoadingTexto }}</p>
         </div>
       </sc-if>
       <sc-if value="{{ cancelRedError }}" hint-placeholder-val="{{ false }}">
         <div style="font-weight:700; font-size:17px; margin-bottom:8px;">No hemos podido conectar</div>
-        <p style="font-size:13px; color:#7A8670; line-height:1.5; margin:0 0 20px;">La conexión está tardando demasiado. Inténtalo otra vez o llama al 91 947 94 16.</p>
+        <p style="font-size:13px; color:#7D5D6A; line-height:1.5; margin:0 0 20px;">La conexión está tardando demasiado. Inténtalo otra vez o llama al 91 947 94 16.</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-          <button sc-camel-on-click="{{ reintentarCancelacion }}" style="background:#23301E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Reintentar</button>
-          <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:transparent; color:#3A4A32; border:1px solid #3A4A32; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
+          <button sc-camel-on-click="{{ reintentarCancelacion }}" style="background:#4A0F28; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Reintentar</button>
+          <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:transparent; color:#4A0F28; border:1px solid #4A0F28; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
         </div>
       </sc-if>
       <sc-if value="{{ cancelNoEncontrada }}" hint-placeholder-val="{{ false }}">
         <div style="font-weight:700; font-size:17px; margin-bottom:8px;">Reserva no encontrada</div>
-        <p style="font-size:13px; color:#7A8670; line-height:1.5; margin:0 0 20px;">Puede que ya se haya cancelado. Si necesitas ayuda llama al 91 947 94 16.</p>
-        <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:#23301E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
+        <p style="font-size:13px; color:#7D5D6A; line-height:1.5; margin:0 0 20px;">Puede que ya se haya cancelado. Si necesitas ayuda llama al 91 947 94 16.</p>
+        <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:#4A0F28; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
       </sc-if>
       <sc-if value="{{ cancelDetalle }}" hint-placeholder-val="{{ false }}">
         <div style="font-weight:700; font-size:17px; margin-bottom:8px;">¿Anular esta reserva?</div>
-        <p style="font-size:14px; color:#3A4A32; line-height:1.6; margin:0 0 20px;">{{ cancelInfoTexto }}</p>
+        <p style="font-size:14px; color:#4A0F28; line-height:1.6; margin:0 0 20px;">{{ cancelInfoTexto }}</p>
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
           <button sc-camel-on-click="{{ confirmarCancelacion }}" style="background:#B4356A; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Sí, anular</button>
-          <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:transparent; color:#3A4A32; border:1px solid #3A4A32; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Volver</button>
+          <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:transparent; color:#4A0F28; border:1px solid #4A0F28; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 22px; border-radius:30px; cursor:pointer; font-family:inherit;">Volver</button>
         </div>
       </sc-if>
       <sc-if value="{{ cancelHecho }}" hint-placeholder-val="{{ false }}">
         <div style="font-weight:700; font-size:17px; margin-bottom:8px;">Reserva anulada</div>
-        <p style="font-size:13px; color:#7A8670; line-height:1.5; margin:0 0 20px;">Te esperamos otro día.</p>
-        <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:#23301E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
+        <p style="font-size:13px; color:#7D5D6A; line-height:1.5; margin:0 0 20px;">Te esperamos otro día.</p>
+        <button sc-camel-on-click="{{ cerrarCancelacion }}" style="background:#4A0F28; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:30px; cursor:pointer; font-family:inherit;">Cerrar</button>
       </sc-if>
     </div>
   </div>
 </sc-if>
 
 <sc-if value="{{ mostrarBuscarCancelar }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed; inset:0; background:rgba(35,48,30,0.55); display:flex; align-items:center; justify-content:center; z-index:999; padding:16px;">
+  <div style="position:fixed; inset:0; background:rgba(74,15,40,0.55); display:flex; align-items:center; justify-content:center; z-index:999; padding:16px;">
     <div style="background:#FAF6EC; border-radius:18px; padding:32px 28px; max-width:400px; width:100%; font-family:'Bricolage Grotesque',sans-serif;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
         <h3 style="font-size:19px; margin:0;">Anular una reserva</h3>
-        <button sc-camel-on-click="{{ cerrarBuscarCancelar }}" style="background:#F2EDDD; border:none; width:32px; height:32px; border-radius:50%; font-size:16px; color:#5C6A54; cursor:pointer;">✕</button>
+        <button sc-camel-on-click="{{ cerrarBuscarCancelar }}" style="background:#F2EDDD; border:none; width:40px; height:40px; border-radius:50%; font-size:16px; color:#7D5D6A; cursor:pointer;">✕</button>
       </div>
       <sc-if value="{{ mostrarBusquedaForm }}" hint-placeholder-val="{{ true }}">
-        <p style="font-size:13px; color:#7A8670; margin:0 0 14px;">Introduce el email y teléfono con los que reservaste.</p>
+        <p style="font-size:13px; color:#7D5D6A; margin:0 0 14px;">Introduce el email y teléfono con los que reservaste.</p>
         <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
           <input type="email" placeholder="Email" value="{{ buscarEmail }}" sc-camel-on-change="{{ onBuscarEmail }}" style="font-size:15px; padding:10px 12px; border:1.5px solid #E4DCC8; border-radius:10px; font-family:inherit;">
           <input type="tel" placeholder="Teléfono" value="{{ buscarTelefono }}" sc-camel-on-change="{{ onBuscarTelefono }}" style="font-size:15px; padding:10px 12px; border:1.5px solid #E4DCC8; border-radius:10px; font-family:inherit;">
         </div>
-        <button sc-camel-on-click="{{ buscarReservasEmailTel }}" disabled="{{ buscarLoading }}" style="width:100%; background:#23301E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:13px; border-radius:30px; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:9px;">
+        <button sc-camel-on-click="{{ buscarReservasEmailTel }}" disabled="{{ buscarLoading }}" style="width:100%; background:#4A0F28; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:13px; border-radius:30px; cursor:pointer; font-family:inherit; display:flex; align-items:center; justify-content:center; gap:9px;">
           <sc-if value="{{ buscarLoading }}" hint-placeholder-val="{{ false }}"><span style="width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,0.35); border-top-color:#fff; animation:lolitaSpin 0.7s linear infinite; display:block;"></span></sc-if>
           {{ buscarLabel }}
         </button>
@@ -1363,6 +1373,8 @@
 
 <div style="{{ containerStyle }}">
 
+  <a href="#contenido" style="position:absolute; left:12px; top:-60px; z-index:200; background:#4A0F28; color:#fff; padding:12px 18px; border-radius:8px; text-decoration:none; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; transition:top .15s ease;" onfocus="this.style.top='12px'" onblur="this.style.top='-60px'">Saltar al contenido</a>
+
   <!-- NAV -->
   <header style="{{ navStyle }}">
     <div style="display:flex; align-items:center; gap:10px;">
@@ -1370,37 +1382,63 @@
       <span style="font-family:'Playfair Display',serif; font-weight:600; font-size:21px; letter-spacing:-0.01em;">Lolita Café</span>
     </div>
     <nav style="{{ navLinksStyle }}">
-      <a href="#carta" style="text-decoration:none; color:#4A5642; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">Carta</a>
-      <a href="#contacto" style="text-decoration:none; color:#4A5642; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">El local</a>
-      <a href="#contacto" style="text-decoration:none; color:#4A5642; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">Contacto</a>
+      <a href="#carta" style="text-decoration:none; color:#B4356A; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">Carta</a>
+      <a href="#contacto" style="text-decoration:none; color:#B4356A; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">El local</a>
+      <a href="#contacto" style="text-decoration:none; color:#B4356A; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; letter-spacing:0.06em; text-transform:uppercase;">Contacto</a>
     </nav>
-    <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
-      <button class="lolita-btn" sc-camel-on-click="{{ openReserva }}" style="text-decoration:none; background:#23301E; color:#fff; font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; padding:11px 20px; border-radius:10px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; transition:transform .15s ease, box-shadow .15s ease; box-shadow:0 2px 8px rgba(35,48,30,0.15);">Reservar mesa</button>
-      <a href="#" sc-camel-on-click="{{ abrirBuscarCancelar }}" style="text-decoration:underline; color:#4A5642; font-family:'DM Sans',sans-serif; font-weight:600; font-size:11px;">¿Necesitas anular una reserva?</a>
+    <button type="button" aria-label="Abrir menú" sc-camel-on-click="{{ toggleMobileMenu }}" style="{{ hamburgerBtnStyle }}">
+      <span style="display:flex; flex-direction:column; gap:5px;">
+        <span style="width:20px; height:2px; border-radius:2px; background:#4A0F28;"></span>
+        <span style="width:20px; height:2px; border-radius:2px; background:#4A0F28;"></span>
+        <span style="width:14px; height:2px; border-radius:2px; background:#4A0F28; align-self:flex-end;"></span>
+      </span>
+    </button>
+    <div style="{{ navCtaWrapStyle }}">
+      <button class="lolita-btn" sc-camel-on-click="{{ openReserva }}" style="text-decoration:none; background:#C93D6E; color:#fff; font-weight:700; font-size:12px; letter-spacing:0.05em; text-transform:uppercase; padding:11px 20px; border-radius:10px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; transition:transform .15s ease, box-shadow .15s ease; box-shadow:0 6px 16px -4px rgba(201,61,110,0.5);">Reservar mesa</button>
+      <a href="#" sc-camel-on-click="{{ abrirBuscarCancelar }}" style="text-decoration:underline; color:#B4356A; font-family:'DM Sans',sans-serif; font-weight:600; font-size:11px;">¿Necesitas anular una reserva?</a>
     </div>
   </header>
 
+  <sc-if value="{{ mobileMenuOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="lolita-mobile-menu" style="position:fixed; inset:0; z-index:150; background:#FAF6EC;" sc-camel-on-click="{{ closeMobileMenu }}">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:13px 18px;" sc-camel-on-click="{{ stopClick }}">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <img src="favicon.png" alt="Lolita Café" style="width:34px; height:34px; object-fit:contain; display:block;">
+          <span style="font-family:'Playfair Display',serif; font-weight:600; font-size:21px; letter-spacing:-0.01em;">Lolita Café</span>
+        </div>
+        <button type="button" aria-label="Cerrar menú" sc-camel-on-click="{{ closeMobileMenu }}" style="background:#F2EDDD; border:none; width:40px; height:40px; border-radius:50%; font-size:17px; color:#4A0F28; cursor:pointer;">✕</button>
+      </div>
+      <nav style="display:flex; flex-direction:column; padding:20px 24px; gap:4px;" sc-camel-on-click="{{ stopClick }}">
+        <a href="#carta" class="lolita-hero-in-1" sc-camel-on-click="{{ closeMobileMenu }}" style="text-decoration:none; color:#241017; font-family:'Playfair Display',serif; font-weight:600; font-size:32px; padding:14px 0; border-bottom:1px solid #F0E4DC;">Carta</a>
+        <a href="#contacto" class="lolita-hero-in-2" sc-camel-on-click="{{ closeMobileMenu }}" style="text-decoration:none; color:#241017; font-family:'Playfair Display',serif; font-weight:600; font-size:32px; padding:14px 0; border-bottom:1px solid #F0E4DC;">El local</a>
+        <a href="#contacto" class="lolita-hero-in-3" sc-camel-on-click="{{ closeMobileMenu }}" style="text-decoration:none; color:#241017; font-family:'Playfair Display',serif; font-weight:600; font-size:32px; padding:14px 0; border-bottom:1px solid #F0E4DC;">Contacto</a>
+        <button type="button" class="lolita-btn lolita-hero-in-4" sc-camel-on-click="{{ openReservaFromMenu }}" style="margin-top:24px; text-decoration:none; background:#C93D6E; color:#fff; font-weight:700; font-size:13px; letter-spacing:0.05em; text-transform:uppercase; padding:16px 20px; border-radius:10px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; box-shadow:0 6px 16px -4px rgba(201,61,110,0.5);">Reservar mesa</button>
+        <a href="#" class="lolita-hero-in-4" sc-camel-on-click="{{ abrirBuscarCancelarDesdeMenu }}" style="margin-top:14px; text-align:center; text-decoration:underline; color:#7D5D6A; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px;">¿Necesitas anular una reserva?</a>
+      </nav>
+    </div>
+  </sc-if>
+
   
 
-  <button class="lolita-fab" sc-camel-on-click="{{ openReserva }}" style="position:fixed; bottom:22px; right:22px; z-index:60; background:#D9527E; color:#fff; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:16px 24px; border-radius:100px; box-shadow:0 14px 32px -8px rgba(217,82,126,0.55), 0 4px 12px rgba(35,48,30,0.15); display:flex; align-items:center; gap:8px; transition:transform .18s ease, box-shadow .18s ease;">
+  <button class="lolita-fab" sc-camel-on-click="{{ openReserva }}" style="position:fixed; bottom:22px; right:22px; z-index:60; background:#C93D6E; color:#fff; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:16px 24px; border-radius:100px; box-shadow:0 14px 32px -8px rgba(201,61,110,0.55), 0 4px 12px rgba(74,15,40,0.15); display:flex; align-items:center; gap:8px; transition:transform .18s ease, box-shadow .18s ease;">
     Reservar
   </button>
 
   <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
-    <div style="position:fixed; inset:0; z-index:100; background:rgba(35,48,30,0.55); display:flex; align-items:flex-end; justify-content:center;" sc-camel-on-click="{{ closeReserva }}">
+    <div style="position:fixed; inset:0; z-index:100; background:rgba(74,15,40,0.55); display:flex; align-items:flex-end; justify-content:center;" sc-camel-on-click="{{ closeReserva }}">
       <div style="background:#FAF6EC; width:100%; max-width:460px; max-height:92vh; overflow-y:auto; border-radius:24px 24px 0 0; padding:26px 22px 32px;" sc-camel-on-click="{{ stopClick }}">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
           <h3 style="font-family:'Playfair Display',serif; font-weight:600; font-size:23px; letter-spacing:-0.01em; margin:0;">Reservar mesa</h3>
-          <button sc-camel-on-click="{{ closeReserva }}" style="background:#F2EDDD; border:none; width:32px; height:32px; border-radius:50%; font-size:16px; color:#5C6A54; cursor:pointer;">✕</button>
+          <button sc-camel-on-click="{{ closeReserva }}" style="background:#F2EDDD; border:none; width:40px; height:40px; border-radius:50%; font-size:16px; color:#7D5D6A; cursor:pointer;">✕</button>
         </div>
 
         <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
           <div style="text-align:center; padding:30px 10px;">
             <div style="font-size:40px; margin-bottom:10px;">🌸</div>
             <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:19px; margin-bottom:6px;">¡Reserva recibida!</div>
-            <p style="font-size:14px; color:#7A8670; line-height:1.5; margin:0 0 6px;">Recibirás un recordatorio de la reserva por email.</p>
-            <p style="font-size:13px; color:#7A8670; line-height:1.5; margin:0 0 20px;">Si necesitas anularla o cambiarla, llámanos al <a href="tel:+34919479416" style="color:#2E5D3A; font-weight:600;">91 947 94 16</a>, o <a href="{{ cancelLink }}" style="color:#2E5D3A; font-weight:600;">cancélala aquí</a>.</p>
-            <button sc-camel-on-click="{{ closeReserva }}" style="background:#23301E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif;">Cerrar</button>
+            <p style="font-size:14px; color:#7D5D6A; line-height:1.5; margin:0 0 6px;">Recibirás un recordatorio de la reserva por email.</p>
+            <p style="font-size:13px; color:#7D5D6A; line-height:1.5; margin:0 0 20px;">Si necesitas anularla o cambiarla, llámanos al <a href="tel:+34919479416" style="color:#B4356A; font-weight:600;">91 947 94 16</a>, o <a href="{{ cancelLink }}" style="color:#B4356A; font-weight:600;">cancélala aquí</a>.</p>
+            <button sc-camel-on-click="{{ closeReserva }}" style="background:#4A0F28; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:12px 24px; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif;">Cerrar</button>
           </div>
         </sc-if>
 
@@ -1436,11 +1474,11 @@
             <input type="number" min="1" max="40" step="1" placeholder="Número de personas *" required="{{ true }}" value="{{ resPersonas }}" sc-camel-on-change="{{ onPersonas }}" style="{{ inputStyle }}">
             <sc-if value="{{ mostrarSelectorMesa }}" hint-placeholder-val="{{ false }}">
               <div style="border:1px solid #E2DCC9; border-radius:12px; padding:12px 14px; background:#FFFDF7;">
-                <button type="button" sc-camel-on-click="{{ toggleElegirMesa }}" style="background:none; border:none; padding:0; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; color:#2E5D3A; text-decoration:underline; text-align:left;">{{ elegirMesaLabel }}</button>
+                <button type="button" sc-camel-on-click="{{ toggleElegirMesa }}" style="background:none; border:none; padding:0; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; color:#B4356A; text-decoration:underline; text-align:left;">{{ elegirMesaLabel }}</button>
                 <sc-if value="{{ elegirMesa }}" hint-placeholder-val="{{ false }}">
                   <div style="margin-top:12px;">
                     <sc-if value="{{ estadoLoading }}" hint-placeholder-val="{{ true }}">
-                      <div style="font-size:12.5px; color:#7A8670; padding:8px 0;">Cargando el plano del local...</div>
+                      <div style="font-size:12.5px; color:#7D5D6A; padding:8px 0;">Cargando el plano del local...</div>
                     </sc-if>
                     <sc-if value="{{ estadoError }}" hint-placeholder-val="{{ false }}">
                       <div style="font-size:12.5px; color:#B4356A; padding:8px 0;">No hemos podido cargar el plano. Envía la reserva y te asignamos la mejor mesa libre.</div>
@@ -1461,12 +1499,12 @@
                           </button>
                         </sc-for>
                       </div>
-                      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:9px; font-family:'DM Sans',sans-serif; font-size:10.5px; color:#7A8670;">
-                        <span style="display:flex; align-items:center; gap:5px;"><span style="width:11px; height:11px; border-radius:3px; background:#EAF1E4; border:1px solid #9DB88F;"></span>Libre</span>
+                      <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:9px; font-family:'DM Sans',sans-serif; font-size:10.5px; color:#7D5D6A;">
+                        <span style="display:flex; align-items:center; gap:5px;"><span style="width:11px; height:11px; border-radius:3px; background:#FCEFD8; border:1px solid #D9A93A;"></span>Libre</span>
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:11px; height:11px; border-radius:3px; background:#D9527E;"></span>Tu mesa</span>
                         <span style="display:flex; align-items:center; gap:5px;"><span style="width:11px; height:11px; border-radius:3px; background:#E6E2D6; border:1px solid #CDC7B6;"></span>Ocupada o pequeña</span>
                       </div>
-                      <div style="font-family:'DM Sans',sans-serif; font-size:11.5px; color:#7A8670; margin-top:7px;">{{ mesaElegidaTexto }}</div>
+                      <div style="font-family:'DM Sans',sans-serif; font-size:11.5px; color:#7D5D6A; margin-top:7px;">{{ mesaElegidaTexto }}</div>
                     </sc-if>
                   </div>
                 </sc-if>
@@ -1476,7 +1514,7 @@
             <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
               <div style="font-size:13px; color:#B4356A;">No hemos podido enviar la reserva. Pulsa «Enviar reserva» para reintentar o llámanos al 91 947 94 16.</div>
             </sc-if>
-            <button class="lolita-btn" type="submit" disabled="{{ isSubmitDisabled }}" style="background:#D9527E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:15px; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 8px 20px -6px rgba(217,82,126,0.45); transition:transform .15s ease;">
+            <button class="lolita-btn" type="submit" disabled="{{ isSubmitDisabled }}" style="background:#C93D6E; color:#fff; border:none; font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; padding:15px; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:9px; box-shadow:0 8px 20px -6px rgba(201,61,110,0.45); transition:transform .15s ease;">
               <sc-if value="{{ isSending }}" hint-placeholder-val="{{ false }}"><span style="width:14px; height:14px; border-radius:50%; border:2px solid rgba(255,255,255,0.35); border-top-color:#fff; animation:lolitaSpin 0.7s linear infinite; display:block;"></span></sc-if>
               {{ submitLabel }}
             </button>
@@ -1487,18 +1525,19 @@
   </sc-if>
 
   <!-- HERO -->
-  <section style="{{ heroSectionStyle }}">
+  <section id="contenido" style="{{ heroSectionStyle }}">
+    <span class="lolita-sr-only">Fachada de Lolita Café, cafetería en la Calle Magdalena 16, Getafe</span>
     <image-slot id="heroFachada" shape="rect" src="hero-fachada.jpg" placeholder="Foto de la fachada de Lolita Café" style="position:absolute; inset:0; width:100%; height:100%; animation:lolitaHeroZoom 18s ease-in-out infinite alternate;"></image-slot>
-    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,28,16,0.05) 0%, rgba(20,28,16,0.45) 55%, rgba(15,22,11,0.92) 100%); pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(28,10,18,0.05) 0%, rgba(28,10,18,0.45) 55%, rgba(28,10,18,0.92) 100%); pointer-events:none;"></div>
     <div style="{{ heroContentStyle }}">
-      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+      <div class="lolita-hero-in-1" style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
         <span style="width:34px; height:2px; background:#D9527E;"></span>
         <span style="font-family:'DM Sans',sans-serif; font-weight:700; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:#EFE7D0;">Getafe · C. Magdalena 16</span>
       </div>
-      <h1 style="{{ heroTitleStyle }}">Nuestra <span style="font-style:italic; color:#F4A6C0;">carta</span></h1>
-      <p style="font-size:16.5px; line-height:1.6; color:#D8DFCB; margin:0 0 30px; max-width:420px;">Desayunos, brunch y platos healthy hechos con producto fresco en el corazón de Getafe.</p>
-      <div style="display:flex; gap:14px; flex-wrap:wrap;">
-        <a class="lolita-btn" href="#carta" style="text-decoration:none; background:#D9527E; color:#fff; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; padding:17px 28px; border-radius:10px; box-shadow:0 12px 28px -8px rgba(217,82,126,0.6); transition:transform .18s ease;">Ver la carta</a>
+      <h1 class="lolita-hero-in-2" style="{{ heroTitleStyle }}">Nuestra <span style="font-style:italic; color:#F4A6C0;">carta</span></h1>
+      <p class="lolita-hero-in-3" style="font-size:16.5px; line-height:1.6; color:#E8D6DC; margin:0 0 30px; max-width:420px;">Desayunos, brunch y platos healthy hechos con producto fresco en el corazón de Getafe.</p>
+      <div class="lolita-hero-in-4" style="display:flex; gap:14px; flex-wrap:wrap;">
+        <a class="lolita-btn" href="#carta" style="text-decoration:none; background:#C93D6E; color:#fff; font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; padding:17px 28px; border-radius:10px; box-shadow:0 12px 28px -8px rgba(201,61,110,0.6); transition:transform .18s ease;">Ver la carta</a>
         <a class="lolita-btn-outline" href="#contacto" style="text-decoration:none; background:rgba(255,255,255,0.08); backdrop-filter:blur(6px); color:#fff; border:1px solid rgba(255,255,255,0.4); font-family:'DM Sans',sans-serif; font-weight:700; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; padding:17px 28px; border-radius:10px; transition:background .18s ease, border-color .18s ease;">Cómo llegar</a>
       </div>
     </div>
@@ -1508,21 +1547,21 @@
   <section id="carta" style="{{ cartaSectionStyle }}">
     
     <div style="display:flex; align-items:center; gap:10px; margin:8px 0 6px;">
-      <span style="width:20px; height:1px; background:#B7C4AF;"></span>
-      <span style="font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7A8670;">La carta</span>
+      <span style="width:20px; height:1px; background:#D9527E;"></span>
+      <span style="font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7D5D6A;">La carta</span>
     </div>
     <h2 style="font-family:'Playfair Display',serif; font-weight:700; font-size:36px; letter-spacing:-0.01em; margin:0 0 20px;">Elige por dónde empezar</h2>
     <div style="{{ catListStyle }}">
       <sc-for list="{{ cats }}" as="cat" hint-placeholder-count="7">
         <button class="lolita-cat-card" sc-camel-on-click="{{ cat.onClick }}" style="{{ cat.cardStyle }}">
           <sc-if value="{{ cat.hasPhoto }}" hint-placeholder-val="{{ false }}">{{ cat.thumb }}</sc-if>
-          <sc-if value="{{ cat.hasNoPhoto }}" hint-placeholder-val="{{ true }}"><span style="width:46px; height:46px; flex-shrink:0; border-radius:13px; background:{{ cat.tint }}; display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:17px; color:#2E5D3A;">{{ cat.initial }}</span></sc-if>
+          <sc-if value="{{ cat.hasNoPhoto }}" hint-placeholder-val="{{ true }}"><span style="width:46px; height:46px; flex-shrink:0; border-radius:13px; background:{{ cat.tint }}; display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:17px; color:#B4356A;">{{ cat.initial }}</span></sc-if>
           <span style="flex:1; text-align:left;">
             <span style="display:flex; align-items:center; gap:8px;">
-              <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:16.5px; color:#23301E;">{{ cat.label }}</span>
-              <sc-if value="{{ cat.isNew }}" hint-placeholder-val="{{ true }}"><span style="background:#F4B740; color:#23301E; font-size:9px; font-weight:800; padding:2px 6px; border-radius:100px; letter-spacing:0.05em;">NUEVO</span></sc-if>
+              <span style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:16.5px; color:#4A0F28;">{{ cat.label }}</span>
+              <sc-if value="{{ cat.isNew }}" hint-placeholder-val="{{ true }}"><span style="background:#F4B740; color:#4A0F28; font-size:9px; font-weight:800; padding:2px 6px; border-radius:100px; letter-spacing:0.05em;">NUEVO</span></sc-if>
             </span>
-            <span style="display:block; font-size:12.5px; color:#84907A; margin-top:2px;">{{ cat.tagline }}</span>
+            <span style="display:block; font-size:12.5px; color:#7D5D6A; margin-top:2px;">{{ cat.tagline }}</span>
           </span>
           <span style="{{ cat.chevronStyle }}">›</span>
         </button>
@@ -1534,14 +1573,14 @@
   <section style="{{ itemsSectionStyle }}" ref="{{ itemsSectionRef }}">
     <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:6px;">
       <h3 style="font-family:'Playfair Display',serif; font-weight:700; font-size:32px; letter-spacing:-0.01em; margin:0;">{{ activeLabel }}</h3>
-      <span style="font-size:11px; font-weight:700; letter-spacing:0.04em; color:#9CA68F; white-space:nowrap;">{{ countLabel }}</span>
+      <span style="font-size:11px; font-weight:700; letter-spacing:0.04em; color:#7D5D6A; white-space:nowrap;">{{ countLabel }}</span>
     </div>
     <sc-if value="{{ activeNote }}" hint-placeholder-val="{{ true }}">
-      <p style="font-size:13px; color:#7A8670; margin:0 0 18px; line-height:1.5;">{{ activeNote }}</p>
+      <p style="font-size:13px; color:#7D5D6A; margin:0 0 18px; line-height:1.5;">{{ activeNote }}</p>
     </sc-if>
 
     <div style="margin-bottom:20px;">
-      <div style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#84907A; margin-bottom:9px;">Evitar alérgenos</div>
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#7D5D6A; margin-bottom:9px;">Evitar alérgenos</div>
       <div style="display:flex; flex-wrap:wrap; gap:8px;">
         <sc-for list="{{ allergens }}" as="a" hint-placeholder-count="10">
           <button class="lolita-chip" sc-camel-on-click="{{ a.onClick }}" style="{{ a.chipStyle }}">
@@ -1556,28 +1595,28 @@
       <sc-for list="{{ groups }}" as="group" hint-placeholder-count="2">
         <div>
           <sc-if value="{{ group.title }}" hint-placeholder-val="{{ true }}">
-            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.07em; color:#2E5D3A; margin-bottom:3px;">{{ group.title }}</div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.07em; color:#B4356A; margin-bottom:3px;">{{ group.title }}</div>
           </sc-if>
           <sc-if value="{{ group.subtitle }}" hint-placeholder-val="{{ true }}">
-            <div style="font-size:12px; color:#84907A; margin-bottom:11px; line-height:1.45;">{{ group.subtitle }}</div>
+            <div style="font-size:12px; color:#7D5D6A; margin-bottom:11px; line-height:1.45;">{{ group.subtitle }}</div>
           </sc-if>
           <div style="{{ itemsGridStyle }}">
             <sc-for list="{{ group.items }}" as="item" hint-placeholder-count="3">
-              <div class="lolita-item-card" style="display:flex; align-items:center; gap:12px; background:#fff; border-radius:14px; padding:13px 14px; box-shadow:0 4px 16px -6px rgba(46,93,58,0.12); transition:box-shadow .18s ease, transform .18s ease;">
+              <div class="lolita-item-card" style="display:flex; align-items:center; gap:12px; background:#fff; border-radius:14px; padding:13px 14px; box-shadow:0 4px 16px -6px rgba(180,53,106,0.12); transition:box-shadow .18s ease, transform .18s ease;">
                 <sc-if value="{{ item.hasPhoto }}" hint-placeholder-val="{{ false }}">{{ item.thumb }}</sc-if>
                 <div style="flex:1; min-width:0; display:flex; justify-content:space-between; gap:14px; align-items:baseline;">
                   <div style="min-width:0;">
-                    <div style="font-weight:600; font-size:14.5px; color:#23301E; line-height:1.3;">{{ item.name }}</div>
-                    <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ true }}"><div style="font-size:12px; color:#84907A; margin-top:2px; line-height:1.35;">{{ item.desc }}</div></sc-if>
+                    <div style="font-weight:600; font-size:14.5px; color:#4A0F28; line-height:1.3;">{{ item.name }}</div>
+                    <sc-if value="{{ item.desc }}" hint-placeholder-val="{{ true }}"><div style="font-size:12px; color:#7D5D6A; margin-top:2px; line-height:1.35;">{{ item.desc }}</div></sc-if>
                     <sc-if value="{{ item.hasTags }}" hint-placeholder-val="{{ false }}">
                       <div style="display:flex; flex-wrap:wrap; gap:5px; margin-top:6px;">
                         <sc-for list="{{ item.tags }}" as="tag" hint-placeholder-count="2">
-                          <span style="font-size:9.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:#9CA68F; background:#F2EDDD; padding:3px 7px; border-radius:6px;">{{ tag }}</span>
+                          <span style="font-size:9.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:#7D5D6A; background:#F2EDDD; padding:3px 7px; border-radius:6px;">{{ tag }}</span>
                         </sc-for>
                       </div>
                     </sc-if>
                   </div>
-                  <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:15px; color:#2E5D3A; white-space:nowrap;">{{ item.price }}</div>
+                  <div style="font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:15px; color:#B4356A; white-space:nowrap;">{{ item.price }}</div>
                 </div>
               </div>
             </sc-for>
@@ -1591,17 +1630,17 @@
   <section class="lolita-reveal" style="padding:64px 20px; text-align:center; background:radial-gradient(120% 140% at 50% 0%, #FCE7F0 0%, #FBE0EC 60%, #F8D4E4 100%);">
     <div style="font-family:'DM Sans',sans-serif; font-weight:800; font-size:18px; color:#F4B740; letter-spacing:0.14em; margin-bottom:14px;">★★★★<span style="color:#EFC9D5;">★</span></div>
     <h2 style="font-family:'Playfair Display',serif; font-weight:700; font-size:38px; letter-spacing:-0.01em; margin:0 0 10px;">Déjanos tu <span style="font-style:italic; color:#D9527E;">reseña</span></h2>
-    <p style="font-size:14.5px; color:#8A6B78; margin:0 0 26px; max-width:300px; margin-left:auto; margin-right:auto; line-height:1.5;">Si has disfrutado tu visita, nos ayuda un montón que lo cuentes en Google.</p>
-    <a class="lolita-btn" href="https://www.google.com/maps/place/Lolita+Caf%C3%A9/@40.305931,-3.7296636,15z/data=!4m5!3m4!1s0x0:0x3f796a1550ca0346!8m2!3d40.305931!4d-3.7296636" target="_blank" style="display:inline-block; text-decoration:none; background:#23301E; color:#fff; font-family:'DM Sans',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase; padding:16px 30px; border-radius:10px; box-shadow:0 10px 24px -10px rgba(35,48,30,0.4); transition:transform .18s ease;">Escribir reseña en Google</a>
+    <p style="font-size:14.5px; color:#7D5D6A; margin:0 0 26px; max-width:300px; margin-left:auto; margin-right:auto; line-height:1.5;">Si has disfrutado tu visita, nos ayuda un montón que lo cuentes en Google.</p>
+    <a class="lolita-btn" href="https://www.google.com/maps/place/Lolita+Caf%C3%A9/@40.305931,-3.7296636,15z/data=!4m5!3m4!1s0x0:0x3f796a1550ca0346!8m2!3d40.305931!4d-3.7296636" target="_blank" style="display:inline-block; text-decoration:none; background:#4A0F28; color:#fff; font-family:'DM Sans',sans-serif; font-weight:700; font-size:12.5px; letter-spacing:0.05em; text-transform:uppercase; padding:16px 30px; border-radius:10px; box-shadow:0 10px 24px -10px rgba(74,15,40,0.4); transition:transform .18s ease;">Escribir reseña en Google</a>
   </section>
 
   <!-- CONTACTO -->
   <section id="contacto" style="{{ contactSectionStyle }}">
-    <div style="background:#2E5D3A; color:#F7F3E7; border-radius:24px; padding:24px 20px;">
+    <div style="background:#B4356A; color:#F7F3E7; border-radius:24px; padding:24px 20px;">
       
       <div style="display:flex; align-items:center; gap:10px; margin:6px 0 8px;">
         <span style="width:20px; height:1px; background:rgba(255,255,255,0.3);"></span>
-        <span style="font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#BFD3BC;">Visítanos</span>
+        <span style="font-family:'DM Sans',sans-serif; font-weight:700; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#E7B7CB;">Visítanos</span>
       </div>
       <h2 style="font-family:'Playfair Display',serif; font-weight:700; font-size:36px; letter-spacing:-0.01em; margin:0 0 18px; color:#fff;">Estamos en Getafe</h2>
       <div style="{{ contactInnerStyle }}">
@@ -1612,13 +1651,13 @@
         </div>
         <div>
           <div style="display:flex; flex-direction:column; gap:13px;">
-            <div style="display:flex; flex-direction:column; gap:2px; padding:12px 0; border-top:1px solid rgba(255,255,255,0.12);"><div style="font-weight:600; font-size:15px; color:#fff;">C. Magdalena 16</div><div style="font-size:13px; color:#BFD3BC;">28901 Getafe, Madrid</div></div>
+            <div style="display:flex; flex-direction:column; gap:2px; padding:12px 0; border-top:1px solid rgba(255,255,255,0.12);"><div style="font-weight:600; font-size:15px; color:#fff;">C. Magdalena 16</div><div style="font-size:13px; color:#E7B7CB;">28901 Getafe, Madrid</div></div>
             <div style="display:flex; flex-direction:column; gap:6px; padding:12px 0; border-top:1px solid rgba(255,255,255,0.12);">
               <div style="font-weight:600; font-size:15px; color:#fff; margin-bottom:4px;">Horario</div>
-              <div style="display:flex; justify-content:space-between; font-size:13px; color:#BFD3BC;"><span>Lunes–Jueves</span><span>8:00–00:00</span></div>
-              <div style="display:flex; justify-content:space-between; font-size:13px; color:#BFD3BC;"><span>Viernes</span><span>8:00–02:00</span></div>
-              <div style="display:flex; justify-content:space-between; font-size:13px; color:#BFD3BC;"><span>Sábado</span><span>10:00–02:00</span></div>
-              <div style="display:flex; justify-content:space-between; font-size:13px; color:#BFD3BC;"><span>Domingo</span><span>10:00–00:00</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; color:#E7B7CB;"><span>Lunes–Jueves</span><span>8:00–00:00</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; color:#E7B7CB;"><span>Viernes</span><span>8:00–02:00</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; color:#E7B7CB;"><span>Sábado</span><span>10:00–02:00</span></div>
+              <div style="display:flex; justify-content:space-between; font-size:13px; color:#E7B7CB;"><span>Domingo</span><span>10:00–00:00</span></div>
             </div>
             <div style="padding:12px 0; border-top:1px solid rgba(255,255,255,0.12);"><a href="tel:+34919479416" style="font-weight:600; font-size:15px; color:#F4B740; text-decoration:none;">91 947 94 16</a></div>
           </div>
@@ -1632,14 +1671,14 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="lolita-reveal" style="background:#23301E; color:#B7C4AF; padding:28px 20px; text-align:center;">
+  <footer class="lolita-reveal" style="background:#4A0F28; color:#E7B7CB; padding:28px 20px; text-align:center;">
     <div style="font-family:'Playfair Display',serif; font-weight:700; font-style:italic; font-size:30px; color:#F4B740; margin-bottom:8px;">Lolita Café</div>
     <div style="display:flex; gap:16px; justify-content:center; font-size:13px; margin-bottom:16px;">
-      <a href="#carta" style="color:#B7C4AF; text-decoration:none;">Carta</a>
-      <a href="#contacto" style="color:#B7C4AF; text-decoration:none;">Contacto</a>
-      <a href="#" sc-camel-on-click="{{ abrirBuscarCancelar }}" style="color:#B7C4AF; text-decoration:none;">Anular una reserva</a>
+      <a href="#carta" style="color:#E7B7CB; text-decoration:none;">Carta</a>
+      <a href="#contacto" style="color:#E7B7CB; text-decoration:none;">Contacto</a>
+      <a href="#" sc-camel-on-click="{{ abrirBuscarCancelar }}" style="color:#E7B7CB; text-decoration:none;">Anular una reserva</a>
     </div>
-    <div style="font-size:11px; color:#6F7D66;">© 2026 Lolita Café · Getafe, Madrid</div>
+    <div style="font-size:11px; color:#B98A9E;">© 2026 Lolita Café · Getafe, Madrid</div>
   </footer>
 
 </div>
@@ -1648,6 +1687,8 @@
 class Component extends DCLogic {
   state = {
     cat: 0, excluded: [], isDesktop: (typeof window !== "undefined" && window.innerWidth >= 900),
+    scrolled: (typeof window !== "undefined" && window.scrollY > 24),
+    mobileMenuOpen: false,
     resOpen: false, resStatus: "idle",
     cancelToken: (typeof window !== "undefined" && new URLSearchParams(window.location.search).get("cancelar")) || null,
     cancelFase: "cargando", cancelInfo: null,
@@ -1675,6 +1716,11 @@ class Component extends DCLogic {
     this.setState({ resOpen: true, resStatus: "idle", dispo: null, dispoError: false, dispoLoading: false, elegirMesa: false, estadoMesas: null, estadoLoading: false, estadoErrorFlag: false, mesaElegida: null });
   };
   closeReserva = () => this.setState({ resOpen: false });
+
+  toggleMobileMenu = () => this.setState((s) => ({ mobileMenuOpen: !s.mobileMenuOpen }));
+  closeMobileMenu = () => this.setState({ mobileMenuOpen: false });
+  openReservaFromMenu = () => { this.setState({ mobileMenuOpen: false }); this.openReserva(); };
+  abrirBuscarCancelarDesdeMenu = (e) => { this.setState({ mobileMenuOpen: false }); this.abrirBuscarCancelar(e); };
 
   // Plano real del local: posición y tamaño de cada mesa en % del recuadro.
   // Pared izquierda 5-4-3-2-1, centro 8-7-6, derecha 13-10-12-9-11,
@@ -1975,6 +2021,14 @@ class Component extends DCLogic {
     };
     window.addEventListener("resize", this._onResize);
 
+    // Navbar: se compacta y gana sombra al hacer scroll. Puramente visual,
+    // no toca el flujo de reserva.
+    this._onScroll = () => {
+      const s = window.scrollY > 24;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+
     // Sin un listener de touch, iOS Safari no aplica :active en taps.
     document.addEventListener("touchstart", () => {}, { passive: true });
 
@@ -1997,6 +2051,7 @@ class Component extends DCLogic {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
     if (this._revealObserver) this._revealObserver.disconnect();
   }
 
@@ -2042,7 +2097,7 @@ class Component extends DCLogic {
       { name: "Estamos pasando esta sección a la nueva web", desc: "Muy pronto disponible aquí. Mientras, pídela en el local.", price: "", all: [] },
     ]}];
     return [
-      { label: "Desayunos", emoji: "🥐", tint: "#EAF1E4", tagline: "De 8:00 a 13:00 h", photo: "menu-photo-1.jpg", groups: [
+      { label: "Desayunos", emoji: "🥐", tint: "#FCEFD8", tagline: "De 8:00 a 13:00 h", photo: "menu-photo-1.jpg", groups: [
         { title: "Desayuno Lolita", subtitle: "De 8:00 a 13:00 h · incluye Café, Cola Cao o Infusión", items: [
           { name: "Barrita con tomate y aceite", price: "3,20€", all: ["gluten"] },
           { name: "Barrita con mermelada y mantequilla", price: "3,20€", all: ["gluten", "leche"] },
@@ -2105,7 +2160,7 @@ class Component extends DCLogic {
           { name: "Tortitas de avena con pollo Satay, huevos poché, espinacas salteadas y salsa holandesa", price: "9,95€", all: ["gluten", "huevo", "leche", "frutosSecos"] },
         ]},
       ]},
-      { label: "Healthy plates", emoji: "🥗", tint: "#EAF1E4", tagline: "Rico y equilibrado", isNew: true, photo: "menu-photo-3.jpg", groups: [
+      { label: "Healthy plates", emoji: "🥗", tint: "#FBE0EC", tagline: "Rico y equilibrado", isNew: true, photo: "menu-photo-3.jpg", groups: [
         { items: [
           { name: "Bowl de quinoa con pollo, verdura, huevo cocido y crema agria", price: "14,90€", all: ["huevo"] },
           { name: "Bowl de quinoa con atún, queso feta, maíz, aguacate, edamame y alga wakame", price: "15,90€", all: ["pescado", "leche", "soja"] },
@@ -2129,7 +2184,7 @@ class Component extends DCLogic {
           { name: "Chipirones a la sartén con cebolla caramelizada y reducción de módena y frambuesa", price: "16,50€", all: ["moluscos"] },
         ]},
       ]},
-      { label: "Verde que te quiero verde", emoji: "🌱", tint: "#EAF1E4", tagline: "Opciones veggie", photo: "menu-photo-6.jpg", groups: [
+      { label: "Verde que te quiero verde", emoji: "🌱", tint: "#FCEFD8", tagline: "Opciones veggie", photo: "menu-photo-6.jpg", groups: [
         { items: [
           { name: "Tartar Tricolor de aguacate, mango y cherrys asados", price: "14,50€", photo: "menu-photo-6.jpg", all: [] },
           { name: "Ensaladilla rusa clásica con burrata", price: "12,00€", all: ["huevo", "leche"] },
@@ -2167,13 +2222,16 @@ class Component extends DCLogic {
     const excluded = this.state.excluded;
     const d = this.state.isDesktop;
 
-    const containerStyle = `width:100%; max-width:${d ? "1120px" : "440px"}; margin:0 auto; background:#FAF6EC; min-height:100vh; font-family:'DM Sans',sans-serif; color:#23301E; position:relative; overflow-x:hidden; box-shadow:${d ? "none" : "0 0 60px rgba(0,0,0,0.12)"};`;
-    const navStyle = `position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:${d ? "16px 40px" : "13px 18px"}; background:rgba(250,246,236,0.85); backdrop-filter:blur(14px) saturate(1.4); -webkit-backdrop-filter:blur(14px) saturate(1.4); border-bottom:1px solid rgba(35,48,30,0.08); box-shadow:0 1px 0 rgba(35,48,30,0.02), 0 8px 24px -16px rgba(35,48,30,0.15);`;
+    const containerStyle = `width:100%; max-width:${d ? "1120px" : "440px"}; margin:0 auto; background:#FAF6EC; min-height:100vh; font-family:'DM Sans',sans-serif; color:#4A0F28; position:relative; overflow-x:hidden; box-shadow:${d ? "none" : "0 0 60px rgba(0,0,0,0.12)"};`;
+    const scrolled = this.state.scrolled;
+    const navStyle = `position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:18px; padding:${scrolled ? (d ? "10px 40px" : "9px 18px") : (d ? "16px 40px" : "13px 18px")}; background:rgba(250,246,236,${scrolled ? "0.96" : "0.85"}); backdrop-filter:blur(14px) saturate(1.4); -webkit-backdrop-filter:blur(14px) saturate(1.4); border-bottom:1px solid rgba(74,15,40,${scrolled ? "0.1" : "0.08"}); box-shadow:${scrolled ? "0 1px 0 rgba(74,15,40,0.04), 0 12px 28px -14px rgba(74,15,40,0.24)" : "0 1px 0 rgba(74,15,40,0.02), 0 8px 24px -16px rgba(74,15,40,0.15)"}; transition:padding .3s cubic-bezier(0.22,0.8,0.32,1), box-shadow .3s ease, background .3s ease, border-color .3s ease;`;
     const navLinksStyle = `display:${d ? "flex" : "none"}; align-items:center; gap:30px; flex:1; justify-content:center;`;
+    const navCtaWrapStyle = `display:${d ? "flex" : "none"}; flex-direction:column; align-items:flex-end; gap:4px;`;
+    const hamburgerBtnStyle = `display:${d ? "none" : "flex"}; align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; border:none; background:transparent; cursor:pointer; padding:0; flex-shrink:0;`;
     const heroSectionStyle = `position:relative; height:${d ? "680px" : "580px"}; margin:0; padding:0; overflow:hidden;`;
     const heroContentStyle = `position:absolute; left:0; right:0; bottom:0; z-index:2; padding:${d ? "0 56px 68px" : "0 24px 42px"};`;
-    const heroTitleStyle = `font-family:'Playfair Display',serif; font-weight:800; font-size:${d ? "104px" : "56px"}; line-height:0.92; letter-spacing:-0.03em; margin:0 0 20px; color:#fff; text-shadow:0 2px 24px rgba(15,22,11,0.35);`;
-    const heroImgWrapStyle = `position:relative; border-radius:14px; overflow:hidden; height:${d ? "460px" : "400px"}; border:1px solid #DDE4D0;`;
+    const heroTitleStyle = `font-family:'Playfair Display',serif; font-weight:800; font-size:${d ? "104px" : "56px"}; line-height:0.92; letter-spacing:-0.03em; margin:0 0 20px; color:#fff; text-shadow:0 2px 24px rgba(28,10,18,0.35);`;
+    const heroImgWrapStyle = `position:relative; border-radius:14px; overflow:hidden; height:${d ? "460px" : "400px"}; border:1px solid #F0D2DE;`;
     const cartaSectionStyle = `padding:${d ? "48px 40px 8px" : "32px 20px 8px"};`;
     const catListStyle = `display:${d ? "grid" : "flex"}; grid-template-columns:${d ? "1fr 1fr" : "none"}; flex-direction:column; gap:${d ? "12px" : "10px"};`;
     const itemsSectionStyle = `padding:${d ? "40px 40px 56px" : "26px 20px 38px"}; background:#F2EDDD; margin-top:28px;`;
@@ -2182,7 +2240,7 @@ class Component extends DCLogic {
     const galleryImgWrapStyle = `border-radius:14px; overflow:hidden; height:${d ? "580px" : "480px"};`;
     const contactInnerStyle = `display:${d ? "grid" : "block"}; grid-template-columns:${d ? "1fr 1fr" : "none"}; gap:${d ? "36px" : "0"}; align-items:${d ? "stretch" : "start"};`;
     const mapColStyle = d ? "height:100%; display:flex; flex-direction:column;" : "";
-    const mapWrapStyle = d ? "border-radius:18px; overflow:hidden; position:relative; flex:1; min-height:0; box-shadow:0 12px 32px -12px rgba(15,22,11,0.35);" : "border-radius:18px; overflow:hidden; height:220px; position:relative; margin-bottom:18px; box-shadow:0 12px 32px -12px rgba(15,22,11,0.35);";
+    const mapWrapStyle = d ? "border-radius:18px; overflow:hidden; position:relative; flex:1; min-height:0; box-shadow:0 12px 32px -12px rgba(28,10,18,0.35);" : "border-radius:18px; overflow:hidden; height:220px; position:relative; margin-bottom:18px; box-shadow:0 12px 32px -12px rgba(28,10,18,0.35);";
     const contactSectionStyle = `padding:${d ? "16px 40px 56px" : "12px 20px 40px"};`;
     const allergenLabels = this.allergenList().reduce((acc, a) => { acc[a.id] = a.label; return acc; }, {});
 
@@ -2192,7 +2250,7 @@ class Component extends DCLogic {
         id: a.id,
         label: a.label,
         onClick: () => this.toggleAllergen(a.id),
-        chipStyle: `display:flex; align-items:center; gap:5px; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; padding:8px 12px; border-radius:100px; border:1px solid ${isOn ? '#D9527E' : '#ECE3CE'}; background:${isOn ? '#FBE0EC' : '#fff'}; color:${isOn ? '#B4356A' : '#5C6A54'}; white-space:nowrap; transition:transform .12s ease, background .12s ease, border-color .12s ease;`,
+        chipStyle: `display:flex; align-items:center; gap:5px; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:12.5px; padding:8px 12px; border-radius:100px; border:1px solid ${isOn ? '#D9527E' : '#ECE3CE'}; background:${isOn ? '#FBE0EC' : '#fff'}; color:${isOn ? '#B4356A' : '#7D5D6A'}; white-space:nowrap; transition:transform .12s ease, background .12s ease, border-color .12s ease;`,
         dotStyle: `width:6px; height:6px; border-radius:50%; background:${isOn ? '#D9527E' : '#C9BFA6'}; flex-shrink:0;`,
       };
     });
@@ -2205,6 +2263,7 @@ class Component extends DCLogic {
       thumb: c.photo ? React.createElement("img", {
         src: c.photo,
         alt: "",
+        loading: "lazy",
         style: { width: 46, height: 46, flexShrink: 0, borderRadius: 13, objectFit: "cover", display: "block" },
       }) : null,
       hasNoPhoto: !c.photo,
@@ -2212,8 +2271,8 @@ class Component extends DCLogic {
       tagline: c.tagline,
       isNew: !!c.isNew,
       onClick: () => this.selectCat(i),
-      cardStyle: `display:flex; align-items:center; gap:13px; width:100%; cursor:pointer; text-align:left; padding:13px 14px; border-radius:14px; border:1px solid ${i === active ? '#2E5D3A' : 'rgba(35,48,30,0.09)'}; background:${i === active ? '#EAF1E4' : '#fff'}; box-shadow:${i === active ? '0 10px 24px -8px rgba(46,93,58,0.28)' : '0 2px 10px rgba(46,93,58,0.05)'}; font-family:'DM Sans',sans-serif; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;`,
-      chevronStyle: `font-size:22px; color:${i === active ? '#2E5D3A' : '#C9BFA6'}; line-height:1; transition:transform .18s ease; transform:${i === active ? 'translateX(2px)' : 'none'};`,
+      cardStyle: `display:flex; align-items:center; gap:13px; width:100%; cursor:pointer; text-align:left; padding:13px 14px; border-radius:14px; border:1px solid ${i === active ? '#B4356A' : 'rgba(74,15,40,0.09)'}; background:${i === active ? '#FBE0EC' : '#fff'}; box-shadow:${i === active ? '0 10px 24px -8px rgba(180,53,106,0.28)' : '0 2px 10px rgba(180,53,106,0.05)'}; font-family:'DM Sans',sans-serif; transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;`,
+      chevronStyle: `font-size:22px; color:${i === active ? '#B4356A' : '#C9BFA6'}; line-height:1; transition:transform .18s ease; transform:${i === active ? 'translateX(2px)' : 'none'};`,
     }));
 
     const totalItems = menu[active].groups.reduce((n, g) => n + g.items.length, 0);
@@ -2228,6 +2287,7 @@ class Component extends DCLogic {
             thumb: it.photo ? React.createElement("img", {
               src: it.photo,
               alt: "",
+              loading: "lazy",
               style: { width: 56, height: 56, flexShrink: 0, borderRadius: 11, objectFit: "cover", display: "block" },
             }) : null,
             hasTags: !!(it.all && it.all.length),
@@ -2253,7 +2313,7 @@ class Component extends DCLogic {
     });
     const minFecha = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
     const fechaHoraPasada = this.esFechaHoraPasada(f.fecha, f.hora);
-    const inputStyle = "width:100%; box-sizing:border-box; padding:12px 14px; border-radius:12px; border:1.5px solid #E4DCC8; font-family:'DM Sans',sans-serif; font-size:14.5px; color:#23301E; background:#fff; transition:border-color .15s ease;";
+    const inputStyle = "width:100%; box-sizing:border-box; padding:12px 14px; border-radius:12px; border:1.5px solid #E4DCC8; font-family:'DM Sans',sans-serif; font-size:14.5px; color:#4A0F28; background:#fff; transition:border-color .15s ease;";
     const telValid = f.telefono === "" || /^\d{9}$/.test(f.telefono.replace(/\s/g, ""));
     const emailValid = f.email === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email);
     const errorInputStyle = inputStyle + " border-color:#D9527E;";
@@ -2262,6 +2322,11 @@ class Component extends DCLogic {
       cats,
       groups,
       allergens,
+      mobileMenuOpen: this.state.mobileMenuOpen,
+      toggleMobileMenu: this.toggleMobileMenu,
+      closeMobileMenu: this.closeMobileMenu,
+      openReservaFromMenu: this.openReservaFromMenu,
+      abrirBuscarCancelarDesdeMenu: this.abrirBuscarCancelarDesdeMenu,
       resOpen: this.state.resOpen,
       resStatus: this.state.resStatus,
       isSending: this.state.resStatus === "sending",
@@ -2304,15 +2369,15 @@ class Component extends DCLogic {
         const cabe = m.capacidad >= Number(f.personas || 1);
         const elegida = this.state.mesaElegida === m.numero;
         const bloqueada = m.ocupada || !cabe;
-        const bg = elegida ? "#D9527E" : m.ocupada || !cabe ? "#E6E2D6" : "#EAF1E4";
-        const border = elegida ? "#D9527E" : m.ocupada || !cabe ? "#CDC7B6" : "#9DB88F";
-        const color = elegida ? "#fff" : bloqueada ? "#9A937F" : "#2E5D3A";
+        const bg = elegida ? "#C93D6E" : m.ocupada || !cabe ? "#E6E2D6" : "#FCEFD8";
+        const border = elegida ? "#C93D6E" : m.ocupada || !cabe ? "#CDC7B6" : "#D9A93A";
+        const color = elegida ? "#fff" : bloqueada ? "#9A937F" : "#8A5D12";
         return {
           numero: m.numero,
           sub: m.ocupada ? `Ocupada · ${m.hora || f.hora}` : !cabe ? `${m.capacidad} pers.` : `${m.capacidad} pers.`,
           disabled: bloqueada,
           onClick: bloqueada ? () => {} : () => this.seleccionarMesa(m.numero),
-          style: `position:absolute; left:${pos.x}%; top:${pos.y}%; width:${pos.w}%; height:${pos.h}%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:2px; border-radius:6px; background:${bg}; border:1.5px solid ${border}; color:${color}; cursor:${bloqueada ? "not-allowed" : "pointer"}; font-family:'DM Sans',sans-serif; box-shadow:${elegida ? "0 4px 12px rgba(217,82,126,0.35)" : "none"};`,
+          style: `position:absolute; left:${pos.x}%; top:${pos.y}%; width:${pos.w}%; height:${pos.h}%; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; padding:2px; border-radius:6px; background:${bg}; border:1.5px solid ${border}; color:${color}; cursor:${bloqueada ? "not-allowed" : "pointer"}; font-family:'DM Sans',sans-serif; box-shadow:${elegida ? "0 4px 12px rgba(201,61,110,0.35)" : "none"};`,
         };
       }),
       showDispo: !!(f.fecha && f.hora) && Number(f.personas) <= 6 && (this.state.dispoLoading || this.state.dispo !== null),
@@ -2350,7 +2415,7 @@ class Component extends DCLogic {
         cancelarEsta: () => this.cancelarDesdeResultado(r.token),
       })),
       dispoText: fechaHoraPasada ? "Esa fecha u hora ya ha pasado, elige otra." : this.state.dispoError ? "" : this.state.dispo ? (this.state.dispo.cabe ? `Mesa disponible (${this.state.dispo.mesasLibres} libres de ${this.state.dispo.totalMesas})` : "Completo para esa hora u grupo, elige otra") : "",
-      dispoStyle: `font-size:13px; font-weight:600; padding:8px 12px; border-radius:10px; background:${fechaHoraPasada || (this.state.dispo && !this.state.dispo.cabe) ? '#FBE0EC' : '#EAF1E4'}; color:${fechaHoraPasada || (this.state.dispo && !this.state.dispo.cabe) ? '#B4356A' : '#2E5D3A'};`,
+      dispoStyle: `font-size:13px; font-weight:600; padding:8px 12px; border-radius:10px; background:${fechaHoraPasada || (this.state.dispo && !this.state.dispo.cabe) ? '#FBE0EC' : '#FCEFD8'}; color:${fechaHoraPasada || (this.state.dispo && !this.state.dispo.cabe) ? '#B4356A' : '#8A5D12'};`,
       isFull: !!(this.state.dispo && !this.state.dispo.cabe),
       isSubmitDisabled: !f.nombre || !f.telefono || !f.email || !f.fecha || !f.hora || !f.personas || !telValid || !emailValid || Number(f.personas) > 6 || fechaHoraPasada || !!(this.state.dispo && !this.state.dispo.cabe) || this.state.resStatus === "sending",
       submitLabel: this.state.resStatus === "sending" ? "Enviando..." : "Enviar reserva",
@@ -2359,7 +2424,7 @@ class Component extends DCLogic {
       activeNote: menu[active].note || "",
       countLabel: `${visibleItems} de ${totalItems} platos`,
       hasExcluded: excluded.length > 0,
-      containerStyle, navStyle, navLinksStyle, heroSectionStyle, heroContentStyle, heroTitleStyle, heroImgWrapStyle, cartaSectionStyle, catListStyle,
+      containerStyle, navStyle, navLinksStyle, navCtaWrapStyle, hamburgerBtnStyle, heroSectionStyle, heroContentStyle, heroTitleStyle, heroImgWrapStyle, cartaSectionStyle, catListStyle,
       itemsSectionStyle, itemsGridStyle, gallerySectionStyle, galleryImgWrapStyle, contactInnerStyle, contactSectionStyle, mapColStyle, mapWrapStyle,
     };
   }
