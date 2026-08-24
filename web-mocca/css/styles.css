@@ -287,17 +287,18 @@ address { font-style: normal; }
 .carta__intro { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
 
 .cat-nav {
+  --inset: max(var(--gutter), calc((100% - 1180px) / 2 + var(--gutter)));
   position: sticky;
   top: var(--header-h, 84px);
   z-index: 40;
   display: flex;
   gap: 9px;
   overflow-x: auto;
-  padding: 22px var(--gutter) 10px;
+  padding: 22px var(--inset) 10px;
   margin-top: 24px;
   background: var(--cream);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
-  mask-image: linear-gradient(to right, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--inset), #000 calc(100% - var(--inset)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--inset), #000 calc(100% - var(--inset)), transparent);
 }
 .cat-chip {
   flex: 0 0 auto;
@@ -378,9 +379,9 @@ address { font-style: normal; }
    Menu category sections — alternating rhythm
    ========================================================================== */
 .menu-cat {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: var(--section-y) var(--gutter);
+  width: 100%;
+  padding-block: var(--section-y);
+  padding-inline: max(var(--gutter), calc((100% - 1180px) / 2 + var(--gutter)));
   display: grid;
   gap: 32px;
   scroll-margin-top: 180px;
@@ -484,12 +485,14 @@ address { font-style: normal; }
   background: var(--cream-soft);
   color: var(--ink);
   display: grid;
+  width: 100%;
+  padding-inline: max(var(--gutter), calc((100% - 1180px) / 2 + var(--gutter)));
   gap: 0;
   scroll-margin-top: 180px;
 }
 .poke-spotlight__media { aspect-ratio: 4 / 5; overflow: hidden; }
 .poke-spotlight__media img { width: 100%; height: 100%; object-fit: cover; }
-.poke-spotlight__body { padding: clamp(36px, 6vw, 72px) var(--gutter); max-width: 560px; }
+.poke-spotlight__body { padding-block: clamp(36px, 6vw, 72px); max-width: 560px; }
 .poke-spotlight .eyebrow { color: var(--accent-text); }
 .poke-spotlight__title { font-family: var(--font-serif); font-size: clamp(34px, 5vw, 50px); line-height: 1.05; margin-bottom: 16px; color: var(--ink); }
 .poke-spotlight__price {
@@ -500,7 +503,7 @@ address { font-style: normal; }
   font-variant-numeric: tabular-nums;
 }
 @media (min-width: 860px) {
-  .poke-spotlight { grid-template-columns: 1.1fr .9fr; }
+  .poke-spotlight { grid-template-columns: 1.1fr .9fr; gap: 48px; }
   .poke-spotlight__body { display: flex; flex-direction: column; justify-content: center; margin: 0 auto 0 0; }
 }
 
@@ -521,8 +524,11 @@ address { font-style: normal; }
 /* ==========================================================================
    Footer / localización
    ========================================================================== */
-.site-footer { padding: var(--section-y) var(--gutter) 60px; }
-.site-footer__inner { max-width: 1180px; margin: 0 auto; display: grid; gap: 36px; }
+.site-footer {
+  padding-block: var(--section-y) 60px;
+  padding-inline: max(var(--gutter), calc((100% - 1180px) / 2 + var(--gutter)));
+}
+.site-footer__inner { display: grid; gap: 36px; }
 .wordmark--footer { font-size: 28px; margin: 0; }
 .site-footer address { font-size: 14px; line-height: 1.7; color: var(--muted); margin-top: 10px; }
 .site-footer address a { text-decoration: underline; }
