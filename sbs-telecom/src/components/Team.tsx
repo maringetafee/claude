@@ -14,7 +14,7 @@ export function Team() {
               Detrás de cada instalación hay un equipo.
             </h2>
             <p className="mt-6 max-w-md text-bone-500">
-              Técnicos que suben a las azoteas de Madrid con el mismo cuidado desde hace 26 años. No es una empresa
+              Técnicos que suben a las azoteas de Madrid con el mismo cuidado desde hace más de 50 años. No es una empresa
               abstracta: es gente que conoce cada edificio en el que ha trabajado.
             </p>
 

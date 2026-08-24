@@ -15,7 +15,7 @@ export function TrustStats() {
           <Reveal>
             <div className="flex items-end gap-4">
               <span className="font-display text-[9rem] leading-[0.8] font-bold tracking-[-0.04em] text-bone-100 sm:text-[11rem] lg:text-[13rem]">
-                {company.foundedYears}
+                {company.foundedYears}+
               </span>
               <div className="mb-3 leading-tight sm:mb-6">
                 <div className="mono-label text-sm text-signal-500">Años</div>

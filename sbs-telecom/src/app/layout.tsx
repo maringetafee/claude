@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s — S.B.S Telecomunicaciones",
   },
   description:
-    "Instalación, reparación y mantenimiento de antenas colectivas, antenas parabólicas, porteros automáticos, videoporteros, videovigilancia y electricidad en Madrid. 26 años de experiencia, flota propia y urgencias los domingos.",
+    "Instalación, reparación y mantenimiento de antenas colectivas, antenas parabólicas, porteros automáticos, videoporteros, videovigilancia y electricidad en Madrid. Más de 50 años de experiencia, flota propia y urgencias los domingos.",
   keywords: [
     "telecomunicaciones Madrid",
     "antenas Madrid",
@@ -53,13 +53,13 @@ export const metadata: Metadata = {
     siteName: "S.B.S Telecomunicaciones S.L.",
     title: "S.B.S Telecomunicaciones — Antenas, porteros y telecomunicaciones en Madrid",
     description:
-      "26 años instalando y manteniendo antenas, porteros automáticos, videoporteros, videovigilancia y electricidad en la Comunidad de Madrid.",
+      "Más de 50 años instalando y manteniendo antenas, porteros automáticos, videoporteros, videovigilancia y electricidad en la Comunidad de Madrid.",
     images: [{ url: "/images/rooftop-wide.jpg", width: 1200, height: 630, alt: "Técnicos de S.B.S Telecomunicaciones trabajando en una azotea de Madrid" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "S.B.S Telecomunicaciones — Telecomunicaciones en Madrid",
-    description: "Antenas, porteros automáticos, videoporteros y electricidad. 26 años en la Comunidad de Madrid.",
+    description: "Antenas, porteros automáticos, videoporteros y electricidad. Más de 50 años en la Comunidad de Madrid.",
     images: ["/images/rooftop-wide.jpg"],
   },
   robots: { index: true, follow: true },

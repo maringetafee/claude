@@ -187,8 +187,8 @@ export function Hero() {
 
       {/* Stat — editorial protagonism, not a feature card */}
       <div data-hero-stat className="absolute bottom-10 left-6 hidden items-end gap-3 lg:flex lg:left-10">
-        <span ref={statRef} className="font-display text-6xl leading-none font-bold tracking-tight text-bone-100">
-          0
+        <span className="flex items-end font-display text-6xl leading-none font-bold tracking-tight text-bone-100">
+          <span ref={statRef}>0</span>+
         </span>
         <div className="pb-1.5 leading-tight">
           <div className="mono-label text-[10px] text-signal-500">Años</div>

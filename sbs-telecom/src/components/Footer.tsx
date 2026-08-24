@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-5 max-w-xs text-sm text-bone-500">
-              {company.foundedYears} años instalando, reparando y manteniendo antenas, porteros y sistemas de
+              Más de {company.foundedYears} años instalando, reparando y manteniendo antenas, porteros y sistemas de
               seguridad en la Comunidad de Madrid.
             </p>
           </div>
