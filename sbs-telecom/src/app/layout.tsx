@@ -54,13 +54,13 @@ export const metadata: Metadata = {
     title: "S.B.S Telecomunicaciones — Antenas, porteros y telecomunicaciones en Madrid",
     description:
       "26 años instalando y manteniendo antenas, porteros automáticos, videoporteros, videovigilancia y electricidad en la Comunidad de Madrid.",
-    images: [{ url: "/images/hero-rooftop.jpg", width: 1200, height: 630, alt: "Técnicos de S.B.S Telecomunicaciones trabajando en una azotea de Madrid" }],
+    images: [{ url: "/images/rooftop-wide.jpg", width: 1200, height: 630, alt: "Técnicos de S.B.S Telecomunicaciones trabajando en una azotea de Madrid" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "S.B.S Telecomunicaciones — Telecomunicaciones en Madrid",
     description: "Antenas, porteros automáticos, videoporteros y electricidad. 26 años en la Comunidad de Madrid.",
-    images: ["/images/hero-rooftop.jpg"],
+    images: ["/images/rooftop-wide.jpg"],
   },
   robots: { index: true, follow: true },
   icons: { icon: "/icon.png" },
@@ -70,7 +70,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: company.legalName,
-  image: `${siteUrl}/images/hero-rooftop.jpg`,
+  image: `${siteUrl}/images/rooftop-wide.jpg`,
   telephone: company.phone,
   email: company.email,
   address: {

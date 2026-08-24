@@ -1,11 +1,10 @@
-import Image from "next/image";
 import { company } from "@/lib/content";
 import { Reveal } from "./ui/Reveal";
+import { ResponsivePhoto } from "./ui/ResponsivePhoto";
 
 const fleetImages = [
   { src: "/images/flota-1.jpg", alt: "Vehículos de S.B.S Telecomunicaciones estacionados junto a las oficinas" },
   { src: "/images/flota-2.jpg", alt: "Flota de vehículos rotulados de S.B.S Telecomunicaciones" },
-  { src: "/images/flota-3.jpg", alt: "Vehículo de servicio técnico de S.B.S Telecomunicaciones" },
 ];
 
 export function Fleet() {
@@ -45,10 +44,9 @@ export function Fleet() {
                   isDuplicate ? "motion-reduce:hidden" : ""
                 }`}
               >
-                <Image
+                <ResponsivePhoto
                   src={img.src}
                   alt={isDuplicate ? "" : img.alt}
-                  fill
                   sizes="400px"
                   className="object-cover"
                   style={{ filter: "grayscale(0.35) contrast(1.1) brightness(0.85)" }}

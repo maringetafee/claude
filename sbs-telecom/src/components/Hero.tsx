@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { Button } from "./ui/Button";
+import { ResponsivePhoto } from "./ui/ResponsivePhoto";
 import { company } from "@/lib/content";
 
 export function Hero() {
@@ -159,10 +159,9 @@ export function Hero() {
             ref={photoRef}
             className="grain relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-carbon-800 lg:aspect-[3/4]"
           >
-            <Image
+            <ResponsivePhoto
               src="/images/rooftop-wide.jpg"
               alt="Técnicos de S.B.S Telecomunicaciones instalando antenas parabólicas en una azotea de Madrid"
-              fill
               priority
               sizes="(min-width: 1024px) 40vw, 90vw"
               className="object-cover"

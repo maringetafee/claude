@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { Reveal } from "./ui/Reveal";
 
@@ -80,16 +79,6 @@ export function MadridNetwork() {
               Trabajamos en toda la Comunidad de Madrid, desde el mantenimiento de una sola antena hasta la
               conservación integral de comunidades enteras.
             </p>
-            <div className="mt-8 grain relative h-40 w-32 overflow-hidden rounded-sm bg-carbon-800">
-              <Image
-                src="/images/madrid-torre.jpg"
-                alt="Antena de telecomunicaciones sobre un edificio en Madrid"
-                fill
-                sizes="130px"
-                className="object-cover"
-                style={{ filter: "grayscale(0.3) contrast(1.1) brightness(0.85)" }}
-              />
-            </div>
           </Reveal>
 
           <div className="relative">
@@ -131,8 +120,7 @@ export function MadridNetwork() {
                 );
               })}
             </svg>
-            <div className="mt-4 flex items-center justify-between font-mono text-[10px] tracking-[0.12em] text-bone-600">
-              <span>RED ESTILIZADA — REPRESENTACIÓN NO CARTOGRÁFICA</span>
+            <div className="mt-4 flex items-center justify-end font-mono text-[10px] tracking-[0.12em] text-bone-600">
               <span>MADRID</span>
             </div>
           </div>

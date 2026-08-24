@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { services } from "@/lib/content";
 import { Reveal } from "./ui/Reveal";
+import { ResponsivePhoto } from "./ui/ResponsivePhoto";
 
 export function Services() {
   const [active, setActive] = useState(0);
@@ -83,11 +83,10 @@ export function Services() {
             <div className="sticky top-28">
               <div className="grain relative aspect-[4/5] overflow-hidden rounded-sm bg-carbon-800">
                 {services.map((service, i) => (
-                  <Image
+                  <ResponsivePhoto
                     key={service.slug}
                     src={service.image}
                     alt={service.imageAlt}
-                    fill
                     sizes="(min-width: 1024px) 45vw, 90vw"
                     className={`object-cover transition-opacity duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] ${
                       i === active ? "opacity-100" : "opacity-0"
@@ -121,10 +120,9 @@ function ServiceDetail({ service, compact }: { service: (typeof services)[number
   return (
     <div className={compact ? "space-y-4" : ""}>
       <div className="grain relative aspect-[16/10] overflow-hidden rounded-sm bg-carbon-800">
-        <Image
+        <ResponsivePhoto
           src={service.image}
           alt={service.imageAlt}
-          fill
           sizes="100vw"
           className="object-cover"
           style={{ filter: "grayscale(0.4) contrast(1.1) brightness(0.75)" }}
