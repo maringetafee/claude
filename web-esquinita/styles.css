@@ -54,6 +54,19 @@
   :root { --edge: 22px; --header-h: 64px; }
 }
 
+/* on large screens a fixed 1180px container leaves a very wide, flat band of
+   empty background on both sides — widen the container as the viewport grows
+   so the page keeps filling the screen instead of floating in a narrow column */
+@media (min-width: 1440px) {
+  :root { --container: 1320px; --edge: 40px; }
+}
+@media (min-width: 1800px) {
+  :root { --container: 1520px; --edge: 48px; }
+}
+@media (min-width: 2200px) {
+  :root { --container: 1720px; --edge: 56px; }
+}
+
 /* ---------------------------------------------------------------------- */
 /* Reset                                                                   */
 /* ---------------------------------------------------------------------- */
@@ -366,6 +379,19 @@ body.menu-open { overflow: hidden; }
   margin: clamp(28px, 5vw, 48px) auto 0;
   padding: 0 var(--edge) 30px;
 }
+/* on laptop screens and up, bleed this photo to both viewport edges instead of
+   boxing it inside the container — it isn't paired with text like the local/
+   contacto photos, so nothing stops it going fully edge-to-edge like the dark
+   carta band does, and that removes the empty side margins entirely here */
+@media (min-width: 1024px) {
+  .hero-band {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 .hero-frame {
   position: relative;
   height: clamp(340px, 52vw, 620px);
@@ -411,7 +437,7 @@ body.menu-open { overflow: hidden; }
 /* El local                                                                */
 /* ---------------------------------------------------------------------- */
 
-.local { padding: clamp(52px, 9vw, 66px) 0; }
+.local { padding: clamp(56px, 9vw, 74px) 0; }
 .local-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -677,7 +703,10 @@ body.menu-open { overflow: hidden; }
 .schedule-row span:last-child { color: var(--fg-softer); }
 .contact-social { display: flex; gap: 12px; align-items: center; }
 
-.map-col { display: flex; flex-direction: column; }
+.map-col {
+  display: flex;
+  flex-direction: column;
+}
 .map-frame {
   flex: 1; min-height: 340px; border-radius: var(--radius); overflow: hidden;
   box-shadow: 0 30px 55px -28px rgba(23,20,15,.4);
@@ -685,6 +714,13 @@ body.menu-open { overflow: hidden; }
 }
 .map-frame iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
 .map-col .btn { margin-top: 14px; }
+
+/* the hero photo bleeds to both viewport edges (see the 1024px rule above) —
+   a rounded corner + shadow right at that edge would show a sliver of
+   background peeking through, so square it off and drop the shadow there */
+@media (min-width: 1024px) {
+  .hero-frame { border-radius: 0; box-shadow: none; }
+}
 
 /* ---------------------------------------------------------------------- */
 /* Footer                                                                   */
