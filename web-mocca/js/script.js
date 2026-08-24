@@ -1,28 +1,53 @@
 (() => {
   'use strict';
 
-  /* ---------- Sticky header shrink ---------- */
   const header = document.getElementById('siteHeader');
+  const catNav = document.getElementById('catNav');
+
+  /* ---------- Sticky header shrink + --header-h sync ---------- */
+  const syncHeaderHeight = () => {
+    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+  };
   const onScroll = () => {
     header.classList.toggle('is-scrolled', window.scrollY > 12);
   };
   onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  /* Keep the category nav pinned right under the header, even while its
-     height animates on scroll (avoids a gap revealing content underneath). */
-  const syncHeaderHeight = () => {
-    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-  };
   syncHeaderHeight();
+  window.addEventListener('scroll', onScroll, { passive: true });
   if ('ResizeObserver' in window) {
     new ResizeObserver(syncHeaderHeight).observe(header);
   } else {
     window.addEventListener('resize', syncHeaderHeight);
   }
 
-  /* ---------- Scroll reveal ---------- */
-  const revealEls = document.querySelectorAll('.reveal, .reveal-child, .reveal-line');
+  /* ---------- Mobile nav ---------- */
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+
+  const closeNav = () => {
+    navMobile.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
+  const openNav = () => {
+    navMobile.classList.add('is-open');
+    navToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  };
+  navToggle.addEventListener('click', () => {
+    navMobile.classList.contains('is-open') ? closeNav() : openNav();
+  });
+  navMobile.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeNav));
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNav();
+  });
+
+  /* ---------- Hero + generic reveal ---------- */
+  requestAnimationFrame(() => {
+    document.querySelector('.hero').classList.add('is-revealed');
+  });
+
+  const revealTargets = document.querySelectorAll('.reveal, .section-split');
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -31,16 +56,16 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: .15 });
-    revealEls.forEach((el) => io.observe(el));
+    }, { threshold: 0.15 });
+    revealTargets.forEach((el) => io.observe(el));
   } else {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
+    revealTargets.forEach((el) => el.classList.add('is-visible'));
   }
 
   /* ---------- Category scrollspy ---------- */
-  const catChips = document.querySelectorAll('.cat-chip');
-  const catSections = Array.from(catChips)
-    .map((chip) => document.getElementById(chip.dataset.cat))
+  const catLinks = document.querySelectorAll('.cat-nav__link');
+  const catSections = Array.from(catLinks)
+    .map((link) => document.getElementById(link.dataset.cat))
     .filter(Boolean);
 
   if ('IntersectionObserver' in window && catSections.length) {
@@ -48,7 +73,7 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
-          catChips.forEach((chip) => chip.classList.toggle('is-active', chip.dataset.cat === id));
+          catLinks.forEach((link) => link.classList.toggle('is-active', link.dataset.cat === id));
         }
       });
     }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
@@ -57,37 +82,30 @@
 
   /* ---------- Allergen filter ---------- */
   const allergenChips = document.querySelectorAll('.allergen-chip');
-  const menuItems = document.querySelectorAll('.menu-item[data-allergens], .poke-spotlight[data-allergens]');
-  const filterEmpty = document.getElementById('filterEmpty');
+  const menuItems = document.querySelectorAll('.menu-item[data-allergens], .spotlight[data-allergens]');
+  const filterNote = document.getElementById('filterNote');
   const excluded = new Set();
 
   function applyFilter() {
-    let visibleCount = 0;
+    let visibleFilterable = 0;
     let totalFilterable = 0;
     menuItems.forEach((item) => {
       const allergens = item.dataset.allergens.split(',').filter(Boolean);
       totalFilterable++;
       const hasExcluded = allergens.some((a) => excluded.has(a));
-      item.classList.toggle('is-hidden', hasExcluded);
-      if (!hasExcluded) visibleCount++;
+      item.classList.toggle('is-filtered', hasExcluded);
+      if (!hasExcluded) visibleFilterable++;
     });
-    filterEmpty.hidden = !(excluded.size > 0 && visibleCount === 0 && totalFilterable > 0);
+    filterNote.classList.toggle('is-visible', excluded.size > 0 && visibleFilterable === 0 && totalFilterable > 0);
   }
 
   allergenChips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const code = chip.dataset.code;
-      if (excluded.has(code)) {
-        excluded.delete(code);
-        chip.classList.remove('is-on');
-        chip.setAttribute('aria-pressed', 'false');
-      } else {
-        excluded.add(code);
-        chip.classList.add('is-on');
-        chip.setAttribute('aria-pressed', 'true');
-      }
+      const active = chip.getAttribute('aria-pressed') === 'true';
+      chip.setAttribute('aria-pressed', String(!active));
+      active ? excluded.delete(code) : excluded.add(code);
       applyFilter();
     });
-    chip.setAttribute('aria-pressed', 'false');
   });
 })();

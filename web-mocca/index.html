@@ -4,332 +4,528 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mocca Café · Getafe</title>
-<meta name="description" content="Mocca Café — Brunch, picoteo de cocina y poke bowls en el centro de Getafe. C. Toledo 1. Terraza amplia y sala acogedora.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' rx='10' fill='%23201712'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-style='italic' font-size='34' fill='%23C08A3E' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Mocca Café, C. Toledo 1, Getafe. Desayunos, picoteo, poke bowl, ensaladas, postres y café de la mañana a la noche. Consulta la carta completa, horarios y cómo llegar.">
+<link rel="canonical" href="https://moccacafe.netlify.app/">
+
+<meta property="og:type" content="restaurant">
+<meta property="og:site_name" content="Mocca Café">
+<meta property="og:title" content="Mocca Café · Getafe">
+<meta property="og:description" content="Desayunos, picoteo, poke bowl, ensaladas, postres y café en el centro de Getafe. C. Toledo, 1.">
+<meta property="og:image" content="https://moccacafe.netlify.app/assets/fachada.jpg">
+<meta property="og:url" content="https://moccacafe.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Crect width='64' height='64' fill='%23241A13'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23E15A2A' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,500;0,600;1,500&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=9">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Mocca Café",
+  "image": "https://moccacafe.netlify.app/assets/fachada.jpg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. Toledo, 1",
+    "postalCode": "28901",
+    "addressLocality": "Getafe",
+    "addressRegion": "Madrid",
+    "addressCountry": "ES"
+  },
+  "telephone": "+34916181189",
+  "url": "https://moccacafe.netlify.app/",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "23:59" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "01:30" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "10:00", "closes": "01:30" }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.2",
+    "reviewCount": "800"
+  },
+  "sameAs": [
+    "https://www.instagram.com/lamoccacafe/",
+    "https://www.facebook.com/lamoccacafe/"
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Ir al contenido</a>
 
 <header class="site-header" id="siteHeader">
-  <div class="site-header__inner">
+  <div class="container site-header__inner">
     <a href="#top" class="wordmark">Mocca <span>Café</span></a>
-    <nav class="quick-nav" aria-label="Navegación principal">
-      <a href="#carta" class="quick-nav__link">Carta</a>
-      <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="quick-nav__link">Cómo llegar</a>
-      <a href="tel:+34916181189" class="btn btn--ghost-dark">Llamar</a>
+
+    <nav class="nav-desktop" aria-label="Navegación principal">
+      <div class="nav-desktop__links">
+        <a href="#concepto" class="nav-link">Concepto</a>
+        <a href="#carta" class="nav-link">Carta</a>
+        <a href="#localizacion" class="nav-link">Localización</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn--outline-dark">Cómo llegar</a>
+        <a href="tel:+34916181189" class="btn btn--solid">Llamar</a>
+      </div>
     </nav>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMobile">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Navegación móvil">
+  <div class="nav-mobile__links">
+    <a href="#concepto">Concepto</a>
+    <a href="#carta">Carta</a>
+    <a href="#localizacion">Localización</a>
+    <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener">Cómo llegar</a>
+  </div>
+  <div class="nav-mobile__meta">
+    <a href="tel:+34916181189">916 18 11 89</a>
+    <span>C. Toledo, 1 · Getafe</span>
+  </div>
+</nav>
 
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <section class="hero grain" id="top" aria-label="Portada">
-    <div class="hero__inner">
-      <div class="hero__copy">
-        <p class="eyebrow reveal-child">Mocca Café · est. Getafe</p>
+  <section class="hero" id="top" aria-label="Portada">
+    <div class="hero__media">
+      <picture>
+        <source srcset="assets/fachada.webp?v=2" type="image/webp">
+        <img src="assets/fachada.fallback.jpg?v=2" alt="Fachada y terraza de Mocca Café en C. Toledo, Getafe" width="1600" height="1600" fetchpriority="high">
+      </picture>
+    </div>
+    <div class="hero__scrim"></div>
+    <div class="container hero__content">
+      <div>
+        <p class="hero__eyebrow">Getafe · C. Toledo, 1</p>
         <h1 class="hero__title">
-          <span class="reveal-line"><span class="reveal-line__inner">Mesa puesta</span></span>
-          <span class="reveal-line"><span class="reveal-line__inner"><em>desde primera hora</em></span></span>
+          <span class="line"><span>Mocca</span></span>
+          <span class="line"><span>Café</span></span>
         </h1>
-        <p class="hero__desc reveal-child">Brunch, picoteo de cocina y poke bowls en el centro de Getafe. Terraza amplia y sala acogedora, C. Toledo 1.</p>
-        <div class="hero__actions reveal-child">
-          <a href="#carta" class="btn btn--solid">Ver la carta</a>
-          <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn--ghost-dark">Cómo llegar</a>
-        </div>
-        <div class="hero__rating reveal-child">
-          <span class="stars" aria-hidden="true">★★★★☆</span>
-          <span>4,2 · +800 opiniones en Google</span>
-        </div>
+        <p class="hero__desc">De la primera taza a la última mesa. Desayunos, picoteo, poke bowl y postres caseros en el centro de Getafe.</p>
       </div>
-      <div class="hero__photo photo-frame reveal-child">
-        <picture>
-          <source srcset="assets/fachada.webp" type="image/webp">
-          <img src="assets/fachada.fallback.jpg" alt="Entrada de Mocca Café" width="447" height="447" fetchpriority="high">
-        </picture>
+      <div class="hero__side">
+        <div class="hero__actions">
+          <a href="#carta" class="btn btn--solid">Ver la carta</a>
+          <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn--outline-light">Cómo llegar</a>
+        </div>
+        <p class="hero__rating"><span class="stars" aria-hidden="true">★★★★☆</span> 4,2 · +800 opiniones en Google</p>
       </div>
     </div>
   </section>
 
-  <!-- ============ CARTA ============ -->
-  <section class="carta" id="carta" aria-label="La carta">
-    <div class="carta__intro">
-      <p class="eyebrow reveal">La carta</p>
-      <h2 class="section-title reveal">Todo lo que se puede pedir en Mocca</h2>
-    </div>
-
-    <nav class="cat-nav scr" id="catNav" aria-label="Categorías de la carta">
-      <a href="#desayunos" class="cat-chip" data-cat="desayunos"><span class="cat-chip__icon">🥐</span>Desayunos</a>
-      <a href="#picoteo" class="cat-chip" data-cat="picoteo"><span class="cat-chip__icon">🍤</span>Picoteo</a>
-      <a href="#poke" class="cat-chip" data-cat="poke"><span class="cat-chip__icon">🥗</span>Poke Bowl</a>
-      <a href="#ensaladas" class="cat-chip" data-cat="ensaladas"><span class="cat-chip__icon">🥬</span>Ensaladas</a>
-      <a href="#postres" class="cat-chip" data-cat="postres"><span class="cat-chip__icon">🍰</span>Postres</a>
-      <a href="#bebidas" class="cat-chip" data-cat="bebidas"><span class="cat-chip__icon">☕</span>Bebidas</a>
-    </nav>
-
-    <div class="allergen-bar">
-      <div class="allergen-bar__label">Evitar alérgenos</div>
-      <div class="allergen-bar__chips scr" id="allergenChips">
-        <button type="button" class="allergen-chip" data-code="leche"><span class="dot"></span>Leche</button>
-        <button type="button" class="allergen-chip" data-code="huevo"><span class="dot"></span>Huevo</button>
-        <button type="button" class="allergen-chip" data-code="trigo"><span class="dot"></span>Gluten</button>
-        <button type="button" class="allergen-chip" data-code="pescado"><span class="dot"></span>Pescado</button>
-        <button type="button" class="allergen-chip" data-code="crustaceos"><span class="dot"></span>Crustáceos</button>
-        <button type="button" class="allergen-chip" data-code="soja"><span class="dot"></span>Soja</button>
-        <button type="button" class="allergen-chip" data-code="sesamo"><span class="dot"></span>Sésamo</button>
-        <button type="button" class="allergen-chip" data-code="mostaza"><span class="dot"></span>Mostaza</button>
-        <button type="button" class="allergen-chip" data-code="frutossecos"><span class="dot"></span>Frutos secos</button>
-        <button type="button" class="allergen-chip" data-code="moluscos"><span class="dot"></span>Moluscos</button>
+  <!-- ============ CONCEPTO ============ -->
+  <section class="intro" id="concepto" aria-label="Mocca, de la mañana a la noche">
+    <div class="container intro__grid">
+      <p class="intro__statement reveal">De la mañana a la noche, Mocca acompaña el día entero: café y bollería al abrir, picoteo y platos al mediodía, sobremesa larga por la tarde.</p>
+      <div>
+        <p class="intro__body reveal">En C. Toledo 1, con terraza amplia y sala acogedora, Mocca abre desde primera hora entre semana y alarga el horario los fines de semana, hasta la 1:30.</p>
+        <p class="intro__body reveal">Una carta pensada para pedir poco o pedir mucho: barritas y montados por la mañana, croquetas y tartar para picar, poke bowl y ensaladas frescas, y una mesa de postres caseros que no falta cada día.</p>
       </div>
     </div>
 
-    <!-- ---- DESAYUNOS ---- -->
-    <section class="menu-cat menu-cat--light" id="desayunos" aria-labelledby="desayunos-title">
-      <div class="menu-cat__media reveal">
+    <div class="container daypart-rail reveal-group">
+      <div class="daypart reveal" style="--i:0">
+        <p class="daypart__time">Mañana</p>
+        <p class="daypart__label">Desayunos</p>
+        <p class="daypart__detail">Barritas, montados y churros recién hechos.</p>
+      </div>
+      <div class="daypart reveal" style="--i:1">
+        <p class="daypart__time">Mediodía</p>
+        <p class="daypart__label">Picoteo</p>
+        <p class="daypart__detail">Croquetas caseras, tartar, poke bowl y ensaladas.</p>
+      </div>
+      <div class="daypart reveal" style="--i:2">
+        <p class="daypart__time">Tarde</p>
+        <p class="daypart__label">Postres</p>
+        <p class="daypart__detail">Coulant, tarta de queso y helados, hechos cada día.</p>
+      </div>
+      <div class="daypart reveal" style="--i:3">
+        <p class="daypart__time">Noche</p>
+        <p class="daypart__label">Café y sobremesa</p>
+        <p class="daypart__detail">Abierto hasta tarde los fines de semana, hasta la 1:30.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARTA: intro + navegación de categorías + alérgenos ============ -->
+  <section class="carta-intro" id="carta" aria-label="La carta">
+    <div class="container carta-intro__head">
+      <h2 class="section-title reveal">Todo lo que se puede pedir en Mocca</h2>
+      <p class="carta-intro__meta reveal">Seis categorías, de la barra a la mesa. Los alérgenos indicados junto a cada plato son los que declara el propio local.</p>
+    </div>
+
+    <div class="container allergen-bar">
+      <div class="allergen-bar__row">
+        <span class="allergen-bar__label">Evitar alérgenos</span>
+        <div class="allergen-chips" id="allergenChips">
+          <button type="button" class="allergen-chip" data-code="leche" aria-pressed="false">Leche</button>
+          <button type="button" class="allergen-chip" data-code="huevo" aria-pressed="false">Huevo</button>
+          <button type="button" class="allergen-chip" data-code="gluten" aria-pressed="false">Gluten</button>
+          <button type="button" class="allergen-chip" data-code="pescado" aria-pressed="false">Pescado</button>
+          <button type="button" class="allergen-chip" data-code="crustaceos" aria-pressed="false">Crustáceos</button>
+          <button type="button" class="allergen-chip" data-code="soja" aria-pressed="false">Soja</button>
+          <button type="button" class="allergen-chip" data-code="sesamo" aria-pressed="false">Sésamo</button>
+          <button type="button" class="allergen-chip" data-code="mostaza" aria-pressed="false">Mostaza</button>
+          <button type="button" class="allergen-chip" data-code="frutossecos" aria-pressed="false">Frutos secos</button>
+          <button type="button" class="allergen-chip" data-code="moluscos" aria-pressed="false">Moluscos</button>
+        </div>
+      </div>
+      <p class="carta-filter-note" id="filterNote">Ningún plato cumple ese filtro. Prueba a quitar alguno.</p>
+    </div>
+  </section>
+
+  <div class="carta-wrap">
+    <div class="cat-nav" id="catNav">
+      <div class="container cat-nav__track" aria-label="Categorías de la carta">
+        <a href="#desayunos" class="cat-nav__link" data-cat="desayunos">Desayunos</a>
+        <a href="#picoteo" class="cat-nav__link" data-cat="picoteo">Picoteo</a>
+        <a href="#poke" class="cat-nav__link" data-cat="poke">Poke Bowl</a>
+        <a href="#ensaladas" class="cat-nav__link" data-cat="ensaladas">Ensaladas</a>
+        <a href="#postres" class="cat-nav__link" data-cat="postres">Postres</a>
+        <a href="#bebidas" class="cat-nav__link" data-cat="bebidas">Bebidas</a>
+      </div>
+    </div>
+
+  <!-- ============ DESAYUNOS ============ -->
+  <section class="menu-section menu-section--light" id="desayunos" aria-labelledby="desayunos-title">
+    <div class="section-split">
+      <div class="section-split__media">
         <picture>
           <source srcset="assets/bagel-cafe.webp" type="image/webp">
-          <img src="assets/bagel-cafe.fallback.jpg" alt="Desayunos de Mocca Café" width="811" height="845" loading="lazy">
+          <img src="assets/bagel-cafe.fallback.jpg" alt="Montado y café de la carta de desayunos de Mocca Café" width="811" height="845" loading="lazy">
         </picture>
       </div>
-      <div class="menu-cat__body">
-        <p class="eyebrow reveal">Barritas, montados y churros</p>
-        <h3 class="menu-cat__title reveal" id="desayunos-title">Desayunos</h3>
-        <ul class="menu-list reveal">
+      <div class="section-split__body">
+        <p class="eyebrow reveal">Mañana</p>
+        <h3 class="section-title reveal" id="desayunos-title" style="font-size:clamp(30px,3.6vw,44px)">Desayunos</h3>
+        <ul class="menu-list">
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Barrita con tomate y aceite</span><span class="menu-item__price">3,10€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Barrita con tomate y aceite</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span></div>
+            </div>
+            <span class="menu-item__price">3,10€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Barrita con mermelada y mantequilla</span><span class="menu-item__price">3,10€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Barrita con mermelada y mantequilla</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span></div>
+            </div>
+            <span class="menu-item__price">3,10€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Barrita con tomate, aceite y jamón ibérico</span><span class="menu-item__price">4,30€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Barrita con tomate, aceite y jamón ibérico</span>
+            </div>
+            <span class="menu-item__price">4,30€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Pan de cereales con tomate y aceite</span><span class="menu-item__price">3,20€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Pan de cereales con tomate y aceite</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span></div>
+            </div>
+            <span class="menu-item__price">3,20€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Pincho de tortilla de patatas con pan</span><span class="menu-item__price">4,90€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Pincho de tortilla de patatas con pan</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span></div>
+            </div>
+            <span class="menu-item__price">4,90€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Montado de salmón, aguacate y queso crema<span class="tag">Novedad</span></span><span class="menu-item__price">5,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Montado de salmón, aguacate y queso crema<span class="menu-item__tag">Novedad</span></span>
+            </div>
+            <span class="menu-item__price">5,50€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Montado de bacon y queso cheddar</span><span class="menu-item__price">3,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Montado de bacon y queso cheddar</span>
+            </div>
+            <span class="menu-item__price">3,50€</span>
           </li>
           <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Churros (3 unidades)</span><span class="menu-item__price">2,90€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge badge--nodata">Sin datos</span></div>
+            <div class="menu-item__main">
+              <span class="menu-item__name">Churros (3 unidades)</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span></div>
+            </div>
+            <span class="menu-item__price">2,90€</span>
           </li>
         </ul>
       </div>
-    </section>
-
-    <!-- ---- PICOTEO ---- -->
-    <section class="menu-cat menu-cat--dark menu-cat--reverse" id="picoteo" aria-labelledby="picoteo-title">
-      <div class="menu-cat__media reveal">
-        <picture>
-          <source srcset="assets/tartar.webp" type="image/webp">
-          <img src="assets/tartar.fallback.jpg" alt="Picoteo de Mocca Café" width="639" height="814" loading="lazy">
-        </picture>
-      </div>
-      <div class="menu-cat__body">
-        <p class="eyebrow reveal">Croquetas, tartar y gambones</p>
-        <h3 class="menu-cat__title reveal" id="picoteo-title">Picoteo</h3>
-        <ul class="menu-list reveal">
-          <li class="menu-item" data-allergens="leche,huevo,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Croquetas de jamón ibérico</span><span class="menu-item__price">10,90€</span></div>
-            <p class="menu-item__desc">Caseras, con fina bechamel y panko.</p>
-            <div class="menu-item__badges"><span class="badge">Leche</span><span class="badge">Huevo</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="crustaceos,leche,huevo,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Croquetas de chipirones</span><span class="menu-item__price">10,90€</span></div>
-            <p class="menu-item__desc">Caseras, con chipirones frescos.</p>
-            <div class="menu-item__badges"><span class="badge">Crustáceos</span><span class="badge">Leche</span><span class="badge">Huevo</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="pescado">
-            <div class="menu-item__head"><span class="menu-item__name">Tiradito de lubina salvaje</span><span class="menu-item__price">13,50€</span></div>
-            <p class="menu-item__desc">Marinada con leche de tigre de mango y cítricos.</p>
-            <div class="menu-item__badges"><span class="badge">Pescado</span></div>
-          </li>
-          <li class="menu-item" data-allergens="pescado,mostaza,leche">
-            <div class="menu-item__head"><span class="menu-item__name">Carpaccio de atún rojo</span><span class="menu-item__price">12,90€</span></div>
-            <p class="menu-item__desc">Vinagreta de alcaparras, rúcula y grana padano.</p>
-            <div class="menu-item__badges"><span class="badge">Pescado</span><span class="badge">Mostaza</span><span class="badge">Leche</span></div>
-          </li>
-          <li class="menu-item" data-allergens="soja,pescado,sesamo">
-            <div class="menu-item__head"><span class="menu-item__name">Tartar Mocca</span><span class="menu-item__price">18,00€</span></div>
-            <p class="menu-item__desc">Atún o salmón, salsa japo, aguacate y alga wakame.</p>
-            <div class="menu-item__badges"><span class="badge">Soja</span><span class="badge">Pescado</span><span class="badge">Sésamo</span></div>
-          </li>
-          <li class="menu-item" data-allergens="crustaceos,soja,sesamo,frutossecos,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Tulipas crujientes de gambón</span><span class="menu-item__price">11,50€</span></div>
-            <p class="menu-item__desc">En wantón, con verduritas y salsa tokio.</p>
-            <div class="menu-item__badges"><span class="badge">Crustáceos</span><span class="badge">Soja</span><span class="badge">Sésamo</span><span class="badge">Frutos secos</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="crustaceos">
-            <div class="menu-item__head"><span class="menu-item__name">Gambones al ajillo</span><span class="menu-item__price">13,90€</span></div>
-            <p class="menu-item__desc">Norteños, ajillo tradicional y guindilla.</p>
-            <div class="menu-item__badges"><span class="badge">Crustáceos</span></div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ---- POKE BOWL (spotlight, single dish) ---- -->
-    <section class="poke-spotlight" id="poke" aria-labelledby="poke-title" data-allergens="soja,pescado,sesamo">
-      <div class="poke-spotlight__media reveal">
-        <picture>
-          <source srcset="assets/poke.webp" type="image/webp">
-          <img src="assets/poke.fallback.jpg" alt="Poke Bowl Hawaiano Mocca Style" width="669" height="839" loading="lazy">
-        </picture>
-      </div>
-      <div class="poke-spotlight__body reveal">
-        <p class="eyebrow">Poke Bowl</p>
-        <h3 class="poke-spotlight__title" id="poke-title">Hawaiano Mocca Style</h3>
-        <p class="menu-item__desc menu-item__desc--lg">Base de arroz de sushi o quinoa + salmón, atún marinado o pollo teriyaki. Con aguacate, zanahoria, pepino, rabanitos, remolacha y wakame.</p>
-        <div class="menu-item__badges"><span class="badge">Soja</span><span class="badge">Pescado</span><span class="badge">Sésamo</span></div>
-        <p class="menu-item__note">Los alérgenos pueden variar según la proteína elegida</p>
-        <p class="poke-spotlight__price">14,90€</p>
-      </div>
-    </section>
-
-    <!-- ---- ENSALADAS ---- -->
-    <section class="menu-cat menu-cat--typographic menu-cat--dark" id="ensaladas" aria-labelledby="ensaladas-title">
-      <div class="menu-cat__body">
-        <p class="eyebrow reveal">Frescas y de temporada</p>
-        <h3 class="menu-cat__title reveal" id="ensaladas-title">Ensaladas</h3>
-        <ul class="menu-list menu-list--cols reveal">
-          <li class="menu-item" data-allergens="soja,pescado,huevo">
-            <div class="menu-item__head"><span class="menu-item__name">Ensaladilla rusa</span><span class="menu-item__price">11,90€</span></div>
-            <p class="menu-item__desc">Con mix de picos.</p>
-            <div class="menu-item__badges"><span class="badge">Soja</span><span class="badge">Pescado</span><span class="badge">Huevo</span></div>
-          </li>
-          <li class="menu-item" data-allergens="mostaza,frutossecos,leche">
-            <div class="menu-item__head"><span class="menu-item__name">Ensalada de queso de cabra</span><span class="menu-item__price">12,90€</span></div>
-            <p class="menu-item__desc">Mezclum, cherrys asados, mostaza y miel, frutos secos.</p>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Mostaza</span><span class="badge">Frutos secos</span><span class="badge">Leche</span></div>
-          </li>
-          <li class="menu-item">
-            <div class="menu-item__head"><span class="menu-item__name">Ensalada primavera</span><span class="menu-item__price">12,90€</span></div>
-            <p class="menu-item__desc">Mezclum, jamón ibérico, pera marinada y queso manchego.</p>
-            <div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div>
-          </li>
-          <li class="menu-item" data-allergens="frutossecos,leche">
-            <div class="menu-item__head"><span class="menu-item__name">Ensalada de calabacín al pesto</span><span class="menu-item__price">12,90€</span></div>
-            <p class="menu-item__desc">Queso feta, anacardos, cherrys asados y pesto genovés.</p>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Frutos secos</span><span class="badge">Leche</span></div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ---- POSTRES ---- -->
-    <section class="menu-cat menu-cat--postres" id="postres" aria-labelledby="postres-title">
-      <div class="menu-cat__body">
-        <p class="eyebrow reveal">Caseros del día</p>
-        <h3 class="menu-cat__title reveal" id="postres-title">Postres</h3>
-        <ul class="menu-list menu-list--postres reveal">
-          <li class="menu-item" data-allergens="leche,huevo,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Coulant casero de chocolate</span><span class="menu-item__price">6,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Leche</span><span class="badge">Huevo</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="leche,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Strudel casero de manzana</span><span class="menu-item__price">6,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Leche</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="leche,huevo,trigo">
-            <div class="menu-item__head"><span class="menu-item__name">Tarta tres leches casera</span><span class="menu-item__price">6,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Leche</span><span class="badge">Huevo</span><span class="badge">Gluten</span></div>
-          </li>
-          <li class="menu-item" data-allergens="leche,huevo">
-            <div class="menu-item__head"><span class="menu-item__name">Tarta de queso con toque blue</span><span class="menu-item__price">6,50€</span></div>
-            <p class="menu-item__desc">Con mermelada de fresas casera.</p>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Leche</span><span class="badge">Huevo</span></div>
-          </li>
-          <li class="menu-item" data-allergens="leche">
-            <div class="menu-item__head"><span class="menu-item__name">Barca de helados napolitana</span><span class="menu-item__price">6,50€</span></div>
-            <div class="menu-item__badges"><span class="badge badge--veg">Vegetariano</span><span class="badge">Leche</span></div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ---- BEBIDAS ---- -->
-    <section class="menu-cat menu-cat--dark menu-cat--drinks" id="bebidas" aria-labelledby="bebidas-title">
-      <div class="menu-cat__media menu-cat__media--pair reveal">
-        <picture>
-          <source srcset="assets/batido-oreo.webp" type="image/webp">
-          <img src="assets/batido-oreo.fallback.jpg" alt="Batido Oreo de Mocca Café" width="757" height="835" loading="lazy">
-        </picture>
-        <picture>
-          <source srcset="assets/batido-choco.webp" type="image/webp">
-          <img src="assets/batido-choco.fallback.jpg" alt="Bebidas de Mocca Café" width="759" height="818" loading="lazy">
-        </picture>
-      </div>
-      <div class="menu-cat__body">
-        <p class="eyebrow reveal">Cafés, batidos e infusiones</p>
-        <h3 class="menu-cat__title reveal" id="bebidas-title">Bebidas</h3>
-        <ul class="menu-list menu-list--cols reveal">
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Espresso</span><span class="menu-item__price">1,80€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Café con leche</span><span class="menu-item__price">1,80€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Cappuccino</span><span class="menu-item__price">2,80€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Mocca</span><span class="menu-item__price">2,90€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Frappé Mocca</span><span class="menu-item__price">4,60€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Batido Oreo</span><span class="menu-item__price">6,00€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-          <li class="menu-item"><div class="menu-item__head"><span class="menu-item__name">Infusiones orgánicas</span><span class="menu-item__price">1,80€</span></div><div class="menu-item__badges"><span class="badge badge--nodata">Sin datos</span></div></li>
-        </ul>
-      </div>
-    </section>
-
-    <p class="filter-empty" id="filterEmpty" hidden>Ningún plato cumple ese filtro. Prueba a quitar alguno.</p>
+    </div>
   </section>
 
+  <!-- ============ PICOTEO ============ -->
+  <section class="menu-section menu-section--dark section-picoteo" id="picoteo" aria-labelledby="picoteo-title">
+    <div class="section-picoteo__media">
+      <picture>
+        <source srcset="assets/tartar.webp" type="image/webp">
+        <img src="assets/tartar.fallback.jpg" alt="Tartar de la carta de picoteo de Mocca Café" width="639" height="814" loading="lazy">
+      </picture>
+    </div>
+    <div class="section-picoteo__scrim"></div>
+    <div class="container section-picoteo__body">
+      <p class="eyebrow reveal">Mediodía</p>
+      <h3 class="section-title reveal" id="picoteo-title">Picoteo</h3>
+      <ul class="menu-list">
+        <li class="menu-item" data-allergens="leche,huevo,gluten">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Croquetas de jamón ibérico</span>
+            <p class="menu-item__desc">Caseras, con fina bechamel y panko.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Leche</span><span class="a-tag">Huevo</span><span class="a-tag">Gluten</span></div>
+          </div>
+          <span class="menu-item__price">10,90€</span>
+        </li>
+        <li class="menu-item" data-allergens="crustaceos,leche,huevo,gluten">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Croquetas de chipirones</span>
+            <p class="menu-item__desc">Caseras, con chipirones frescos.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Crustáceos</span><span class="a-tag">Leche</span><span class="a-tag">Huevo</span><span class="a-tag">Gluten</span></div>
+          </div>
+          <span class="menu-item__price">10,90€</span>
+        </li>
+        <li class="menu-item" data-allergens="pescado">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Tiradito de lubina salvaje</span>
+            <p class="menu-item__desc">Marinada con leche de tigre de mango y cítricos.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Pescado</span></div>
+          </div>
+          <span class="menu-item__price">13,50€</span>
+        </li>
+        <li class="menu-item" data-allergens="pescado,mostaza,leche">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Carpaccio de atún rojo</span>
+            <p class="menu-item__desc">Vinagreta de alcaparras, rúcula y grana padano.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Pescado</span><span class="a-tag">Mostaza</span><span class="a-tag">Leche</span></div>
+          </div>
+          <span class="menu-item__price">12,90€</span>
+        </li>
+        <li class="menu-item" data-allergens="soja,pescado,sesamo">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Tartar Mocca</span>
+            <p class="menu-item__desc">Atún o salmón, salsa japo, aguacate y alga wakame.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Soja</span><span class="a-tag">Pescado</span><span class="a-tag">Sésamo</span></div>
+          </div>
+          <span class="menu-item__price">18,00€</span>
+        </li>
+        <li class="menu-item" data-allergens="crustaceos,soja,sesamo,frutossecos,gluten">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Tulipas crujientes de gambón</span>
+            <p class="menu-item__desc">En wantón, con verduritas y salsa tokio.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Crustáceos</span><span class="a-tag">Soja</span><span class="a-tag">Sésamo</span><span class="a-tag">Frutos secos</span><span class="a-tag">Gluten</span></div>
+          </div>
+          <span class="menu-item__price">11,50€</span>
+        </li>
+        <li class="menu-item" data-allergens="crustaceos">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Gambones al ajillo</span>
+            <p class="menu-item__desc">Norteños, ajillo tradicional y guindilla.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Crustáceos</span></div>
+          </div>
+          <span class="menu-item__price">13,90€</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ POKE BOWL (spotlight) ============ -->
+  <section class="spotlight" id="poke" aria-labelledby="poke-title" data-allergens="soja,pescado,sesamo">
+    <div class="spotlight__media">
+      <picture>
+        <source srcset="assets/poke.webp" type="image/webp">
+        <img src="assets/poke.fallback.jpg" alt="Poke Bowl Hawaiano Mocca Style" width="669" height="839" loading="lazy">
+      </picture>
+    </div>
+    <div class="spotlight__body">
+      <p class="eyebrow reveal">Poke Bowl</p>
+      <h3 class="spotlight__title reveal" id="poke-title">Hawaiano Mocca Style</h3>
+      <p class="spotlight__desc reveal">Base de arroz de sushi o quinoa, con salmón, atún marinado o pollo teriyaki. Aguacate, zanahoria, pepino, rabanitos, remolacha y alga wakame.</p>
+      <div class="spotlight__allergens"><span class="a-tag">Soja</span><span class="a-tag">Pescado</span><span class="a-tag">Sésamo</span></div>
+      <p class="spotlight__note">Los alérgenos pueden variar según la proteína elegida.</p>
+      <p class="spotlight__price">14,90€</p>
+    </div>
+  </section>
+
+  <!-- ============ ENSALADAS (tipográfico, sin foto) ============ -->
+  <section class="menu-section menu-section--light section-type" id="ensaladas" aria-labelledby="ensaladas-title">
+    <div class="container">
+      <div class="section-type__head">
+        <p class="eyebrow reveal">Frescas y de temporada</p>
+        <h3 class="section-title reveal" id="ensaladas-title">Ensaladas</h3>
+      </div>
+      <ul class="menu-list menu-list--split">
+        <li class="menu-item" data-allergens="soja,pescado,huevo">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Ensaladilla rusa</span>
+            <p class="menu-item__desc">Con mix de picos.</p>
+            <div class="menu-item__allergens"><span class="a-tag">Soja</span><span class="a-tag">Pescado</span><span class="a-tag">Huevo</span></div>
+          </div>
+          <span class="menu-item__price">11,90€</span>
+        </li>
+        <li class="menu-item" data-allergens="mostaza,frutossecos,leche">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Ensalada de queso de cabra</span>
+            <p class="menu-item__desc">Mezclum, cherrys asados, mostaza y miel, frutos secos.</p>
+            <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Mostaza</span><span class="a-tag">Frutos secos</span><span class="a-tag">Leche</span></div>
+          </div>
+          <span class="menu-item__price">12,90€</span>
+        </li>
+        <li class="menu-item">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Ensalada primavera</span>
+            <p class="menu-item__desc">Mezclum, jamón ibérico, pera marinada y queso manchego.</p>
+          </div>
+          <span class="menu-item__price">12,90€</span>
+        </li>
+        <li class="menu-item" data-allergens="frutossecos,leche">
+          <div class="menu-item__main">
+            <span class="menu-item__name">Ensalada de calabacín al pesto</span>
+            <p class="menu-item__desc">Queso feta, anacardos, cherrys asados y pesto genovés.</p>
+            <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Frutos secos</span><span class="a-tag">Leche</span></div>
+          </div>
+          <span class="menu-item__price">12,90€</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ POSTRES ============ -->
+  <section class="section-postres" id="postres" aria-labelledby="postres-title">
+    <div class="container section-postres__grid">
+      <div class="section-postres__media reveal">
+        <picture>
+          <source srcset="assets/batido-oreo.webp" type="image/webp">
+          <img src="assets/batido-oreo.fallback.jpg" alt="Postre casero de la carta de Mocca Café" width="757" height="835" loading="lazy">
+        </picture>
+      </div>
+      <div>
+        <p class="eyebrow reveal">Tarde · caseros del día</p>
+        <h3 class="section-title reveal" id="postres-title" style="font-size:clamp(30px,3.6vw,44px)">Postres</h3>
+        <ul class="menu-list">
+          <li class="menu-item" data-allergens="leche,huevo,gluten">
+            <div class="menu-item__main">
+              <span class="menu-item__name">Coulant casero de chocolate</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Leche</span><span class="a-tag">Huevo</span><span class="a-tag">Gluten</span></div>
+            </div>
+            <span class="menu-item__price">6,50€</span>
+          </li>
+          <li class="menu-item" data-allergens="leche,gluten">
+            <div class="menu-item__main">
+              <span class="menu-item__name">Strudel casero de manzana</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Leche</span><span class="a-tag">Gluten</span></div>
+            </div>
+            <span class="menu-item__price">6,50€</span>
+          </li>
+          <li class="menu-item" data-allergens="leche,huevo,gluten">
+            <div class="menu-item__main">
+              <span class="menu-item__name">Tarta tres leches casera</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Leche</span><span class="a-tag">Huevo</span><span class="a-tag">Gluten</span></div>
+            </div>
+            <span class="menu-item__price">6,50€</span>
+          </li>
+          <li class="menu-item" data-allergens="leche,huevo">
+            <div class="menu-item__main">
+              <span class="menu-item__name">Tarta de queso con toque blue</span>
+              <p class="menu-item__desc">Con mermelada de fresas casera.</p>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Leche</span><span class="a-tag">Huevo</span></div>
+            </div>
+            <span class="menu-item__price">6,50€</span>
+          </li>
+          <li class="menu-item" data-allergens="leche">
+            <div class="menu-item__main">
+              <span class="menu-item__name">Barca de helados napolitana</span>
+              <div class="menu-item__allergens"><span class="a-tag a-tag--veg">Vegetariano</span><span class="a-tag">Leche</span></div>
+            </div>
+            <span class="menu-item__price">6,50€</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEBIDAS ============ -->
+  <section class="section-bebidas" id="bebidas" aria-labelledby="bebidas-title">
+    <div class="container section-bebidas__grid">
+      <div>
+        <p class="eyebrow reveal">Noche · cafés, batidos e infusiones</p>
+        <h3 class="section-title reveal" id="bebidas-title" style="font-size:clamp(30px,3.6vw,44px)">Bebidas</h3>
+        <ul class="menu-list menu-list--split">
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Espresso</span></div><span class="menu-item__price">1,80€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Café con leche</span></div><span class="menu-item__price">1,80€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Cappuccino</span></div><span class="menu-item__price">2,80€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Mocca</span></div><span class="menu-item__price">2,90€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Frappé Mocca</span></div><span class="menu-item__price">4,60€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Batido Oreo</span></div><span class="menu-item__price">6,00€</span></li>
+          <li class="menu-item"><div class="menu-item__main"><span class="menu-item__name">Infusiones orgánicas</span></div><span class="menu-item__price">1,80€</span></li>
+        </ul>
+      </div>
+      <div class="section-bebidas__media reveal">
+        <picture>
+          <source srcset="assets/batido-choco.webp" type="image/webp">
+          <img src="assets/batido-choco.fallback.jpg" alt="Batido de la carta de bebidas de Mocca Café" width="759" height="818" loading="lazy">
+        </picture>
+      </div>
+    </div>
+  </section>
+  </div>
+
   <!-- ============ RESEÑAS ============ -->
-  <section class="reviews grain reveal" aria-label="Reseñas de Google">
-    <div class="stars stars--lg" aria-hidden="true">★★★★☆</div>
-    <p class="reviews__score">4,2 <span>/ 5</span></p>
-    <p class="reviews__count">+800 opiniones en Google</p>
-    <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn--solid">Déjanos tu reseña</a>
+  <section class="reviews" aria-label="Reseñas de Google">
+    <div class="container">
+      <p class="reviews__stars reveal" aria-hidden="true">★★★★☆</p>
+      <p class="reviews__score reveal">4,2<span> / 5</span></p>
+      <p class="reviews__count reveal">+800 opiniones en Google</p>
+      <div class="reviews__cta reveal">
+        <a href="https://www.google.com/maps/place/Mocca+Caf%C3%A9/@40.3049963,-3.732065,15z/data=!4m2!3m1!1s0x0:0x975554c4f5bad21a" target="_blank" rel="noopener" class="btn btn--outline-dark">Déjanos tu reseña</a>
+      </div>
+    </div>
   </section>
 
   <!-- ============ LOCALIZACIÓN / CONTACTO ============ -->
-  <footer class="site-footer reveal" id="localizacion">
-    <div class="site-footer__inner">
+  <footer class="site-footer" id="localizacion">
+    <div class="site-footer__grid">
       <div class="site-footer__info">
-        <p class="wordmark wordmark--footer">Mocca <span>Café</span></p>
-        <address>
-          C. Toledo, 1 · 28901 Getafe<br>
+        <p class="site-footer__wordmark">Mocca <span>Café</span></p>
+        <address class="site-footer__address">
+          C. Toledo, 1 · 28901 Getafe, Madrid<br>
           <a href="tel:+34916181189">916 18 11 89</a>
         </address>
+        <dl class="hours">
+          <div><dt>Lunes a viernes</dt><dd>7:00 – 00:00</dd></div>
+          <div><dt>Sábado</dt><dd>10:00 – 1:30</dd></div>
+          <div><dt>Domingo</dt><dd>10:00 – 1:30</dd></div>
+        </dl>
         <div class="site-footer__social">
           <a href="https://www.instagram.com/lamoccacafe/" target="_blank" rel="noopener" class="social-link">Instagram</a>
           <a href="https://www.facebook.com/lamoccacafe/" target="_blank" rel="noopener" class="social-link">Facebook</a>
         </div>
-        <dl class="hours">
-          <div><dt>Lun – Vie</dt><dd>7:00 – 00:00</dd></div>
-          <div><dt>Sáb</dt><dd>10:00 – 1:30</dd></div>
-          <div><dt>Dom</dt><dd>10:00 – 1:30</dd></div>
-        </dl>
       </div>
-      <div class="map-frame">
-        <iframe src="https://www.google.com/maps?q=Mocca+Caf%C3%A9,+Calle+Toledo+1,+Getafe&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa Mocca Café"></iframe>
+      <div class="site-footer__map">
+        <iframe src="https://www.google.com/maps?q=Mocca+Caf%C3%A9,+Calle+Toledo+1,+Getafe&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de ubicación de Mocca Café"></iframe>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <div class="container site-footer__bottom-inner">
+        <span>© 2026 Mocca Café · Getafe</span>
+        <span>C. Toledo, 1 · 916 18 11 89</span>
       </div>
     </div>
   </footer>
 
 </main>
 
-<script src="js/script.js"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>
