@@ -211,6 +211,19 @@ address { font-style: normal; }
 
 .quick-nav .btn { padding: 9px 18px; font-size: 13px; }
 
+/* The "Llamar" button is styled for light-on-dark (over the hero photo).
+   Once the header picks up its solid background on scroll, flip it to
+   dark-on-light so it stays legible. */
+.site-header.is-scrolled .btn--ghost-dark {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+.site-header.is-scrolled .btn--ghost-dark:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
 @media (min-width: 720px) {
   .quick-nav__link { display: inline-block; }
 }
@@ -275,7 +288,7 @@ address { font-style: normal; }
 
 .cat-nav {
   position: sticky;
-  top: 84px;
+  top: var(--header-h, 84px);
   z-index: 40;
   display: flex;
   gap: 9px;

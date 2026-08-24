@@ -9,6 +9,18 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  /* Keep the category nav pinned right under the header, even while its
+     height animates on scroll (avoids a gap revealing content underneath). */
+  const syncHeaderHeight = () => {
+    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+  };
+  syncHeaderHeight();
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(syncHeaderHeight).observe(header);
+  } else {
+    window.addEventListener('resize', syncHeaderHeight);
+  }
+
   /* ---------- Scroll reveal ---------- */
   const revealEls = document.querySelectorAll('.reveal, .reveal-child, .reveal-line');
   if ('IntersectionObserver' in window) {
