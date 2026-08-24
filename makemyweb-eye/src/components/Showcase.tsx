@@ -42,6 +42,16 @@ const PROJECTS = [
     image: "/images/showcase/makemyweb-demo.webp",
     featured: false,
   },
+  {
+    name: "S.B.S Telecomunicaciones",
+    place: "Madrid",
+    kind: "Antenas, porteros y seguridad",
+    eyebrow: "MADRID · 26 AÑOS DE EXPERIENCIA",
+    tagline: "La infraestructura invisible de Madrid: antenas, porteros y telecomunicaciones.",
+    href: "https://sbs-telecom.netlify.app/",
+    image: "/images/showcase/sbs-telecom.webp",
+    featured: false,
+  },
 ];
 
 function ProjectCard({
@@ -59,7 +69,7 @@ function ProjectCard({
       whileInView={{ clipPath: "inset(0% 0 0% 0)", opacity: 1 }}
       viewport={{ once: true, margin: "-10% 0px" }}
       transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
-      className={project.featured ? "lg:col-span-12" : "lg:col-span-4"}
+      className={project.featured ? "lg:col-span-12" : "lg:col-span-3"}
     >
       <a
         href={project.href}
@@ -139,7 +149,7 @@ export function Showcase() {
             Así lucen los sitios que creamos
           </h2>
           <p className="mt-5 max-w-lg text-stone">
-            Cuatro webs ya publicadas: tres negocios reales y un ejemplo de
+            Cinco webs ya publicadas: cuatro negocios reales y un ejemplo de
             diseño animado. Toca cualquiera para verla en vivo.
           </p>
         </Reveal>
