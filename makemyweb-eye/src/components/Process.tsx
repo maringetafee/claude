@@ -60,10 +60,13 @@ export function Process() {
           {STEPS.map((step, i) => (
             <Reveal key={step.num} delay={i * 0.12}>
               <div className="relative">
-                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-iris/40 bg-charcoal font-display text-sm text-iris">
-                  {step.num}
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-iris/40 bg-charcoal">
+                  <span className="h-1.5 w-1.5 rounded-full bg-iris" />
                 </div>
-                <h3 className="font-display text-xl text-marble">
+                <p className="font-display text-4xl text-iris/30">
+                  {step.num}
+                </p>
+                <h3 className="font-display mt-2 text-xl text-marble">
                   {step.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-stone">

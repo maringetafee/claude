@@ -1,6 +1,7 @@
 import { LogoMark } from "./Logo";
 
 const LINKS = [
+  { label: "Trabajo", href: "#trabajo" },
   { label: "Precios", href: "#presupuesto" },
   { label: "Planes", href: "#mantenimiento" },
   { label: "FAQ", href: "#faq" },

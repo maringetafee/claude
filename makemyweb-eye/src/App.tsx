@@ -1,3 +1,4 @@
+import { MotionConfig } from "framer-motion";
 import { IntroExperience } from "./components/IntroExperience";
 import { BackgroundField } from "./components/BackgroundField";
 import { Header } from "./components/Header";
@@ -12,22 +13,29 @@ import { Footer } from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <a
+        href="#main-content"
+        className="fixed top-4 left-4 z-[60] -translate-y-24 rounded-full bg-marble px-5 py-2.5 text-sm text-charcoal transition-transform focus:translate-y-0"
+      >
+        Saltar al contenido
+      </a>
+
       <IntroExperience />
       <BackgroundField />
 
       <Header />
-      <main>
+      <main id="main-content">
         <Hero />
+        <Showcase />
+        <Process />
         <PriceCalculator />
         <Maintenance />
-        <Process />
-        <Showcase />
         <FAQ />
         <Contact />
       </main>
       <Footer />
-    </>
+    </MotionConfig>
   );
 }
 

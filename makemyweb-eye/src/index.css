@@ -81,6 +81,12 @@ body {
   color: var(--color-charcoal);
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-iris);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* thin custom scrollbar, premium feel */
 ::-webkit-scrollbar {
   width: 10px;

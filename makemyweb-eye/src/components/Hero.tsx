@@ -33,7 +33,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-balance text-5xl leading-[1.05] text-marble sm:text-6xl lg:text-7xl"
+          className="font-display text-balance text-6xl leading-[0.98] tracking-tight text-marble sm:text-7xl lg:text-8xl"
         >
           Diseñamos tu <span className="text-iris">web</span>
         </motion.h1>
@@ -66,6 +66,19 @@ export function Hero() {
           >
             Calcula el precio
           </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="mx-auto mt-16 flex max-w-lg flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs tracking-[0.15em] text-stone/70 uppercase"
+        >
+          <span>Diseño &amp; desarrollo a medida</span>
+          <span className="h-1 w-1 rounded-full bg-stone/40" />
+          <span>Páginas animadas 3D</span>
+          <span className="h-1 w-1 rounded-full bg-stone/40" />
+          <span>Mantenimiento y soporte</span>
         </motion.div>
       </div>
 

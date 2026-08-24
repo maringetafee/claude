@@ -84,7 +84,7 @@ export function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="tu@email.com"
-                    className="w-full flex-1 rounded-full border border-marble/20 bg-marble/[0.03] px-6 py-4 text-marble placeholder:text-stone/60 outline-none transition-colors focus:border-iris/60"
+                    className="w-full flex-1 rounded-full border border-marble/20 bg-marble/[0.03] px-6 py-4 text-marble placeholder:text-stone/60 transition-colors focus:border-iris/60 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-iris"
                   />
                   <button
                     type="submit"

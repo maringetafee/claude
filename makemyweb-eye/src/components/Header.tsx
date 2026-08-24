@@ -3,8 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { LogoMark } from "./Logo";
 
 const NAV_LINKS = [
-  { label: "Precios", href: "#presupuesto" },
+  { label: "Trabajo", href: "#trabajo" },
   { label: "Proceso", href: "#proceso" },
+  { label: "Precios", href: "#presupuesto" },
   { label: "FAQ", href: "#faq" },
 ];
 
