@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+:root {
+  /* Neutral base — warm off-whites and deep charcoal, architecture-brand feel */
+  --color-paper: #f6f4f0;
+  --color-paper-soft: #efece5;
+  --color-ink: #14140f;
+  --color-ink-soft: #2a2a24;
+  --color-stone: #6b6a62;
+  --color-stone-light: #a4a297;
+  --color-line: #dcd9d0;
+
+  /* Corporate accent — placeholder, updated once verified from the live brand */
+  --color-accent: #b5502e;
+  --color-accent-soft: #d97b52;
+
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-soft: var(--color-paper-soft);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-stone: var(--color-stone);
+  --color-stone-light: var(--color-stone-light);
+  --color-line: var(--color-line);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
