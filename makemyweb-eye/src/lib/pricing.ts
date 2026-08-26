@@ -1,12 +1,16 @@
 export interface CalculatorState {
   pages: number;
   animated3d: boolean;
+  bookingSystem: boolean;
 }
 
 export const defaultCalculatorState: CalculatorState = {
   pages: 1,
   animated3d: false,
+  bookingSystem: false,
 };
+
+export const MAINTENANCE_SURCHARGE = 20;
 
 export interface PricingResult {
   agency: number;
@@ -33,12 +37,13 @@ function makemywebBasePrice(pages: number): number {
 }
 
 export function calculatePricing(state: CalculatorState): PricingResult {
-  const { pages, animated3d } = state;
+  const { pages, animated3d, bookingSystem } = state;
 
   const makemywebBase = makemywebBasePrice(pages);
 
   let extrasTotal = 0;
   if (animated3d) extrasTotal += 279;
+  if (bookingSystem) extrasTotal += 179;
 
   return {
     agency: agencyPrice(pages),

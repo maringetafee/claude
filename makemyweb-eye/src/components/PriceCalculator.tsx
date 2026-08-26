@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo, type Dispatch, type SetStateAction } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./Reveal";
 import {
   calculatePricing,
-  defaultCalculatorState,
   formatEUR,
+  MAINTENANCE_SURCHARGE,
+  type CalculatorState,
 } from "../lib/pricing";
 
 function AnimatedPrice({ value }: { value: number }) {
@@ -24,8 +25,12 @@ function AnimatedPrice({ value }: { value: number }) {
   );
 }
 
-export function PriceCalculator() {
-  const [state, setState] = useState(defaultCalculatorState);
+interface PriceCalculatorProps {
+  state: CalculatorState;
+  setState: Dispatch<SetStateAction<CalculatorState>>;
+}
+
+export function PriceCalculator({ state, setState }: PriceCalculatorProps) {
   const result = useMemo(() => calculatePricing(state), [state]);
 
   const update = <K extends keyof typeof state>(key: K, value: (typeof state)[K]) =>
@@ -101,7 +106,26 @@ export function PriceCalculator() {
                   </span>
                   <span className="text-xs text-gold">+279 €</span>
                 </label>
+
+                <label className="flex cursor-pointer items-center justify-between rounded-xl border border-marble/10 px-4 py-3 text-sm text-stone transition-colors hover:border-marble/25">
+                  <span className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      className="accent-iris"
+                      checked={state.bookingSystem}
+                      onChange={(e) => update("bookingSystem", e.target.checked)}
+                    />
+                    Sistema de reservas
+                  </span>
+                  <span className="text-xs text-gold">+179 €</span>
+                </label>
               </div>
+              {state.bookingSystem && (
+                <p className="mt-3 text-xs text-stone/70">
+                  El sistema de reservas suma {formatEUR(MAINTENANCE_SURCHARGE)}
+                  /mes al mantenimiento.
+                </p>
+              )}
               <p className="mt-4 text-xs text-stone/70">
                 La ayuda con los contenidos y el SEO ya van incluidos en el
                 precio, sin coste extra.

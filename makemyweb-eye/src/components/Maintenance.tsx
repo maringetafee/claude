@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
+import { MAINTENANCE_SURCHARGE } from "../lib/pricing";
 
 const PLANS = [
   {
     name: "Mantenimiento Básico",
-    price: "39",
+    price: 39,
     featured: false,
     icon: "shield" as const,
     features: [
@@ -19,7 +20,7 @@ const PLANS = [
   {
     name: "Mantenimiento Pro",
     tag: "Más elegido",
-    price: "77",
+    price: 77,
     featured: true,
     icon: "shield-check" as const,
     features: [
@@ -54,7 +55,11 @@ function PlanIcon({ type }: { type: "shield" | "shield-check" }) {
   );
 }
 
-export function Maintenance() {
+interface MaintenanceProps {
+  bookingSystem: boolean;
+}
+
+export function Maintenance({ bookingSystem }: MaintenanceProps) {
   return (
     <section id="mantenimiento" className="px-6 py-28 lg:py-36">
       <div className="mx-auto max-w-5xl">
@@ -69,6 +74,12 @@ export function Maintenance() {
             Hosting, dominio, copias de seguridad y soporte para que no
             tengas que pensar en ello.
           </p>
+          {bookingSystem && (
+            <p className="mt-3 text-xs text-gold">
+              Con el sistema de reservas: +{MAINTENANCE_SURCHARGE} €/mes en
+              cada plan
+            </p>
+          )}
         </Reveal>
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2">
@@ -107,7 +118,7 @@ export function Maintenance() {
                 </h3>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="font-display text-4xl text-marble">
-                    {plan.price}€
+                    {plan.price + (bookingSystem ? MAINTENANCE_SURCHARGE : 0)}€
                   </span>
                   <span className="text-sm text-stone">/mes</span>
                 </div>
@@ -121,6 +132,13 @@ export function Maintenance() {
                       {f}
                     </li>
                   ))}
+                  {bookingSystem && (
+                    <li className="flex items-start gap-3 text-sm text-gold">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                      Si el sistema de reservas falla, lo solucionamos en
+                      menos de 24 horas
+                    </li>
+                  )}
                 </ul>
                 <a
                   href="#contacto"

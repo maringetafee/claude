@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MotionConfig } from "framer-motion";
 import { IntroExperience } from "./components/IntroExperience";
 import { BackgroundField } from "./components/BackgroundField";
@@ -10,8 +11,13 @@ import { Showcase } from "./components/Showcase";
 import { FAQ } from "./components/FAQ";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { defaultCalculatorState } from "./lib/pricing";
 
 function App() {
+  const [calculatorState, setCalculatorState] = useState(
+    defaultCalculatorState
+  );
+
   return (
     <MotionConfig reducedMotion="user">
       <a
@@ -29,8 +35,8 @@ function App() {
         <Hero />
         <Showcase />
         <Process />
-        <PriceCalculator />
-        <Maintenance />
+        <PriceCalculator state={calculatorState} setState={setCalculatorState} />
+        <Maintenance bookingSystem={calculatorState.bookingSystem} />
         <FAQ />
         <Contact />
       </main>
