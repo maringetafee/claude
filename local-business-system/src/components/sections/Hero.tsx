@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type RefObject } from "react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { HeroConfig } from "@/lib/types";
@@ -10,8 +10,8 @@ import { renderLines } from "@/lib/lines";
  * React state) para no pelear con la transicion de escala de entrada, que
  * vive en el div contenedor, no en la imagen. Desactivado si el usuario
  * prefiere menos movimiento. */
-function useHeroParallax(enabled: boolean) {
-  const imgRef = useRef<HTMLImageElement>(null);
+function useHeroParallax<T extends HTMLImageElement | HTMLVideoElement>(enabled: boolean) {
+  const imgRef = useRef<T>(null);
 
   useEffect(() => {
     if (!enabled) return;
@@ -41,14 +41,14 @@ function MarqueeStrip({ items }: { items: string[] }) {
   const track = [...items, ...items];
   return (
     <div
-      className="absolute bottom-0 inset-x-0 z-10 overflow-hidden py-3"
+      className="marquee-strip absolute bottom-0 inset-x-0 z-10 overflow-hidden py-3"
       style={{
         background: "color-mix(in srgb, var(--color-background) 88%, transparent)",
         borderTop: "1px solid var(--color-border)",
       }}
       aria-hidden="true"
     >
-      <div className="flex w-max" style={{ animation: "marquee-scroll 22s linear infinite" }}>
+      <div className="marquee-track flex w-max">
         {track.map((item, i) => (
           <span key={i} className="flex items-center shrink-0 px-6">
             <span
@@ -88,7 +88,7 @@ function ScrollCue({ visible }: { visible: boolean }) {
 export function Hero({ hero }: { hero: HeroConfig }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const parallaxRef = useHeroParallax(hero.type === "fullscreen");
+  const parallaxRef = useHeroParallax<HTMLImageElement | HTMLVideoElement>(hero.type === "fullscreen");
 
   const revealClass = `transition-all duration-[900ms] ease-[var(--ease-smooth)] ${
     mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -105,12 +105,26 @@ export function Hero({ hero }: { hero: HeroConfig }) {
           className="absolute inset-0 overflow-hidden"
           style={{ transform: mounted ? "scale(1.04)" : "scale(1.12)", transition: "transform 1.6s var(--ease-smooth)" }}
         >
-          <img
-            ref={parallaxRef}
-            src={hero.image}
-            alt=""
-            className="absolute -top-10 -bottom-10 inset-x-0 w-full h-[calc(100%+5rem)] object-cover"
-          />
+          {hero.video ? (
+            <video
+              ref={parallaxRef as RefObject<HTMLVideoElement>}
+              autoPlay
+              muted
+              loop
+              playsInline
+              poster={hero.image}
+              className="absolute -top-10 -bottom-10 inset-x-0 w-full h-[calc(100%+5rem)] object-cover"
+            >
+              <source src={hero.video} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              ref={parallaxRef as RefObject<HTMLImageElement>}
+              src={hero.image}
+              alt=""
+              className="absolute -top-10 -bottom-10 inset-x-0 w-full h-[calc(100%+5rem)] object-cover"
+            />
+          )}
         </div>
         <div
           className="absolute inset-0"

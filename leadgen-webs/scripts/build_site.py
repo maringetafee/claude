@@ -43,7 +43,7 @@ PLANTILLAS_MAESTRAS = {
     "Bar": [("Casa Manolo — bar de barrio, tema tavern-warm", "plantillas/casa-manolo.html")],
     "Cocktail bar": [("Lolita — coctelería, tema nightlife", "plantillas/lolita.html")],
     "Restaurante": [
-        ("NEONBUN — hamburguesería, tema street-neon", "plantillas/neonbun.html"),
+        ("Web Plantilla Burgers — hamburguesería", "plantillas/burgers/index.html"),
         ("LÚMINA — restaurante, tema luxury-editorial", "plantillas/lumina.html"),
     ],
     "Peluqueria": [("Studio X — peluquería, tema fashion-minimal", "plantillas/studio-x.html")],

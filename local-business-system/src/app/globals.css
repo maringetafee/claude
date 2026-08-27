@@ -143,22 +143,39 @@
 /* condensada. Pensado para sitios con energia de noche de ciudad.    */
 /* ---------------------------------------------------------------- */
 [data-theme="street-neon"] {
-  --color-background: #0c0a13;
-  --color-surface: #16121e;
-  --color-primary: #f6f2ff;
-  --color-secondary: #b6a9cc;
-  --color-accent: #ff2e93;
-  --color-text: #efe9fa;
-  --color-muted: #8b7ea3;
-  --color-border: rgba(246, 242, 255, 0.12);
-  --radius-sm: 3px;
-  --radius-md: 4px;
-  --radius-lg: 4px;
+  --color-background: #06050f;
+  --color-surface: #0d0b1a;
+  --color-primary: #eee8ff;
+  --color-secondary: #a89fc4;
+  --color-accent: #f060d8;
+  --color-text: #eee8ff;
+  --color-muted: #766e93;
+  --color-border: rgba(238, 232, 255, 0.09);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
   --cta-text-transform: uppercase;
-  --cta-letter-spacing: 0.08em;
+  --cta-letter-spacing: 0.16em;
   --color-scrim: var(--color-background);
   --color-accent-foreground: var(--color-primary);
   --section-title-size: clamp(2.5rem, 6.5vw, 4.25rem);
+}
+
+/* Cursor propio del tema street-neon — ver CustomCursor.tsx. */
+.cursor-dot {
+  transition: width 0.2s, height 0.2s;
+}
+.cursor-dot.cursor-dot-big {
+  width: 14px;
+  height: 14px;
+}
+.cursor-ring {
+  transition: width 0.3s var(--ease-smooth), height 0.3s var(--ease-smooth), border-color 0.3s;
+}
+.cursor-ring.cursor-ring-big {
+  width: 58px;
+  height: 58px;
+  border-color: var(--color-accent);
 }
 
 * {
@@ -210,6 +227,19 @@ body {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* La animacion vive en la clase (no en un style inline) para que la regla
+   :hover de abajo pueda ganarle en la cascada — un style inline siempre
+   gana a cualquier regla de hoja de estilos, aunque sea mas especifica. */
+.marquee-track {
+  animation: marquee-scroll 22s linear infinite;
+}
+
+/* El marquee del Hero se detiene mientras el raton esta encima, y retoma
+   donde iba al salir (no se reinicia, gracias a animation-play-state). */
+.marquee-strip:hover .marquee-track {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {

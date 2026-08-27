@@ -20,6 +20,22 @@ export function About({ about }: { about: AboutConfig }) {
               }`}
             >
               <img src={about.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              {about.stat && (
+                <div
+                  className="absolute -bottom-5 -right-5 px-6 py-4 text-center"
+                  style={{ background: "var(--color-accent)" }}
+                >
+                  <span className="font-display text-3xl block" style={{ color: "var(--color-accent-foreground)" }}>
+                    {about.stat.value}
+                  </span>
+                  <span
+                    className="text-[10px] uppercase tracking-[0.2em]"
+                    style={{ color: "var(--color-accent-foreground)", opacity: 0.7 }}
+                  >
+                    {about.stat.label}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
           <div className="md:col-span-7 md:order-1">

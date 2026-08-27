@@ -6,11 +6,19 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { MenuConfig, MenuCategoryConfig, MenuItemConfig } from "@/lib/types";
 import { useReveal } from "@/lib/useReveal";
 
-function MenuRow({ name, description, price }: MenuItemConfig) {
+function MenuRow({
+  name,
+  description,
+  price,
+  image,
+  onHoverImage,
+}: MenuItemConfig & { onHoverImage?: (src?: string) => void }) {
   const { ref, visible } = useReveal<HTMLLIElement>();
   return (
     <li
       ref={ref}
+      onMouseEnter={() => image && onHoverImage?.(image)}
+      onMouseLeave={() => image && onHoverImage?.(undefined)}
       className={`py-4 transition-all duration-[600ms] ease-[var(--ease-standard)] ${
         visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
       }`}
@@ -37,11 +45,13 @@ function CategoryBlock({
   index,
   active,
   onActivate,
+  onItemHoverImage,
 }: {
   category: MenuCategoryConfig;
   index: number;
   active: boolean;
   onActivate: () => void;
+  onItemHoverImage: (src?: string) => void;
 }) {
   const { ref, visible } = useReveal<HTMLDivElement>();
   const number = String(index + 1).padStart(2, "0");
@@ -76,7 +86,7 @@ function CategoryBlock({
 
       <ul className="pl-0 sm:pl-9 mt-3">
         {category.items.map((item) => (
-          <MenuRow key={item.name} {...item} />
+          <MenuRow key={item.name} {...item} onHoverImage={onItemHoverImage} />
         ))}
       </ul>
     </div>
@@ -86,6 +96,24 @@ function CategoryBlock({
 export function Menu({ menu }: { menu: MenuConfig }) {
   const withImage = menu.categories.filter((c) => c.image);
   const [active, setActive] = useState<string | null>(withImage[0]?.name ?? null);
+  // Imagen de un plato concreto bajo el raton, por encima de la de su
+  // categoria — undefined cuando no hay ningun plato bajo el raton, y la
+  // panel vuelve a mostrar la imagen de la categoria activa.
+  const [hoverImage, setHoverImage] = useState<string | undefined>(undefined);
+
+  const activeCategoryImage = menu.categories.find((c) => c.name === active)?.image;
+  const displaySrc = hoverImage ?? activeCategoryImage;
+
+  // Todas las imagenes que pueden llegar a mostrarse (de categoria o de
+  // plato individual) se apilan ya en el DOM y se cruzan por opacidad, para
+  // que el cambio de una a otra no parpadee ni recargue la imagen.
+  const allImages = Array.from(
+    new Set(
+      menu.categories
+        .flatMap((c) => [c.image, ...c.items.map((i) => i.image)])
+        .filter((src): src is string => Boolean(src))
+    )
+  );
 
   return (
     <section id="menu" className="py-[var(--space-xl)]" style={{ background: "var(--color-surface)" }}>
@@ -104,21 +132,28 @@ export function Menu({ menu }: { menu: MenuConfig }) {
                 category={category}
                 index={i}
                 active={active === category.name}
-                onActivate={() => category.image && setActive(category.name)}
+                onActivate={() => {
+                  if (category.image) {
+                    setActive(category.name);
+                    setHoverImage(undefined);
+                  }
+                }}
+                onItemHoverImage={setHoverImage}
               />
             ))}
           </div>
 
-          {withImage.length > 0 && (
+          {allImages.length > 0 && (
             <div className="hidden lg:block lg:col-span-5">
               <div className="sticky top-32 relative aspect-[3/4] overflow-hidden">
-                {withImage.map((category) => (
+                {allImages.map((src) => (
                   <img
-                    key={category.name}
-                    src={category.image}
+                    key={src}
+                    src={src}
                     alt=""
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-opacity duration-[700ms] ease-[var(--ease-smooth)]"
-                    style={{ opacity: active === category.name ? 1 : 0 }}
+                    style={{ opacity: src === displaySrc ? 1 : 0 }}
                   />
                 ))}
               </div>
