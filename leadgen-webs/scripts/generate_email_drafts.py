@@ -30,18 +30,21 @@ TEMPLATE_BODY = """Hola,
 
 Soy [TU NOMBRE], diseño y desarrollo páginas web para negocios locales en {city}.
 
-Vi {business_name} y preparé, a modo de ejemplo, un boceto de cómo podría verse
-vuestra web:
+Vi {business_name} y me tomé la libertad de preparar un boceto de cómo podría
+quedar vuestra web:
 
 {preview_link}
 
-Es solo una demo con contenido genérico para que os hagáis una idea del estilo;
-con vuestras fotos, textos y datos reales quedaría lista en pocos días.
+Es una demo con contenido de ejemplo para que os hagáis una idea real del estilo
+y del resultado; con vuestras fotos, textos y datos quedaría lista en pocos días.
 
-Si os interesa, puedo mandaros presupuesto sin compromiso. Un saludo,
+Si os encaja, os paso presupuesto sin compromiso. Un saludo,
 [TU NOMBRE]
 [TU TELEFONO]
 """
+
+TEMPLATE_WHATSAPP = """Hola! Soy Mario de MakeMyWeb.es, hacemos páginas web para negocios en {city}. Vi {business_name} y os preparé una demo de cómo podría quedar vuestra web: {preview_link}
+Es solo un ejemplo, con vuestros datos reales quedaría lista y mucho más personalizada en pocos días. Si os interesa os paso presupuesto sin compromiso, muchas gracias!"""
 
 
 def main():
@@ -75,12 +78,20 @@ def main():
     for row in rows:
         slug = slugify(f"{row['business_name']}-{row['city']}")
         preview_link = f"{PREVIEW_BASE_URL}/{slug}.html" if PREVIEW_BASE_URL else "[FALTA DESPLEGAR output/sites]"
+        # Netlify sirve la misma pagina con y sin ".html" (pretty URLs); para
+        # WhatsApp queda mas limpio sin la extension.
+        preview_link_whatsapp = preview_link[:-len(".html")] if preview_link.endswith(".html") else preview_link
 
         subject = TEMPLATE_SUBJECT.format(business_name=row["business_name"])
         body = TEMPLATE_BODY.format(
             business_name=row["business_name"],
             city=row["city"],
             preview_link=preview_link,
+        )
+        mensaje_whatsapp = TEMPLATE_WHATSAPP.format(
+            business_name=row["business_name"],
+            city=row["city"],
+            preview_link=preview_link_whatsapp,
         )
 
         email = row.get("email", "")
@@ -97,6 +108,7 @@ def main():
             "estado": estados_previos.get(slug, "pendiente"),
             "asunto": subject,
             "cuerpo": body,
+            "mensaje_whatsapp": mensaje_whatsapp,
         })
 
     with out_path.open("w", newline="", encoding="utf-8") as f:
@@ -106,7 +118,8 @@ def main():
 
     con_email = sum(1 for d in drafts if d["email"])
     print(f"Guardado {out_path} — {con_email} con email listo, {len(drafts) - con_email} necesitan contacto por telefono/whatsapp.")
-    print("Recuerda: revisa y edita los textos (sustituye [TU NOMBRE]/[TU TELEFONO]) antes de enviar nada.")
+    print("Cada fila trae 'asunto'/'cuerpo' (email) y 'mensaje_whatsapp' (version corta) listos para copiar.")
+    print("Recuerda: revisa el texto del email (sustituye [TU NOMBRE]/[TU TELEFONO]) antes de enviar nada.")
     print("Marca la columna 'estado' (pendiente/enviado/respondido/cliente/rechazado) segun avances, y luego ejecuta build_site.py para actualizar el indice.")
 
 

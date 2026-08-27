@@ -1,16 +1,19 @@
 import { BusinessConfig } from "@/lib/types";
 import { Lead } from "@/data/leads/types";
 import { casaManolo } from "@/data/sites/casa-manolo";
-import { lumina } from "@/data/sites/lumina";
+import { neonbun } from "@/data/sites/neonbun";
 import { studioX } from "@/data/sites/studio-x";
 
 // Tipo de negocio (tal y como aparece en las CSV de leads) -> config base
 // cuya arquitectura/tema se reutiliza para generar la demo personalizada.
 // Nota: "Lolita" (nightlife) es una coctelería, no un bar de barrio — los
 // leads de tipo "Bar" (cervecerías, bares de toda la vida) usan Casa Manolo.
+// "Restaurante" usa NEONBUN (street-neon) — LÚMINA (luxury-editorial) sigue
+// disponible como plantilla maestra alternativa en el panel, pero ya no es
+// la que se asigna por defecto a los leads reales.
 export const BASE_CONFIG_BY_TIPO: Record<string, BusinessConfig> = {
   Bar: casaManolo,
-  Restaurante: lumina,
+  Restaurante: neonbun,
   Peluqueria: studioX,
 };
 

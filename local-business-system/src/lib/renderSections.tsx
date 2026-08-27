@@ -7,6 +7,7 @@ import { Services } from "@/components/sections/Services";
 import { Showcase } from "@/components/sections/Showcase";
 import { Team } from "@/components/sections/Team";
 import { Gallery } from "@/components/sections/Gallery";
+import { Testimonials } from "@/components/sections/Testimonials";
 import { Booking } from "@/components/sections/Booking";
 import { Location } from "@/components/sections/Location";
 import { Contact } from "@/components/sections/Contact";
@@ -21,6 +22,7 @@ const RENDERERS: Partial<Record<SectionId, (config: BusinessConfig) => React.Rea
   showcase: (config) => (config.showcase ? <Showcase showcase={config.showcase} /> : null),
   team: (config) => (config.team ? <Team team={config.team} /> : null),
   gallery: (config) => (config.gallery ? <Gallery gallery={config.gallery} /> : null),
+  testimonials: (config) => (config.testimonials ? <Testimonials testimonials={config.testimonials} /> : null),
   booking: (config) => (config.booking ? <Booking booking={config.booking} whatsapp={config.contact.whatsapp} /> : null),
   location: (config) => <Location location={config.location} />,
   contact: (config) => <Contact contact={config.contact} />,

@@ -8,7 +8,7 @@ export type BusinessType =
   | "beauty"
   | "bakery";
 
-export type ThemeId = "luxury-editorial" | "nightlife" | "fashion-minimal" | "tavern-warm";
+export type ThemeId = "luxury-editorial" | "nightlife" | "fashion-minimal" | "tavern-warm" | "street-neon";
 
 export type HeroType = "fullscreen" | "editorial" | "split";
 
@@ -21,6 +21,7 @@ export type SectionId =
   | "showcase"
   | "team"
   | "gallery"
+  | "testimonials"
   | "booking"
   | "location"
   | "contact"
@@ -39,6 +40,10 @@ export interface HeroConfig {
   image: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
+  /** Franja de texto en bucle infinito sobre el borde del hero (solo variante
+   * "fullscreen"). Opcional — temas sin vocacion "urbana" simplemente no la
+   * definen y el Hero se comporta como siempre. */
+  marquee?: string[];
 }
 
 export interface AboutConfig {
@@ -126,6 +131,23 @@ export interface GalleryConfig {
   images: { src: string; alt: string }[];
 }
 
+export interface TestimonialItemConfig {
+  author: string;
+  timeAgo: string;
+  stars: number;
+  quote: string;
+}
+
+export interface TestimonialsConfig {
+  eyebrow: string;
+  title: string;
+  rating: string;
+  ratingCount: string;
+  source: string;
+  sourceHref?: string;
+  items: TestimonialItemConfig[];
+}
+
 export type BookingFlowStep =
   | "service"
   | "professional"
@@ -183,6 +205,7 @@ export interface BusinessConfig {
   showcase?: ShowcaseConfig;
   team?: TeamConfig;
   gallery?: GalleryConfig;
+  testimonials?: TestimonialsConfig;
   booking?: BookingConfig;
   location: LocationConfig;
   contact: ContactConfig;

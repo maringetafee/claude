@@ -34,6 +34,37 @@ function useHeroParallax(enabled: boolean) {
   return imgRef;
 }
 
+/** Franja de texto en bucle infinito sobre el borde inferior del hero —
+ * puramente CSS (keyframe `marquee-scroll` en globals.css), el contenido se
+ * duplica una vez para que el bucle no deje huecos. */
+function MarqueeStrip({ items }: { items: string[] }) {
+  const track = [...items, ...items];
+  return (
+    <div
+      className="absolute bottom-0 inset-x-0 z-10 overflow-hidden py-3"
+      style={{
+        background: "color-mix(in srgb, var(--color-background) 88%, transparent)",
+        borderTop: "1px solid var(--color-border)",
+      }}
+      aria-hidden="true"
+    >
+      <div className="flex w-max" style={{ animation: "marquee-scroll 22s linear infinite" }}>
+        {track.map((item, i) => (
+          <span key={i} className="flex items-center shrink-0 px-6">
+            <span
+              className="font-display text-sm tracking-[0.15em] whitespace-nowrap"
+              style={{ color: "var(--color-primary)" }}
+            >
+              {item}
+            </span>
+            <span className="ml-6 w-1.5 h-1.5 rounded-full shrink-0" style={{ background: "var(--color-accent)" }} />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ScrollCue({ visible }: { visible: boolean }) {
   return (
     <div
@@ -110,7 +141,7 @@ export function Hero({ hero }: { hero: HeroConfig }) {
             )}
           </div>
         </Container>
-        <ScrollCue visible={mounted} />
+        {hero.marquee ? <MarqueeStrip items={hero.marquee} /> : <ScrollCue visible={mounted} />}
       </section>
     );
   }

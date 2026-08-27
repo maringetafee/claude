@@ -94,8 +94,12 @@ de mandar nada** — esto solo prepara el contenido, no lo envía.
 
 ## 8. Regenerar el índice y desplegar
 
-`python scripts/build_site.py` genera dos páginas en `output/sites/`, con
-pestañas para moverse entre ellas:
+Requiere `PANEL_SLUG` en `.env` (ver `.env.example`) — una ruta inventada y no
+adivinable, ej. `PANEL_SLUG=panel-7c4f91ab`. `python scripts/build_site.py`
+falla con un aviso si no está puesta.
+
+`python scripts/build_site.py` genera dos páginas en `output/sites/<PANEL_SLUG>/`,
+con pestañas para moverse entre ellas:
 
 - `index.html` — panel de propuestas: agrupa las webs de muestra por tipo de
   negocio y estado (pendiente/enviado/respondido/cliente/rechazado), y cada
@@ -106,6 +110,15 @@ pestañas para moverse entre ellas:
   tener que abrir el CSV en bruto. La genera `scripts/build_leads_data.py`
   (se llama automáticamente desde `build_site.py`, no hace falta ejecutarlo
   aparte).
+
+**Por qué no está en la raíz:** las webs de muestra que se mandan a los leads
+viven en `output/sites/<slug>.html`. Si el panel estuviera en
+`output/sites/index.html`, cualquiera que recibiera el link de su demo y
+recortara la URL hasta el dominio vería el panel entero — todos los leads,
+sus datos de contacto y en qué estado está cada uno. Al vivir en una ruta
+propia (`/<PANEL_SLUG>/`), solo entra quien conozca el enlace exacto; guárdalo
+como marcador en vez de teclearlo, y no lo compartas ni lo pegues en ningún
+sitio público (el propio `PANEL_SLUG` en `.env` nunca se sube a git).
 
 ```bash
 python scripts/build_site.py

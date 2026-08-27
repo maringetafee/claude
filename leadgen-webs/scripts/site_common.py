@@ -4,9 +4,20 @@ build_leads_data.py (vista visual de los CSV de leads), para que las dos
 paginas de output/sites/ se sientan como pestañas del mismo sitio.
 """
 import csv
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(ROOT / ".env")
+
+# Ruta (no la raiz) donde se publica el panel interno, para que alguien que
+# reciba el link de una demo (output/sites/<slug>.html) y recorte la URL
+# hasta el dominio no caiga directamente en el listado de todos los leads.
+# Se define en .env (nunca se sube a git) — si no esta configurada, se corta
+# el build en vez de usar una ruta previsible.
+PANEL_SLUG = os.environ.get("PANEL_SLUG", "").strip()
 
 ESTADO_LABELS = {
     "pendiente": "Pendiente",
@@ -124,6 +135,42 @@ SHARED_CSS = """
     cursor: wait;
     opacity: 0.5;
   }
+"""
+
+
+# Pagina neutra que se publica en la raiz del sitio, en vez del panel (que
+# ahora vive en /<PANEL_SLUG>/) o el 404 generico de Netlify. No dice nada
+# sobre leads, negocios ni el panel — solo evita que alguien que llegue por
+# curiosidad vea un mensaje de error.
+ROOT_PLACEHOLDER_HTML = """<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sitio en construcción</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    background: #fafafa;
+    color: #b0b0b6;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+  Sitio en construcción.
+</body>
+</html>
 """
 
 
