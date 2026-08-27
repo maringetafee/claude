@@ -4,3 +4,5 @@ leads/photos/
 output/
 __pycache__/
 *.pyc
+node_modules/
+.netlify/

@@ -10,18 +10,22 @@ function TeamCard({ name, role, image, index }: { name: string; role: string; im
   return (
     <div
       ref={ref}
-      className={`transition-all duration-[700ms] ease-[var(--ease-smooth)] ${
+      className={`group transition-all duration-[700ms] ease-[var(--ease-smooth)] ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="relative aspect-[3/4] overflow-hidden mb-4">
-        <img src={image} alt={name} className="absolute inset-0 w-full h-full object-cover grayscale" />
+      <div className="relative aspect-[3/4] overflow-hidden mb-5">
+        <img
+          src={image}
+          alt={name}
+          className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-[900ms] ease-[var(--ease-smooth)] group-hover:scale-[1.03]"
+        />
       </div>
-      <p className="font-display text-lg" style={{ color: "var(--color-primary)" }}>
+      <p className="font-display text-xl" style={{ color: "var(--color-primary)" }}>
         {name}
       </p>
-      <p className="text-sm" style={{ color: "var(--color-muted)" }}>
+      <p className="text-sm mt-1" style={{ color: "var(--color-muted)" }}>
         {role}
       </p>
     </div>

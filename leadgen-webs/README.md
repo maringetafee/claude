@@ -94,19 +94,38 @@ de mandar nada** — esto solo prepara el contenido, no lo envía.
 
 ## 8. Regenerar el índice y desplegar
 
-`output/sites/index.html` ya no es una lista plana: agrupa las webs de muestra
-por tipo de negocio y estado (pendiente/enviado/respondido/cliente/rechazado),
-y cada apartado enlaza arriba a la plantilla maestra correspondiente
-(`output/sites/plantillas/`, el export estático de `local-business-system`).
+`python scripts/build_site.py` genera dos páginas en `output/sites/`, con
+pestañas para moverse entre ellas:
+
+- `index.html` — panel de propuestas: agrupa las webs de muestra por tipo de
+  negocio y estado (pendiente/enviado/respondido/cliente/rechazado), y cada
+  apartado enlaza arriba a la plantilla maestra correspondiente
+  (`output/sites/plantillas/`, el export estático de `local-business-system`).
+- `datos.html` — vista visual de todos los `leads/*.csv` (foto, dirección,
+  contacto, si tiene web o no, valoración de Google y estado), en vez de
+  tener que abrir el CSV en bruto. La genera `scripts/build_leads_data.py`
+  (se llama automáticamente desde `build_site.py`, no hace falta ejecutarlo
+  aparte).
 
 ```bash
 python scripts/build_site.py
-netlify deploy --prod --site 45d3343b-c03c-41aa-857b-886c62675825 --dir output/sites
+netlify deploy --prod --site 45d3343b-c03c-41aa-857b-886c62675825 --dir output/sites --functions netlify/functions
 ```
 
-Para actualizar el `estado` de un lead, edita la columna `estado` en
-`output/<lote>_borradores.csv` (la conserva `generate_email_drafts.py` si
-vuelves a regenerar ese CSV) y repite los dos comandos de arriba.
+(`--functions` sube también `netlify/functions/estado.mjs`, la Netlify Function
+que da soporte al checkbox de abajo — sin ese flag el checkbox dejaría de
+funcionar aunque la web siguiera viéndose bien.)
+
+**Marcar un lead como enviado directamente desde la web:** en `index.html`,
+cada lead pendiente tiene un checkbox "Marcar enviado". Al marcarlo, guarda
+el cambio en Netlify Blobs (vía `netlify/functions/estado.mjs`) — se ve al
+momento desde cualquier dispositivo, sin rebuild ni redeploy, y también se
+refleja en `datos.html`. Para pasar a `respondido`/`cliente`/`rechazado` (o
+para corregir algo en bloque), sigue siendo más rápido editar la columna
+`estado` en `output/<lote>_borradores.csv` y repetir los dos comandos de
+arriba — eso reconstruye el HTML base; los cambios hechos por checkbox desde
+entonces se vuelven a aplicar solos en cuanto la página carga y pide el
+estado real a la función.
 
 Si cambian las demos de `local-business-system`, hay que re-exportarlas y
 volver a copiarlas:

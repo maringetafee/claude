@@ -17,6 +17,17 @@ Uso:
 import csv
 from pathlib import Path
 
+import build_leads_data
+from site_common import (
+    ESTADO_LABELS,
+    ESTADO_ORDEN,
+    ESTADO_SYNC_SCRIPT,
+    SHARED_CSS,
+    badge_html,
+    checkbox_hecho,
+    nav_tabs,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 OUT_SITES = ROOT / "output" / "sites"
 
@@ -30,15 +41,6 @@ PLANTILLAS_MAESTRAS = {
     "Restaurante": ("LÚMINA — restaurante, tema luxury-editorial", "plantillas/lumina.html"),
     "Peluqueria": ("Studio X — peluquería, tema fashion-minimal", "plantillas/studio-x.html"),
 }
-
-ESTADO_LABELS = {
-    "pendiente": "Pendiente",
-    "enviado": "Enviado",
-    "respondido": "Respondido",
-    "cliente": "Cliente",
-    "rechazado": "Rechazado",
-}
-ESTADO_ORDEN = ["pendiente", "enviado", "respondido", "cliente", "rechazado"]
 
 
 def cargar_entradas():
@@ -62,10 +64,6 @@ def cargar_entradas():
                     "estado": row.get("estado", "pendiente") or "pendiente",
                 }
     return list(entradas.values())
-
-
-def badge_class(estado):
-    return f"badge badge-{estado}" if estado in ESTADO_LABELS else "badge badge-otro"
 
 
 def render_tipo_section(tipo, entradas_tipo):
@@ -92,7 +90,10 @@ def render_tipo_section(tipo, entradas_tipo):
         filas = "\n".join(
             f"""        <li class="lead">
           <a href="{e['slug']}.html">{e['business_name']}</a>
-          <span class="{badge_class(e['estado'])}">{ESTADO_LABELS.get(e['estado'], e['estado'])}</span>
+          <span class="lead-right">
+            {checkbox_hecho(e['slug'], e['estado'])}
+            {badge_html(e['slug'], e['estado'])}
+          </span>
         </li>"""
             for e in entradas_ordenadas
         )
@@ -139,18 +140,9 @@ def build():
 <title>Propuestas de webs — panel interno</title>
 <meta name="robots" content="noindex, nofollow" />
 <style>
-  :root {{ color-scheme: light; }}
-  * {{ box-sizing: border-box; }}
-  body {{
-    font-family: ui-sans-serif, system-ui, sans-serif;
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 6rem;
-    color: #17171a;
-    background: #fafafa;
-  }}
-  h1 {{ font-size: 1.75rem; margin-bottom: 0.25rem; }}
-  .resumen {{ color: #6b6b70; margin-bottom: 3rem; }}
+{SHARED_CSS}
+  body {{ max-width: 880px; }}
+  .resumen {{ margin-bottom: 3rem; }}
   h2 {{ font-size: 1.25rem; margin: 0 0 1rem; display: flex; align-items: baseline; gap: 0.5rem; }}
   .conteo {{ font-weight: 400; color: #8a8a90; font-size: 0.9rem; }}
   section.tipo {{
@@ -196,34 +188,24 @@ def build():
   li.lead:last-child {{ border-bottom: none; }}
   li.lead a {{ color: #1a4fd6; text-decoration: none; }}
   li.lead a:hover {{ text-decoration: underline; }}
+  .lead-right {{ display: flex; align-items: center; gap: 0.75rem; }}
   .sin-leads {{ color: #8a8a90; font-size: 0.9rem; margin: 0.5rem 0 0; }}
-  .badge {{
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-    white-space: nowrap;
-  }}
-  .badge-pendiente {{ background: #f2eddc; color: #8a6d1a; }}
-  .badge-enviado {{ background: #dce8fc; color: #1a4fd6; }}
-  .badge-respondido {{ background: #e8dcfc; color: #6b1ad6; }}
-  .badge-cliente {{ background: #d9f2e1; color: #157a3d; }}
-  .badge-rechazado {{ background: #fcdcdc; color: #b31a1a; }}
-  .badge-otro {{ background: #ececec; color: #666; }}
 </style>
 </head>
 <body>
+{nav_tabs('panel')}
 <h1>Propuestas de webs</h1>
 <p class="resumen">{total} leads en total{" — " + resumen if resumen else ""}</p>
 {secciones}
+{ESTADO_SYNC_SCRIPT}
 </body>
 </html>
 """
     OUT_SITES.mkdir(parents=True, exist_ok=True)
     (OUT_SITES / "index.html").write_text(index_html, encoding="utf-8")
     print(f"Indice regenerado: {OUT_SITES / 'index.html'} ({total} leads, {len(por_tipo)} tipos)")
+
+    build_leads_data.build()
 
 
 if __name__ == "__main__":

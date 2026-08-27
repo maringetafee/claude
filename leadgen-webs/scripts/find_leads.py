@@ -50,9 +50,11 @@ def fetch_page(query_text, included_type, page_token=None):
         "X-Goog-Api-Key": API_KEY,
         "X-Goog-FieldMask": FIELD_MASK,
     }
+    # Google exige que una peticion de paginacion repita exactamente los
+    # mismos parametros que la peticion inicial, y solo anada pageToken.
     body = {"textQuery": query_text, "includedType": included_type, "languageCode": "es"}
     if page_token:
-        body = {"textQuery": query_text, "pageToken": page_token}
+        body["pageToken"] = page_token
     resp = requests.post(SEARCH_URL, json=body, headers=headers, timeout=20)
     resp.raise_for_status()
     return resp.json()

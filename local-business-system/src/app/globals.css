@@ -11,6 +11,14 @@
   --color-muted: #8a8078;
   --color-border: rgba(28, 26, 23, 0.12);
 
+  /* Siempre "el tono oscuro" / "el tono claro" de este tema, sin importar si
+     la base del tema es clara u oscura — usados para superposiciones sobre
+     fotografia (scrim) y para texto/iconos sobre rellenos de --color-accent,
+     donde --color-background o --color-primary por si solos invertirian el
+     contraste en un tema de base oscura (ver tavern-warm/nightlife abajo). */
+  --color-scrim: var(--color-primary);
+  --color-accent-foreground: var(--color-background);
+
   /* Spacing scale */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -33,6 +41,16 @@
   /* Container system */
   --page-padding: clamp(1.25rem, 4vw, 3rem);
   --content-max-width: 1280px;
+
+  /* CTA/nav text case — algunos temas (fashion-minimal) prefieren
+     mayusculas espaciadas; el resto se queda tal cual el texto del config. */
+  --cta-text-transform: none;
+  --cta-letter-spacing: 0.02em;
+
+  /* Tamano de los titulos de seccion (SectionHeading) — variable para que un
+     tema mas cinematografico (tavern-warm) pueda pedir titulos bastante mas
+     grandes sin tocar el componente ni afectar a los demas temas. */
+  --section-title-size: clamp(2.25rem, 5vw, 3rem);
 }
 
 /* ---------------------------------------------------------------- */
@@ -50,6 +68,8 @@
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 4px;
+  --color-scrim: var(--color-primary);
+  --color-accent-foreground: var(--color-background);
 }
 
 /* ---------------------------------------------------------------- */
@@ -67,41 +87,54 @@
   --radius-sm: 999px;
   --radius-md: 999px;
   --radius-lg: 24px;
+  --color-scrim: var(--color-background);
+  --color-accent-foreground: var(--color-primary);
 }
 
 /* ---------------------------------------------------------------- */
 /* THEME: fashion-minimal — peluquerías, barberías, beauty editorial */
+/* Crema/negro cálido + un acento burdeos apagado, no blanco+negro a secas. */
 /* ---------------------------------------------------------------- */
 [data-theme="fashion-minimal"] {
-  --color-background: #fafafa;
-  --color-surface: #ffffff;
-  --color-primary: #0a0a0a;
-  --color-secondary: #4d4d4d;
-  --color-accent: #0a0a0a;
-  --color-text: #111111;
-  --color-muted: #757575;
-  --color-border: rgba(0, 0, 0, 0.1);
+  --color-background: #f7f4ef;
+  --color-surface: #fffdfa;
+  --color-primary: #16130f;
+  --color-secondary: #55503f;
+  --color-accent: #7d3240;
+  --color-text: #1a1712;
+  --color-muted: #948c7c;
+  --color-border: rgba(22, 19, 15, 0.1);
   --radius-sm: 0px;
   --radius-md: 0px;
   --radius-lg: 0px;
+  --cta-text-transform: uppercase;
+  --cta-letter-spacing: 0.1em;
+  --color-scrim: var(--color-primary);
+  --color-accent-foreground: var(--color-background);
 }
 
 /* ---------------------------------------------------------------- */
-/* THEME: tavern-warm — bares de barrio, cervecerías, tabernas       */
-/* (distinto de "nightlife": esto es bar de toda la vida, no cocktail bar) */
+/* THEME: tavern-warm — bares, tabernas, gastrobares, cocteleria,    */
+/* cerveceria, restaurante, cafe. Oscuro, cinematografico, editorial.*/
+/* --color-accent es el unico valor pensado para cambiar por cliente */
+/* (terracota por defecto; rojo vino / verde oliva / naranja quemado */
+/* funcionan igual de bien sobre esta base). */
 /* ---------------------------------------------------------------- */
 [data-theme="tavern-warm"] {
-  --color-background: #fbf1e4;
-  --color-surface: #fffaf3;
-  --color-primary: #2e1c10;
-  --color-secondary: #6b4a30;
+  --color-background: #0b0b0a;
+  --color-surface: #15120f;
+  --color-primary: #f3ead8;
+  --color-secondary: #c9b8a0;
   --color-accent: #c1502e;
-  --color-text: #2a1b10;
-  --color-muted: #8a7460;
-  --color-border: rgba(46, 28, 16, 0.14);
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 28px;
+  --color-text: #ece3d4;
+  --color-muted: #8f8579;
+  --color-border: rgba(243, 234, 216, 0.12);
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 3px;
+  --color-scrim: var(--color-background);
+  --color-accent-foreground: var(--color-primary);
+  --section-title-size: clamp(2.75rem, 7vw, 4.75rem);
 }
 
 * {

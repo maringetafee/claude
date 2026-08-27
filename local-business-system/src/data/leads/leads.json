@@ -169,5 +169,365 @@
     "address": "C. Rosa Luxemburgo, 7, 28903 Getafe, Madrid, España",
     "phone": "+34 919 35 58 04",
     "hasPhoto": true
+  },
+  {
+    "slug": "natalia-gadeo-estilistas-getafe",
+    "businessName": "Natalia Gadeo Estilistas",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. San José de Calasanz, 6, 28902 Getafe, Madrid, España",
+    "phone": "+34 918 31 01 46",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-en-getafe-lo-mas-in-getafe",
+    "businessName": "Peluquería en Getafe ️ | LO MAS IN",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. de la Magdalena, 13, 28901 Getafe, Madrid, España",
+    "phone": "+34 916 84 24 03",
+    "hasPhoto": true
+  },
+  {
+    "slug": "gaudencio-peluquerias-estilistas-alisados-rizos-afeitados-getafe",
+    "businessName": "Gaudencio Peluquerías - Estilistas - Alisados - Rizos - Afeitados",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Villaviciosa, S/N, 28901 Getafe, Madrid, España",
+    "phone": "+34 916 81 00 68",
+    "hasPhoto": true
+  },
+  {
+    "slug": "javier-glodosindo-estilistas-peluqueria-unisex-especialista-en-tintes-100-vegetales-getafe",
+    "businessName": "Javier GLODOSINDO - Estilistas - Peluquería unisex especialista en tintes 100% vegetales",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Hospital de San José, 17, 28901 Getafe, Madrid, España",
+    "phone": "+34 916 83 47 45",
+    "hasPhoto": true
+  },
+  {
+    "slug": "javier-palacios-peluqueros-getafe",
+    "businessName": "Javier Palacios Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. Mariano Moreno el Musico, 6, 28907 Getafe, Madrid, España",
+    "phone": "+34 914 91 55 90",
+    "hasPhoto": true
+  },
+  {
+    "slug": "kapas-peluqueros-getafe",
+    "businessName": "KAPAS PELUQUEROS",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Calle Felipe Estevez, 21, 28902 Madrid, España",
+    "phone": "+34 916 83 70 98",
+    "hasPhoto": true
+  },
+  {
+    "slug": "atelier-42-estilistas-peluqueria-y-barberia-en-getafe-getafe",
+    "businessName": "Atelier 42 Estilistas Peluquería y Barbería en Getafe",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. de La Paz, 1, 28907 Getafe, Madrid, España",
+    "phone": "+34 633 68 27 90",
+    "hasPhoto": true
+  },
+  {
+    "slug": "natural-paradise-peluqueria-organica-getafe-getafe",
+    "businessName": "Natural Paradise Peluquería Orgánica Getafe",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Hospital de San José, 3, 28901 Getafe, Madrid, España",
+    "phone": "+34 910 29 86 78",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-bercial-lo-mas-in-getafe",
+    "businessName": "Peluquería Bercial ️| Lo más IN",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Pilar Soler, 4, 28907 Getafe, Madrid, España",
+    "phone": "+34 912 51 47 95",
+    "hasPhoto": true
+  },
+  {
+    "slug": "estilistas-por-fin-expertos-coloristas-spa-barberia-getafe",
+    "businessName": "Estilistas por Fin | Expertos Coloristas & SPA - Barbería",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. de La Paz, 33, 28907 Getafe, Madrid, España",
+    "phone": "+34 914 91 64 58",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueros-eva-saiz-getafe",
+    "businessName": "Peluqueros Eva Saiz",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Calle Felipe Estevez, 8, 28901 Getafe, Madrid, España",
+    "phone": "+34 914 66 90 85",
+    "hasPhoto": true
+  },
+  {
+    "slug": "dh-peluqueros-getafe",
+    "businessName": "Dh Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Valencia, 21, 28903 Getafe, Madrid, España",
+    "phone": "+34 912 95 24 09",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-approach-by-julian-lopez-getafe",
+    "businessName": "Peluquería Approach by Julián López",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Gral. Castaños, 5, 28902 Getafe, Madrid, España",
+    "phone": "+34 624 12 61 51",
+    "hasPhoto": true
+  },
+  {
+    "slug": "livi-estilistas-getafe",
+    "businessName": "LIVI estilistas",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C/ Giralda s/n semiesq. av. D. Juan de Borbón, 1 METROSUR, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 82 50 96",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-karen-mendez-hair-designer-getafe",
+    "businessName": "Peluquería Karen Méndez Hair Designer",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Jiménez e Iglesias, 3, 28903 Getafe, Madrid, España",
+    "phone": "+34 603 12 08 38",
+    "hasPhoto": true
+  },
+  {
+    "slug": "kayra-peluqueros-getafe",
+    "businessName": "Kayra Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. de Ramón Rubial, 2, Loc 4, 28904 Getafe, Madrid, España",
+    "phone": "+34 916 96 23 07",
+    "hasPhoto": true
+  },
+  {
+    "slug": "victoria-belleza-y-estetica-getafe",
+    "businessName": "Victoria Belleza y Estética",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Pizarro, 2, Loc 6, 28902 Getafe, Madrid, España",
+    "phone": "+34 623 14 86 39",
+    "hasPhoto": true
+  },
+  {
+    "slug": "cesar-gomez-estilistas-getafe",
+    "businessName": "César Goméz Estilistas",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Ciempozuelos, 6, 28901 Getafe, Madrid, España",
+    "phone": "+34 916 95 40 02",
+    "hasPhoto": true
+  },
+  {
+    "slug": "origen-hair-studio-peluqueros-getafe",
+    "businessName": "Origen Hair Studio Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Uruguay, 3, Local 1, 28907 Getafe, Madrid, España",
+    "phone": "+34 919 52 27 70",
+    "hasPhoto": true
+  },
+  {
+    "slug": "el-salon-de-eva-getafe",
+    "businessName": "El salón de Eva",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. de la Magdalena, 35, 28901 Getafe, Madrid, España",
+    "phone": "",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-de-caballeros-zayd-getafe",
+    "businessName": "Peluquería De Caballeros ZAYD",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. Juan de la Cierva, 33, 28902 Getafe, Madrid, España",
+    "phone": "+34 910 07 57 32",
+    "hasPhoto": true
+  },
+  {
+    "slug": "pepa-romero-hairstudio-expertos-en-color-spa-getafe",
+    "businessName": "Pepa Romero HairStudio | Expertos en Color | SPA ⭐️⭐️⭐️⭐️⭐️",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. Rosa Regás, 6, 28907 Getafe, Madrid, España",
+    "phone": "+34 914 42 83 57",
+    "hasPhoto": true
+  },
+  {
+    "slug": "carmen-pena-estilistas-getafe",
+    "businessName": "Carmen Peña Estilistas",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Fuenlabrada, 7, 28901 Getafe, Madrid, España",
+    "phone": "+34 916 82 38 40",
+    "hasPhoto": false
+  },
+  {
+    "slug": "peluqueria-max-volumen-peluqueros-getafe",
+    "businessName": "Peluquería Max Volumen Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Olivo, 5, 28901 Getafe, Madrid, España",
+    "phone": "+34 910 14 65 48",
+    "hasPhoto": true
+  },
+  {
+    "slug": "lidia-caballero-getafe",
+    "businessName": "Lidia Caballero",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. Juan de la Cierva, 41, 28902 Getafe, Madrid, España",
+    "phone": "+34 915 45 86 91",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-aqui-me-quedo-expertas-en-extensiones-trenzas-y-unas-en-getafe-getafe",
+    "businessName": "Peluquería Aquí Me Quedo | Expertas en Extensiones, Trenzas y Uñas en Getafe.",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. de los Ángeles, 18, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 01 05 55",
+    "hasPhoto": true
+  },
+  {
+    "slug": "estilista-susana-hernandez-getafe",
+    "businessName": "Estilista Susana Hernández",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Calle Dr. Barraquer, 7, 28903 Getafe, Madrid, España",
+    "phone": "+34 912 28 52 75",
+    "hasPhoto": true
+  },
+  {
+    "slug": "glamour-peluqueria-estetica-getafe",
+    "businessName": "Glamour Peluquería Estética",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Peluqueria y estética Glamour, Av. de las Ciudades, 3, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 01 81 00",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-estilistas-inffinity-getafe",
+    "businessName": "Peluquería Estilistas Inffinity",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Perales, 5, 28902 Getafe, Madrid, España",
+    "phone": "+34 916 95 42 73",
+    "hasPhoto": true
+  },
+  {
+    "slug": "vany-peluqueria-c-ramon-y-cajal-getafe-getafe",
+    "businessName": "VANY Peluquería C/Ramon y Cajal. Getafe.",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Ramon y Cajal, 17, 28902 Getafe, Madrid, España",
+    "phone": "+34 912 46 05 26",
+    "hasPhoto": true
+  },
+  {
+    "slug": "sotto-peluqueros-getafe",
+    "businessName": "SOTTO Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Madrid, 109, 28902 Getafe, Madrid, España",
+    "phone": "+34 916 83 39 25",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-sabbah-getafe",
+    "businessName": "PELUQUERIA SABBAH",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Pl. España, 7, 28903 Getafe, Madrid, España",
+    "phone": "+34 919 35 98 82",
+    "hasPhoto": true
+  },
+  {
+    "slug": "alau-hair-studio-getafe",
+    "businessName": "ALAU Hair Studio",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "P.º de La Estación, 33, Loc 4, 28904 Getafe, Madrid, España",
+    "phone": "+34 676 88 93 66",
+    "hasPhoto": true
+  },
+  {
+    "slug": "mercedes-brey-peluqueria-estetica-getafe",
+    "businessName": "MERCEDES BREY PELUQUERÍA & ESTÉTICA",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "peluqueria, C. Álvaro de Bazán, 22, 28902 Getafe, Madrid, España",
+    "phone": "+34 916 96 88 46",
+    "hasPhoto": false
+  },
+  {
+    "slug": "peluqueria-doble-a-estilistas-getafe",
+    "businessName": "Peluquería Doble A Estilistas",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. María la Judía, 4, 28903 Getafe, Madrid, España",
+    "phone": "+34 912 99 01 86",
+    "hasPhoto": true
+  },
+  {
+    "slug": "d-d-daniel-romera-getafe",
+    "businessName": "D&D Daniel Romera",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Jardines, 15, 28901 Getafe, Madrid, España",
+    "phone": "+34 912 95 88 33",
+    "hasPhoto": false
+  },
+  {
+    "slug": "exca-peluqueros-getafe",
+    "businessName": "Exca Peluqueros",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. de los Ángeles, 19, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 83 54 30",
+    "hasPhoto": true
+  },
+  {
+    "slug": "vany-peluqueria-juan-de-la-cierva-getafe",
+    "businessName": "VANY Peluquería Juan de la Cierva.",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "Av. España, 5, Loc Peluquería, 28903 Getafe, Madrid, España",
+    "phone": "+34 919 12 45 96",
+    "hasPhoto": true
+  },
+  {
+    "slug": "veronica-blonde-gastrosalon-peluqueria-getafe",
+    "businessName": "Verònica Blonde gastrosalòn/Peluquería",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "C. Don Fadrique, 16, 28901 Getafe, Madrid, España",
+    "phone": "+34 912 01 70 01",
+    "hasPhoto": true
+  },
+  {
+    "slug": "peluqueria-arem-getafe",
+    "businessName": "Peluquería ArEm",
+    "tipo": "Peluqueria",
+    "city": "Getafe",
+    "address": "28902 Getafe, Madrid, España",
+    "phone": "+34 912 30 25 25",
+    "hasPhoto": true
   }
 ]

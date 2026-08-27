@@ -1,4 +1,4 @@
-import { DM_Serif_Display, Fraunces, Unbounded, Inter, Nunito_Sans } from "next/font/google";
+import { DM_Serif_Display, Fraunces, Bodoni_Moda, Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteShell } from "@/components/layout/SiteShell";
@@ -12,9 +12,8 @@ const leads = leadsData as Lead[];
 // cargan las tres aqui porque next/font/google exige llamarse a nivel de
 // modulo, y luego se elige la .variable correcta por lead en tiempo de build.
 const tavernDisplay = DM_Serif_Display({ variable: "--font-site-display", subsets: ["latin"], weight: "400" });
-const tavernBody = Nunito_Sans({ variable: "--font-site-body", subsets: ["latin"] });
 const editorialDisplay = Fraunces({ variable: "--font-site-display", subsets: ["latin"], weight: ["500", "600"] });
-const fashionDisplay = Unbounded({ variable: "--font-site-display", subsets: ["latin"], weight: ["500", "600"] });
+const fashionDisplay = Bodoni_Moda({ variable: "--font-site-display", subsets: ["latin"], weight: ["500", "600", "700"] });
 const body = Inter({ variable: "--font-site-body", subsets: ["latin"] });
 
 const DISPLAY_FONT_BY_TIPO: Record<string, { variable: string }> = {
@@ -22,9 +21,7 @@ const DISPLAY_FONT_BY_TIPO: Record<string, { variable: string }> = {
   Restaurante: editorialDisplay,
   Peluqueria: fashionDisplay,
 };
-const BODY_FONT_BY_TIPO: Record<string, { variable: string }> = {
-  Bar: tavernBody,
-};
+const BODY_FONT_BY_TIPO: Record<string, { variable: string }> = {};
 
 export function generateStaticParams() {
   return leads.map((lead) => ({ slug: lead.slug }));

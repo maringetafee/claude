@@ -19,6 +19,10 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 
+# La consola de Windows usa cp1252 por defecto y no sabe imprimir emojis, que
+# a veces aparecen en nombres de negocio sacados de Google Places.
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
 IGNORE_SUBSTR = ("sentry", "wixpress", "example.com", "godaddy", "yourdomain")
 HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; lead-research/1.0)"}

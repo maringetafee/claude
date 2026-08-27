@@ -1,0 +1,9 @@
+{
+  "name": "leadgen-webs-functions",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Netlify Function para sincronizar el estado de los leads (checkbox 'marcar como hecho' en el panel).",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  }
+}

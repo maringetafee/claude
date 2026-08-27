@@ -19,7 +19,7 @@ function GalleryTile({ src, alt, span, index }: { src: string; alt: string; span
   return (
     <div
       ref={ref}
-      className={`relative overflow-hidden aspect-square ${span} transition-all duration-[700ms] ease-[var(--ease-smooth)] ${
+      className={`group relative overflow-hidden aspect-square ${span} transition-all duration-[700ms] ease-[var(--ease-smooth)] ${
         visible ? "opacity-100 scale-100" : "opacity-0 scale-[0.97]"
       }`}
       style={{ transitionDelay: `${(index % 3) * 90}ms` }}
@@ -28,8 +28,16 @@ function GalleryTile({ src, alt, span, index }: { src: string; alt: string; span
         src={src}
         alt={alt}
         loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-standard)] hover:scale-105"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[var(--duration-slow)] ease-[var(--ease-standard)] group-hover:scale-[1.04]"
       />
+      <div
+        className="absolute inset-0 flex items-end p-5 opacity-0 group-hover:opacity-100 transition-opacity duration-[var(--duration-normal)]"
+        style={{ background: "linear-gradient(0deg, color-mix(in srgb, var(--color-primary) 35%, transparent), transparent 55%)" }}
+      >
+        <span className="text-[10px] uppercase tracking-[0.35em]" style={{ color: "var(--color-background)" }}>
+          Ver
+        </span>
+      </div>
     </div>
   );
 }

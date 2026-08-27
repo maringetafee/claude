@@ -72,7 +72,7 @@ export function TableMap({
                   : isOccupied
                     ? "var(--color-border)"
                     : "var(--color-surface)",
-                color: isSelected ? "var(--color-background)" : isOccupied ? "var(--color-muted)" : "var(--color-primary)",
+                color: isSelected ? "var(--color-accent-foreground)" : isOccupied ? "var(--color-muted)" : "var(--color-primary)",
                 border: `1.5px solid ${isSelected ? "var(--color-accent)" : "var(--color-border)"}`,
                 transform: isSelected ? "scale(1.06)" : "scale(1)",
               }}

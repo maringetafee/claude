@@ -1,6 +1,7 @@
 "use client";
 
 import { useReveal } from "@/lib/useReveal";
+import { renderLines } from "@/lib/lines";
 
 export function SectionHeading({
   eyebrow,
@@ -26,8 +27,11 @@ export function SectionHeading({
       >
         {eyebrow}
       </p>
-      <h2 className="font-display text-4xl md:text-5xl leading-[1.05]" style={{ color: "var(--color-primary)" }}>
-        {title}
+      <h2
+        className="font-display leading-[1.05]"
+        style={{ color: "var(--color-primary)", fontSize: "var(--section-title-size)" }}
+      >
+        {renderLines(title)}
       </h2>
     </div>
   );

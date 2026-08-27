@@ -15,13 +15,16 @@ export type HeroType = "fullscreen" | "editorial" | "split";
 export type SectionId =
   | "hero"
   | "about"
+  | "features"
   | "menu"
   | "services"
+  | "showcase"
   | "team"
   | "gallery"
   | "booking"
   | "location"
-  | "contact";
+  | "contact"
+  | "cta";
 
 export interface NavLink {
   label: string;
@@ -54,12 +57,35 @@ export interface MenuItemConfig {
 export interface MenuCategoryConfig {
   name: string;
   items: MenuItemConfig[];
+  /** Imagen mostrada al pasar el raton sobre esta categoria (panel editorial). */
+  image?: string;
 }
 
 export interface MenuConfig {
   eyebrow: string;
   title: string;
+  subtitle?: string;
   categories: MenuCategoryConfig[];
+}
+
+export interface FeatureItemConfig {
+  title: string;
+  body: string;
+  image: string;
+}
+
+export interface FeaturesConfig {
+  eyebrow: string;
+  title: string;
+  items: FeatureItemConfig[];
+}
+
+export interface ShowcaseConfig {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  image: string;
+  cta: { label: string; href: string };
 }
 
 export interface ServiceItemConfig {
@@ -72,6 +98,8 @@ export interface ServiceItemConfig {
 export interface ServiceCategoryConfig {
   name: string;
   items: ServiceItemConfig[];
+  /** Imagen mostrada al pasar el raton sobre esta categoria (panel editorial). */
+  image?: string;
 }
 
 export interface ServicesConfig {
@@ -123,6 +151,13 @@ export interface LocationConfig {
   hours: { day: string; hours: string }[];
 }
 
+export interface CTAConfig {
+  title: string;
+  subtitle?: string;
+  image: string;
+  cta: { label: string; href: string };
+}
+
 export interface ContactConfig {
   phone: string;
   whatsapp: string;
@@ -142,11 +177,14 @@ export interface BusinessConfig {
   sections: SectionId[];
   hero: HeroConfig;
   about?: AboutConfig;
+  features?: FeaturesConfig;
   menu?: MenuConfig;
   services?: ServicesConfig;
+  showcase?: ShowcaseConfig;
   team?: TeamConfig;
   gallery?: GalleryConfig;
   booking?: BookingConfig;
   location: LocationConfig;
   contact: ContactConfig;
+  cta?: CTAConfig;
 }

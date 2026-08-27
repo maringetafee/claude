@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from "react";
 
 interface ButtonProps {
   href: string;
@@ -14,14 +14,18 @@ export function Button({ href, children, variant = "primary", className = "" }: 
 
   const styles =
     variant === "primary"
-      ? "text-[var(--color-background)] bg-[var(--color-primary)] hover:bg-[var(--color-accent)] hover:text-[var(--color-background)]"
+      ? "text-[var(--color-background)] bg-[var(--color-primary)] hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-foreground)]"
       : "text-[var(--color-primary)] bg-transparent border border-[var(--color-border)] hover:border-[var(--color-primary)]";
 
   return (
     <Link
       href={href}
       className={`${base} ${styles} ${className}`}
-      style={{ borderRadius: "var(--radius-sm)" }}
+      style={{
+        borderRadius: "var(--radius-sm)",
+        textTransform: "var(--cta-text-transform, none)" as CSSProperties["textTransform"],
+        letterSpacing: "var(--cta-letter-spacing, normal)",
+      }}
     >
       {children}
     </Link>
