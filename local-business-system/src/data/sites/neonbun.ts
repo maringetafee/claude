@@ -1,13 +1,5 @@
 import { BusinessConfig } from "@/lib/types";
 
-// Los assets propios de esta plantilla (fotos + video del hero) viven en
-// public/img/neonbun y public/video — como este mismo config se reutiliza
-// para el build de plantillas (basePath "/plantillas") y para el build
-// plano de leads reales (basePath ""), el prefijo se resuelve en build time
-// igual que en next.config.ts, para que la ruta sea correcta en los dos.
-const BASE = process.env.STATIC_EXPORT_BASE_PATH || "";
-const img = (name: string) => `${BASE}/img/neonbun/${name}`;
-
 export const neonbun: BusinessConfig = {
   slug: "neonbun",
   businessName: "NEONBUN",
@@ -28,8 +20,7 @@ export const neonbun: BusinessConfig = {
     eyebrow: "Hamburguesería · Ciudad",
     title: "SMASH BURGERS\nSIN POSTUREO",
     subtitle: "Carne de calidad, pan brioche a la plancha y salsas propias. Rápido, honesto, sin complicarse.",
-    image: img("burger1.png"),
-    video: `${BASE}/video/neonbun-intro.mp4`,
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1800&q=80",
     ctaPrimary: { label: "Reservar mesa", href: "#booking" },
     ctaSecondary: { label: "Ver la carta", href: "#menu" },
     marquee: [
@@ -47,64 +38,28 @@ export const neonbun: BusinessConfig = {
     categories: [
       {
         name: "Smash Burgers",
-        image: img("burger2.png"),
+        image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=1200&q=80",
         items: [
-          {
-            name: "La Original",
-            description: "Doble smash, queso cheddar, cebolla caramelizada, salsa de la casa",
-            price: "9,50€",
-            image: img("burger1.png"),
-          },
-          {
-            name: "La Ahumada",
-            description: "Smash de vaca madurada, bacon crujiente, queso azul, mayo ahumada",
-            price: "11€",
-            image: img("smash.png"),
-          },
-          {
-            name: "La Picante",
-            description: "Doble smash, jalapeños, queso pepper jack, salsa spicy",
-            price: "10,50€",
-            image: img("burger2.png"),
-          },
+          { name: "La Original", description: "Doble smash, queso cheddar, cebolla caramelizada, salsa de la casa", price: "9,50€" },
+          { name: "La Ahumada", description: "Smash de vaca madurada, bacon crujiente, queso azul, mayo ahumada", price: "11€" },
+          { name: "La Picante", description: "Doble smash, jalapeños, queso pepper jack, salsa spicy", price: "10,50€" },
         ],
       },
       {
         name: "Para Compartir",
-        image: img("papas.png"),
+        image: "https://images.unsplash.com/photo-1485962398705-ef6a13c41e8f?w=1200&q=80",
         items: [
-          { name: "Patatas Cargadas", description: "Patatas fritas, salsa cheddar cremosa, bacon crujiente, cebollino", price: "6,50€", image: img("papas.png") },
-          {
-            name: "Aros de Cebolla Crujientes",
-            description: "Rebozado casero, salsa barbacoa de la casa",
-            price: "5€",
-            image: img("crispy.png"),
-          },
-          {
-            name: "Alitas Picantes",
-            description: "8 unidades, salsa a elegir",
-            price: "8€",
-            image: img("wings.png"),
-          },
-          {
-            name: "Nachos Cargados",
-            description: "Nachos, queso fundido, guacamole, pico de gallo",
-            price: "7€",
-            image: img("nachos.png"),
-          },
+          { name: "Patatas Cargadas", description: "Patatas fritas, salsa cheddar cremosa, bacon crujiente, cebollino", price: "6,50€" },
+          { name: "Aros de Cebolla Crujientes", description: "Rebozado casero, salsa barbacoa de la casa", price: "5€" },
+          { name: "Alitas Picantes", description: "8 unidades, salsa a elegir", price: "8€" },
         ],
       },
       {
         name: "Postres",
-        image: img("brownie.png"),
+        image: "https://images.unsplash.com/photo-1702925614886-50ad13c88d3f?w=1200&q=80",
         items: [
-          { name: "Flan Casero", description: "Receta de la abuela, caramelo tostado", price: "4,50€", image: img("flan.png") },
-          {
-            name: "Brownie con Helado",
-            description: "Brownie templado, bola de vainilla",
-            price: "5,50€",
-            image: img("brownie.png"),
-          },
+          { name: "Tarta de Queso", description: "Base de galleta, coulis de frutos rojos", price: "5€" },
+          { name: "Brownie con Helado", description: "Brownie templado, bola de vainilla", price: "5,50€" },
         ],
       },
     ],
@@ -113,32 +68,24 @@ export const neonbun: BusinessConfig = {
     eyebrow: "Especialidad de la casa",
     title: "PATATAS\nCARGADAS",
     subtitle: "Crujientes, bañadas en salsa cheddar cremosa y bacon por encima. El acompañante que todo el mundo acaba pidiendo de más.",
-    image: img("papas.png"),
+    image: "https://images.unsplash.com/photo-1639744210631-209fce3e256c?w=1600&q=80",
     cta: { label: "Ver la carta completa", href: "#menu" },
-    stats: [
-      { value: "220g", label: "Patata fresca" },
-      { value: "3", label: "Salsas caseras" },
-      { value: "100%", label: "Fritas al momento" },
-    ],
   },
   about: {
     eyebrow: "Nosotros",
     title: "Hamburguesas con\nactitud urbana",
     body:
       "NEONBUN nació de una idea simple: la smash burger perfecta no necesita complicarse. Carne de calidad, pan brioche tostado en plancha y salsas propias, servidas rápido y sin postureo. Un local pequeño, luces de neón y buena música — así nos gusta recibir a quien viene a comer.",
-    image: img("about.png"),
-    stat: { value: "★ 4.8", label: "Valoración media" },
+    image: "https://images.unsplash.com/photo-1740957452643-24c36e417732?w=1200&q=80",
   },
   gallery: {
     eyebrow: "Galería",
     title: "Lo que sale de la plancha",
     images: [
-      { src: img("burger1.png"), alt: "Smash burger doble con queso" },
-      { src: img("tenders.png"), alt: "Chicken tenders crujientes" },
-      { src: img("croquetas.png"), alt: "Croquetas caseras" },
-      { src: img("rollitos.png"), alt: "Rollitos crujientes" },
-      { src: img("wings.png"), alt: "Alitas de pollo picantes" },
-      { src: img("nachos.png"), alt: "Nachos cargados con guacamole" },
+      { src: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=1200&q=80", alt: "Hamburguesa doble con queso" },
+      { src: "https://images.unsplash.com/photo-1609530127564-bee93ebe1c9e?w=900&q=80", alt: "Patatas fritas en plato de cerámica negra" },
+      { src: "https://images.unsplash.com/photo-1637273484026-11d51fb64024?w=900&q=80", alt: "Alitas de pollo fritas" },
+      { src: "https://images.unsplash.com/photo-1740957442467-69296c3e0c04?w=900&q=80", alt: "Ventana del local con letrero de neón" },
     ],
   },
   booking: {
@@ -151,7 +98,7 @@ export const neonbun: BusinessConfig = {
   testimonials: {
     eyebrow: "Lo que dicen de nosotros",
     title: "RESEÑAS DE\nGOOGLE",
-    rating: "4.8",
+    rating: "4.7",
     ratingCount: "+150 reseñas",
     source: "Google Reviews",
     sourceHref: "https://www.google.com/maps",
@@ -165,7 +112,7 @@ export const neonbun: BusinessConfig = {
   cta: {
     title: "DIRECTO A\nTU CASA",
     subtitle: "Si no puedes venir, te lo llevamos. Pedido fácil, entrega rápida.",
-    image: img("smash.png"),
+    image: "https://images.unsplash.com/photo-1609530127564-bee93ebe1c9e?w=1600&q=80",
     cta: { label: "Ver la carta", href: "#menu" },
   },
   location: {

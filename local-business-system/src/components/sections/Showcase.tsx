@@ -54,23 +54,6 @@ export function Showcase({ showcase }: { showcase: ShowcaseConfig }) {
               {showcase.subtitle}
             </p>
           )}
-          {showcase.stats && showcase.stats.length > 0 && (
-            <div className="flex gap-8 mb-9">
-              {showcase.stats.map((stat) => (
-                <div key={stat.label}>
-                  <span className="font-display text-3xl block" style={{ color: "var(--color-accent)" }}>
-                    {stat.value}
-                  </span>
-                  <span
-                    className="text-[10px] uppercase tracking-[0.2em]"
-                    style={{ color: "var(--color-accent-foreground)", opacity: 0.6 }}
-                  >
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
           <Button href={showcase.cta.href}>{showcase.cta.label}</Button>
         </div>
       </Container>

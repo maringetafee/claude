@@ -38,10 +38,6 @@ export interface HeroConfig {
   title: string;
   subtitle: string;
   image: string;
-  /** Video de fondo opcional (solo variante "fullscreen") — si esta presente
-   * sustituye a la imagen estatica, que se sigue usando como poster/fallback
-   * y como og:image. Autoplay/loop/muted, se ignora en reduced-motion. */
-  video?: string;
   ctaPrimary: { label: string; href: string };
   ctaSecondary?: { label: string; href: string };
   /** Franja de texto en bucle infinito sobre el borde del hero (solo variante
@@ -55,8 +51,6 @@ export interface AboutConfig {
   title: string;
   body: string;
   image: string;
-  /** Insignia flotante sobre la imagen (ej. valoracion media). Opcional. */
-  stat?: { value: string; label: string };
 }
 
 export interface MenuItemConfig {
@@ -100,8 +94,6 @@ export interface ShowcaseConfig {
   subtitle?: string;
   image: string;
   cta: { label: string; href: string };
-  /** Fila de datos destacados (ej. "180g · Carne · 100% vacuno"). Opcional. */
-  stats?: { value: string; label: string }[];
 }
 
 export interface ServiceItemConfig {
