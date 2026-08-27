@@ -20,10 +20,6 @@ const FAQS = [
     a: "Sí, ambos están incluidos en los planes de cuidado mensual. También podemos configurarlo sobre tu propio hosting o dominio si ya los tienes.",
   },
   {
-    q: "¿Cómo funciona el pago?",
-    a: "La mitad al empezar el proyecto y la otra mitad al publicar el sitio.",
-  },
-  {
     q: "¿Y si necesito más páginas después de empezar?",
     a: "Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.",
   },
