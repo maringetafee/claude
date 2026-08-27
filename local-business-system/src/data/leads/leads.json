@@ -1,0 +1,173 @@
+[
+  {
+    "slug": "cerveceria-el-eskinazo-getafe",
+    "businessName": "Cervecería El Eskinazo",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. de las Ciudades, 1, 28903 Getafe, Madrid, España",
+    "phone": "+34 679 96 42 79",
+    "hasPhoto": true
+  },
+  {
+    "slug": "amphetamine-lovers-getafe",
+    "businessName": "Amphetamine Lovers",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Ricardo de la Vega, 2, 28901 Getafe, Madrid, España",
+    "phone": "+34 627 37 82 56",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-garaje-getafe",
+    "businessName": "Bar Garaje",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Tr.ª del Pilar, 2, 28901 Getafe, Madrid, España",
+    "phone": "",
+    "hasPhoto": true
+  },
+  {
+    "slug": "yii-bar-vip-getafe",
+    "businessName": "YII BAR VIP",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Carabanchel, 4, 28902 Getafe, Madrid, España",
+    "phone": "+34 674 77 50 94",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-avenida-47-getafe",
+    "businessName": "Bar Avenida 47",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. España, 47, 28903 Getafe, Madrid, España",
+    "phone": "",
+    "hasPhoto": true
+  },
+  {
+    "slug": "tipsy-bar-getafe",
+    "businessName": "TIPSY Bar",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. de los Ángeles, 49, 28903 Getafe, Madrid, España",
+    "phone": "+34 610 65 94 49",
+    "hasPhoto": false
+  },
+  {
+    "slug": "casi-k-si-rock-bar-getafe",
+    "businessName": "Casi k si Rock Bar",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Sierra, 7, 28901 Getafe, Madrid, España",
+    "phone": "",
+    "hasPhoto": true
+  },
+  {
+    "slug": "glu-glu-bar-getafe",
+    "businessName": "Glu glu Bar",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Pizarro, 2, 28902 Getafe, Madrid, España",
+    "phone": "+34 666 07 20 12",
+    "hasPhoto": true
+  },
+  {
+    "slug": "donde-pepe-bar-getafe",
+    "businessName": "Donde Pepe Bar",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Teruel, 3, 28903 Getafe, Madrid, España",
+    "phone": "",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-los-amigos-getafe",
+    "businessName": "Bar Los Amigos",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Valencia, 2, 28903 Getafe, Madrid, España",
+    "phone": "+34 919 21 33 11",
+    "hasPhoto": true
+  },
+  {
+    "slug": "grape-bar-getafe",
+    "businessName": "GRAPE BAR",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Calle Alcalde Angel Arroyo 8, Via de Servicios, 10, A 42 Salida, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 65 27 60",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-la-antigua-getafe-getafe",
+    "businessName": "Bar La Antigua Getafe",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. de las Ciudades, 5, 28903 Getafe, Madrid, España",
+    "phone": "+34 602 60 53 51",
+    "hasPhoto": true
+  },
+  {
+    "slug": "horizonte-lounge-getafe",
+    "businessName": "Horizonte_lounge",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. Rocinante, 2, 28906 Getafe, Madrid, España",
+    "phone": "+34 915 97 21 52",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-el-rincon-de-la-morenita-getafe",
+    "businessName": "Bar El Rincón de La Morenita",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. Don Juan de Borbón, s/n, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 82 30 03",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-de-paco-getafe",
+    "businessName": "Bar de Paco",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Loto, 4, 28903 Getafe, Madrid, España",
+    "phone": "+34 660 32 17 73",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-gallardo-getafe",
+    "businessName": "Bar Gallardo",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Pizarro, 34, 28902 Getafe, Madrid, España",
+    "phone": "+34 696 35 30 61",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-soportal-getafe",
+    "businessName": "Bar Soportal",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Carabanchel, 20, 28902 Getafe, Madrid, España",
+    "phone": "+34 916 01 03 78",
+    "hasPhoto": true
+  },
+  {
+    "slug": "bar-restaurante-el-rincon-del-tio-eulogio-getafe",
+    "businessName": "Bar restaurante El Rincón del Tío Eulogio",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "Av. Rigoberta Menchú, 11, 28903 Getafe, Madrid, España",
+    "phone": "+34 916 01 73 02",
+    "hasPhoto": true
+  },
+  {
+    "slug": "the-gold-s-abbey-getafe",
+    "businessName": "The Gold´s Abbey",
+    "tipo": "Bar",
+    "city": "Getafe",
+    "address": "C. Rosa Luxemburgo, 7, 28903 Getafe, Madrid, España",
+    "phone": "+34 919 35 58 04",
+    "hasPhoto": true
+  }
+]

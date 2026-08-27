@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ business_name }} — {{ city }}</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#fff; color:#1f1b18; }
+  h1, h2, .brand { font-family: 'Poppins', sans-serif; }
+  .hero-bg { background-size: cover; background-position: center; }
+</style>
+</head>
+<body>
+
+<header class="fixed top-0 inset-x-0 z-30 backdrop-blur bg-white/90 border-b border-black/5">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <span class="brand text-xl tracking-wide">{{ business_name }}</span>
+    <nav class="hidden md:flex gap-8 text-sm text-stone-600">
+      <a href="#nosotros" class="hover:text-rose-500">Nosotros</a>
+      <a href="#servicios" class="hover:text-rose-500">Servicios</a>
+      <a href="#contacto" class="hover:text-rose-500">Cita</a>
+    </nav>
+    <a href="{{ whatsapp_link }}" class="text-sm font-semibold bg-rose-500 text-white px-4 py-2 rounded-full hover:bg-rose-400 transition">Pedir cita</a>
+  </div>
+</header>
+
+<section class="hero-bg relative h-[92vh] flex items-end{% if not hero_image %} bg-gradient-to-br from-rose-100 via-rose-50 to-white{% endif %}"{% if hero_image %} style="background-image:linear-gradient(180deg, rgba(255,255,255,.1), rgba(20,15,15,.55)), url('img/{{ slug }}.jpg')"{% endif %}>
+  <div class="max-w-6xl mx-auto px-6 pb-20 w-full {% if hero_image %}text-white{% else %}text-stone-900{% endif %}">
+    <p class="uppercase tracking-[0.3em] {% if hero_image %}text-rose-200{% else %}text-rose-500{% endif %} text-xs mb-4">{{ type_label }} en {{ city }}</p>
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">{{ business_name }}</h1>
+    <p class="{% if hero_image %}text-white/80{% else %}text-stone-600{% endif %} text-lg max-w-xl mb-8">Estilo y cuidado personal en {{ city }}, con cita para que no esperes.</p>
+    <div class="flex flex-wrap gap-4">
+      <a href="{{ whatsapp_link }}" class="bg-rose-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-rose-400 transition">Reservar cita</a>
+      <a href="#servicios" class="border border-current px-6 py-3 rounded-full hover:bg-black/5 transition">Ver servicios</a>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="max-w-4xl mx-auto px-6 py-24 text-center">
+  <h2 class="text-3xl md:text-4xl font-bold mb-6">Sobre nosotros</h2>
+  <p class="text-stone-600 text-lg leading-relaxed">
+    {{ business_name }} es un salón en {{ city }} centrado en el cuidado y el estilo de cada cliente.
+    Esta es una página de ejemplo para mostrar cómo podría verse vuestra presencia online — con vuestros
+    servicios, precios y fotos reales quedaría lista para publicar.
+  </p>
+</section>
+
+<section id="servicios" class="bg-rose-50/60 py-24">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Servicios</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl p-8 border border-black/5">
+        <div class="text-2xl mb-4">✂️</div>
+        <h3 class="text-xl font-semibold mb-2">Corte y peinado</h3>
+        <p class="text-stone-500 text-sm">Para cada tipo de cabello y ocasión.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border border-black/5">
+        <div class="text-2xl mb-4">🎨</div>
+        <h3 class="text-xl font-semibold mb-2">Color</h3>
+        <p class="text-stone-500 text-sm">Técnicas de coloración adaptadas a ti.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-8 border border-black/5">
+        <div class="text-2xl mb-4">💆</div>
+        <h3 class="text-xl font-semibold mb-2">Tratamientos</h3>
+        <p class="text-stone-500 text-sm">Cuidado y reparación para tu cabello.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="max-w-6xl mx-auto px-6 py-24">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Pide tu cita</h2>
+  <div class="grid md:grid-cols-2 gap-10 items-start">
+    <div class="space-y-4 text-stone-600">
+      <p><strong class="text-stone-900">Dirección:</strong> {{ address }}</p>
+      <p><strong class="text-stone-900">Teléfono:</strong> <a href="{{ tel_link }}" class="hover:text-rose-500">{{ phone }}</a></p>
+      <a href="{{ whatsapp_link }}" class="inline-block mt-4 bg-rose-500 text-white font-semibold px-6 py-3 rounded-full hover:bg-rose-400 transition">Escribir por WhatsApp</a>
+    </div>
+    <div class="rounded-2xl overflow-hidden border border-black/10 h-64 md:h-full">
+      <iframe class="w-full h-full" style="border:0" loading="lazy" src="{{ maps_embed_src }}"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-black/10 py-8 text-center text-stone-400 text-xs">
+  © {{ year }} {{ business_name }} · Página de ejemplo generada como propuesta
+</footer>
+
+</body>
+</html>

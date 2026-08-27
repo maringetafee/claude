@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ business_name }} — {{ city }}</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: 'Inter', sans-serif; background:#fbf7f0; color:#2b2420; }
+  h1, h2, .brand { font-family: 'Playfair Display', serif; }
+  .hero-bg { background-size: cover; background-position: center; }
+</style>
+</head>
+<body>
+
+<header class="fixed top-0 inset-x-0 z-30 backdrop-blur bg-[#fbf7f0]/90 border-b border-black/5">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <span class="brand text-xl tracking-wide">{{ business_name }}</span>
+    <nav class="hidden md:flex gap-8 text-sm text-stone-600">
+      <a href="#nosotros" class="hover:text-stone-900">Nosotros</a>
+      <a href="#carta" class="hover:text-stone-900">La carta</a>
+      <a href="#contacto" class="hover:text-stone-900">Reservas</a>
+    </nav>
+    <a href="{{ tel_link }}" class="text-sm font-semibold bg-stone-900 text-white px-4 py-2 rounded-full hover:bg-stone-700 transition">Llamar</a>
+  </div>
+</header>
+
+<section class="hero-bg relative h-[92vh] flex items-end{% if not hero_image %} bg-gradient-to-br from-stone-800 via-stone-900 to-black{% endif %}"{% if hero_image %} style="background-image:linear-gradient(180deg, rgba(20,15,10,.25), rgba(20,15,10,.85)), url('img/{{ slug }}.jpg')"{% endif %}>
+  <div class="max-w-6xl mx-auto px-6 pb-20 w-full text-white">
+    <p class="uppercase tracking-[0.3em] text-amber-200 text-xs mb-4">{{ type_label }} en {{ city }}</p>
+    <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6">{{ business_name }}</h1>
+    <p class="text-white/80 text-lg max-w-xl mb-8">Cocina cuidada y ambiente cercano en {{ city }}.</p>
+    <div class="flex flex-wrap gap-4">
+      <a href="{{ whatsapp_link }}" class="bg-amber-100 text-stone-900 font-semibold px-6 py-3 rounded-full hover:bg-white transition">Reservar mesa</a>
+      <a href="#carta" class="border border-white/40 text-white px-6 py-3 rounded-full hover:bg-white/10 transition">Ver la carta</a>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" class="max-w-4xl mx-auto px-6 py-24 text-center">
+  <h2 class="text-3xl md:text-4xl font-bold mb-6">Sobre nosotros</h2>
+  <p class="text-stone-600 text-lg leading-relaxed">
+    {{ business_name }} ofrece cocina de mercado en {{ city }}, pensada para disfrutar tanto en el día a día
+    como en ocasiones especiales. Esta es una página de ejemplo para mostrar cómo podría verse vuestra web —
+    con vuestra carta, fotos y horarios reales quedaría lista para publicar.
+  </p>
+</section>
+
+<section id="carta" class="bg-white py-24 border-y border-black/5">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-14">Nuestra propuesta</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="rounded-2xl p-8 border border-black/5 bg-[#fbf7f0]">
+        <div class="text-2xl mb-4">🥗</div>
+        <h3 class="text-xl font-semibold mb-2">Entrantes</h3>
+        <p class="text-stone-500 text-sm">Para compartir o empezar bien la comida.</p>
+      </div>
+      <div class="rounded-2xl p-8 border border-black/5 bg-[#fbf7f0]">
+        <div class="text-2xl mb-4">🍽️</div>
+        <h3 class="text-xl font-semibold mb-2">Platos principales</h3>
+        <p class="text-stone-500 text-sm">Cocina de mercado con producto de temporada.</p>
+      </div>
+      <div class="rounded-2xl p-8 border border-black/5 bg-[#fbf7f0]">
+        <div class="text-2xl mb-4">🍰</div>
+        <h3 class="text-xl font-semibold mb-2">Postres</h3>
+        <p class="text-stone-500 text-sm">El broche final, caseros y de temporada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="max-w-6xl mx-auto px-6 py-24">
+  <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Reservas y ubicación</h2>
+  <div class="grid md:grid-cols-2 gap-10 items-start">
+    <div class="space-y-4 text-stone-600">
+      <p><strong class="text-stone-900">Dirección:</strong> {{ address }}</p>
+      <p><strong class="text-stone-900">Teléfono:</strong> <a href="{{ tel_link }}" class="hover:text-stone-900">{{ phone }}</a></p>
+      <a href="{{ whatsapp_link }}" class="inline-block mt-4 bg-stone-900 text-white font-semibold px-6 py-3 rounded-full hover:bg-stone-700 transition">Reservar por WhatsApp</a>
+    </div>
+    <div class="rounded-2xl overflow-hidden border border-black/10 h-64 md:h-full">
+      <iframe class="w-full h-full" style="border:0" loading="lazy" src="{{ maps_embed_src }}"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-black/10 py-8 text-center text-stone-400 text-xs">
+  © {{ year }} {{ business_name }} · Página de ejemplo generada como propuesta
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+:root {
+  /* Color tokens — overridden per theme below */
+  --color-background: #faf7f2;
+  --color-surface: #ffffff;
+  --color-primary: #1c1a17;
+  --color-secondary: #6b5c4d;
+  --color-accent: #a9722f;
+  --color-text: #211d19;
+  --color-muted: #8a8078;
+  --color-border: rgba(28, 26, 23, 0.12);
+
+  /* Spacing scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 320ms;
+  --duration-slow: 640ms;
+
+  /* Container system */
+  --page-padding: clamp(1.25rem, 4vw, 3rem);
+  --content-max-width: 1280px;
+}
+
+/* ---------------------------------------------------------------- */
+/* THEME: luxury-editorial — restaurantes, cafés premium, beauty    */
+/* ---------------------------------------------------------------- */
+[data-theme="luxury-editorial"] {
+  --color-background: #faf7f2;
+  --color-surface: #ffffff;
+  --color-primary: #1c1a17;
+  --color-secondary: #6b5c4d;
+  --color-accent: #a9722f;
+  --color-text: #211d19;
+  --color-muted: #8a8078;
+  --color-border: rgba(28, 26, 23, 0.12);
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 4px;
+}
+
+/* ---------------------------------------------------------------- */
+/* THEME: nightlife — bares, cocktail bars, clubs                   */
+/* ---------------------------------------------------------------- */
+[data-theme="nightlife"] {
+  --color-background: #0b0710;
+  --color-surface: #16101f;
+  --color-primary: #ffffff;
+  --color-secondary: #c9b8db;
+  --color-accent: #ff3d81;
+  --color-text: #f5eefc;
+  --color-muted: #9c8bb0;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --radius-sm: 999px;
+  --radius-md: 999px;
+  --radius-lg: 24px;
+}
+
+/* ---------------------------------------------------------------- */
+/* THEME: fashion-minimal — peluquerías, barberías, beauty editorial */
+/* ---------------------------------------------------------------- */
+[data-theme="fashion-minimal"] {
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-primary: #0a0a0a;
+  --color-secondary: #4d4d4d;
+  --color-accent: #0a0a0a;
+  --color-text: #111111;
+  --color-muted: #757575;
+  --color-border: rgba(0, 0, 0, 0.1);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+}
+
+/* ---------------------------------------------------------------- */
+/* THEME: tavern-warm — bares de barrio, cervecerías, tabernas       */
+/* (distinto de "nightlife": esto es bar de toda la vida, no cocktail bar) */
+/* ---------------------------------------------------------------- */
+[data-theme="tavern-warm"] {
+  --color-background: #fbf1e4;
+  --color-surface: #fffaf3;
+  --color-primary: #2e1c10;
+  --color-secondary: #6b4a30;
+  --color-accent: #c1502e;
+  --color-text: #2a1b10;
+  --color-muted: #8a7460;
+  --color-border: rgba(46, 28, 16, 0.14);
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Applied on the themed site wrapper, not on body — body is an ancestor of
+   that wrapper, so a `var(--color-background)` on body would always resolve
+   against :root's default theme instead of the [data-theme] override below.
+   Sections with no explicit background of their own (About, Booking,
+   Contact) rely on this to show the correct per-theme color. */
+[data-theme] {
+  background: var(--color-background);
+  color: var(--color-text);
+  min-height: 100dvh;
+  font-family: var(--font-site-body, ui-sans-serif, system-ui, sans-serif);
+}
+
+.font-display {
+  font-family: var(--font-site-display, ui-serif, serif);
+}
+
+/* ---------------------------------------------------------------- */
+/* Container system — symmetric margins at every breakpoint         */
+/* ---------------------------------------------------------------- */
+.container {
+  width: min(calc(100% - 2 * var(--page-padding)), var(--content-max-width));
+  margin-inline: auto;
+}
+
+.full-bleed {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

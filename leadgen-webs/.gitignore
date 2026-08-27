@@ -1,0 +1,6 @@
+.env
+leads/*.csv
+leads/photos/
+output/
+__pycache__/
+*.pyc
