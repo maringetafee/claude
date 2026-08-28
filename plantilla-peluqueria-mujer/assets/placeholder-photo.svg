@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <rect width="800" height="800" fill="#171013"/>
+  <rect x="0" y="0" width="800" height="800" fill="none" stroke="#b18111" stroke-width="6"/>
+  <g transform="translate(400,360)" stroke="#e0ad36" stroke-width="6" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-90" y="-64" width="180" height="128" rx="10"/>
+    <circle cx="0" cy="0" r="34"/>
+    <rect x="-26" y="-92" width="52" height="24" rx="4"/>
+  </g>
+  <text x="400" y="470" font-family="'DM Sans', system-ui, sans-serif" font-size="26" letter-spacing="6" font-weight="700" fill="#aca09b" text-anchor="middle">FOTO PLACEHOLDER</text>
+</svg>

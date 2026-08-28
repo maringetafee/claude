@@ -1,0 +1,19 @@
+{
+  "name": "[NOMBRE DEL NEGOCIO]",
+  "short_name": "[NOMBRE]",
+  "description": "Peluquería en [Ciudad]. Color, balayage, corte, styling y novias.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#09090a",
+  "theme_color": "#09090a",
+  "lang": "es-ES",
+  "icons": [
+    {
+      "src": "/assets/placeholder-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
