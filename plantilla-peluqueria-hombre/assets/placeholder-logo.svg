@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="98" fill="#09090a"/>
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#116eb1" stroke-width="3"/>
+  <circle cx="100" cy="100" r="78" fill="none" stroke="#3699e0" stroke-width="1" opacity="0.5"/>
+  <text x="100" y="122" font-family="'Oswald', Georgia, sans-serif" font-size="92" font-weight="600" fill="#f6efe9" text-anchor="middle">N</text>
+</svg>
