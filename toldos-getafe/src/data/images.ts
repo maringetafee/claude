@@ -92,8 +92,8 @@ export const pergolas = {
   },
   bioclimatica2: {
     src: "/images/pergolas/pergola-bioclimatica-2.webp",
-    width: 700,
-    height: 648,
+    width: 2144,
+    height: 1984,
     alt: "Pérgola bioclimática sobre terraza",
   },
 } satisfies Record<string, SiteImage>;
@@ -183,6 +183,45 @@ export const fabrica = {
     },
   ] satisfies SiteImage[],
 };
+
+export const soluciones = {
+  viviendas: {
+    src: "/images/soluciones/viviendas.webp",
+    width: 1600,
+    height: 1065,
+    alt: "Toldo en fachada de vivienda",
+  },
+  terrazas: {
+    src: "/images/soluciones/terrazas.webp",
+    width: 1600,
+    height: 1067,
+    alt: "Terraza con pérgola al atardecer",
+  },
+  jardines: {
+    src: "/images/soluciones/jardines.webp",
+    width: 1600,
+    height: 1068,
+    alt: "Pérgola moderna en jardín",
+  },
+  ventanas: {
+    src: "/images/soluciones/ventanas.webp",
+    width: 1600,
+    height: 1067,
+    alt: "Toldo vertical en ventana",
+  },
+  restaurantes: {
+    src: "/images/soluciones/restaurantes.webp",
+    width: 1600,
+    height: 1067,
+    alt: "Terraza de restaurante con toldo",
+  },
+  espaciosComerciales: {
+    src: "/images/soluciones/espacios-comerciales.webp",
+    width: 1600,
+    height: 1067,
+    alt: "Fachada de espacio comercial con protección solar",
+  },
+} satisfies Record<string, SiteImage>;
 
 export const carrusel: SiteImage[] = [
   {

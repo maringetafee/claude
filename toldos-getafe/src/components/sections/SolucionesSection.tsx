@@ -1,29 +1,36 @@
-import PlaceholderImage from "@/components/ui/PlaceholderImage";
+import Image from "next/image";
+import { soluciones } from "@/data/images";
 
 const espacios = [
   {
     nombre: "Viviendas",
     texto: "Toldos y pérgolas integrados en la fachada y el jardín de casa.",
+    imagen: soluciones.viviendas,
   },
   {
     nombre: "Terrazas",
     texto: "Protección solar a medida para ganar horas de terraza al aire libre.",
+    imagen: soluciones.terrazas,
   },
   {
     nombre: "Jardines",
     texto: "Cerramientos y pérgolas que amplían el espacio útil del jardín.",
+    imagen: soluciones.jardines,
   },
   {
     nombre: "Ventanas",
     texto: "Toldos verticales y Stor para controlar la luz de cada estancia.",
+    imagen: soluciones.ventanas,
   },
   {
     nombre: "Restaurantes",
     texto: "Soluciones para terrazas de hostelería, resistentes y funcionales.",
+    imagen: soluciones.restaurantes,
   },
   {
     nombre: "Espacios comerciales",
     texto: "Toldos e instalaciones a medida para locales y negocios.",
+    imagen: soluciones.espaciosComerciales,
   },
 ];
 
@@ -45,7 +52,13 @@ export default function SolucionesSection() {
             key={espacio.nombre}
             className="group relative h-full w-[62%] shrink-0 snap-start overflow-hidden rounded-2xl sm:w-auto sm:shrink"
           >
-            <PlaceholderImage label={espacio.nombre} className="h-full w-full" />
+            <Image
+              src={espacio.imagen.src}
+              alt={espacio.imagen.alt}
+              fill
+              sizes="(min-width: 640px) 33vw, 62vw"
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-ink/0" />
             <div className="absolute inset-x-0 bottom-0 p-5">
               <span className="text-xs font-medium uppercase tracking-[0.2em] text-paper/60">
