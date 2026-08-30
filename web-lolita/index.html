@@ -17,6 +17,42 @@
 <meta name="theme-color" content="#211519" />
   <script type="module" crossorigin src="/assets/index-8Ltv3Syz.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CwTK8Ik_.css">
+  <style>
+    /* Full-page fixed grain (.hero__grain) uses mix-blend-mode, which forces the
+       browser to recomposite it against whatever scrolls underneath. Without its
+       own layer this ghosts/flickers on scroll, especially across a high-contrast
+       seam like hero (light) -> brunch (dark). Promoting it fixes the scroll jank. */
+    .hero__grain{will-change:opacity;transform:translateZ(0)}
+    .hero__media img{will-change:transform}
+    .brunch-feature{position:relative;overflow:hidden}
+    .brunch-feature:before{content:"";position:absolute;inset:0;background:radial-gradient(120% 140% at 100% -10%, color-mix(in oklab, var(--rose-700) 45%, transparent) 0%, transparent 55%);pointer-events:none}
+    .brunch-feature .container{position:relative}
+    .brunch-feature__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+    .brunch-feature__badge-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem}
+    .brunch-feature__lede{color:var(--color-on-dark-muted);max-width:44ch;font-size:1.05rem;line-height:1.65;margin-block:1.1rem 1.8rem}
+    .brunch-feature__prices{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+    .brunch-feature__price-card{display:flex;flex-direction:column;gap:.35rem;padding:.9rem 1.2rem;border:1px solid color-mix(in oklab, var(--cream-50) 18%, transparent);border-radius:var(--radius-m);background:color-mix(in oklab, var(--cream-50) 6%, transparent);min-width:190px}
+    .brunch-feature__price-label{font-size:.72rem;letter-spacing:.03em;color:var(--color-on-dark-muted)}
+    .brunch-feature__price-value{font-family:var(--font-accent);font-weight:800;font-size:1.5rem;color:var(--brass-300)}
+    .brunch-feature__gallery{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:.9rem}
+    .brunch-feature__img{width:100%;height:100%;min-height:180px;object-fit:cover;border-radius:var(--radius-l);box-shadow:var(--shadow-soft);display:block}
+    .brunch-feature__img--main{grid-row:span 2}
+    .brunch-feature__menu{grid-column:1 / -1;display:flex;flex-direction:column;gap:.2rem;padding:1.3rem 1.4rem;border-radius:var(--radius-l);border:1px solid color-mix(in oklab, var(--cream-50) 18%, transparent);background:color-mix(in oklab, var(--cream-50) 6%, transparent);box-shadow:var(--shadow-soft)}
+    .brunch-feature__menu-title{font-family:var(--font-display);font-size:1.15rem;color:#fff}
+    .brunch-feature__menu-subtitle{font-size:.78rem;color:var(--color-on-dark-muted);margin-bottom:.7rem}
+    .brunch-feature__menu-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
+    .brunch-feature__menu-list li{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-size:.86rem;color:var(--color-on-dark-muted);border-top:1px solid color-mix(in oklab, var(--cream-50) 12%, transparent);padding-top:.55rem}
+    .brunch-feature__menu-list li:first-child{border-top:0;padding-top:0}
+    .brunch-feature__menu-list li>span:first-child{color:#fff}
+    .brunch-feature__menu-price{font-family:var(--font-accent);font-weight:800;color:var(--brass-300);white-space:nowrap}
+    @media (max-width:900px){
+      .brunch-feature__grid{grid-template-columns:1fr}
+      .brunch-feature__img{min-height:220px}
+    }
+    @media (max-width:520px){
+      .brunch-feature__menu-list li{flex-direction:column;gap:.15rem}
+    }
+  </style>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -78,6 +114,49 @@
       </div>
     </div>
     <span class="hero__scroll-cue">Descubre Lolita</span>
+  </section>
+
+  <!-- ============ BRUNCH DESTACADO ============ -->
+  <section id="brunch" class="section-pad surface-dark brunch-feature">
+    <div class="container">
+      <div class="brunch-feature__grid">
+        <div class="brunch-feature__text" data-reveal>
+          <div class="brunch-feature__badge-row">
+            <span class="kicker" style="color:var(--rose-300);">Brunch · Fin de semana</span>
+            <span class="tag-new">Nuevo</span>
+          </div>
+          <h2 class="section-title" style="color:#fff;">BRUNCH: <em style="font-style:italic;color:var(--rose-300);">Nuestro servicio estrella</em></h2>
+          <p class="brunch-feature__lede">Combinación de desayuno y almuerzo, con opciones dulces y saladas para compartir sin prisas: zumo de naranja natural, café o infusión, un plato principal a elegir y un bowl de yogur griego con cereales y fruta fresca.</p>
+          <div class="brunch-feature__prices">
+            <div class="brunch-feature__price-card">
+              <span class="brunch-feature__price-label">Entre semana · 13:00–16:00 h</span>
+              <span class="brunch-feature__price-value">16,95€</span>
+            </div>
+            <div class="brunch-feature__price-card">
+              <span class="brunch-feature__price-label">Fin de semana · 12:00–14:00 h</span>
+              <span class="brunch-feature__price-value">19,95€</span>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="button" id="btn-reservar-brunch">Reservar para el brunch</button>
+        </div>
+        <div class="brunch-feature__gallery">
+          <img class="brunch-feature__img brunch-feature__img--main" src="/images/menu-photo-2.jpg" alt="Huevos benedictinos con salmón y aguacate de Lolita Café" loading="lazy" />
+          <img class="brunch-feature__img" src="/images/brunch-spread.jpg" alt="Mesa de brunch con tostadas, fruta y café" loading="lazy" />
+          <img class="brunch-feature__img" src="/images/menu-photo-1.jpg" alt="Café con leche y croissant de jamón de Lolita Café" loading="lazy" />
+          <div class="brunch-feature__menu">
+            <span class="brunch-feature__menu-title">Platos principales a elegir</span>
+            <span class="brunch-feature__menu-subtitle">También sueltos, de lunes a viernes de 13:00 a 16:00 h</span>
+            <ul class="brunch-feature__menu-list">
+              <li><span>Tosta de pan gallego con boniato, bacon crujiente, queso feta y frijoles</span><span class="brunch-feature__menu-price">9,95€</span></li>
+              <li><span>Sándwich brioche mixto con huevos trufados revueltos</span><span class="brunch-feature__menu-price">9,95€</span></li>
+              <li><span>Tosta de pan gallego con salmón noruego, aguacate, huevos poché y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+              <li><span>Media berenjena asada con huevos revueltos, bechamel de queso y trufa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+              <li><span>Tortitas de avena con pollo Satay, huevos poché, espinacas salteadas y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ============ CARTA ============ -->
