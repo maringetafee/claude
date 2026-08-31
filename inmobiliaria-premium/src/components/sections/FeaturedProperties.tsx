@@ -27,7 +27,7 @@ export async function FeaturedProperties() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-14 md:mt-20 lg:grid-cols-5">
-          <Reveal className="lg:col-span-3" delay={0.1}>
+          <Reveal className="lg:col-span-3 lg:h-full" delay={0.1}>
             <PropertyCard property={main} size="large" priority />
           </Reveal>
 

@@ -29,7 +29,7 @@ function Field({
 }
 
 const selectClass =
-  "w-full appearance-none bg-transparent font-serif text-[1.05rem] text-ink outline-none";
+  "w-full min-w-0 appearance-none overflow-hidden truncate bg-transparent font-serif text-[1.05rem] text-ink outline-none";
 
 export function PropertySearch() {
   const router = useRouter();

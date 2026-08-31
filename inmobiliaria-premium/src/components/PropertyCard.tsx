@@ -12,7 +12,7 @@ interface PropertyCardProps {
 }
 
 const sizes: Record<NonNullable<PropertyCardProps["size"]>, string> = {
-  large: "aspect-[4/5] md:aspect-[16/11]",
+  large: "aspect-[4/5] md:aspect-[16/11] lg:aspect-auto lg:flex-1 lg:min-h-0",
   medium: "aspect-[4/5]",
   small: "aspect-[4/5]",
 };
@@ -23,7 +23,10 @@ export function PropertyCard({
   priority = false,
 }: PropertyCardProps) {
   return (
-    <Link href={`/propiedades/${property.slug}`} className="group block">
+    <Link
+      href={`/propiedades/${property.slug}`}
+      className={cn("group block", size === "large" && "lg:flex lg:h-full lg:flex-col")}
+    >
       <div className={cn("relative overflow-hidden bg-line", sizes[size])}>
         <Image
           src={property.cover.src}
