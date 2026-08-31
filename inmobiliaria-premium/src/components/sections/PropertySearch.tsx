@@ -107,7 +107,7 @@ export function PropertySearch() {
               onChange={(e) => setZona(e.target.value)}
               className={selectClass}
             >
-              <option value="">Todo Madrid Sur</option>
+              <option value="">Comunidad de Madrid</option>
               {zones.map((z) => (
                 <option key={z.slug} value={z.name}>
                   {z.name}

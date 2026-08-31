@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { PropertySearch } from "@/components/sections/PropertySearch";
 import { FeaturedProperties } from "@/components/sections/FeaturedProperties";
+import { ExploreMap } from "@/components/sections/ExploreMap";
 import { ValueProps } from "@/components/sections/ValueProps";
 import { FeaturedShowcase } from "@/components/sections/FeaturedShowcase";
 import { Services } from "@/components/sections/Services";
@@ -19,6 +20,7 @@ export default async function Home() {
       <Hero />
       <PropertySearch />
       <FeaturedProperties />
+      <ExploreMap />
       <ValueProps />
       {showcaseProperty && <FeaturedShowcase featuredProperty={showcaseProperty} />}
       <Services />
