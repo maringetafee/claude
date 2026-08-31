@@ -5,7 +5,7 @@ import { LineReveal } from "@/components/motion/LineReveal";
 
 export function ContactSection() {
   return (
-    <section className="bg-paper-dim py-section-y">
+    <section id="contacto" className="bg-paper-dim py-section-y">
       <div className="container-edit grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-10">
         <div className="lg:col-span-5">
           <span className="mb-6 block text-[0.72rem] font-medium uppercase tracking-[0.24em] text-stone">

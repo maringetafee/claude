@@ -8,7 +8,6 @@ import { Services } from "@/components/sections/Services";
 import { About } from "@/components/sections/About";
 import { Zones } from "@/components/sections/Zones";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { FinalCta } from "@/components/sections/FinalCta";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { getShowcaseProperty } from "@/lib/properties";
 
@@ -27,7 +26,6 @@ export default async function Home() {
       <About />
       <Zones />
       <Testimonials />
-      <FinalCta />
       <ContactSection />
     </>
   );

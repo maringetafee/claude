@@ -38,43 +38,27 @@ export const navLinks: NavLink[] = [
 export const services: ServiceItem[] = [
   {
     number: "01",
-    title: "Comprar",
+    title: "Comprar/Alquilar",
     description:
       "Acceso a propiedades seleccionadas, muchas antes de salir al mercado abierto. Te acompañamos desde la primera visita hasta la firma.",
     image: { src: unsplash("photo-1613977257592-4871e5fcd7c4"), alt: "Villa con piscina" },
-    href: "/propiedades?operacion=venta",
+    href: "/propiedades",
   },
   {
     number: "02",
-    title: "Vender",
+    title: "Vender/Alquilar",
     description:
       "Valoración precisa, fotografía profesional y una estrategia de comercialización pensada para tu propiedad, no para cualquier propiedad.",
     image: { src: unsplash("photo-1664463760781-f159dfe3af30"), alt: "Firma de documentos en el escritorio" },
-    href: "/#contacto",
+    href: "/#contacto-form",
   },
   {
     number: "03",
-    title: "Alquilar",
-    description:
-      "Gestionamos el proceso completo de alquiler, desde la selección de inquilinos hasta la firma del contrato, con la misma exigencia que en una venta.",
-    image: { src: unsplash("photo-1724582586529-62622e50c0b3"), alt: "Salón moderno con ventanal" },
-    href: "/propiedades?operacion=alquiler",
-  },
-  {
-    number: "04",
     title: "Inversión",
     description:
       "Análisis de rentabilidad, zonas con mayor recorrido y acompañamiento en cada operación, pensado para quien invierte con criterio a largo plazo.",
     image: { src: unsplash("photo-1543785734-4b6e564642f8"), alt: "Gran Vía, Madrid" },
-    href: "/#contacto",
-  },
-  {
-    number: "05",
-    title: "Gestión de propiedades",
-    description:
-      "Administración integral de tu inmueble: mantenimiento, incidencias y relación con inquilinos, para que la propiedad trabaje sin darte trabajo.",
-    image: { src: unsplash("photo-1776363284806-873eeef565a7"), alt: "Terraza de un ático" },
-    href: "/#contacto",
+    href: "/#contacto-form",
   },
 ];
 
