@@ -36,7 +36,10 @@ function App() {
         <Showcase />
         <Process />
         <PriceCalculator state={calculatorState} setState={setCalculatorState} />
-        <Maintenance bookingSystem={calculatorState.bookingSystem} />
+        <Maintenance
+          bookingSystem={calculatorState.bookingSystem}
+          adminPanel={calculatorState.adminPanel}
+        />
         <FAQ />
         <Contact />
       </main>

@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
-import { MAINTENANCE_SURCHARGE } from "../lib/pricing";
+import {
+  MAINTENANCE_SURCHARGE,
+  ADMIN_PANEL_MAINTENANCE_SURCHARGE,
+} from "../lib/pricing";
 
 const PLANS = [
   {
@@ -57,9 +60,14 @@ function PlanIcon({ type }: { type: "shield" | "shield-check" }) {
 
 interface MaintenanceProps {
   bookingSystem: boolean;
+  adminPanel: boolean;
 }
 
-export function Maintenance({ bookingSystem }: MaintenanceProps) {
+export function Maintenance({ bookingSystem, adminPanel }: MaintenanceProps) {
+  const surcharge =
+    (bookingSystem ? MAINTENANCE_SURCHARGE : 0) +
+    (adminPanel ? ADMIN_PANEL_MAINTENANCE_SURCHARGE : 0);
+
   return (
     <section id="mantenimiento" className="px-6 py-28 lg:py-36">
       <div className="mx-auto max-w-5xl">
@@ -78,6 +86,12 @@ export function Maintenance({ bookingSystem }: MaintenanceProps) {
             <p className="mt-3 text-xs text-gold">
               Con el sistema de reservas: +{MAINTENANCE_SURCHARGE} €/mes en
               cada plan
+            </p>
+          )}
+          {adminPanel && (
+            <p className="mt-3 text-xs text-gold">
+              Con el panel de gestión: +{ADMIN_PANEL_MAINTENANCE_SURCHARGE}{" "}
+              €/mes en cada plan
             </p>
           )}
         </Reveal>
@@ -118,7 +132,7 @@ export function Maintenance({ bookingSystem }: MaintenanceProps) {
                 </h3>
                 <div className="mt-4 flex items-baseline gap-1">
                   <span className="font-display text-4xl text-marble">
-                    {plan.price + (bookingSystem ? MAINTENANCE_SURCHARGE : 0)}€
+                    {plan.price + surcharge}€
                   </span>
                   <span className="text-sm text-stone">/mes</span>
                 </div>
@@ -137,6 +151,12 @@ export function Maintenance({ bookingSystem }: MaintenanceProps) {
                       <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
                       Si el sistema de reservas falla, lo solucionamos en
                       menos de 24 horas
+                    </li>
+                  )}
+                  {adminPanel && (
+                    <li className="flex items-start gap-3 text-sm text-gold">
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-gold" />
+                      Backups diarios de tu base de datos incluidos
                     </li>
                   )}
                 </ul>

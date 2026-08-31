@@ -5,6 +5,7 @@ import {
   calculatePricing,
   formatEUR,
   MAINTENANCE_SURCHARGE,
+  ADMIN_PANEL_MAINTENANCE_SURCHARGE,
   type CalculatorState,
 } from "../lib/pricing";
 
@@ -119,11 +120,37 @@ export function PriceCalculator({ state, setState }: PriceCalculatorProps) {
                   </span>
                   <span className="text-xs text-gold">+179 €</span>
                 </label>
+
+                <label className="flex cursor-pointer items-center justify-between rounded-xl border border-marble/10 px-4 py-3 text-sm text-stone transition-colors hover:border-marble/25">
+                  <span className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      className="accent-iris"
+                      checked={state.adminPanel}
+                      onChange={(e) => update("adminPanel", e.target.checked)}
+                    />
+                    Panel de gestión (base de datos propia)
+                  </span>
+                  <span className="text-xs text-gold">+249 €</span>
+                </label>
               </div>
               {state.bookingSystem && (
                 <p className="mt-3 text-xs text-stone/70">
                   El sistema de reservas suma {formatEUR(MAINTENANCE_SURCHARGE)}
                   /mes al mantenimiento.
+                </p>
+              )}
+              {state.adminPanel && (
+                <p className="mt-3 text-xs text-stone/70">
+                  El panel de gestión suma{" "}
+                  {formatEUR(ADMIN_PANEL_MAINTENANCE_SURCHARGE)}/mes al
+                  mantenimiento.
+                </p>
+              )}
+              {!state.bookingSystem && (
+                <p className="mt-4 text-xs text-stone/50">
+                  ¿No necesitas reservas? Con el panel de gestión actualizas tú
+                  mismo catálogo, precios, horarios u ofertas, sin escribirnos.
                 </p>
               )}
               <p className="mt-4 text-xs text-stone/70">

@@ -23,6 +23,10 @@ const FAQS = [
     q: "¿Y si necesito más páginas después de empezar?",
     a: "Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.",
   },
+  {
+    q: "¿Qué es el panel de gestión con base de datos?",
+    a: "Un extra pensado para negocios sin sistema de reservas: te damos un panel privado donde puedes actualizar tú mismo el catálogo, precios, horarios u ofertas, sin tocar código ni escribirnos.",
+  },
 ];
 
 export function FAQ() {
