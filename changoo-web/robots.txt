@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /privacidad.html
-Disallow: /cookies.html
-
-Sitemap: https://www.restaurantechangoo.es/sitemap.xml
