@@ -1,0 +1,150 @@
+/* =========================================================================
+   DESIGN TOKENS — Riangle "Cherry" design system (reconstructed)
+   -------------------------------------------------------------------------
+   The original ships two full colour sets. Light is the default; dark is
+   applied by putting  data-theme="dark"  on <html> (the original toggles a
+   `.dark` class + a `theme` cookie — see js/theme-toggle.js).
+
+   Naming:
+     --ink*        text colours
+     --surface*    backgrounds
+     --line*       hairline / border colours
+     --refract*    the per-section ACCENT colour ("refraction"). Each section
+                   sets  data-band="violet|indigo|cyan|emerald|amber|flare|brand"
+                   which re-points --refract at that band. On dark ground
+                   (data-ground="dark") the brighter "ondark" ramp is used.
+   ========================================================================= */
+
+:root {
+  interpolate-size: allow-keywords; /* lets height animate to `auto` */
+
+  /* ---- Band ramps : LIGHT ground (deeper, higher-contrast) ---- */
+  --band-brand: #c21a1a;   --band-brand-soft: #fda4af;   --band-brand-strong: #9e1010;
+  --band-violet: #5b3fd6;  --band-violet-soft: #c4b5fd;  --band-violet-strong: #45289e;
+  --band-indigo: #2f53d9;  --band-indigo-soft: #a5b8fd;  --band-indigo-strong: #1e3aa8;
+  --band-cyan: #0a6f65;    --band-cyan-soft: #5ec8bc;    --band-cyan-strong: #05534b;
+  --band-emerald: #0a6f3c; --band-emerald-soft: #5ecb8f; --band-emerald-strong: #075c31;
+  --band-amber: #8a4b00;   --band-amber-soft: #e0a96d;   --band-amber-strong: #6b3a00;
+  --band-flare: #b32b0c;   --band-flare-soft: #f0a38f;   --band-flare-strong: #8c1f06;
+
+  /* ---- Band ramps : DARK ground (luminous) ---- */
+  --band-brand-ondark: #f43333;   --band-brand-ondark-soft: #ffb3a8;   --band-brand-ondark-strong: #ff5a5a;
+  --band-violet-ondark: #a78bff;  --band-violet-ondark-soft: #d3c6ff;  --band-violet-ondark-strong: #c0aaff;
+  --band-indigo-ondark: #6e8cff;  --band-indigo-ondark-soft: #b3c4ff;  --band-indigo-ondark-strong: #94a9ff;
+  --band-cyan-ondark: #3fe0d0;    --band-cyan-ondark-soft: #a5f0e8;    --band-cyan-ondark-strong: #6bebdd;
+  --band-emerald-ondark: #3fd97a; --band-emerald-ondark-soft: #a5f0c7; --band-emerald-ondark-strong: #6ee7a0;
+  --band-amber-ondark: #ffb061;   --band-amber-ondark-soft: #ffd5ac;   --band-amber-ondark-strong: #ffc488;
+  --band-flare-ondark: #ff6b4a;   --band-flare-ondark-soft: #ffb3a2;   --band-flare-ondark-strong: #ff8a70;
+
+  --on-refract: #ffffff;
+
+  /* default accent = brand */
+  --refract: var(--band-brand);
+  --refract-soft: var(--band-brand-soft);
+  --refract-strong: var(--band-brand-strong);
+
+  /* ---- Neutrals : LIGHT ---- */
+  --ink: #0b0d12;          /* primary text */
+  --ink-muted: #575f6c;    /* body / secondary */
+  --ink-faint: #8a919c;    /* captions, glyphs */
+  --surface-page: #f6f7f9; /* base page bg */
+  --surface-1: #ffffff;    /* raised card / media plate */
+  --surface-2: #eef0f4;    /* alternating section bg */
+  --surface-3: #eef0f4;
+  --line: #e2e5ea;         /* hairlines */
+  --line-strong: #cbd0d9;
+
+  /* header treatment on light */
+  --header-ink: #0b0d12;
+  --header-scrim: rgb(246 247 249 / 62%);
+  --header-line: #e2e5ea;
+
+  --grain-opacity: 0.022;
+  --grain-blend: multiply;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  /* re-point band ramps at the luminous set */
+  --band-brand: var(--band-brand-ondark);   --band-brand-soft: var(--band-brand-ondark-soft);   --band-brand-strong: var(--band-brand-ondark-strong);
+  --band-violet: var(--band-violet-ondark); --band-violet-soft: var(--band-violet-ondark-soft); --band-violet-strong: var(--band-violet-ondark-strong);
+  --band-indigo: var(--band-indigo-ondark); --band-indigo-soft: var(--band-indigo-ondark-soft); --band-indigo-strong: var(--band-indigo-ondark-strong);
+  --band-cyan: var(--band-cyan-ondark);     --band-cyan-soft: var(--band-cyan-ondark-soft);     --band-cyan-strong: var(--band-cyan-ondark-strong);
+  --band-emerald: var(--band-emerald-ondark); --band-emerald-soft: var(--band-emerald-ondark-soft); --band-emerald-strong: var(--band-emerald-ondark-strong);
+  --band-amber: var(--band-amber-ondark);   --band-amber-soft: var(--band-amber-ondark-soft);   --band-amber-strong: var(--band-amber-ondark-strong);
+  --band-flare: var(--band-flare-ondark);   --band-flare-soft: var(--band-flare-ondark-soft);   --band-flare-strong: var(--band-flare-ondark-strong);
+
+  --refract: var(--band-brand);
+  --refract-soft: var(--band-brand-soft);
+  --refract-strong: var(--band-brand-strong);
+
+  --ink: #edeff4;
+  --ink-muted: #99a1ae;
+  --ink-faint: #626a78;
+  --surface-page: #07080b;
+  --surface-1: #10131a;
+  --surface-2: #0a0c11;
+  --surface-3: #10131a;
+  --line: #1e222c;
+  --line-strong: #2a2f3a;
+
+  --header-ink: #edeff4;
+  --header-scrim: rgb(7 8 11 / 62%);
+  --header-line: #1e222c;
+
+  --grain-opacity: 0.035;
+  --grain-blend: overlay;
+
+  color-scheme: dark;
+}
+
+/* -------------------------------------------------------------------------
+   PER-SECTION ACCENT ("band")
+   Put data-band="…" on any wrapper; descendants inherit --refract.
+   ------------------------------------------------------------------------- */
+[data-band="brand"]   { --refract: var(--band-brand);   --refract-soft: var(--band-brand-soft);   --refract-strong: var(--band-brand-strong); }
+[data-band="violet"]  { --refract: var(--band-violet);  --refract-soft: var(--band-violet-soft);  --refract-strong: var(--band-violet-strong); }
+[data-band="indigo"]  { --refract: var(--band-indigo);  --refract-soft: var(--band-indigo-soft);  --refract-strong: var(--band-indigo-strong); }
+[data-band="cyan"]    { --refract: var(--band-cyan);    --refract-soft: var(--band-cyan-soft);    --refract-strong: var(--band-cyan-strong); }
+[data-band="emerald"] { --refract: var(--band-emerald); --refract-soft: var(--band-emerald-soft); --refract-strong: var(--band-emerald-strong); }
+[data-band="amber"]   { --refract: var(--band-amber);   --refract-soft: var(--band-amber-soft);   --refract-strong: var(--band-amber-strong); }
+[data-band="flare"]   { --refract: var(--band-flare);   --refract-soft: var(--band-flare-soft);   --refract-strong: var(--band-flare-strong); }
+
+[data-band-scope] { display: contents; }
+
+/* A dark island inside the light page (the CTA band) forces the luminous ramp */
+[data-ground="dark"] {
+  --refract: var(--band-brand-ondark);
+  --refract-soft: var(--band-brand-ondark-soft);
+  --refract-strong: var(--band-brand-ondark-strong);
+  --on-refract: #ffffff;
+  --ink: #edeff4;
+  --ink-muted: #99a1ae;
+  --line: #1e222c;
+}
+
+/* animated custom property (used for smooth accent cross-fades) */
+@property --refract       { syntax: "<color>"; inherits: true; initial-value: #f43333; }
+@property --refract-soft  { syntax: "<color>"; inherits: true; initial-value: #ffb3a8; }
+@property --refract-strong{ syntax: "<color>"; inherits: true; initial-value: #ff5a5a; }
+
+/* -------------------------------------------------------------------------
+   TYPE SCALE + SPACING primitives
+   ------------------------------------------------------------------------- */
+:root {
+  --font-display: "Archivo", "Archivo Fallback", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Fallback", ui-monospace, SFMono-Regular, monospace;
+
+  /* fluid section rhythm — the whole site is built on these two clamps */
+  --pad-inline: clamp(20px, 4.5vw, 64px);
+  --pad-block: clamp(96px, 10vw, 192px);
+  --pad-block-tight: clamp(64px, 7vw, 128px);
+
+  --max-inner: 1440px; /* section content */
+  --max-wide: 1760px;  /* header + hero */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-standard: cubic-bezier(0.215, 0.61, 0.355, 1);
+}

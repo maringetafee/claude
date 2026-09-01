@@ -1,0 +1,204 @@
+/* =========================================================================
+   MOTION LAYER
+   -------------------------------------------------------------------------
+   Reconstructs riangle.com's scroll + hover motion, plus a red animated
+   hero logo and a custom cursor.
+   - Hover micro-interactions live in components.css (link underlines, nav
+     roll, image zoom, capability width-axis, button glow…). This file adds
+     the SCROLL reveals, the HERO LOGO, and the CURSOR.
+   - Everything is gated behind `html.js-anim` so with JS off / reduced
+     motion the page renders fully visible (see base.css fallbacks).
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. SCROLL REVEALS
+   ------------------------------------------------------------------------- */
+html.js-anim [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.72s var(--ease-out),
+    transform 0.72s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* rules / hairlines wipe in horizontally instead of sliding */
+html.js-anim [data-reveal].draw-rule,
+html.js-anim [data-reveal].spectrum-rule {
+  opacity: 1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.9s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+html.js-anim [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* hero headline — one line per <span>, clip-path wipe + slight rise, staggered */
+html.js-anim [data-reveal-heading] > span {
+  opacity: 0;
+  clip-path: inset(0 0 106% 0);
+  transform: translateY(0.16em);
+  transition:
+    clip-path 0.82s var(--ease-out),
+    opacity 0.5s linear,
+    transform 0.82s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms + 120ms);
+}
+html.js-anim [data-reveal-heading].is-in > span {
+  opacity: 1;
+  clip-path: inset(-12% 0 -12% 0);
+  transform: none;
+}
+
+/* media frames — clip reveal + inner image settle */
+html.js-anim .reveal-media {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.js-anim .reveal-media.is-in {
+  clip-path: inset(0 0 0 0);
+}
+html.js-anim .reveal-media img {
+  transform: scale(1.08);
+  transition: transform 1.25s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.js-anim .reveal-media.is-in img {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim [data-reveal],
+  html.js-anim [data-reveal-heading] > span,
+  html.js-anim .reveal-media,
+  html.js-anim .reveal-media img {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   2. HERO LOGO  (red ribbon mark — replaces the WebGL prism)
+   ------------------------------------------------------------------------- */
+.hero__logo {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  width: min(64cqw, 62cqh);
+  height: auto;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  /* pointer parallax (js sets --px / --py in the range -1..1) */
+  translate: calc(var(--px, 0) * 14px) calc(var(--py, 0) * 12px);
+  transition: translate 0.4s var(--ease-standard), opacity 0.2s linear;
+  filter: drop-shadow(0 20px 48px color-mix(in srgb, #f43333 26%, transparent));
+}
+@media (min-width: 768px) { .hero__logo { width: min(46cqw, 48cqh); } }
+@media (min-width: 992px) {
+  .hero__logo { left: 66%; top: 50%; width: min(42cqw, 46cqh); }
+}
+
+.hero__logo .blade {
+  transform-box: fill-box;
+  transform-origin: 50% 62%;
+  /* per-blade parallax depth */
+  translate: calc(var(--px, 0) * (var(--i) + 1) * 5px)
+             calc(var(--py, 0) * (var(--i) + 1) * 4px);
+}
+.hero__logo .blade__float {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+/* intro: blades rise + unrotate, staggered — fires when .hero gets .is-in */
+html.js-anim .hero__logo .blade {
+  opacity: 0;
+  transform: translateY(46px) rotate(-8deg) scale(0.86);
+}
+html.js-anim .hero.is-in .hero__logo .blade {
+  animation: bladeIn 0.9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 130ms + 200ms);
+}
+@keyframes bladeIn {
+  to { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+}
+
+/* idle: gentle out-of-phase float once the intro has played */
+html.js-anim .hero.is-in .hero__logo .blade__float {
+  animation: bladeFloat calc(5s + var(--i) * 0.7s) ease-in-out infinite;
+  animation-delay: calc(1.2s + var(--i) * -1.7s);
+}
+@keyframes bladeFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-4.5%) rotate(1.1deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__logo .blade { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .hero__logo .blade__float { animation: none !important; }
+  .hero__logo { translate: none !important; }
+}
+
+/* -------------------------------------------------------------------------
+   3. CUSTOM CURSOR  (small dot + trailing red ring)
+   ------------------------------------------------------------------------- */
+@media (pointer: fine) {
+  html.js-cursor,
+  html.js-cursor * { cursor: none !important; }
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.25s linear;
+}
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: #f43333;
+}
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid #f43333;
+  transition:
+    width 0.28s var(--ease-out),
+    height 0.28s var(--ease-out),
+    background-color 0.28s linear,
+    border-color 0.28s linear,
+    opacity 0.25s linear;
+}
+html.js-cursor .cursor-dot,
+html.js-cursor .cursor-ring { opacity: 1; }
+
+/* grows over anything clickable */
+.cursor-ring.is-hot {
+  width: 54px;
+  height: 54px;
+  background: color-mix(in srgb, #f43333 12%, transparent);
+}
+.cursor-ring.is-down { width: 24px; height: 24px; }
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden { opacity: 0; }
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+  html.js-cursor,
+  html.js-cursor * { cursor: auto !important; }
+}
