@@ -1,0 +1,1 @@
+# Solo se usa la libreria estandar de Python (urllib, json), no hay dependencias externas.
