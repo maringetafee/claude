@@ -40,7 +40,7 @@ export function Header() {
             href="#top"
             className="flex items-center gap-2.5 font-display text-lg tracking-[0.15em] text-marble"
           >
-            <LogoMark className="h-6 w-6" />
+            <LogoMark className="h-7 w-12" />
             MAKEMY<span className="text-iris">WEB</span>
           </a>
 
@@ -86,7 +86,7 @@ export function Header() {
           >
             <div className="flex items-center justify-between px-6 py-5">
               <span className="flex items-center gap-2.5 font-display text-lg tracking-[0.15em] text-marble">
-                <LogoMark className="h-6 w-6" />
+                <LogoMark className="h-7 w-12" />
                 MAKEMY<span className="text-iris">WEB</span>
               </span>
               <button

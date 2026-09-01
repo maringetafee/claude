@@ -14,7 +14,7 @@ export function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="flex items-center gap-2.5 font-display text-lg tracking-[0.15em] text-marble">
-              <LogoMark className="h-6 w-6" />
+              <LogoMark className="h-7 w-12" />
               MAKEMY<span className="text-iris">WEB</span>
             </p>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-stone">
