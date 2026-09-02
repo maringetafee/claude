@@ -1,91 +1,64 @@
 /* =========================================================================
-   Presupuesto orientativo — precios.html
-   Modelo transparente en euros. Cifras de referencia; el presupuesto
-   final se confirma tras hablar con el cliente (mismo criterio que
-   makemyweb.es, que muestra "Consultar").
+   Presupuesto orientativo — calculadora de servicios
+   -------------------------------------------------------------------------
+   Modelo transparente en euros. Base "Diseño + desarrollo" siempre incluida
+   (contenidos y SEO dentro). Sólo suman las páginas extra y los add-ons.
+   Cifras de referencia; el presupuesto final se confirma tras hablar con
+   el cliente. Multi-instancia: cablea cada [data-calc] de la página.
    No toca ninguna animación: sólo lee inputs y escribe texto.
    ========================================================================= */
 (function () {
-  var root = document.querySelector("[data-calc]");
-  if (!root) return;
+  var roots = document.querySelectorAll("[data-calc]");
+  if (!roots.length) return;
 
-  var BASE = { full: 690, design: 450, dev: 490 };
-  var PER_EXTRA_PAGE = 120;
-  var EXTRAS = { content: 150, seo: 180, anim: 350 };
-  var SPEED = { d1: 200, d2: 120, normal: 0 };
-
-  var MODE_LABEL = {
-    full: "Diseño + desarrollo",
-    design: "Solo diseño",
-    dev: "Solo desarrollo"
-  };
-  var EXTRA_LABEL = {
-    content: "ayuda con los contenidos",
-    seo: "optimización SEO",
-    anim: "página animada 3D"
-  };
-  var SPEED_LABEL = { d1: "en 24 h", d2: "en 48 h", normal: "a ritmo normal" };
+  var BASE = 799;              // diseño + desarrollo, 1 página, todo incluido
+  var PER_EXTRA_PAGE = 120;    // cada página a partir de la primera
+  var EXTRAS = { anim: 279, booking: 179, panel: 249 };
 
   var euro = function (n) {
-    // manual es-ES grouping (Intl locale data isn't guaranteed everywhere)
+    // agrupación es-ES manual (Intl no está garantizado en todos lados)
     return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " €";
   };
 
-  var elTotal = root.querySelector("[data-calc-total]");
-  var elSpec = root.querySelector("[data-calc-spec]");
-  var elPages = root.querySelector("[data-calc-pages-value]");
-  var elAgency = root.querySelector("[data-calc-agency]");
-  var elFree = root.querySelector("[data-calc-free]");
+  function wire(root) {
+    var elTotal = root.querySelector("[data-calc-total]");
+    var elSpec = root.querySelector("[data-calc-spec]");
+    var elPages = root.querySelector("[data-calc-pages-value]");
 
-  function readMode() {
-    var c = root.querySelector('input[name="mode"]:checked');
-    return c ? c.value : "full";
-  }
-  function readSpeed() {
-    var c = root.querySelector('input[name="speed"]:checked');
-    return c ? c.value : "normal";
-  }
-  function readPages() {
-    var r = root.querySelector('input[name="pages"]');
-    return r ? parseInt(r.value, 10) || 1 : 1;
-  }
-  function readExtras() {
-    return Array.prototype.filter.call(
-      root.querySelectorAll('input[name="extra"]:checked'),
-      function () { return true; }
-    ).map(function (i) { return i.value; });
-  }
+    function readPages() {
+      var r = root.querySelector('input[name="pages"]');
+      return r ? parseInt(r.value, 10) || 1 : 1;
+    }
+    function readExtras() {
+      return Array.prototype.map.call(
+        root.querySelectorAll('input[name="extra"]:checked'),
+        function (i) { return i.value; }
+      );
+    }
 
-  function recompute() {
-    var mode = readMode();
-    var pages = readPages();
-    var speed = readSpeed();
-    var extras = readExtras();
+    function recompute() {
+      var pages = readPages();
+      var extras = readExtras();
 
-    var total = BASE[mode];
-    total += Math.max(0, pages - 1) * PER_EXTRA_PAGE;
-    extras.forEach(function (k) { total += EXTRAS[k] || 0; });
-    total += SPEED[speed] || 0;
+      var total = BASE + Math.max(0, pages - 1) * PER_EXTRA_PAGE;
+      extras.forEach(function (k) { total += EXTRAS[k] || 0; });
 
-    if (elPages) elPages.textContent = pages + (pages === 1 ? " página" : " páginas");
+      if (elPages) elPages.textContent = String(pages);
 
-    if (elSpec) {
-      var bits = [MODE_LABEL[mode], pages + (pages === 1 ? " página" : " páginas")];
-      if (extras.length) {
-        bits.push(extras.map(function (k) { return EXTRA_LABEL[k]; }).join(", "));
+      if (elSpec) {
+        var bits = ["Diseño + desarrollo", pages + (pages === 1 ? " página" : " páginas")];
+        if (extras.length === 1) bits.push("1 extra");
+        else if (extras.length > 1) bits.push(extras.length + " extras");
+        elSpec.textContent = bits.join(" · ");
       }
-      bits.push(SPEED_LABEL[speed]);
-      elSpec.textContent = bits.join(" · ");
+
+      if (elTotal) elTotal.textContent = euro(total);
     }
 
-    if (elTotal) {
-      elTotal.innerHTML = '<span>desde</span> ' + euro(total);
-    }
-    if (elAgency) elAgency.textContent = "≈ " + euro(Math.round((total * 3) / 50) * 50) + "+";
-    if (elFree) elFree.textContent = "≈ " + euro(Math.round((total * 1.6) / 50) * 50) + "+";
+    root.addEventListener("input", recompute);
+    root.addEventListener("change", recompute);
+    recompute();
   }
 
-  root.addEventListener("input", recompute);
-  root.addEventListener("change", recompute);
-  recompute();
+  Array.prototype.forEach.call(roots, wire);
 })();

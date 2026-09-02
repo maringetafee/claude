@@ -135,56 +135,49 @@
             <h2 class="eyebrow" data-reveal>Calculadora</h2>
             <div class="spectrum-rule capabilities__key"></div>
 
-            <div class="calc" data-calc>
+            <div class="calc calc--fold" data-calc>
               <form class="calc__form" aria-label="Calculadora de presupuesto">
                 <fieldset class="calc__group">
-                  <legend class="calc__legend">¿Qué necesitas?</legend>
-                  <div class="calc__options">
-                    <label class="calc__option"><input type="radio" name="mode" value="full" checked /> Diseño + desarrollo</label>
-                    <label class="calc__option"><input type="radio" name="mode" value="design" /> Solo diseño</label>
-                    <label class="calc__option"><input type="radio" name="mode" value="dev" /> Solo desarrollo</label>
+                  <legend class="calc__legend">Base</legend>
+                  <div class="calc__base">
+                    <span>Diseño + desarrollo, de principio a fin</span>
+                    <span class="calc__base-tag">Siempre incluido</span>
                   </div>
                 </fieldset>
 
                 <fieldset class="calc__group">
-                  <legend class="calc__legend">¿Cuántas páginas?</legend>
+                  <legend class="calc__legend">Número de páginas</legend>
                   <div class="calc__pages">
-                    <span class="calc__pages-value" data-calc-pages-value>1 página</span>
+                    <span class="calc__pages-value" data-calc-pages-value>1</span>
                     <input class="calc__range" type="range" name="pages" min="1" max="5" step="1" value="1" aria-label="Número de páginas" />
+                    <div class="calc__range-scale" aria-hidden="true"><span>1</span><span>5</span></div>
                   </div>
                 </fieldset>
 
                 <fieldset class="calc__group">
                   <legend class="calc__legend">Extras</legend>
                   <div class="calc__checks">
-                    <label class="calc__check"><input type="checkbox" name="extra" value="content" /> Ayuda con los contenidos <span class="calc__check-note">coste adicional</span></label>
-                    <label class="calc__check"><input type="checkbox" name="extra" value="seo" /> Optimización SEO <span class="calc__check-note">coste adicional</span></label>
-                    <label class="calc__check"><input type="checkbox" name="extra" value="anim" /> Página animada 3D <span class="calc__check-note">coste adicional</span></label>
+                    <label class="calc__check"><input type="checkbox" name="extra" value="anim" /> Página animada 3D <span class="calc__check-hint">(esta web es un ejemplo)</span> <span class="calc__check-note">+279 €</span></label>
+                    <label class="calc__check"><input type="checkbox" name="extra" value="booking" /> Sistema de reservas <span class="calc__check-note">+179 €</span></label>
+                    <label class="calc__check"><input type="checkbox" name="extra" value="panel" /> Panel de gestión <span class="calc__check-hint">(base de datos propia)</span> <span class="calc__check-note">+249 €</span></label>
                   </div>
-                </fieldset>
-
-                <fieldset class="calc__group">
-                  <legend class="calc__legend">¿Con qué rapidez lo necesitas?</legend>
-                  <div class="calc__options">
-                    <label class="calc__option"><input type="radio" name="speed" value="d1" /> En 24 horas</label>
-                    <label class="calc__option"><input type="radio" name="speed" value="d2" /> En 48 horas</label>
-                    <label class="calc__option"><input type="radio" name="speed" value="normal" checked /> A ritmo normal</label>
-                  </div>
+                  <p class="calc__hint">¿No necesitas reservas? Con el panel de gestión actualizas tú mismo catálogo, precios, horarios u ofertas, sin escribirnos.</p>
+                  <p class="calc__hint">La ayuda con los contenidos y el SEO ya van incluidos en el precio, sin coste extra.</p>
                 </fieldset>
               </form>
 
               <aside class="calc__result" data-reveal>
-                <span class="calc__result-label">Presupuesto estimado</span>
-                <p class="calc__spec" data-calc-spec>Diseño + desarrollo · 1 página · a ritmo normal</p>
-                <p class="calc__total" data-calc-total><span>desde</span> 690 €</p>
-                <p class="calc__disclaimer">Cifras orientativas. El presupuesto final se confirma tras hablar contigo.</p>
-                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
-
-                <div class="calc__compare">
-                  <div class="calc__compare-row"><span>Agencia típica</span><span data-calc-agency>≈ 2.050 €+</span></div>
-                  <div class="calc__compare-row"><span>Freelancer</span><span data-calc-free>≈ 1.100 €+</span></div>
-                  <div class="calc__compare-row"><span>Con MakeMyWeb</span><span>según la calculadora</span></div>
+                <div class="calc__vs">
+                  <div class="calc__vs-row"><span>Agencia típica cobra un mínimo de</span><b>8000 €</b></div>
+                  <div class="calc__vs-row"><span>Freelancer normal cobra un mínimo de</span><b>3000 €</b></div>
                 </div>
+                <div class="calc__mmw">
+                  <span class="calc__result-label">Con MakeMyWeb</span>
+                  <p class="calc__total" data-calc-total>799 €</p>
+                  <p class="calc__spec" data-calc-spec>Diseño + desarrollo · 1 página</p>
+                  <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+                </div>
+                <p class="calc__disclaimer">Cifras orientativas. El presupuesto final se confirma tras hablar contigo.</p>
               </aside>
             </div>
           </div>
@@ -234,27 +227,30 @@
             <p class="lead" style="max-width:46ch;margin:24px 0 36px"><span data-reveal>Después del lanzamiento seguimos cuidando tu web: hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</span></p>
             <div class="plan-cards">
               <div class="plan-card" data-reveal>
-                <span class="plan-card__tag">Cuido Básico</span>
-                <span class="plan-card__price">Consultar precio · mensual</span>
+                <span class="plan-card__tag">Mantenimiento</span>
+                <h3 class="plan-card__name">Básico</h3>
+                <p class="plan-card__price"><b>39 €</b><span>/mes</span></p>
                 <ul class="plan-card__list">
-                  <li>Hosting incluido</li>
+                  <li>Hosting y dominio incluidos</li>
                   <li>Copias de seguridad semanales</li>
                   <li>Actualizaciones de seguridad</li>
-                  <li>1 cambio de contenido al mes (los siguientes con coste adicional)</li>
-                  <li>1 hora de soporte al mes</li>
+                  <li>1 cambio de contenido al mes incluido</li>
+                  <li>Los siguientes cambios a 15 €</li>
+                  <li>Optimización SEO solo una vez (al crear la página)</li>
                 </ul>
-                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+                <a class="btn-primary" href="mailto:hola@makemyweb.com">Elegir plan</a>
               </div>
               <div class="plan-card plan-card--featured" data-reveal>
-                <span class="plan-card__tag">Cuido Pro · Más elegido</span>
-                <span class="plan-card__price">Consultar precio · mensual</span>
+                <span class="plan-card__tag">Mantenimiento · Más elegido</span>
+                <h3 class="plan-card__name">Pro</h3>
+                <p class="plan-card__price"><b>77 €</b><span>/mes</span></p>
                 <ul class="plan-card__list">
-                  <li>Todo lo de Cuido Básico</li>
+                  <li>Todo lo de Mantenimiento Básico</li>
                   <li>Cambios de contenido ilimitados</li>
                   <li>Soporte prioritario</li>
                   <li>Revisión SEO continua</li>
                 </ul>
-                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+                <a class="btn-primary" href="mailto:hola@makemyweb.com">Elegir plan</a>
               </div>
             </div>
           </div>
@@ -334,8 +330,8 @@
             <div class="footer-column">
               <span class="mono-label">Precios</span>
               <a class="text-link" href="#calculadora">Calculadora</a>
-              <a class="text-link" href="#mantenimiento">Cuido Básico</a>
-              <a class="text-link" href="#mantenimiento">Cuido Pro</a>
+              <a class="text-link" href="#mantenimiento">Mantenimiento Básico</a>
+              <a class="text-link" href="#mantenimiento">Mantenimiento Pro</a>
             </div>
             <div class="footer-column">
               <span class="mono-label">Contacto</span>

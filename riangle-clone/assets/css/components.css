@@ -1075,6 +1075,143 @@
 .plan-card__list li::before { content: "—"; color: var(--refract); margin-right: 10px; }
 .plan-card .btn-primary { margin-top: auto; align-self: flex-start; }
 
+.plan-card__name { margin-top: -8px; }
+.plan-card__price { display: flex; align-items: baseline; gap: 6px; font-family: var(--font-display); color: var(--ink); }
+.plan-card__price b { font-weight: 600; font-stretch: 110%; font-size: clamp(2rem, 1.4rem + 2vw, 2.6rem); line-height: 1; }
+.plan-card__price span { font-family: var(--font-mono); font-size: 0.8125rem; color: var(--ink-muted); }
+
+/* -------------------------------------------------------------------------
+   SERVICIOS — foldable rows (index.html #servicios)
+   Two <details> that reuse the .cap-row look; each opens a panel (the
+   budget calculator / the maintenance plans). Native disclosure, no JS.
+   ------------------------------------------------------------------------- */
+.cap-row--fold > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.cap-row--fold > summary::-webkit-details-marker { display: none; }
+.cap-row--fold:not([open]) > .cap-fold__body { display: none; }
+.cap-row--fold > summary:focus-visible {
+  outline: 2px solid var(--refract);
+  outline-offset: -4px;
+}
+
+.cap-row__hint {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  align-self: center;
+}
+@media (min-width: 992px) { .cap-row__hint { grid-column: 3; justify-self: start; } }
+
+.cap-row__sign {
+  position: absolute;
+  top: 38px;
+  right: 14px;
+  width: 15px;
+  height: 15px;
+}
+@media (min-width: 992px) { .cap-row__sign { top: 50%; translate: 0 -50%; right: 10px; } }
+.cap-row__sign::before, .cap-row__sign::after {
+  content: "";
+  position: absolute;
+  background: var(--refract);
+  transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out);
+}
+.cap-row__sign::before { top: 6.5px; left: 0; width: 15px; height: 2px; }
+.cap-row__sign::after  { top: 0; left: 6.5px; width: 2px; height: 15px; }
+.cap-row--fold[open] > summary .cap-row__sign::after { transform: rotate(90deg); opacity: 0; }
+.cap-row--fold[open] > summary .cap-row__name { font-variation-settings: "wdth" 108; }
+
+.cap-fold__body { padding: 4px 12px 44px 24px; }
+@media (min-width: 992px) { .cap-fold__body { padding: 8px 24px 56px 112px; } }
+.cap-fold__intro {
+  max-width: 60ch;
+  margin: 0 0 32px;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+
+/* calculator when embedded in the fold */
+.calc--fold .calc__result { position: static; top: auto; border: 0; background: transparent; padding: 0; }
+.calc--fold .calc__form { gap: 32px; }
+
+.calc__base {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--refract) 6%, transparent);
+  padding: 15px 18px;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+.calc__base-tag {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--refract);
+}
+.calc__range-scale {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+.calc__check { flex-wrap: wrap; column-gap: 12px; row-gap: 2px; }
+.calc__check-hint { color: var(--ink-faint); font-size: 0.9em; }
+.calc__check > .calc__check-note { margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+.calc__hint {
+  margin: 12px 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ink-faint);
+}
+.calc__hint + .calc__hint { margin-top: 8px; }
+
+.calc__vs { display: flex; flex-direction: column; gap: 12px; }
+.calc__vs-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--line);
+  padding: 16px 18px;
+}
+.calc__vs-row span { font-size: 0.8125rem; color: var(--ink-muted); }
+.calc__vs-row b {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 110%;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink-faint);
+}
+.calc__mmw {
+  margin-top: 14px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-1);
+  padding: clamp(22px, 3vw, 32px);
+}
+.calc__mmw .calc__total { margin-top: 12px; color: var(--ink); }
+.calc__mmw .calc__spec { margin-top: 10px; }
+.calc__mmw .btn-primary { margin-top: 20px; width: 100%; }
+.calc--fold .calc__disclaimer { margin-top: 16px; }
+
+/* the scroll thread lights the row as its head passes — keep it working
+   on the foldable summary too */
+.cap-row--fold.thread-lit > summary .cap-row__band { transform: scaleY(1); }
+.cap-row--fold.thread-lit > summary .cap-row__name { font-variation-settings: "wdth" 108; }
+
 /* FAQ accordion (faq.html) ------------------------------------------------- */
 .faq-list { border-top: 1px solid var(--line); }
 .faq-item { border-bottom: 1px solid var(--line); }

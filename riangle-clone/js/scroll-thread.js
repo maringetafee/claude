@@ -3,12 +3,18 @@
    -------------------------------------------------------------------------
    One fixed SVG overlay. A path is rebuilt every frame from the live
    positions of the page's points of interest (hero mark, work rows, each
-   service row, each process step, plans, FAQ, CTA…). A comet head eases
-   toward the point of the path that sits at ~40% of the viewport height, so
-   it reads as "following you down the page", taking whatever detour the
-   route needs. Behind it trails a fading wake in the current section's band
-   colour; each node lights + pulses in its own band colour as the head
-   passes. Palette = the same --band-* tokens Servicios uses on hover.
+   service row, each process step, plans, FAQ, CTA…). The horizontal route
+   is an organic meander down the CENTRE of the page: a smooth low-frequency
+   function of absolute document position (meanderX) — wide Bézier turns,
+   a slow drift left↔right through the middle, two wider excursions that
+   slip briefly past a viewport edge, resampled between anchors so nothing
+   overshoots. A comet head eases toward the point of the path at ~40% of
+   the viewport height, so it reads as "following you down the page". Behind
+   it trails a fading wake in the current section's band colour; each node
+   lights + pulses in its own band colour as the head passes. Solid blocks
+   (work photos, studio plate, plan cards) are lifted above the overlay so
+   the line passes behind them. Palette = the --band-* tokens Servicios
+   uses on hover.
 
    Standalone: does NOT touch animations.js / animations.css / cursor.js.
    Gated by html.js-anim, min-width 901px, and prefers-reduced-motion.
@@ -31,7 +37,7 @@
   var SEQ = ["violet", "indigo", "emerald", "cyan", "amber", "flare"];
   var FLOW_ORDER = ["violet", "indigo", "emerald", "cyan", "amber", "flare", "violet"];
 
-  var EASE = 0.12, TRAIL = 230, FOCUS = 0.4, SAMPLES = 72;
+  var EASE = 0.1, TRAIL = 260, FOCUS = 0.4, SAMPLES = 90;
 
   var svg, defs, base, travel, trail, headDot, headGlow, flow, wake, wake0, wake1, nodeLayer;
   var anchors = [], nodes = [];
@@ -135,49 +141,83 @@
     });
   }
 
+  // ---- organic centre-line meander -------------------------------------
+  // x is a smooth, low-frequency function of the element's ABSOLUTE position
+  // down the whole document, so the route is one coherent, designed path
+  // (planned for the full page, not the current viewport). Only wide,
+  // progressive turns — no repeating ripple, no corners.
+  var TAU = Math.PI * 2;
+  function bump(p, c, s) { return Math.exp(-Math.pow((p - c) / s, 2)); }
+  function meanderX(absY, docH, vw) {
+    var p = clamp(absY / Math.max(1, docH), 0, 1);
+    // gentle central drift — three detuned low harmonics (a ~1.3-lobe main
+    // drift, a slow half-page sway, a small irregular term so it never reads
+    // as periodic). Sum ~[-1, 1]; keeps the line loosely around centre.
+    var drift = (0.60 * Math.sin(p * TAU * 1.30 + 0.70)
+               + 0.30 * Math.sin(p * TAU * 0.52 - 0.90)
+               + 0.12 * Math.sin(p * TAU * 2.60 + 2.30)) / 0.95;
+    var x = vw / 2 + drift * vw * 0.18;
+    // two designed excursions: a wide sweep to the left ~1/3 down and one
+    // back to the right ~2/3 down. Each eases the line out past a viewport
+    // edge over roughly a screen and eases it back — Gaussian, so the turn
+    // is broad with no corner, and the line re-enters on the same path.
+    x -= bump(p, 0.300, 0.060) * vw * 0.58;
+    x += bump(p, 0.685, 0.062) * vw * 0.50;
+    return clamp(x, -vw * 0.16, vw * 1.16);
+  }
+
   function measure() {
     var w = window.innerWidth, h = window.innerHeight;
+    var sy = window.pageYOffset || docEl.scrollTop || 0;
+    var docH = Math.max(
+      docEl.scrollHeight, docEl.offsetHeight,
+      document.body ? document.body.scrollHeight : 0
+    );
 
     var raw = [];
     anchors.forEach(function (a, i) {
       var r = a.el.getBoundingClientRect();
       if (!r.width && !r.height) return;
-      raw.push({
-        y: r.top + r.height / 2,
-        left: r.left,
-        wide: r.width > w * 0.55,
-        node: nodes[i] || null
-      });
+      raw.push({ absY: r.top + sy + r.height / 2, node: nodes[i] || null });
     });
-    raw.sort(function (p, q) { return p.y - q.y; });
+    raw.sort(function (p, q) { return p.absY - q.absY; });
+    if (!raw.length) return [];
 
-    // the thread lives in the left gutter, left of all content — so it never
-    // crosses text. On wide screens the gutter is deep and it can weave; on
-    // narrow ones it stays a slim ribbon hugging the edge.
-    var guard = 99999;
-    raw.forEach(function (p) { if (p.left > 4 && p.left < guard) guard = p.left; });
-    if (guard === 99999) guard = 64;
-    guard = clamp(guard, 30, 340);
-    var railX = clamp(guard * 0.3, 11, 110);
-    var reach = clamp(guard * 0.62, 16, 220);
-    var xMax = guard - 8;
-
-    var pts = raw.map(function (p, k) {
-      var wave = 0.42 + 0.48 * Math.sin(k * 1.15 + 0.6);
-      var pull = clamp((p.left - guard) / (w * 0.5), 0, 1);
-      var lean = wave * 0.72 + pull * 0.28;
-      if (p.wide) lean = Math.max(lean, 0.5);
-      var x = clamp(railX + lean * reach, 8, xMax);
-      return { x: x, y: p.y, node: p.node };
+    // merge anchors that sit almost on the same line
+    var anch = [];
+    raw.forEach(function (p) {
+      var prev = anch[anch.length - 1];
+      if (prev && p.absY - prev.absY < 16) {
+        if (!prev.node && p.node) prev.node = p.node;
+        return;
+      }
+      anch.push(p);
     });
+
+    // resample the meander between anchors so wide gaps still bend smoothly
+    // (Catmull-Rom through sparse points could otherwise overshoot)
+    var STEP = 200;
+    var pts = [];
+    var entryY = anch[0].absY - h * 0.62;        // enters from above the top
+    pts.push({ x: meanderX(entryY, docH, w), y: entryY - sy, node: null });
+
+    for (var i = 0; i < anch.length; i++) {
+      if (i > 0) {
+        var y0 = anch[i - 1].absY, y1 = anch[i].absY, gap = y1 - y0;
+        var n = Math.floor(gap / STEP);
+        for (var k = 1; k <= n; k++) {
+          var ay = y0 + (gap * k) / (n + 1);
+          pts.push({ x: meanderX(ay, docH, w), y: ay - sy, node: null });
+        }
+      }
+      pts.push({ x: meanderX(anch[i].absY, docH, w), y: anch[i].absY - sy, node: anch[i].node });
+    }
+
+    var exitY = anch[anch.length - 1].absY + h * 0.6;
+    pts.push({ x: meanderX(exitY, docH, w), y: exitY - sy, node: null });
 
     for (var m = 1; m < pts.length; m++) {
-      if (pts[m].y < pts[m - 1].y + 8) pts[m].y = pts[m - 1].y + 8;
-    }
-    if (pts.length) {
-      pts.unshift({ x: pts[0].x - reach * 0.15, y: pts[0].y - h * 0.6, node: null });
-      var last = pts[pts.length - 1];
-      pts.push({ x: last.x, y: last.y + h * 0.6, node: null });
+      if (pts[m].y < pts[m - 1].y + 6) pts[m].y = pts[m - 1].y + 6;
     }
     return pts;
   }
@@ -280,14 +320,14 @@
       var alen = (ct.chord[i] / ct.tot) * LEN;
       n.g.setAttribute("transform", "translate(" + r1(p.x) + "," + r1(p.y) + ")");
       var dist = Math.abs(headLen - alen);
-      if (dist < 52 && !n.lit) {
+      if (dist < 60 && !n.lit) {
         n.lit = true;
         n.ring.setAttribute("fill", COL[n.band] || col);
         n.ring.setAttribute("stroke", COL[n.band] || col);
         n.ring.setAttribute("r", 5);
         if (n.el) n.el.classList.add("thread-lit");
         firePulse(n);
-      } else if (n.lit && dist > 108) {
+      } else if (n.lit && dist > 124) {
         n.lit = false;
         n.ring.setAttribute("fill", "var(--surface-page)");
         n.ring.setAttribute("stroke", "var(--line-strong)");

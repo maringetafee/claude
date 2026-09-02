@@ -2,9 +2,10 @@
    SCROLL THREAD
    -------------------------------------------------------------------------
    A single fixed-overlay SVG line with a comet head + fading wake ("estela")
-   that travels down the page as you scroll, weaving between the points of
-   interest (hero, work rows, service rows, process steps, CTA…) and carrying
-   the band palette Servicios uses on hover.
+   that travels down the page as you scroll on an organic meander through the
+   centre of the layout, weaving between the points of interest (hero, work
+   rows, service rows, process steps, CTA…), passing behind some solid blocks
+   for depth, and carrying the band palette Servicios uses on hover.
 
    Built by js/scroll-thread.js — inert without it.
    Gated: >900px viewport only, and off entirely for reduced motion.
@@ -23,30 +24,48 @@
 }
 .scroll-thread.is-ready { opacity: 1; }
 
-/* faint full route */
+/* faint full route — a thin editorial guide through the centre of the page */
 .scroll-thread__base {
   fill: none;
   stroke: var(--line-strong);
-  stroke-width: 1.25;
+  stroke-width: 1;
   stroke-linecap: round;
-  opacity: 0.4;
+  stroke-linejoin: round;
+  opacity: 0.2;
 }
 
 /* the part already travelled — band gradient, a touch brighter */
 .scroll-thread__travel {
   fill: none;
   stroke: url(#thread-flow);
-  stroke-width: 2;
+  stroke-width: 1.75;
   stroke-linecap: round;
-  opacity: 0.7;
+  stroke-linejoin: round;
+  opacity: 0.62;
 }
 
 /* the wake right behind the head */
 .scroll-thread__trail {
   fill: none;
   stroke: url(#thread-wake);
-  stroke-width: 3.5;
+  stroke-width: 3.25;
   stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* -------------------------------------------------------------------------
+   DEPTH — the thread rides at z-index 95 (over text + grain, under the
+   header). Lifting these solid visual blocks above it lets the line pass
+   physically BEHIND them and re-emerge on the exact same trajectory, since
+   it is one continuous path that is simply occluded. No extra elements.
+   ------------------------------------------------------------------------- */
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .work-row__media .parallax-layer,
+  .studio-panel__plate,
+  .plan-card {
+    position: relative;
+    z-index: 96;
+  }
 }
 
 /* points of interest */

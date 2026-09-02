@@ -355,83 +355,107 @@
             <div class="spectrum-rule capabilities__key"></div>
             <div class="capabilities__list">
 
-              <div class="cap-row" data-band="violet">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
+              <details class="cap-row cap-row--fold" data-band="violet" open>
+                <summary class="cap-row__link">
+                  <div class="draw-rule cap-row__rule" data-reveal></div>
+                  <span class="cap-row__band" aria-hidden="true"></span>
                   <span class="index-number index-number--muted cap-row__index">01</span>
                   <h3 class="cap-row__name"><span data-reveal>Diseño + Desarrollo</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Nos encargamos de todo, de la idea al sitio publicado, con un solo equipo. La opción recomendada.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
+                  <span class="cap-row__hint">Desde 799 €</span>
+                  <span class="cap-row__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="cap-fold__body">
+                  <p class="cap-fold__intro">Un solo equipo lleva tu web de la idea al sitio publicado: diseño, desarrollo, ayuda con los contenidos y SEO, todo incluido. Mueve las opciones para un presupuesto aproximado.</p>
 
-              <div class="cap-row" data-band="indigo">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
+                  <div class="calc calc--fold" data-calc>
+                    <form class="calc__form" aria-label="Calculadora de presupuesto">
+                      <fieldset class="calc__group">
+                        <legend class="calc__legend">Base</legend>
+                        <div class="calc__base">
+                          <span>Diseño + desarrollo, de principio a fin</span>
+                          <span class="calc__base-tag">Siempre incluido</span>
+                        </div>
+                      </fieldset>
+
+                      <fieldset class="calc__group">
+                        <legend class="calc__legend">Número de páginas</legend>
+                        <div class="calc__pages">
+                          <span class="calc__pages-value" data-calc-pages-value>1</span>
+                          <input class="calc__range" type="range" name="pages" min="1" max="5" step="1" value="1" aria-label="Número de páginas" />
+                          <div class="calc__range-scale" aria-hidden="true"><span>1</span><span>5</span></div>
+                        </div>
+                      </fieldset>
+
+                      <fieldset class="calc__group">
+                        <legend class="calc__legend">Extras</legend>
+                        <div class="calc__checks">
+                          <label class="calc__check"><input type="checkbox" name="extra" value="anim" /> Página animada 3D <span class="calc__check-hint">(esta web es un ejemplo)</span> <span class="calc__check-note">+279 €</span></label>
+                          <label class="calc__check"><input type="checkbox" name="extra" value="booking" /> Sistema de reservas <span class="calc__check-note">+179 €</span></label>
+                          <label class="calc__check"><input type="checkbox" name="extra" value="panel" /> Panel de gestión <span class="calc__check-hint">(base de datos propia)</span> <span class="calc__check-note">+249 €</span></label>
+                        </div>
+                        <p class="calc__hint">¿No necesitas reservas? Con el panel de gestión actualizas tú mismo catálogo, precios, horarios u ofertas, sin escribirnos.</p>
+                        <p class="calc__hint">La ayuda con los contenidos y el SEO ya van incluidos en el precio, sin coste extra.</p>
+                      </fieldset>
+                    </form>
+
+                    <aside class="calc__result" data-reveal>
+                      <div class="calc__vs">
+                        <div class="calc__vs-row"><span>Agencia típica cobra un mínimo de</span><b>8000 €</b></div>
+                        <div class="calc__vs-row"><span>Freelancer normal cobra un mínimo de</span><b>3000 €</b></div>
+                      </div>
+                      <div class="calc__mmw">
+                        <span class="calc__result-label">Con MakeMyWeb</span>
+                        <p class="calc__total" data-calc-total>799 €</p>
+                        <p class="calc__spec" data-calc-spec>Diseño + desarrollo · 1 página</p>
+                        <a class="btn-primary" href="#contacto">Pide tu presupuesto</a>
+                      </div>
+                      <p class="calc__disclaimer">Cifras orientativas. El presupuesto final se confirma tras hablar contigo.</p>
+                    </aside>
+                  </div>
+                </div>
+              </details>
+
+              <details class="cap-row cap-row--fold" data-band="flare">
+                <summary class="cap-row__link">
+                  <div class="draw-rule cap-row__rule" data-reveal></div>
+                  <span class="cap-row__band" aria-hidden="true"></span>
                   <span class="index-number index-number--muted cap-row__index">02</span>
-                  <h3 class="cap-row__name"><span data-reveal>Solo Diseño</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
-
-              <div class="cap-row" data-band="emerald">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
-                  <span class="index-number index-number--muted cap-row__index">03</span>
-                  <h3 class="cap-row__name"><span data-reveal>Solo Desarrollo</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Programamos un diseño que ya tienes, con código limpio y rápido.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
-
-              <div class="cap-row" data-band="cyan">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
-                  <span class="index-number index-number--muted cap-row__index">04</span>
-                  <h3 class="cap-row__name"><span data-reveal>Optimización SEO</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Estructura, contenidos y velocidad para que te encuentren en Google.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
-
-              <div class="cap-row" data-band="amber">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
-                  <span class="index-number index-number--muted cap-row__index">05</span>
-                  <h3 class="cap-row__name"><span data-reveal>Página Animada 3D</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Microinteracciones cuidadas y espacios en 3D que se sienten vivos.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
-
-              <div class="cap-row" data-band="flare">
-                <div class="draw-rule cap-row__rule" data-reveal></div>
-                <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="#contacto">
-                  <span class="index-number index-number--muted cap-row__index">06</span>
                   <h3 class="cap-row__name"><span data-reveal>Mantenimiento</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</span></p>
-                  <span class="cap-row__glyph" aria-hidden="true">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                  </span>
-                </a>
-              </div>
+                  <span class="cap-row__hint">Desde 39 €/mes</span>
+                  <span class="cap-row__sign" aria-hidden="true"></span>
+                </summary>
+                <div class="cap-fold__body">
+                  <p class="cap-fold__intro">Después del lanzamiento seguimos cuidando tu web para que no tengas que pensar en ella.</p>
+                  <div class="plan-cards">
+                    <div class="plan-card" data-reveal>
+                      <span class="plan-card__tag">Mantenimiento</span>
+                      <h4 class="plan-card__name">Básico</h4>
+                      <p class="plan-card__price"><b>39 €</b><span>/mes</span></p>
+                      <ul class="plan-card__list">
+                        <li>Hosting y dominio incluidos</li>
+                        <li>Copias de seguridad semanales</li>
+                        <li>Actualizaciones de seguridad</li>
+                        <li>1 cambio de contenido al mes incluido</li>
+                        <li>Los siguientes cambios a 15 €</li>
+                        <li>Optimización SEO solo una vez (al crear la página)</li>
+                      </ul>
+                      <a class="btn-primary" href="#contacto">Elegir plan</a>
+                    </div>
+                    <div class="plan-card plan-card--featured" data-reveal>
+                      <span class="plan-card__tag">Mantenimiento · Más elegido</span>
+                      <h4 class="plan-card__name">Pro</h4>
+                      <p class="plan-card__price"><b>77 €</b><span>/mes</span></p>
+                      <ul class="plan-card__list">
+                        <li>Todo lo de Mantenimiento Básico</li>
+                        <li>Cambios de contenido ilimitados</li>
+                        <li>Soporte prioritario</li>
+                        <li>Revisión SEO continua</li>
+                      </ul>
+                      <a class="btn-primary" href="#contacto">Elegir plan</a>
+                    </div>
+                  </div>
+                </div>
+              </details>
 
               <div class="draw-rule" data-reveal></div>
             </div>
@@ -625,10 +649,10 @@
             <div class="footer-column">
               <span class="mono-label">Servicios</span>
               <a class="text-link" href="#servicios">Diseño + Desarrollo</a>
-              <a class="text-link" href="#servicios">Solo Diseño</a>
-              <a class="text-link" href="#servicios">Solo Desarrollo</a>
               <a class="text-link" href="#servicios">Optimización SEO</a>
               <a class="text-link" href="#servicios">Página Animada 3D</a>
+              <a class="text-link" href="#servicios">Panel de gestión</a>
+              <a class="text-link" href="#servicios">Sistema de reservas</a>
               <a class="text-link" href="#servicios">Mantenimiento</a>
             </div>
             <div class="footer-column">
@@ -682,5 +706,6 @@
   <script src="js/animations.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/scroll-thread.js"></script>
+  <script src="js/pricing.js"></script>
 </body>
 </html>
