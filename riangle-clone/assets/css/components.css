@@ -247,8 +247,17 @@
   justify-content: space-between;
   gap: 24px;
 }
-.site-header__brand { display: inline-flex; align-items: center; gap: 12px; color: inherit; }
+.site-header__brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; }
 .site-header__brand svg { color: currentColor; }
+.site-header__mark { display: block; flex-shrink: 0; }
+.site-header__wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  font-stretch: 108%;
+  color: currentColor;
+}
 
 .site-nav { display: none; align-items: center; gap: 32px; }
 .site-header__controls { display: flex; align-items: center; gap: 12px; }
@@ -632,6 +641,8 @@
 }
 .media-frame--portrait { aspect-ratio: 4 / 3; }
 .media-frame > * { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* images sit inside .media-zoom <a>, so cover them explicitly too (any source ratio) */
+.media-frame img { width: 100%; height: 100%; object-fit: cover; }
 .media-zoom {
   width: 100%;
   height: 100%;
@@ -747,6 +758,17 @@
   .cap-row__glyph { display: block; grid-column: 4; justify-self: end; }
 }
 
+/* the scroll thread lights a row as its comet head passes — mirrors :hover.
+   Added/removed by js/scroll-thread.js; harmless (and unused) without it. */
+.cap-row.thread-lit .cap-row__band { transform: scaleY(1); }
+.cap-row.thread-lit .cap-row__name { font-variation-settings: "wdth" 108; }
+.cap-row.thread-lit .cap-row__note { color: var(--ink); }
+.cap-row.thread-lit .cap-row__glyph { color: var(--refract); }
+.work-row.thread-lit .work-row__title svg { color: var(--refract); transform: translateX(4px); }
+.work-row.thread-lit .work-row__rule { background: var(--refract); }
+.work-row.thread-lit .media-zoom { transform: scale(1.035); }
+.work-row.thread-lit .tag-row > * { color: var(--refract); border-color: var(--refract); }
+
 /* -------------------------------------------------------------------------
    10. STUDIO PANEL  (duotone photo + copy + 3 stats)
    ------------------------------------------------------------------------- */
@@ -815,6 +837,30 @@
 }
 .story-item__meta { display: flex; flex-wrap: wrap; gap: 24px; padding-top: 16px; }
 .story-item__title span { display: block; }
+/* FAQ answers reuse .summary but must not be line-clamped */
+.story-item .summary { -webkit-line-clamp: unset; display: block; max-width: 52ch; margin-top: 4px; }
+
+/* -------------------------------------------------------------------------
+   PROCESO — numbered steps (index one-pager)
+   ------------------------------------------------------------------------- */
+.process-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 48px; }
+@media (min-width: 768px) { .process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.process-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding-block: 28px 34px;
+}
+.process-step__index { margin-bottom: 2px; }
+.process-step__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  line-height: 1.04;
+  font-stretch: 108%;
+}
+.process-step__note { color: var(--ink-muted); max-width: 46ch; line-height: 1.62; }
 
 /* -------------------------------------------------------------------------
    12. CTA BAND
@@ -930,3 +976,126 @@
 }
 .to-top svg { transition: transform 320ms var(--ease-out); }
 .to-top:hover svg { transform: translateY(-3px); }
+
+/* =========================================================================
+   SUBPAGES — page header, pricing calculator, plans, FAQ accordion
+   (precios.html, faq.html). Additive; no animation code here.
+   ========================================================================= */
+
+/* page header ------------------------------------------------------------- */
+.page-head { padding-block: calc(var(--pad-block) * 0.62) calc(var(--pad-block) * 0.34); }
+.page-head__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 110%;
+  font-size: clamp(2.4rem, 1.4rem + 4.2vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  max-width: 16ch;
+  margin-block: 18px 0;
+}
+.page-head__lead { margin-top: 28px; max-width: 52ch; }
+
+/* pricing calculator ----------------------------------------------------- */
+.calc { display: grid; gap: 32px; }
+@media (min-width: 992px) { .calc { grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr); gap: 56px; align-items: start; } }
+
+.calc__form { display: flex; flex-direction: column; gap: 40px; }
+.calc__group { display: flex; flex-direction: column; gap: 16px; border: 0; margin: 0; padding: 0; }
+.calc__legend {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  padding-left: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.calc__options { display: flex; flex-direction: column; border: 1px solid var(--line); }
+.calc__option {
+  position: relative;
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease-standard), color 0.25s var(--ease-standard);
+}
+.calc__option:last-child { border-bottom: 0; }
+.calc__option input { position: absolute; opacity: 0; pointer-events: none; }
+.calc__option:hover { color: var(--ink); }
+.calc__option:has(input:checked) { background: var(--refract); color: var(--on-refract); }
+.calc__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px var(--refract-soft); }
+
+.calc__pages { display: flex; flex-direction: column; gap: 14px; }
+.calc__pages-value { font-family: var(--font-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.calc__range { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: var(--line-strong); accent-color: var(--refract); }
+.calc__range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--refract); cursor: pointer; margin-top: -1px; }
+.calc__range::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: var(--refract); cursor: pointer; }
+
+.calc__checks { display: flex; flex-direction: column; }
+.calc__check {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+  font-family: var(--font-display);
+  color: var(--ink);
+}
+.calc__check:last-child { border-bottom: 1px solid var(--line); }
+.calc__check input { width: 16px; height: 16px; accent-color: var(--refract); flex-shrink: 0; translate: 0 2px; }
+.calc__check-note { margin-left: auto; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+
+/* result card */
+.calc__result { border: 1px solid var(--line-strong); background: var(--surface-1); padding: clamp(24px, 3vw, 40px); position: sticky; top: 96px; }
+.calc__result-label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
+.calc__spec { margin-top: 14px; line-height: 1.6; color: var(--ink-muted); }
+.calc__total { margin-top: 22px; font-family: var(--font-display); font-weight: 600; font-stretch: 110%; font-size: clamp(2.2rem, 1.4rem + 3vw, 3.4rem); line-height: 1; }
+.calc__total span { color: var(--ink-faint); font-size: 0.5em; }
+.calc__disclaimer { margin-top: 14px; font-size: 0.8125rem; color: var(--ink-faint); line-height: 1.55; }
+.calc__result .btn-primary { margin-top: 26px; width: 100%; }
+
+.calc__compare { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 22px; display: flex; flex-direction: column; gap: 14px; }
+.calc__compare-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; font-size: 0.875rem; }
+.calc__compare-row span:first-child { color: var(--ink-muted); }
+.calc__compare-row span:last-child { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); text-align: right; }
+
+/* maintenance / plan cards --------------------------------------------------- */
+.plan-cards { display: grid; gap: 24px; }
+@media (min-width: 768px) { .plan-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.plan-card { border: 1px solid var(--line); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; gap: 20px; background: var(--surface-1); }
+.plan-card--featured { border-color: var(--refract); box-shadow: inset 0 0 0 1px var(--refract); }
+.plan-card__tag { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--refract); }
+.plan-card__name { font-family: var(--font-display); font-weight: 600; font-stretch: 108%; font-size: 1.5rem; }
+.plan-card__price { font-family: var(--font-mono); font-size: 0.9375rem; color: var(--ink-muted); }
+.plan-card__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.plan-card__list li { padding: 12px 0; border-top: 1px solid var(--line); color: var(--ink-muted); line-height: 1.5; }
+.plan-card__list li::before { content: "—"; color: var(--refract); margin-right: 10px; }
+.plan-card .btn-primary { margin-top: auto; align-self: flex-start; }
+
+/* FAQ accordion (faq.html) ------------------------------------------------- */
+.faq-list { border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 26px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.1rem, 1rem + 0.6vw, 1.4rem);
+  line-height: 1.3;
+}
+.faq-item > summary::-webkit-details-marker { display: none; }
+.faq-item__q-index { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; color: var(--ink-faint); padding-top: 0.4em; flex-shrink: 0; }
+.faq-item__sign { margin-left: auto; flex-shrink: 0; width: 16px; height: 16px; position: relative; translate: 0 0.35em; }
+.faq-item__sign::before, .faq-item__sign::after { content: ""; position: absolute; background: var(--refract); transition: transform 0.3s var(--ease-out), opacity 0.3s var(--ease-out); }
+.faq-item__sign::before { top: 7px; left: 0; width: 16px; height: 2px; }
+.faq-item__sign::after { top: 0; left: 7px; width: 2px; height: 16px; }
+.faq-item[open] .faq-item__sign::after { transform: rotate(90deg); opacity: 0; }
+.faq-item__a { padding: 0 0 28px 0; max-width: 60ch; color: var(--ink-muted); line-height: 1.65; }
+@media (min-width: 768px) { .faq-item__a { padding-left: 40px; } }

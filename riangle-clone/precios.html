@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Precios — MakeMyWeb</title>
+  <meta name="description" content="Calcula un presupuesto orientativo para tu web con MakeMyWeb: diseño, desarrollo, páginas, extras y plazos. Sin sorpresas: la mitad al empezar y la mitad al publicar." />
+  <meta name="theme-color" content="#F43333" />
+  <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/images/icon.png" />
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("theme");
+        var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = stored || (sysDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("js-anim");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/fonts.css" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/scroll-thread.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" data-scrolled="false" data-hidden="false">
+    <div class="site-header__bar">
+      <a class="site-header__brand" href="index.html" aria-label="MakeMyWeb, inicio">
+        <svg class="site-header__mark" width="30" height="22" viewBox="0 0 210 168" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hdrRibbon" x1="0.15" y1="0" x2="0.55" y2="1">
+              <stop offset="0" stop-color="#FF6A5C" />
+              <stop offset="0.5" stop-color="#F43333" />
+              <stop offset="1" stop-color="#C81414" />
+            </linearGradient>
+          </defs>
+          <path transform="translate(0 0)"   d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
+          <path transform="translate(62 0)"  d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
+          <path transform="translate(124 0)" d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
+        </svg>
+        <span class="site-header__wordmark">MakeMyWeb</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="index.html#servicios">
+          <span class="nav-link__index" aria-hidden="true">01</span>
+          <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span>
+        </a>
+        <a class="nav-link" href="precios.html" aria-current="page">
+          <span class="nav-link__index" aria-hidden="true">02</span>
+          <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span>
+        </a>
+        <a class="nav-link" href="index.html#proceso">
+          <span class="nav-link__index" aria-hidden="true">03</span>
+          <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span>
+        </a>
+        <a class="nav-link" href="faq.html">
+          <span class="nav-link__index" aria-hidden="true">04</span>
+          <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span>
+        </a>
+      </nav>
+
+      <div class="site-header__controls">
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema">
+          <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
+          </svg>
+          <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 5h4" /><path d="M20 3v4" /><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+          </svg>
+        </button>
+        <button class="burger" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="Abrir menú"></button>
+      </div>
+    </div>
+  </header>
+
+  <div class="menu-overlay" id="site-menu" aria-hidden="true">
+    <div class="menu-overlay__glass" aria-hidden="true"></div>
+    <div class="menu-overlay__content">
+      <nav class="menu-overlay__items" aria-label="Primary">
+        <div class="menu-overlay__item">
+          <a class="nav-link" href="index.html#servicios"><span class="nav-link__index" aria-hidden="true">01</span>
+            <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span></a>
+        </div>
+        <div class="menu-overlay__item">
+          <a class="nav-link" href="precios.html"><span class="nav-link__index" aria-hidden="true">02</span>
+            <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span></a>
+        </div>
+        <div class="menu-overlay__item">
+          <a class="nav-link" href="index.html#proceso"><span class="nav-link__index" aria-hidden="true">03</span>
+            <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span></a>
+        </div>
+        <div class="menu-overlay__item">
+          <a class="nav-link" href="faq.html"><span class="nav-link__index" aria-hidden="true">04</span>
+            <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span></a>
+        </div>
+      </nav>
+      <div class="menu-overlay__foot">
+        <div class="studio-clock">
+          <span>Hora local</span>
+          <time data-studio-clock datetime="">—:—:— CEST</time>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div id="smooth-wrapper">
+   <div id="smooth-content">
+    <main id="main">
+      <div data-band="brand" data-band-scope>
+
+        <!-- PAGE HEAD -->
+        <section class="section page-head">
+          <div class="section__inner">
+            <h1 class="page-head__title" data-reveal>Precios claros, sin sorpresas.</h1>
+            <p class="lead page-head__lead"><span data-reveal>Mueve las opciones y calcula un presupuesto orientativo en segundos. El precio final se confirma tras hablar contigo, y se paga la mitad al empezar y la otra mitad al publicar.</span></p>
+          </div>
+        </section>
+
+        <!-- CALCULADORA -->
+        <section class="section section--alt" id="calculadora">
+          <div class="section__inner">
+            <h2 class="eyebrow" data-reveal>Calculadora</h2>
+            <div class="spectrum-rule capabilities__key"></div>
+
+            <div class="calc" data-calc>
+              <form class="calc__form" aria-label="Calculadora de presupuesto">
+                <fieldset class="calc__group">
+                  <legend class="calc__legend">¿Qué necesitas?</legend>
+                  <div class="calc__options">
+                    <label class="calc__option"><input type="radio" name="mode" value="full" checked /> Diseño + desarrollo</label>
+                    <label class="calc__option"><input type="radio" name="mode" value="design" /> Solo diseño</label>
+                    <label class="calc__option"><input type="radio" name="mode" value="dev" /> Solo desarrollo</label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="calc__group">
+                  <legend class="calc__legend">¿Cuántas páginas?</legend>
+                  <div class="calc__pages">
+                    <span class="calc__pages-value" data-calc-pages-value>1 página</span>
+                    <input class="calc__range" type="range" name="pages" min="1" max="5" step="1" value="1" aria-label="Número de páginas" />
+                  </div>
+                </fieldset>
+
+                <fieldset class="calc__group">
+                  <legend class="calc__legend">Extras</legend>
+                  <div class="calc__checks">
+                    <label class="calc__check"><input type="checkbox" name="extra" value="content" /> Ayuda con los contenidos <span class="calc__check-note">coste adicional</span></label>
+                    <label class="calc__check"><input type="checkbox" name="extra" value="seo" /> Optimización SEO <span class="calc__check-note">coste adicional</span></label>
+                    <label class="calc__check"><input type="checkbox" name="extra" value="anim" /> Página animada 3D <span class="calc__check-note">coste adicional</span></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="calc__group">
+                  <legend class="calc__legend">¿Con qué rapidez lo necesitas?</legend>
+                  <div class="calc__options">
+                    <label class="calc__option"><input type="radio" name="speed" value="d1" /> En 24 horas</label>
+                    <label class="calc__option"><input type="radio" name="speed" value="d2" /> En 48 horas</label>
+                    <label class="calc__option"><input type="radio" name="speed" value="normal" checked /> A ritmo normal</label>
+                  </div>
+                </fieldset>
+              </form>
+
+              <aside class="calc__result" data-reveal>
+                <span class="calc__result-label">Presupuesto estimado</span>
+                <p class="calc__spec" data-calc-spec>Diseño + desarrollo · 1 página · a ritmo normal</p>
+                <p class="calc__total" data-calc-total><span>desde</span> 690 €</p>
+                <p class="calc__disclaimer">Cifras orientativas. El presupuesto final se confirma tras hablar contigo.</p>
+                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+
+                <div class="calc__compare">
+                  <div class="calc__compare-row"><span>Agencia típica</span><span data-calc-agency>≈ 2.050 €+</span></div>
+                  <div class="calc__compare-row"><span>Freelancer</span><span data-calc-free>≈ 1.100 €+</span></div>
+                  <div class="calc__compare-row"><span>Con MakeMyWeb</span><span>según la calculadora</span></div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+
+        <!-- COMPARATIVA -->
+        <section class="section">
+          <div class="section__inner">
+            <h2 class="eyebrow" data-reveal>Con quién comparas</h2>
+            <div class="capabilities__list">
+              <div class="cap-row" data-band="amber">
+                <div class="draw-rule cap-row__rule" data-reveal></div>
+                <span class="cap-row__band" aria-hidden="true"></span>
+                <div class="cap-row__link" style="cursor:default">
+                  <span class="index-number index-number--muted cap-row__index">01</span>
+                  <h3 class="cap-row__name"><span data-reveal>Agencia típica</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Cobra un mínimo alto y suele sumar tiempo y costes extra por el camino.</span></p>
+                </div>
+              </div>
+              <div class="cap-row" data-band="violet">
+                <div class="draw-rule cap-row__rule" data-reveal></div>
+                <span class="cap-row__band" aria-hidden="true"></span>
+                <div class="cap-row__link" style="cursor:default">
+                  <span class="index-number index-number--muted cap-row__index">02</span>
+                  <h3 class="cap-row__name"><span data-reveal>Freelancer</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Más barato que una agencia, pero suele implicar idas y vueltas y plazos que se alargan.</span></p>
+                </div>
+              </div>
+              <div class="cap-row" data-band="brand">
+                <div class="draw-rule cap-row__rule" data-reveal></div>
+                <span class="cap-row__band" aria-hidden="true"></span>
+                <div class="cap-row__link" style="cursor:default">
+                  <span class="index-number index-number--muted cap-row__index">03</span>
+                  <h3 class="cap-row__name"><span data-reveal>Con MakeMyWeb</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Diseño y código en el mismo equipo, precio cerrado y entrega en 24/48h. Ahorras tiempo y dolores de cabeza.</span></p>
+                </div>
+              </div>
+              <div class="draw-rule" data-reveal></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MANTENIMIENTO -->
+        <section class="section section--alt" id="mantenimiento">
+          <div class="section__inner">
+            <h2 class="eyebrow" data-reveal>Mantenimiento</h2>
+            <p class="lead" style="max-width:46ch;margin:24px 0 36px"><span data-reveal>Después del lanzamiento seguimos cuidando tu web: hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</span></p>
+            <div class="plan-cards">
+              <div class="plan-card" data-reveal>
+                <span class="plan-card__tag">Cuido Básico</span>
+                <span class="plan-card__price">Consultar precio · mensual</span>
+                <ul class="plan-card__list">
+                  <li>Hosting incluido</li>
+                  <li>Copias de seguridad semanales</li>
+                  <li>Actualizaciones de seguridad</li>
+                  <li>1 cambio de contenido al mes (los siguientes con coste adicional)</li>
+                  <li>1 hora de soporte al mes</li>
+                </ul>
+                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+              </div>
+              <div class="plan-card plan-card--featured" data-reveal>
+                <span class="plan-card__tag">Cuido Pro · Más elegido</span>
+                <span class="plan-card__price">Consultar precio · mensual</span>
+                <ul class="plan-card__list">
+                  <li>Todo lo de Cuido Básico</li>
+                  <li>Cambios de contenido ilimitados</li>
+                  <li>Soporte prioritario</li>
+                  <li>Revisión SEO continua</li>
+                </ul>
+                <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CÓMO FUNCIONA EL PAGO -->
+        <section class="section">
+          <div class="section__inner">
+            <div class="draw-rule" data-reveal></div>
+            <div class="positioning">
+              <h2 class="h-display positioning__statement" data-reveal>La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</h2>
+              <div class="positioning__support-col">
+                <p class="lead"><span data-reveal>El presupuesto incluye diseño, desarrollo, revisión en móvil y una ronda de ajustes antes de publicar. Si necesitas más páginas a mitad de proyecto, se ajusta con el mismo precio por página que ya conoces.</span></p>
+                <a class="text-link arrow-link" href="faq.html">
+                  Ver todas las preguntas
+                  <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="spectrum-rule"></div>
+
+        <!-- CTA -->
+        <section class="section section--dark cta" data-ground="dark" id="contacto">
+          <div class="section__inner">
+            <div class="cta__middle">
+              <h2 class="h-display cta__statement" data-reveal>Cuéntanos qué necesitas y te devolvemos un presupuesto claro en menos de 24 horas.</h2>
+              <span class="magnetic">
+                <span class="magnetic__visual">
+                  <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+                </span>
+              </span>
+            </div>
+            <div class="cta__prism-corner" aria-hidden="true" data-prism-corner></div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="spectrum-rule"></div>
+      <div class="site-footer__gutter">
+        <div class="section__inner">
+          <div class="footer-readouts">
+            <div class="studio-clock">
+              <span>Hora local</span>
+              <time data-studio-clock datetime="">—:—:— CEST</time>
+            </div>
+            <div class="footer-locations">
+              <div class="footer-place">
+                <span class="mono-label">Base</span>
+                <data value="Getafe">Getafe · Comunidad de Madrid</data>
+              </div>
+              <div class="footer-place">
+                <span class="mono-label">Proyectos</span>
+                <data value="España">Toda España, en remoto</data>
+              </div>
+              <div class="footer-place">
+                <span class="mono-label">Respuesta</span>
+                <data value="24h">Presupuesto en &lt; 24 h</data>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-columns">
+            <div class="footer-column">
+              <span class="mono-label">Navegar</span>
+              <a class="text-link" href="index.html#servicios">Servicios</a>
+              <a class="text-link" href="index.html#trabajo">Trabajo</a>
+              <a class="text-link" href="index.html#proceso">Proceso</a>
+              <a class="text-link" href="precios.html">Precios</a>
+              <a class="text-link" href="faq.html">FAQ</a>
+            </div>
+            <div class="footer-column">
+              <span class="mono-label">Precios</span>
+              <a class="text-link" href="#calculadora">Calculadora</a>
+              <a class="text-link" href="#mantenimiento">Cuido Básico</a>
+              <a class="text-link" href="#mantenimiento">Cuido Pro</a>
+            </div>
+            <div class="footer-column">
+              <span class="mono-label">Contacto</span>
+              <a class="text-link" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+              <span class="plain">hola@makemyweb.com</span>
+              <span class="plain">+1 (555) 019-2044</span>
+            </div>
+            <div class="footer-column">
+              <span class="mono-label">Recursos</span>
+              <a class="text-link arrow-link" href="faq.html">
+                Preguntas frecuentes <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+              </a>
+              <a class="text-link arrow-link" href="index.html">
+                Inicio <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-globe" aria-hidden="true"></div>
+
+      <div class="site-footer__gutter">
+        <div class="section__inner">
+          <div class="footer-colophon">
+            <div class="footer-colophon__details">
+              <span class="mono-label copyright">© 2026 MakeMyWeb · Todos los derechos reservados.</span>
+              <nav class="footer-legal" aria-label="Legal">
+                <a class="text-link" href="/aviso-legal">Aviso legal</a>
+                <a class="text-link" href="/privacidad">Privacidad</a>
+              </nav>
+            </div>
+            <button class="to-top" type="button" aria-label="Volver arriba">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F43333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 19V5M5 12l7-7 7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+   </div>
+  </div>
+
+  <script src="js/theme-toggle.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/studio-clock.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/scroll-thread.js"></script>
+  <script src="js/pricing.js"></script>
+</body>
+</html>

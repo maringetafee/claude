@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Riangle | Design Studio — static reconstruction</title>
-  <meta name="description" content="Riangle is a design studio. We shape brand identities and build the websites, products and AI-driven experiences that carry them." />
+  <title>MakeMyWeb — Diseñamos tu web</title>
+  <meta name="description" content="MakeMyWeb diseña y programa sitios web a medida para negocios. Listos en 24/48h, sin líos técnicos ni sorpresas en el precio." />
   <meta name="theme-color" content="#F43333" />
   <link rel="icon" href="assets/images/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="assets/images/icon.png" />
@@ -29,9 +29,10 @@
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
+  <link rel="stylesheet" href="assets/css/scroll-thread.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <!-- =====================================================================
        SITE HEADER
@@ -39,38 +40,43 @@
        ===================================================================== -->
   <header class="site-header" data-scrolled="false" data-hidden="false">
     <div class="site-header__bar">
-      <a class="site-header__brand" href="/" aria-label="Riangle, home">
-        <svg width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
-          <path d="M10 0L15 7.999H5L10 0Z" fill="#F43333" />
-          <path d="M5 7.99902L10 15.998H0L5 7.99902Z" fill="#F43333" />
-          <path d="M15 7.99902L20 15.998H10L15 7.99902Z" fill="#F43333" />
+      <a class="site-header__brand" href="/" aria-label="MakeMyWeb, inicio">
+        <svg class="site-header__mark" width="30" height="22" viewBox="0 0 210 168" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="hdrRibbon" x1="0.15" y1="0" x2="0.55" y2="1">
+              <stop offset="0" stop-color="#FF6A5C" />
+              <stop offset="0.5" stop-color="#F43333" />
+              <stop offset="1" stop-color="#C81414" />
+            </linearGradient>
+          </defs>
+          <path transform="translate(0 0)"   d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
+          <path transform="translate(62 0)"  d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
+          <path transform="translate(124 0)" d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#hdrRibbon)" />
         </svg>
-        <svg width="101" height="16" viewBox="0 0 101 16" fill="none" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" d="M6.91837 15.3958L2.59196 9.17898H1.83191V15.3958H0V0.701545H2.22168C3.5274 0.701545 4.93056 0.721039 6.09986 1.38364C7.32763 2.10471 8.02921 3.48839 8.02921 4.89155C8.02921 6.9963 6.62605 8.75024 4.50182 9.00359L9.14004 15.3958H6.91837ZM1.83191 7.6589H2.41656C4.28744 7.6589 6.31423 7.3081 6.31423 4.9695C6.31423 2.66987 4.13154 2.33858 2.31912 2.33858H1.83191V7.6589ZM14.8545 15.3958V0.701545H16.6864V15.3958H14.8545ZM24.1742 15.3958H22.2059L29.2217 0.0779297L36.2375 15.3958H34.2692L32.5932 11.7125H25.8502L24.1742 15.3958ZM26.6103 10.0365H31.8332L29.2217 4.09252L26.6103 10.0365ZM52.6511 11.5566V0.701545H54.483V15.9999L43.4526 4.44332V15.3958H41.6206V-3.05176e-05L52.6511 11.5566ZM74.8137 7.9902V8.57485C74.8137 12.6089 71.9684 15.7076 67.8563 15.7076C63.7443 15.7076 60.4312 12.1607 60.4312 8.08764C60.4312 3.85867 63.8222 0.389737 68.0512 0.389737C70.3313 0.389737 72.592 1.42263 74.0341 3.23504L72.7479 4.4628C71.6955 3.02066 69.9221 2.06574 68.1292 2.06574C64.8356 2.06574 62.2632 4.73564 62.2632 8.02917C62.2632 11.1083 64.7966 14.0316 67.9732 14.0316C70.2534 14.0316 72.7089 12.0633 72.7869 9.66619H68.9866V7.9902H74.8137ZM87.2516 13.7198V15.3958H80.9568V0.701545H82.7887V13.7198H87.2516ZM100.683 0.701545V2.37755H94.6225V6.4896H100.508V8.1656H94.6225V13.7198H100.683V15.3958H92.7906V0.701545H100.683Z" />
-        </svg>
+        <span class="site-header__wordmark">MakeMyWeb</span>
       </a>
 
       <nav class="site-nav" aria-label="Primary">
-        <a class="nav-link" href="/work">
+        <a class="nav-link" href="#servicios">
           <span class="nav-link__index" aria-hidden="true">01</span>
-          <span class="nav-link__roll"><span>Work</span><span aria-hidden="true">Work</span></span>
+          <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span>
         </a>
-        <a class="nav-link" href="/about">
+        <a class="nav-link" href="precios.html">
           <span class="nav-link__index" aria-hidden="true">02</span>
-          <span class="nav-link__roll"><span>About</span><span aria-hidden="true">About</span></span>
+          <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span>
         </a>
-        <a class="nav-link" href="/stories">
+        <a class="nav-link" href="#proceso">
           <span class="nav-link__index" aria-hidden="true">03</span>
-          <span class="nav-link__roll"><span>Stories</span><span aria-hidden="true">Stories</span></span>
+          <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span>
         </a>
-        <a class="nav-link" href="/contact">
+        <a class="nav-link" href="faq.html">
           <span class="nav-link__index" aria-hidden="true">04</span>
-          <span class="nav-link__roll"><span>Contact</span><span aria-hidden="true">Contact</span></span>
+          <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span>
         </a>
       </nav>
 
       <div class="site-header__controls">
-        <button class="theme-toggle" type="button" aria-label="Toggle theme">
+        <button class="theme-toggle" type="button" aria-label="Cambiar tema">
           <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="4" /><path d="M12 2v2" /><path d="M12 20v2" /><path d="m4.93 4.93 1.41 1.41" /><path d="m17.66 17.66 1.41 1.41" /><path d="M2 12h2" /><path d="M20 12h2" /><path d="m6.34 17.66-1.41 1.41" /><path d="m19.07 4.93-1.41 1.41" />
           </svg>
@@ -78,7 +84,7 @@
             <path d="M18 5h4" /><path d="M20 3v4" /><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
           </svg>
         </button>
-        <button class="burger" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="Open menu"></button>
+        <button class="burger" type="button" aria-controls="site-menu" aria-expanded="false" aria-label="Abrir menú"></button>
       </div>
     </div>
   </header>
@@ -89,25 +95,25 @@
     <div class="menu-overlay__content">
       <nav class="menu-overlay__items" aria-label="Primary">
         <div class="menu-overlay__item">
-          <a class="nav-link" href="/work"><span class="nav-link__index" aria-hidden="true">01</span>
-            <span class="nav-link__roll"><span>Work</span><span aria-hidden="true">Work</span></span></a>
+          <a class="nav-link" href="#servicios"><span class="nav-link__index" aria-hidden="true">01</span>
+            <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span></a>
         </div>
         <div class="menu-overlay__item">
-          <a class="nav-link" href="/about"><span class="nav-link__index" aria-hidden="true">02</span>
-            <span class="nav-link__roll"><span>About</span><span aria-hidden="true">About</span></span></a>
+          <a class="nav-link" href="precios.html"><span class="nav-link__index" aria-hidden="true">02</span>
+            <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span></a>
         </div>
         <div class="menu-overlay__item">
-          <a class="nav-link" href="/stories"><span class="nav-link__index" aria-hidden="true">03</span>
-            <span class="nav-link__roll"><span>Stories</span><span aria-hidden="true">Stories</span></span></a>
+          <a class="nav-link" href="#proceso"><span class="nav-link__index" aria-hidden="true">03</span>
+            <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span></a>
         </div>
         <div class="menu-overlay__item">
-          <a class="nav-link" href="/contact"><span class="nav-link__index" aria-hidden="true">04</span>
-            <span class="nav-link__roll"><span>Contact</span><span aria-hidden="true">Contact</span></span></a>
+          <a class="nav-link" href="faq.html"><span class="nav-link__index" aria-hidden="true">04</span>
+            <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span></a>
         </div>
       </nav>
       <div class="menu-overlay__foot">
         <div class="studio-clock">
-          <span>Studio time</span>
+          <span>Hora local</span>
           <time data-studio-clock datetime="">—:—:— CEST</time>
         </div>
       </div>
@@ -164,19 +170,19 @@
 
           <div class="hero__content">
             <h1 class="hero__headline" data-reveal-heading>
-              <span>We design brands</span>
-              <span>and build digital</span>
-              <span>and AI-driven</span>
-              <span>experiences.</span>
+              <span>Diseñamos</span>
+              <span>y programamos</span>
+              <span>tu web a</span>
+              <span>medida.</span>
             </h1>
           </div>
 
           <div class="hero__meta">
-            <span data-reveal>Riangle</span>
+            <span data-reveal>MakeMyWeb</span>
             <span class="hero__meta-sep" aria-hidden="true" data-reveal>·</span>
-            <span data-reveal>Est.&nbsp;2013</span>
+            <span data-reveal>Diseño&nbsp;+&nbsp;Código</span>
             <span class="hero__meta-sep" aria-hidden="true" data-reveal>·</span>
-            <span data-reveal>US ↔ CH ↔ ME</span>
+            <span data-reveal>Entrega en 24/48h</span>
           </div>
 
           <div class="hero__scroll-cue" aria-hidden="true">
@@ -192,14 +198,14 @@
             <div class="draw-rule" data-reveal></div>
             <div class="positioning">
               <h2 class="h-display positioning__statement" data-reveal>
-                Riangle is a design studio operating in Switzerland, Montenegro &amp; the USA.
+                MakeMyWeb diseña y programa sitios a medida para negocios que quieren verse tan bien como trabajan.
               </h2>
               <div class="positioning__support-col">
                 <p class="lead">
-                  <span data-reveal>We shape brand identities and build the websites, products and AI-driven experiences that carry them. The designers also write the code, so what ships is what was designed.</span>
+                  <span data-reveal>Nos encargamos de todo, de la idea al sitio publicado: diseño, código y puesta en marcha en un solo equipo. Sin líos técnicos ni sorpresas en el precio, y la mitad del pago no llega hasta que la web está online.</span>
                 </p>
-                <a class="text-link arrow-link" href="/contact">
-                  Start a Project
+                <a class="text-link arrow-link" href="#contacto">
+                  Pide tu presupuesto
                   <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true" focusable="false">
                     <path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" />
                   </svg>
@@ -212,18 +218,18 @@
         <!-- ===============================================================
              SELECTED WORK
              =============================================================== -->
-        <section class="section">
+        <section class="section" id="trabajo">
           <div class="section__inner">
-            <h2 class="eyebrow" data-reveal>Selected work</h2>
+            <h2 class="eyebrow" data-reveal>Trabajo real</h2>
             <div class="selected-work__rows">
 
-              <article class="work-row" data-band="emerald">
+              <article class="work-row" data-band="amber">
                 <div class="draw-rule work-row__rule" data-reveal></div>
                 <div class="work-row__media">
                   <div class="parallax-layer">
                     <div class="media-frame" data-reveal>
-                      <a class="media-zoom" href="/work/doccupine" tabindex="-1" aria-hidden="true">
-                        <img src="assets/images/doccupine.jpg" width="1440" height="900" alt="Doccupine" />
+                      <a class="media-zoom" href="https://moccacafe.netlify.app" target="_blank" rel="noreferrer noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/images/work-mocca.jpg" width="1600" height="1600" alt="Mocca Café, Getafe" />
                       </a>
                     </div>
                   </div>
@@ -233,14 +239,73 @@
                     <div class="work-row__stack" data-reveal>
                       <span class="index-number">01</span>
                       <h3 class="h-work work-row__title">
-                        <a href="/work/doccupine">Doccupine</a>
+                        <a href="https://moccacafe.netlify.app" target="_blank" rel="noreferrer noopener">Mocca Café</a>
                         <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                       </h3>
-                      <p class="summary">Doccupine turns a folder of MDX into a production documentation site in one command. Open source, AI-ready, with a managed platform that writes, syncs and deploys the docs.</p>
+                      <p class="summary">Web y carta digital para la cafetería Mocca, en el centro de Getafe. Desayunos, poke bowls y picoteo de la mañana a la noche, con menú completo, horarios y cómo llegar.</p>
                       <div class="tag-row">
-                        <span class="chip">Product Design</span>
-                        <span class="chip">AI Experiences</span>
-                        <span class="chip">Mobile Design</span>
+                        <span class="chip">Diseño + Desarrollo</span>
+                        <span class="chip">Restauración</span>
+                        <span class="chip">Carta digital</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="work-row work-row--flip" data-band="violet">
+                <div class="draw-rule work-row__rule" data-reveal></div>
+                <div class="work-row__media">
+                  <div class="parallax-layer">
+                    <div class="media-frame" data-reveal>
+                      <a class="media-zoom" href="https://www.instagram.com/laesquinitagetafe/" target="_blank" rel="noreferrer noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/images/work-esquinita.jpg" width="2000" height="1492" alt="La Esquinita, Getafe" loading="lazy" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="work-row__text">
+                  <div class="parallax-layer">
+                    <div class="work-row__stack" data-reveal>
+                      <span class="index-number">02</span>
+                      <h3 class="h-work work-row__title">
+                        <a href="https://www.instagram.com/laesquinitagetafe/" target="_blank" rel="noreferrer noopener">La Esquinita</a>
+                        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+                      </h3>
+                      <p class="summary">Sitio para el bar de tapas de siempre, en el corazón de Getafe. Carta de tostas, raciones y postres caseros, historia del local y contacto directo con la barra.</p>
+                      <div class="tag-row">
+                        <span class="chip">Diseño + Desarrollo</span>
+                        <span class="chip">Hostelería</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="work-row" data-band="emerald">
+                <div class="draw-rule work-row__rule" data-reveal></div>
+                <div class="work-row__media">
+                  <div class="parallax-layer">
+                    <div class="media-frame" data-reveal>
+                      <a class="media-zoom" href="https://lolitagetafe.netlify.app" target="_blank" rel="noreferrer noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/images/work-lolita.jpg" width="1400" height="933" alt="Lolita Café, Getafe" loading="lazy" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="work-row__text">
+                  <div class="parallax-layer">
+                    <div class="work-row__stack" data-reveal>
+                      <span class="index-number">03</span>
+                      <h3 class="h-work work-row__title">
+                        <a href="https://lolitagetafe.netlify.app" target="_blank" rel="noreferrer noopener">Lolita Café</a>
+                        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+                      </h3>
+                      <p class="summary">Web con reserva de mesa online para Lolita: desayunos, brunch y platos healthy con producto fresco, en un local lleno de plantas en el centro de Getafe.</p>
+                      <div class="tag-row">
+                        <span class="chip">Diseño + Desarrollo</span>
+                        <span class="chip">Reservas online</span>
+                        <span class="chip">Restauración</span>
                       </div>
                     </div>
                   </div>
@@ -252,8 +317,8 @@
                 <div class="work-row__media">
                   <div class="parallax-layer">
                     <div class="media-frame" data-reveal>
-                      <a class="media-zoom" href="/work/kf-decic" tabindex="-1" aria-hidden="true">
-                        <img src="assets/images/fk-decic.png" width="1440" height="900" alt="FK Dečić crest" loading="lazy" />
+                      <a class="media-zoom" href="https://sbs-telecom.netlify.app" target="_blank" rel="noreferrer noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/images/work-sbs.jpg" width="1600" height="1000" alt="Web de S.B.S Telecomunicaciones, Madrid" loading="lazy" />
                       </a>
                     </div>
                   </div>
@@ -261,43 +326,17 @@
                 <div class="work-row__text">
                   <div class="parallax-layer">
                     <div class="work-row__stack" data-reveal>
-                      <span class="index-number">02</span>
+                      <span class="index-number">04</span>
                       <h3 class="h-work work-row__title">
-                        <a href="/work/kf-decic">FK Dečić</a>
+                        <a href="https://sbs-telecom.netlify.app" target="_blank" rel="noreferrer noopener">S.B.S Telecomunicaciones</a>
                         <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                       </h3>
-                      <p class="summary">A redesigned crest for FK Dečić, the football club of Tuzi. Wearing the new logo, the club made history and became champions of Montenegro for the first time.</p>
+                      <p class="summary">Web corporativa para S.B.S, instaladores de porteros automáticos, videoporteros, antenas y CCTV en Madrid. Más de 50 años construyendo la infraestructura invisible de la ciudad.</p>
                       <div class="tag-row">
-                        <span class="chip">Brand Identity</span>
-                        <span class="chip">Emblem Design</span>
-                        <span class="chip">Flag Design</span>
+                        <span class="chip">Diseño + Desarrollo</span>
+                        <span class="chip">Telecomunicaciones</span>
+                        <span class="chip">SEO local</span>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <article class="work-row" data-band="amber">
-                <div class="draw-rule work-row__rule" data-reveal></div>
-                <div class="work-row__media">
-                  <div class="parallax-layer">
-                    <div class="media-frame" data-reveal>
-                      <a class="media-zoom" href="/work/xhubleta" tabindex="-1" aria-hidden="true">
-                        <img src="assets/images/xhubleta.jpg" width="1200" height="800" alt="Xhubleta" loading="lazy" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div class="work-row__text">
-                  <div class="parallax-layer">
-                    <div class="work-row__stack" data-reveal>
-                      <span class="index-number">03</span>
-                      <h3 class="h-work work-row__title">
-                        <a href="/work/xhubleta">Xhubleta</a>
-                        <svg width="16" height="16" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-                      </h3>
-                      <p class="summary">Xhubleta is an undulating, bell-shaped folk skirt, worn by Albanian women, part of Albanian traditional clothing.</p>
-                      <div class="tag-row"><span class="chip">Brand Identity</span></div>
                     </div>
                   </div>
                 </div>
@@ -310,19 +349,19 @@
         <!-- ===============================================================
              CAPABILITIES
              =============================================================== -->
-        <section class="section section--alt">
+        <section class="section section--alt" id="servicios">
           <div class="section__inner">
-            <h2 class="eyebrow" data-reveal>Capabilities</h2>
+            <h2 class="eyebrow" data-reveal>Servicios</h2>
             <div class="spectrum-rule capabilities__key"></div>
             <div class="capabilities__list">
 
               <div class="cap-row" data-band="violet">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/brand-identity">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">01</span>
-                  <h3 class="cap-row__name"><span data-reveal>Brand Identity</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Marks, type systems and the rules that keep them intact.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Diseño + Desarrollo</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Nos encargamos de todo, de la idea al sitio publicado, con un solo equipo. La opción recomendada.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -332,10 +371,10 @@
               <div class="cap-row" data-band="indigo">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/web-design-development">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">02</span>
-                  <h3 class="cap-row__name"><span data-reveal>Web Design &amp; Dev</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Sites designed and built by the same studio, end to end.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Solo Diseño</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Te entregamos el diseño completo, listo para que tu equipo lo desarrolle.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -345,10 +384,10 @@
               <div class="cap-row" data-band="emerald">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/ai-experiences">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">03</span>
-                  <h3 class="cap-row__name"><span data-reveal>AI Experiences</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Assistants and AI-driven features people actually trust.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Solo Desarrollo</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Programamos un diseño que ya tienes, con código limpio y rápido.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -358,10 +397,10 @@
               <div class="cap-row" data-band="cyan">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/product-design">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">04</span>
-                  <h3 class="cap-row__name"><span data-reveal>Product Design</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Interfaces for software people use every day.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Optimización SEO</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Estructura, contenidos y velocidad para que te encuentren en Google.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -371,10 +410,10 @@
               <div class="cap-row" data-band="amber">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/mobile-design">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">05</span>
-                  <h3 class="cap-row__name"><span data-reveal>Mobile Design</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Native and responsive work, sized for the hand.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Página Animada 3D</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Microinteracciones cuidadas y espacios en 3D que se sienten vivos.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -384,10 +423,10 @@
               <div class="cap-row" data-band="flare">
                 <div class="draw-rule cap-row__rule" data-reveal></div>
                 <span class="cap-row__band" aria-hidden="true"></span>
-                <a class="block-link cap-row__link" href="/services/visual-design">
+                <a class="block-link cap-row__link" href="#contacto">
                   <span class="index-number index-number--muted cap-row__index">06</span>
-                  <h3 class="cap-row__name"><span data-reveal>Visual Design</span></h3>
-                  <p class="cap-row__note"><span data-reveal>Art direction and the supporting material around a launch.</span></p>
+                  <h3 class="cap-row__name"><span data-reveal>Mantenimiento</span></h3>
+                  <p class="cap-row__note"><span data-reveal>Hosting, copias de seguridad y soporte para que no tengas que pensar en ello.</span></p>
                   <span class="cap-row__glyph" aria-hidden="true">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
                   </span>
@@ -396,6 +435,42 @@
 
               <div class="draw-rule" data-reveal></div>
             </div>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             PROCESO — 4 pasos
+             =============================================================== -->
+        <section class="section" id="proceso">
+          <div class="section__inner">
+            <h2 class="eyebrow" data-reveal>Proceso</h2>
+            <div class="spectrum-rule capabilities__key"></div>
+            <ol class="process-list">
+              <li class="process-step">
+                <div class="draw-rule" data-reveal></div>
+                <span class="index-number index-number--muted process-step__index">01</span>
+                <h3 class="process-step__name"><span data-reveal>Descubrimos</span></h3>
+                <p class="process-step__note"><span data-reveal>Hablamos de tu negocio, tu público y lo que necesita tu web antes de tocar nada.</span></p>
+              </li>
+              <li class="process-step">
+                <div class="draw-rule" data-reveal></div>
+                <span class="index-number index-number--muted process-step__index">02</span>
+                <h3 class="process-step__name"><span data-reveal>Diseñamos</span></h3>
+                <p class="process-step__note"><span data-reveal>Maquetamos y definimos el estilo antes de escribir una sola línea de código.</span></p>
+              </li>
+              <li class="process-step">
+                <div class="draw-rule" data-reveal></div>
+                <span class="index-number index-number--muted process-step__index">03</span>
+                <h3 class="process-step__name"><span data-reveal>Desarrollamos</span></h3>
+                <p class="process-step__note"><span data-reveal>Código limpio, rápido y que se ve bien en cualquier pantalla, con una ronda de ajustes.</span></p>
+              </li>
+              <li class="process-step">
+                <div class="draw-rule" data-reveal></div>
+                <span class="index-number index-number--muted process-step__index">04</span>
+                <h3 class="process-step__name"><span data-reveal>Lanzamos</span></h3>
+                <p class="process-step__note"><span data-reveal>Publicamos el sitio y seguimos cerca las primeras semanas. La otra mitad del pago se abona aquí.</span></p>
+              </li>
+            </ol>
           </div>
         </section>
 
@@ -419,28 +494,28 @@
             <div class="studio-panel">
               <div class="studio-panel__images">
                 <div class="studio-panel__plate media-frame media-frame--portrait" data-reveal>
-                  <img src="assets/images/office.jpg" width="2024" height="1800" alt="The Riangle studio" loading="lazy" />
+                  <img src="assets/images/office.jpg" width="2024" height="1800" alt="El equipo de MakeMyWeb trabajando" loading="lazy" />
                 </div>
               </div>
               <div class="studio-panel__copy">
-                <h2 class="eyebrow" data-reveal>Studio</h2>
+                <h2 class="eyebrow" data-reveal>El estudio</h2>
                 <div class="studio-panel__paragraphs">
-                  <p class="lead"><span data-reveal>Projects run end to end inside the studio, from strategy and identity through to the code that ships them.</span></p>
-                  <p class="lead"><span data-reveal>The work stays in use after launch: client platforms, our own products, and Cherry, the design system this site runs on. The numbers below are the short version.</span></p>
+                  <p class="lead"><span data-reveal>Cada proyecto pasa por el mismo equipo de principio a fin: hablamos de tu negocio y tu público, maquetamos el estilo antes de escribir código, y publicamos un sitio limpio y rápido que se ve bien en cualquier pantalla.</span></p>
+                  <p class="lead"><span data-reveal>Seguimos cerca las primeras semanas tras el lanzamiento y, con los planes de mantenimiento, nos ocupamos del hosting, las copias de seguridad y el soporte. Los números de abajo son la versión corta.</span></p>
                 </div>
                 <div class="studio-panel__stats" data-reveal>
                   <!-- COUNT-UP HOOK: original animates 0 → target on scroll. data-count holds the target. -->
                   <div class="stat">
-                    <span class="stat__value" data-count="15" data-count-suffix="+">15+</span>
-                    <span class="stat__label">Years</span>
+                    <span class="stat__value" data-count="134">134</span>
+                    <span class="stat__label">Proyectos entregados</span>
                   </div>
                   <div class="stat">
-                    <span class="stat__value" data-count="3">3</span>
-                    <span class="stat__label">Countries</span>
+                    <span class="stat__value" data-count="24" data-count-suffix="h">24h</span>
+                    <span class="stat__label">Plazo medio de entrega</span>
                   </div>
                   <div class="stat">
-                    <span class="stat__value" data-count="2" data-count-suffix="M+">2M+</span>
-                    <span class="stat__label">Users reached</span>
+                    <span class="stat__value" data-count="89" data-count-suffix="%">89%</span>
+                    <span class="stat__label">Renueva el mantenimiento</span>
                   </div>
                 </div>
               </div>
@@ -451,12 +526,12 @@
         <!-- ===============================================================
              STORIES TEASER
              =============================================================== -->
-        <section class="section section--tight section--alt">
+        <section class="section section--tight section--alt" id="faq">
           <div class="section__inner">
             <div class="stories__head">
-              <h2 class="eyebrow" data-reveal>Stories</h2>
-              <a class="text-link arrow-link" href="/stories">
-                All stories
+              <h2 class="eyebrow" data-reveal>Preguntas frecuentes</h2>
+              <a class="text-link arrow-link" href="faq.html">
+                Ver todas
                 <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
               </a>
             </div>
@@ -464,22 +539,24 @@
               <article class="story-item">
                 <div class="draw-rule" data-reveal></div>
                 <div class="story-item__meta">
-                  <span class="mono-label">15 AUG 2026</span>
-                  <span class="mono-label">7&nbsp;min read</span>
+                  <span class="mono-label">Plazos</span>
+                  <span class="mono-label">24 / 48 h</span>
                 </div>
                 <h3 class="h-story story-item__title">
-                  <a class="text-link" href="/stories/coding-on-an-ipad"><span data-reveal>Coding on an iPad</span></a>
+                  <span data-reveal>¿Cuánto tarda un proyecto normal?</span>
                 </h3>
+                <p class="summary"><span data-reveal>En 24/48 horas si el proyecto es sencillo. Para webs con más páginas, contenidos o SEO, acordamos contigo el plazo exacto.</span></p>
               </article>
               <article class="story-item">
                 <div class="draw-rule" data-reveal></div>
                 <div class="story-item__meta">
-                  <span class="mono-label">13 AUG 2026</span>
-                  <span class="mono-label">5&nbsp;min read</span>
+                  <span class="mono-label">Precio</span>
+                  <span class="mono-label">Sin sorpresas</span>
                 </div>
                 <h3 class="h-story story-item__title">
-                  <a class="text-link" href="/stories/how-to-know-its-time-to-rebrand"><span data-reveal>How to know it's time to rebrand</span></a>
+                  <span data-reveal>¿Qué incluye el presupuesto?</span>
                 </h3>
+                <p class="summary"><span data-reveal>Diseño, desarrollo, revisión en móvil y una ronda de ajustes antes de publicar. Se paga la mitad al empezar y la otra mitad al publicar el sitio.</span></p>
               </article>
             </div>
           </div>
@@ -490,13 +567,13 @@
         <!-- ===============================================================
              CTA BAND  (always dark)
              =============================================================== -->
-        <section class="section section--dark cta" data-ground="dark">
+        <section class="section section--dark cta" data-ground="dark" id="contacto">
           <div class="section__inner">
             <div class="cta__middle">
-              <h2 class="h-display cta__statement" data-reveal>Say Hi and let's create something amazing.</h2>
+              <h2 class="h-display cta__statement" data-reveal>Cuéntanos qué necesitas y te devolvemos un presupuesto claro en menos de 24 horas.</h2>
               <span class="magnetic">
                 <span class="magnetic__visual">
-                  <a class="btn-primary" href="/contact">Start a project</a>
+                  <a class="btn-primary" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
                 </span>
               </span>
             </div>
@@ -517,58 +594,56 @@
         <div class="section__inner">
           <div class="footer-readouts">
             <div class="studio-clock">
-              <span>Studio time</span>
+              <span>Hora local</span>
               <time data-studio-clock datetime="">—:—:— CEST</time>
             </div>
             <div class="footer-locations">
               <div class="footer-place">
-                <span class="mono-label">Switzerland</span>
-                <data value="47.3769° N 8.5417° E">47.3769° N&nbsp;&nbsp;8.5417° E</data>
+                <span class="mono-label">Base</span>
+                <data value="Getafe">Getafe · Comunidad de Madrid</data>
               </div>
               <div class="footer-place">
-                <span class="mono-label">Montenegro</span>
-                <data value="42.3811° N 19.3159° E">42.3811° N&nbsp;&nbsp;19.3159° E</data>
+                <span class="mono-label">Proyectos</span>
+                <data value="España">Toda España, en remoto</data>
               </div>
               <div class="footer-place">
-                <span class="mono-label">USA</span>
-                <data value="25.7654° N 80.1892° W">25.7654° N&nbsp;&nbsp;80.1892° W</data>
+                <span class="mono-label">Respuesta</span>
+                <data value="24h">Presupuesto en &lt; 24 h</data>
               </div>
             </div>
           </div>
 
           <div class="footer-columns">
             <div class="footer-column">
-              <span class="mono-label">Navigate</span>
-              <a class="text-link" href="/work">Work</a>
-              <a class="text-link" href="/about">About</a>
-              <a class="text-link" href="/stories">Stories</a>
-              <a class="text-link" href="/contact">Contact</a>
+              <span class="mono-label">Navegar</span>
+              <a class="text-link" href="#servicios">Servicios</a>
+              <a class="text-link" href="#trabajo">Trabajo</a>
+              <a class="text-link" href="#proceso">Proceso</a>
+              <a class="text-link" href="precios.html">Precios</a>
+              <a class="text-link" href="faq.html">FAQ</a>
             </div>
             <div class="footer-column">
-              <span class="mono-label">Disciplines</span>
-              <a class="text-link" href="/services/brand-identity">Brand Identity</a>
-              <a class="text-link" href="/services/web-design-development">Web Design &amp; Dev</a>
-              <a class="text-link" href="/services/ai-experiences">AI Experiences</a>
-              <a class="text-link" href="/services/product-design">Product Design</a>
-              <a class="text-link" href="/services/mobile-design">Mobile Design</a>
-              <a class="text-link" href="/services/visual-design">Visual Design</a>
+              <span class="mono-label">Servicios</span>
+              <a class="text-link" href="#servicios">Diseño + Desarrollo</a>
+              <a class="text-link" href="#servicios">Solo Diseño</a>
+              <a class="text-link" href="#servicios">Solo Desarrollo</a>
+              <a class="text-link" href="#servicios">Optimización SEO</a>
+              <a class="text-link" href="#servicios">Página Animada 3D</a>
+              <a class="text-link" href="#servicios">Mantenimiento</a>
             </div>
             <div class="footer-column">
-              <span class="mono-label">Contact</span>
-              <a class="text-link" href="/contact">Start a project</a>
-              <span class="plain">Gjokaj Street 2</span>
-              <span class="plain">81206 Tuzi, Montenegro</span>
+              <span class="mono-label">Contacto</span>
+              <a class="text-link" href="mailto:hola@makemyweb.com">Pide tu presupuesto</a>
+              <span class="plain">hola@makemyweb.com</span>
+              <span class="plain">+1 (555) 019-2044</span>
             </div>
             <div class="footer-column">
-              <span class="mono-label">Elsewhere</span>
-              <a class="text-link arrow-link" href="https://instagram.com/riangledesign" target="_blank" rel="noreferrer noopener">
-                Instagram <svg class="glyph glyph--diag" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+              <span class="mono-label">Recursos</span>
+              <a class="text-link arrow-link" href="faq.html">
+                Preguntas frecuentes <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
               </a>
-              <a class="text-link arrow-link" href="https://dribbble.com/riangle" target="_blank" rel="noreferrer noopener">
-                Dribbble <svg class="glyph glyph--diag" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
-              </a>
-              <a class="text-link arrow-link" href="https://tiktok.com/@riangle.com" target="_blank" rel="noreferrer noopener">
-                TikTok <svg class="glyph glyph--diag" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
+              <a class="text-link arrow-link" href="precios.html">
+                Calcula tu presupuesto <svg class="glyph" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1 6h9M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1" stroke-linecap="square" /></svg>
               </a>
             </div>
           </div>
@@ -582,17 +657,15 @@
         <div class="section__inner">
           <div class="footer-colophon">
             <div class="footer-colophon__details">
-              <span class="mono-label copyright">© 2013–2026 Riangle · PIB: 03371328 · All rights reserved.</span>
+              <span class="mono-label copyright">© 2026 MakeMyWeb · Todos los derechos reservados.</span>
               <nav class="footer-legal" aria-label="Legal">
-                <a class="text-link" href="/privacy-policy">Privacy</a>
-                <a class="text-link" href="/terms-of-service">Terms</a>
+                <a class="text-link" href="/aviso-legal">Aviso legal</a>
+                <a class="text-link" href="/privacidad">Privacidad</a>
               </nav>
             </div>
-            <button class="to-top" type="button" aria-label="Back to top">
-              <svg width="20" height="16" viewBox="0 0 20 16" fill="none" aria-hidden="true">
-                <path d="M10 0L15 7.999H5L10 0Z" fill="#F43333" />
-                <path d="M5 7.99902L10 15.998H0L5 7.99902Z" fill="#F43333" />
-                <path d="M15 7.99902L20 15.998H10L15 7.99902Z" fill="#F43333" />
+            <button class="to-top" type="button" aria-label="Volver arriba">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F43333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 19V5M5 12l7-7 7 7" />
               </svg>
             </button>
           </div>
@@ -608,5 +681,6 @@
   <script src="js/studio-clock.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/cursor.js"></script>
+  <script src="js/scroll-thread.js"></script>
 </body>
 </html>

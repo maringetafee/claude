@@ -9,6 +9,33 @@ original's WebGL prism. The **footer globe / CTA corner prism are deliberately
 left empty**. There's also a **custom cursor** — a small dot with a red ring
 that trails behind it with easing.
 
+### Content: MakeMyWeb
+
+The site is now **MakeMyWeb** (makemyweb.es — a Spanish web-design studio): its
+services, process, prices, FAQ, stats and contact, in the riangle layout and with
+the exact same motion. The brand mark is MakeMyWeb's red triple-ribbon monogram.
+
+**Pages** — it is now multi-page:
+
+| File | Content |
+|---|---|
+| `index.html` | Hero · positioning · `Trabajo real` (4 projects) · Servicios (6) · Proceso (4 steps) · El estudio + stats · FAQ teaser · CTA |
+| `precios.html` | Presupuesto calculator (`js/pricing.js`, indicative €, no animation) · "con quién comparas" · Cuido Básico / Cuido Pro · payment terms |
+| `faq.html` | All 6 questions as a `<details>` accordion |
+
+`Trabajo real` links out to four real client sites — **Mocca Café**
+(moccacafe.netlify.app), **La Esquinita** (Instagram — no deploy), **Lolita Café**
+(lolitagetafe.netlify.app), **S.B.S Telecomunicaciones** (sbs-telecom.netlify.app).
+Café thumbnails are the storefront photos from each project repo; the S.B.S
+thumbnail is a headless-Chrome screenshot of the live site's hero.
+
+No motion code was touched (`animations.*`, `cursor.js`, `header.js`, `menu.js`,
+`theme-toggle.js`, `studio-clock.js` are all as-is). Changes are `index.html` +
+two new pages + `js/pricing.js` + additive rules in `components.css`
+(`.site-header__wordmark`; `.media-frame img` cover fix so any-ratio photos fill
+the frame and the clip-reveal reads; `.process-*`, `.calc*`, `.plan-card*`,
+`.faq-*`, `.page-head*`).
+
 ## Run it
 
 ```bash
@@ -33,7 +60,9 @@ Open the printed URL. No build step — plain HTML/CSS/JS.
 ## File map
 
 ```
-index.html                     one page, semantic sections
+index.html                     home — sections + anchors (#servicios #trabajo #proceso)
+precios.html                   presupuesto calculator + comparison + Cuido plans
+faq.html                       6-question <details> accordion
 assets/css/
   fonts.css                    @font-face (Archivo + JetBrains Mono)
   tokens.css                   design tokens: colour ramps, light/dark,
@@ -41,6 +70,7 @@ assets/css/
   base.css                     reset + global rules + grain overlay + no-JS fallbacks
   components.css               every component + all HOVER micro-interactions
   animations.css               SCROLL reveals + hero-logo + custom-cursor styles
+  scroll-thread.css            the gutter comet-line overlay (MakeMyWeb)
 assets/fonts/                  6 woff2 subsets
 assets/images/                 work thumbnails + studio photo + icons
 js/
@@ -50,6 +80,8 @@ js/
   studio-clock.js              live "Studio time" (Europe/Zurich)
   animations.js                scroll reveals, parallax, count-up, hero-logo, magnetic button
   cursor.js                    custom dot + trailing red ring
+  pricing.js                   precios.html calculator (reads inputs, writes € — no motion)
+  scroll-thread.js             the gutter comet-line: path through the page's points of interest
 _reference/                    the captured originals (page HTML, hydrated DOM,
                                the site's full styled-components CSS)
 ```
@@ -108,6 +140,20 @@ ink → accent.
 - `.stat__value[data-count]` — counts `0 → data-count` (ease-out cubic) then appends the suffix.
 - A scroll-position sweep is used (not `IntersectionObserver`) so fast scrolling never
   strands a hidden element.
+
+### Scroll thread (`scroll-thread.js` + `scroll-thread.css`) — MakeMyWeb addition
+
+A single fixed-overlay SVG line that lives in the left gutter and runs the length of
+the page. Each frame it rebuilds a Catmull-Rom path through the live positions of the
+points of interest (hero mark, each work row, each service row, each process step,
+plans, FAQ items, CTA); a comet head eases (`lerp 0.12`) toward the point of the path
+at 40% of the viewport height, so it reads as following you down. Behind it a
+`getPointAtLength` wake fades out in the current section's band colour; the travelled
+line carries the full Servicios palette as a vertical gradient. As the head passes a
+node it lights + pulses in that section's band colour **and** adds `.thread-lit` to the
+row, which mirrors its `:hover` state (band bar, width-axis, accent). Adapts to gutter
+width — a slim ribbon at ~1000px, a weaving line on wide monitors. Standalone: it
+never touches `animations.*` / `cursor.js`. Off below 901px and for reduced motion.
 
 ### Hero logo (`animations.css` + `animations.js`)
 `index.html` → `svg.hero__logo`: three `<use>` copies of one ribbon path, red gradient
