@@ -907,6 +907,32 @@
 .magnetic { display: inline-block; position: relative; }
 .magnetic__visual { display: inline-block; will-change: transform; }
 
+/* CTA email-capture form (replaces the plain "Pide tu presupuesto" mailto) */
+.cta-form { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.cta-form__input {
+  height: 60px;
+  min-width: 260px;
+  padding: 0 22px;
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: border-color 0.3s;
+}
+.cta-form__input::placeholder { color: var(--ink-muted); }
+.cta-form__input:focus-visible { outline: none; border-color: var(--refract); }
+.cta-form__note,
+.cta-form__success {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.cta-form__success { color: var(--ink); }
+
 /* -------------------------------------------------------------------------
    13. FOOTER
    ------------------------------------------------------------------------- */
@@ -996,7 +1022,7 @@
 
 /* =========================================================================
    SUBPAGES — page header, pricing calculator, plans, FAQ accordion
-   (precios.html, faq.html). Additive; no animation code here.
+   (index.html calculator, faq.html). Additive; no animation code here.
    ========================================================================= */
 
 /* page header ------------------------------------------------------------- */

@@ -12,16 +12,15 @@ that trails behind it with easing.
 ### Content: MakeMyWeb
 
 The site is now **MakeMyWeb** (makemyweb.es — a Spanish web-design studio): its
-services, process, prices, FAQ, stats and contact, in the riangle layout and with
-the exact same motion. The brand mark is MakeMyWeb's red triple-ribbon monogram.
+services, process, FAQ and contact, in the riangle layout and with the exact
+same motion. The brand mark is MakeMyWeb's red triple-ribbon monogram.
 
 **Pages** — it is now multi-page:
 
 | File | Content |
 |---|---|
-| `index.html` | Hero · positioning · `Trabajo real` (4 projects) · Servicios (6) · Proceso (4 steps) · El estudio + stats · FAQ teaser · CTA |
-| `precios.html` | Presupuesto calculator (`js/pricing.js`, indicative €, no animation) · "con quién comparas" · Cuido Básico / Cuido Pro · payment terms |
-| `faq.html` | All 6 questions as a `<details>` accordion |
+| `index.html` | Hero · positioning · `Trabajo real` (4 projects) · Servicios (6, with embedded presupuesto calculator, `js/pricing.js`) · Proceso (4 steps) · FAQ teaser · CTA |
+| `faq.html` | All questions as a `<details>` accordion |
 
 `Trabajo real` links out to four real client sites — **Mocca Café**
 (moccacafe.netlify.app), **La Esquinita** (Instagram — no deploy), **Lolita Café**
@@ -31,10 +30,10 @@ thumbnail is a headless-Chrome screenshot of the live site's hero.
 
 No motion code was touched (`animations.*`, `cursor.js`, `header.js`, `menu.js`,
 `theme-toggle.js`, `studio-clock.js` are all as-is). Changes are `index.html` +
-two new pages + `js/pricing.js` + additive rules in `components.css`
+`faq.html` + `js/pricing.js` + additive rules in `components.css`
 (`.site-header__wordmark`; `.media-frame img` cover fix so any-ratio photos fill
 the frame and the clip-reveal reads; `.process-*`, `.calc*`, `.plan-card*`,
-`.faq-*`, `.page-head*`).
+`.faq-*`, `.page-head*`, `.cta-form*`).
 
 ## Run it
 
@@ -60,9 +59,9 @@ Open the printed URL. No build step — plain HTML/CSS/JS.
 ## File map
 
 ```
-index.html                     home — sections + anchors (#servicios #trabajo #proceso)
-precios.html                   presupuesto calculator + comparison + Cuido plans
-faq.html                       6-question <details> accordion
+index.html                     home — sections + anchors (#servicios #trabajo #proceso),
+                               includes the presupuesto calculator + comparison + Cuido plans
+faq.html                       <details> accordion
 assets/css/
   fonts.css                    @font-face (Archivo + JetBrains Mono)
   tokens.css                   design tokens: colour ramps, light/dark,
@@ -80,7 +79,7 @@ js/
   studio-clock.js              live "Studio time" (Europe/Zurich)
   animations.js                scroll reveals, parallax, count-up, hero-logo, magnetic button
   cursor.js                    custom dot + trailing red ring
-  pricing.js                   precios.html calculator (reads inputs, writes € — no motion)
+  pricing.js                   index.html calculator (reads inputs, writes € — no motion)
   scroll-thread.js             the gutter comet-line: path through the page's points of interest
 _reference/                    the captured originals (page HTML, hydrated DOM,
                                the site's full styled-components CSS)

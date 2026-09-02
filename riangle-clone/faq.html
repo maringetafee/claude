@@ -71,16 +71,12 @@
           <span class="nav-link__index" aria-hidden="true">01</span>
           <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span>
         </a>
-        <a class="nav-link" href="precios.html">
-          <span class="nav-link__index" aria-hidden="true">02</span>
-          <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span>
-        </a>
         <a class="nav-link" href="index.html#proceso">
-          <span class="nav-link__index" aria-hidden="true">03</span>
+          <span class="nav-link__index" aria-hidden="true">02</span>
           <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span>
         </a>
         <a class="nav-link" href="faq.html" aria-current="page">
-          <span class="nav-link__index" aria-hidden="true">04</span>
+          <span class="nav-link__index" aria-hidden="true">03</span>
           <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span>
         </a>
       </nav>
@@ -108,15 +104,11 @@
             <span class="nav-link__roll"><span>Servicios</span><span aria-hidden="true">Servicios</span></span></a>
         </div>
         <div class="menu-overlay__item">
-          <a class="nav-link" href="precios.html"><span class="nav-link__index" aria-hidden="true">02</span>
-            <span class="nav-link__roll"><span>Precios</span><span aria-hidden="true">Precios</span></span></a>
-        </div>
-        <div class="menu-overlay__item">
-          <a class="nav-link" href="index.html#proceso"><span class="nav-link__index" aria-hidden="true">03</span>
+          <a class="nav-link" href="index.html#proceso"><span class="nav-link__index" aria-hidden="true">02</span>
             <span class="nav-link__roll"><span>Proceso</span><span aria-hidden="true">Proceso</span></span></a>
         </div>
         <div class="menu-overlay__item">
-          <a class="nav-link" href="faq.html"><span class="nav-link__index" aria-hidden="true">04</span>
+          <a class="nav-link" href="faq.html"><span class="nav-link__index" aria-hidden="true">03</span>
             <span class="nav-link__roll"><span>FAQ</span><span aria-hidden="true">FAQ</span></span></a>
         </div>
       </nav>
@@ -166,11 +158,7 @@
                 <p class="faq-item__a">Está incluido en los planes de cuidado. También podemos configurarlo sobre tu propio hosting.</p>
               </details>
               <details class="faq-item">
-                <summary><span class="faq-item__q-index" aria-hidden="true">05</span><span data-reveal>¿Cómo funciona el pago?</span><span class="faq-item__sign" aria-hidden="true"></span></summary>
-                <p class="faq-item__a">La mitad al empezar el proyecto y la otra mitad al publicar el sitio.</p>
-              </details>
-              <details class="faq-item">
-                <summary><span class="faq-item__q-index" aria-hidden="true">06</span><span data-reveal>¿Y si necesito más páginas después de empezar?</span><span class="faq-item__sign" aria-hidden="true"></span></summary>
+                <summary><span class="faq-item__q-index" aria-hidden="true">05</span><span data-reveal>¿Y si necesito más páginas después de empezar?</span><span class="faq-item__sign" aria-hidden="true"></span></summary>
                 <p class="faq-item__a">Ajustamos el presupuesto con el mismo precio por página que ya conoces desde el principio.</p>
               </details>
             </div>
@@ -182,12 +170,19 @@
         <section class="section section--dark cta" data-ground="dark" id="contacto">
           <div class="section__inner">
             <div class="cta__middle">
-              <h2 class="h-display cta__statement" data-reveal>¿Sigues con dudas? Cuéntanoslas y te devolvemos un presupuesto claro en menos de 24 horas.</h2>
-              <span class="magnetic">
-                <span class="magnetic__visual">
-                  <a class="btn-primary" href="mailto:makemyweb.info@gmail.com">Pide tu presupuesto</a>
-                </span>
-              </span>
+              <h2 class="h-display cta__statement" data-reveal>¿Quieres trabajar con nosotros? Escribe tu correo y comenzamos.</h2>
+              <div data-cta-form-wrap>
+                <form class="cta-form" data-cta-form aria-label="Pide tu presupuesto">
+                  <input class="cta-form__input" type="email" name="email" required placeholder="tu@email.com" autocomplete="email" aria-label="Tu email" />
+                  <span class="magnetic">
+                    <span class="magnetic__visual">
+                      <button type="submit" class="btn-primary"><span data-cta-form-label>Pide tu presupuesto</span></button>
+                    </span>
+                  </span>
+                </form>
+                <p class="cta-form__note" data-cta-form-note>Te contestamos en menos de 24 horas.</p>
+                <p class="cta-form__success" data-cta-form-success hidden>Hecho. Revisa tu correo: te hemos enviado toda la info y te escribimos en menos de 24 horas.</p>
+              </div>
             </div>
             <div class="cta__prism-corner" aria-hidden="true" data-prism-corner></div>
           </div>
@@ -227,7 +222,6 @@
               <a class="text-link" href="index.html#servicios">Servicios</a>
               <a class="text-link" href="index.html#trabajo">Trabajo</a>
               <a class="text-link" href="index.html#proceso">Proceso</a>
-              <a class="text-link" href="precios.html">Precios</a>
               <a class="text-link" href="faq.html">FAQ</a>
             </div>
             <div class="footer-column">
@@ -271,5 +265,6 @@
   <script src="js/animations.js"></script>
   <script src="js/cursor.js"></script>
   <script src="js/scroll-thread.js"></script>
+  <script src="js/contact-form.js"></script>
 </body>
 </html>
