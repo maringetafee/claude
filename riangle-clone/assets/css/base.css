@@ -17,6 +17,10 @@ body {
   background-color: var(--surface-page);
 }
 
+/* guard against stray horizontal scroll on small screens (wide headings,
+   the fixed scroll-thread overlay, parallax transforms) */
+html { overflow-x: clip; }
+
 html:has(:target) {
   scroll-behavior: smooth;
 }

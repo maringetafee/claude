@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MakeMyWeb">
+  <defs>
+    <linearGradient id="r" x1="0.15" y1="0" x2="0.55" y2="1">
+      <stop offset="0" stop-color="#FF6A5C"/>
+      <stop offset="0.5" stop-color="#F43333"/>
+      <stop offset="1" stop-color="#C81414"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#0b0d12"/>
+  <g transform="translate(38 98) scale(1.8)" fill="url(#r)">
+    <path d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z"/>
+    <path transform="translate(62 0)" d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z"/>
+    <path transform="translate(124 0)" d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z"/>
+  </g>
+</svg>

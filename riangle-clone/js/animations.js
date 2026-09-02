@@ -10,7 +10,7 @@
 
   /* ---------- 1. scroll reveals ------------------------------------------ */
   // media frames: swap the generic reveal for the clip-path media reveal
-  document.querySelectorAll(".media-frame, .studio-panel__plate").forEach(function (f) {
+  document.querySelectorAll(".media-frame").forEach(function (f) {
     f.removeAttribute("data-reveal");
     f.classList.add("reveal-media");
   });

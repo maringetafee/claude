@@ -639,7 +639,6 @@
   aspect-ratio: 16 / 10;
   background: var(--surface-1);
 }
-.media-frame--portrait { aspect-ratio: 4 / 3; }
 .media-frame > * { display: block; width: 100%; height: 100%; object-fit: cover; }
 /* images sit inside .media-zoom <a>, so cover them explicitly too (any source ratio) */
 .media-frame img { width: 100%; height: 100%; object-fit: cover; }
@@ -773,43 +772,58 @@
    10. STUDIO PANEL  (duotone photo + copy + 3 stats)
    ------------------------------------------------------------------------- */
 .studio-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  background: var(--surface-1);
+  position: relative;
+  min-height: clamp(440px, 52vw, 620px);
+  background: #07080b;
   border: 1px solid var(--line);
   overflow: hidden;
 }
-@media (min-width: 992px) { .studio-panel { grid-template-columns: 5fr 7fr; } }
 
-.studio-panel__plate { position: relative; overflow: hidden; aspect-ratio: 4 / 3; }
-@media (min-width: 992px) { .studio-panel__plate { aspect-ratio: auto; height: 100%; } }
-.studio-panel__plate > img {
+/* the studio photo fills the whole panel; the copy sits on top of it */
+.studio-panel__bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* DUOTONE — an SVG <filter> maps the photo onto ink→accent.
-     The filter def lives inline in index.html (id="riangle-duotone"). */
-  filter: url(#riangle-duotone);
+  object-position: 50% 42%;
 }
 
 .studio-panel__copy {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 32px;
-  padding: 48px;
+  padding: clamp(18px, 5vw, 64px);
 }
-@media (min-width: 992px) { .studio-panel__copy { padding: 96px; } }
+
+/* snug black card behind the text — covers as little of the photo as it can
+   while keeping every line readable on top of the image */
+.studio-panel__copy-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
+  width: 100%;
+  max-width: 560px;
+  padding: clamp(24px, 3.5vw, 44px);
+  background: rgba(4, 5, 8, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .studio-panel__paragraphs { display: flex; flex-direction: column; gap: 16px; }
-.studio-panel__paragraphs .lead { max-width: 52ch; }
+.studio-panel__paragraphs .lead { max-width: 46ch; }
 
 .studio-panel__stats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
+  gap: 20px;
   width: 100%;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+@media (max-width: 560px) {
+  .studio-panel__stats { grid-template-columns: minmax(0, 1fr); gap: 14px; }
 }
 
 /* -------------------------------------------------------------------------
@@ -924,10 +938,12 @@
 .footer-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px;
+  gap: 40px 48px;
   padding-block: 64px;
 }
-@media (min-width: 992px) { .footer-columns { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 992px) {
+  .footer-columns { grid-template-columns: repeat(2, minmax(0, 320px)); gap: 48px 96px; }
+}
 .footer-column {
   display: flex;
   flex-direction: column;
@@ -938,11 +954,12 @@
 .footer-column > span:first-child { margin-bottom: 4px; }
 .footer-column .plain { color: var(--ink-muted); }
 
-/* ANIMATION SLOT — original draws an interactive canvas globe here */
+/* ANIMATION SLOT — original draws an interactive canvas globe here.
+   Left as quiet breathing room between the columns and the colophon. */
 .footer-globe {
   position: relative;
   width: 100%;
-  height: clamp(200px, 24vw, 360px);
+  height: clamp(56px, 9vw, 128px);
   overflow: hidden;
 }
 
@@ -1236,3 +1253,42 @@
 .faq-item[open] .faq-item__sign::after { transform: rotate(90deg); opacity: 0; }
 .faq-item__a { padding: 0 0 28px 0; max-width: 60ch; color: var(--ink-muted); line-height: 1.65; }
 @media (min-width: 768px) { .faq-item__a { padding-left: 40px; } }
+
+/* long-form legal pages (aviso-legal.html, privacidad.html) ---------------- */
+.legal { max-width: 70ch; }
+.legal__updated {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 44px;
+}
+.legal h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 108%;
+  font-size: clamp(1.2rem, 1.02rem + 0.9vw, 1.55rem);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-top: 48px;
+}
+.legal > h2:first-of-type { margin-top: 0; }
+.legal p { margin-top: 14px; color: var(--ink-muted); line-height: 1.7; }
+.legal ul { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+.legal li { position: relative; padding-left: 18px; color: var(--ink-muted); line-height: 1.7; }
+.legal li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 1px;
+  background: var(--refract);
+}
+.legal a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.legal dl { margin-top: 14px; display: grid; gap: 4px 20px; }
+@media (min-width: 620px) { .legal dl { grid-template-columns: max-content 1fr; } }
+.legal dt { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); padding-top: 2px; }
+.legal dd { margin: 0 0 12px; color: var(--ink-muted); line-height: 1.7; }
+@media (min-width: 620px) { .legal dd { margin-bottom: 4px; } }

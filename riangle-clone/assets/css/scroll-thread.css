@@ -61,7 +61,7 @@
    ------------------------------------------------------------------------- */
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
   .work-row__media .parallax-layer,
-  .studio-panel__plate,
+  .studio-panel__copy-inner,
   .plan-card {
     position: relative;
     z-index: 96;
