@@ -36,6 +36,21 @@
       );
     }
 
+    var THUMB = 20; // matches .calc__range thumb width/height in components.css
+
+    function positionPagesBubble() {
+      if (!elPages) return;
+      var range = root.querySelector('input[name="pages"]');
+      if (!range) return;
+      var min = parseFloat(range.min) || 0;
+      var max = parseFloat(range.max) || 100;
+      var val = parseFloat(range.value) || min;
+      var pct = max > min ? (val - min) / (max - min) : 0;
+      var trackWidth = range.offsetWidth;
+      var centerPx = THUMB / 2 + pct * (trackWidth - THUMB);
+      elPages.style.left = centerPx + "px";
+    }
+
     function recompute() {
       var pages = readPages();
       var extras = readExtras();
@@ -44,6 +59,7 @@
       extras.forEach(function (k) { total += EXTRAS[k] || 0; });
 
       if (elPages) elPages.textContent = String(pages);
+      positionPagesBubble();
 
       if (elSpec) {
         var bits = ["Diseño + desarrollo", pages + (pages === 1 ? " página" : " páginas")];
@@ -57,6 +73,7 @@
 
     root.addEventListener("input", recompute);
     root.addEventListener("change", recompute);
+    window.addEventListener("resize", positionPagesBubble);
     recompute();
   }
 

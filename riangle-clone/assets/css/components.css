@@ -92,6 +92,7 @@
   color: var(--ink-muted);
 }
 .lead > span { display: block; }
+.section-lead { margin-top: 20px; max-width: 48ch; }
 
 /* short body / summary, clamped to 2 lines */
 .summary {
@@ -359,6 +360,29 @@
   .burger { display: none; }
 }
 
+/* header CTA — hidden on small screens (burger + theme toggle already busy) */
+.btn-header-cta {
+  display: none;
+  height: 38px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--on-refract);
+  background: var(--refract);
+  border: 1px solid var(--refract);
+  transition: 0.3s;
+}
+.btn-header-cta:hover { background: var(--refract-strong); border-color: var(--refract-strong); }
+@media (min-width: 1180px) {
+  .btn-header-cta { display: inline-flex; }
+}
+
 /* -------------------------------------------------------------------------
    4. MOBILE MENU OVERLAY  (static markup kept; open/close handled in JS)
    ------------------------------------------------------------------------- */
@@ -391,6 +415,13 @@
 .menu-overlay__item { border-bottom: 1px solid var(--line); }
 .menu-overlay__item:last-child { border-bottom: 0; }
 .menu-overlay__item > a { display: flex; width: 100%; padding-block: 24px; }
+.menu-overlay__item--cta { border-bottom: 0; margin-top: 12px; }
+.menu-overlay__item--cta > a {
+  justify-content: center;
+  padding-block: 18px;
+  color: var(--on-refract);
+  background: var(--refract);
+}
 .menu-overlay__foot { margin-top: auto; }
 
 /* studio clock readout */
@@ -493,6 +524,7 @@
   margin-inline: auto;
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
   /* pushes the headline below the centred mark on small screens */
   padding-block-start: calc(35svh + min(32vw, 36svh) * 0.8949 - 70px + min(112px, 14svh));
@@ -501,7 +533,7 @@
   .hero__content { padding-block-start: calc(35svh + min(24vw, 27svh) * 0.8949 - 70px + min(112px, 14svh)); }
 }
 @media (min-width: 992px) {
-  .hero__content { align-items: center; padding-block-start: 0; }
+  .hero__content { align-items: flex-start; padding-block-start: 0; }
 }
 
 .hero__headline {
@@ -517,6 +549,22 @@
 }
 .hero__headline > span { display: block; }   /* one <span> per line — reveal targets */
 
+.hero__lead {
+  margin-top: clamp(20px, 2.4vw, 28px);
+  max-width: 40ch;
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+  margin-top: clamp(28px, 3.4vw, 40px);
+}
+
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
@@ -525,6 +573,7 @@
   width: 100%;
   max-width: var(--max-wide);
   margin-inline: auto;
+  margin-top: clamp(28px, 8vw, 56px);
   font-family: var(--font-mono);
   font-size: 0.6875rem;
   line-height: 1.2;
@@ -622,6 +671,48 @@
   height: 100%;
   transition: transform 640ms var(--ease-out);
 }
+
+/* browser-window chrome wrapped around each portfolio screenshot —
+   makes a plain photo read as "a real, live website" without inventing content */
+.media-frame--browser {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+}
+.browser-chrome {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 34px;
+  padding: 0 12px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--line);
+}
+.browser-chrome__dots { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.browser-chrome__dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.browser-chrome__url {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-faint);
+  background: var(--surface-1);
+  border: 1px solid var(--line);
+}
+.media-frame--browser .media-zoom { flex: 1; min-height: 0; }
+.media-frame--browser img { width: 100%; height: 100%; object-fit: cover; }
 .work-row:hover .media-zoom,
 .work-row:focus-within .media-zoom { transform: scale(1.05); }
 
@@ -661,6 +752,29 @@
   color: var(--ink-muted);
   background: transparent;
 }
+
+/* -------------------------------------------------------------------------
+   8b. BENEFICIOS
+   ------------------------------------------------------------------------- */
+.benefits-list { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 0 48px; }
+@media (min-width: 768px) { .benefits-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.benefit-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding-block: 28px 34px;
+}
+.benefit-item__index { margin-bottom: 2px; }
+.benefit-item__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.375rem, 1.15rem + 1vw, 1.75rem);
+  line-height: 1.1;
+  font-stretch: 108%;
+}
+.benefit-item__note { color: var(--ink-muted); max-width: 46ch; line-height: 1.62; }
 
 /* -------------------------------------------------------------------------
    9. CAPABILITIES  (row list; hover fills a 3px band + widens the type)
@@ -834,14 +948,29 @@
    ------------------------------------------------------------------------- */
 .process-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 48px; }
 @media (min-width: 768px) { .process-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1180px) { .process-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 32px; } }
 .process-step {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
   padding-block: 28px 34px;
 }
-.process-step__index { margin-bottom: 2px; }
+.process-step__index { margin-bottom: 2px; position: relative; }
+@media (min-width: 1180px) {
+  /* connecting line running through the index numbers, like a timeline */
+  .process-step__index::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 8px);
+    width: calc(48px - 8px);
+    height: 1px;
+    background: var(--line-strong);
+  }
+  .process-step:last-child .process-step__index::after { display: none; }
+}
 .process-step__name {
   font-family: var(--font-display);
   font-weight: 600;
@@ -897,6 +1026,35 @@
 }
 .cta-form__input::placeholder { color: var(--ink-muted); }
 .cta-form__input:focus-visible { outline: none; border-color: var(--refract); }
+.cta-form--full {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  gap: 16px;
+}
+.cta-form__row { display: flex; flex-wrap: wrap; gap: 16px; }
+.cta-form__row > .cta-form__input { flex: 1 1 220px; min-width: 0; }
+.cta-form--full .cta-form__input { width: 100%; min-width: 0; }
+.cta-form__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2399A1AE' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+  padding-right: 44px;
+  cursor: pointer;
+}
+.cta-form__select:invalid { color: var(--ink-muted); }
+.cta-form__textarea {
+  height: auto;
+  min-height: 100px;
+  padding: 16px 22px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.cta-form--full .magnetic { align-self: center; margin-top: 4px; }
 .cta-form__note,
 .cta-form__success {
   margin-top: 18px;
@@ -995,6 +1153,34 @@
 .to-top svg { transition: transform 320ms var(--ease-out); }
 .to-top:hover svg { transform: translateY(-3px); }
 
+/* -------------------------------------------------------------------------
+   FLOATING WHATSAPP CONTACT
+   ------------------------------------------------------------------------- */
+.whatsapp-float {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 400;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #25d366;
+  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+.whatsapp-float:hover,
+.whatsapp-float:focus-visible {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float:hover { transform: none; }
+}
+
 /* =========================================================================
    SUBPAGES — page header, pricing calculator, plans, FAQ accordion
    (index.html calculator, faq.html). Additive; no animation code here.
@@ -1013,6 +1199,24 @@
   margin-block: 18px 0;
 }
 .page-head__lead { margin-top: 28px; max-width: 52ch; }
+
+/* 404 page ------------------------------------------------------------- */
+.error-404__code {
+  margin: 6px 0 0;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(4.5rem, 2.4rem + 13vw, 11rem);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  color: var(--refract);
+}
+.error-404__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 28px;
+  margin-top: clamp(28px, 3.4vw, 40px);
+}
 
 /* pricing calculator ----------------------------------------------------- */
 .calc { display: grid; gap: 32px; }
@@ -1046,7 +1250,18 @@
 .calc__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px var(--refract-soft); }
 
 .calc__pages { display: flex; flex-direction: column; gap: 14px; }
-.calc__pages-value { font-family: var(--font-mono); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.calc__range-track { position: relative; padding-top: 32px; }
+.calc__pages-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--refract);
+  pointer-events: none;
+}
 .calc__range { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: var(--line-strong); accent-color: var(--refract); }
 .calc__range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--refract); cursor: pointer; margin-top: -1px; }
 .calc__range::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: var(--refract); cursor: pointer; }

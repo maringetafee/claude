@@ -6,7 +6,11 @@
 
   document.querySelectorAll("[data-cta-form]").forEach(function (form) {
     var wrap = form.closest("[data-cta-form-wrap]") || form.parentElement;
-    var input = form.querySelector('input[type="email"]');
+    var nameInput = form.querySelector('input[name="name"]');
+    var businessInput = form.querySelector('input[name="business"]');
+    var projectSelect = form.querySelector('select[name="project"]');
+    var contactInput = form.querySelector('input[name="contact"]');
+    var messageInput = form.querySelector('textarea[name="message"]');
     var button = form.querySelector('button[type="submit"]');
     var label = button ? button.querySelector("[data-cta-form-label]") : null;
     var note = wrap.querySelector("[data-cta-form-note]");
@@ -16,7 +20,11 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (sending || !input.value) return;
+      if (sending) return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
       sending = true;
       if (label) label.textContent = "Enviando…";
       if (button) button.disabled = true;
@@ -24,7 +32,13 @@
       fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: input.value }),
+        body: JSON.stringify({
+          name: nameInput ? nameInput.value : undefined,
+          business: businessInput ? businessInput.value : undefined,
+          project: projectSelect ? projectSelect.value : undefined,
+          contact: contactInput ? contactInput.value : undefined,
+          message: messageInput ? messageInput.value : undefined,
+        }),
       })
         .then(function (res) {
           if (!res.ok) throw new Error("request failed");
