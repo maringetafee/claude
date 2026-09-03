@@ -19,7 +19,7 @@ same motion. The brand mark is MakeMyWeb's red triple-ribbon monogram.
 
 | File | Content |
 |---|---|
-| `index.html` | Hero · positioning · `Trabajo real` (4 projects) · Servicios (6, with embedded presupuesto calculator, `js/pricing.js`) · Proceso (4 steps) · FAQ teaser · CTA |
+| `index.html` | Hero · `Trabajo real` (4 projects) · Servicios (6, with embedded presupuesto calculator, `js/pricing.js`) · Proceso (4 steps) · FAQ teaser · CTA |
 | `faq.html` | All questions as a `<details>` accordion |
 
 `Trabajo real` links out to four real client sites — **Mocca Café**

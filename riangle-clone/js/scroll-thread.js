@@ -28,7 +28,7 @@
   var mq = window.matchMedia("(min-width: 901px)");
 
   var SELECTORS = [
-    ".hero__logo", ".page-head__title", ".positioning__statement",
+    ".hero__logo", ".page-head__title",
     ".work-row", ".cap-row", ".process-step",
     ".calc__form", ".plan-card", ".faq-item",
     ".studio-panel__stats", ".stories__pair", ".cta__middle"

@@ -563,31 +563,6 @@
 }
 
 /* -------------------------------------------------------------------------
-   7. POSITIONING STATEMENT
-   ------------------------------------------------------------------------- */
-.positioning {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  padding-top: 64px;
-}
-@media (min-width: 768px)  { .positioning { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-@media (min-width: 992px)  { .positioning { grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; } }
-
-.positioning__statement { grid-column: 1 / -1; max-width: 20ch; }
-.positioning__support-col {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 32px;
-}
-@media (min-width: 992px) {
-  .positioning__statement { grid-column: 2 / span 6; }
-  .positioning__support-col { grid-column: 8 / span 5; align-self: end; }
-}
-
-/* -------------------------------------------------------------------------
    8. SELECTED WORK  (overlapping full-height rows, alternating sides)
    ------------------------------------------------------------------------- */
 .selected-work__rows {

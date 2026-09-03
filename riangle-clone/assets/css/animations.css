@@ -103,7 +103,7 @@ html.js-anim .reveal-media.is-in img {
 }
 @media (min-width: 768px) { .hero__logo { width: min(46cqw, 48cqh); } }
 @media (min-width: 992px) {
-  .hero__logo { left: 66%; top: 50%; width: min(42cqw, 46cqh); }
+  .hero__logo { left: 74%; top: 50%; width: min(38cqw, 42cqh); }
 }
 
 .hero__logo .blade {
