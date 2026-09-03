@@ -18,6 +18,78 @@
   <script type="module" crossorigin src="/assets/index-8Ltv3Syz.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CwTK8Ik_.css">
   <style>
+    /* Page background: warm oat / "café con leche" instead of the pinkish cream.
+       Only feeds --color-surface (body + sticky nav); cards stay white and lift off it. */
+    :root{--color-surface:#ece3d3}
+
+    /* Hero secondary CTA: proper frosted glass instead of the near-solid pale pill.
+       Fallback (no backdrop-filter) swaps to a dark tint so white text stays legible. */
+    .btn-ghost-light{
+      background:color-mix(in oklab, var(--white) 13%, transparent);
+      border:1px solid color-mix(in oklab, var(--white) 48%, transparent);
+      color:var(--white);
+      text-shadow:0 1px 3px color-mix(in oklab, var(--ink-900) 45%, transparent);
+      box-shadow:0 10px 28px -12px color-mix(in oklab, var(--ink-900) 65%, transparent),
+                 inset 0 1px 0 color-mix(in oklab, var(--white) 28%, transparent);
+      -webkit-backdrop-filter:blur(12px) saturate(1.5);
+      backdrop-filter:blur(12px) saturate(1.5);
+    }
+    .btn-ghost-light:hover{
+      background:color-mix(in oklab, var(--white) 22%, transparent);
+      border-color:color-mix(in oklab, var(--white) 68%, transparent);
+    }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .btn-ghost-light{background:color-mix(in oklab, var(--ink-900) 55%, transparent)}
+    }
+
+    /* Nav "Reservar mesa": dark frosted glass instead of solid ink.
+       Scoped to the nav so the dialog / review btn-dark buttons stay solid. */
+    .nav .btn-dark{
+      background:color-mix(in oklab, var(--ink-900) 64%, transparent);
+      color:var(--cream-50);
+      border:1px solid color-mix(in oklab, var(--white) 14%, transparent);
+      text-shadow:0 1px 2px color-mix(in oklab, #000 40%, transparent);
+      box-shadow:0 8px 22px -12px color-mix(in oklab, var(--ink-900) 70%, transparent);
+      -webkit-backdrop-filter:blur(10px) saturate(1.3);
+      backdrop-filter:blur(10px) saturate(1.3);
+    }
+    .nav .btn-dark:hover{
+      background:color-mix(in oklab, var(--ink-900) 80%, transparent);
+      border-color:color-mix(in oklab, var(--white) 22%, transparent);
+      translate:0 -1px;
+    }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .nav .btn-dark{background:color-mix(in oklab, var(--ink-900) 88%, transparent)}
+    }
+
+    /* Carta: category cards + allergen chips as translucent warm glass,
+       so they read against the page instead of solid white slabs. */
+    .cat-card{
+      background:color-mix(in oklab, var(--white) 42%, transparent);
+      -webkit-backdrop-filter:blur(8px);
+      backdrop-filter:blur(8px);
+    }
+    .cat-card[aria-current=true]{
+      background:color-mix(in oklab, var(--rose-50) 72%, transparent);
+    }
+    .chip{
+      background:color-mix(in oklab, var(--white) 38%, transparent);
+      -webkit-backdrop-filter:blur(6px);
+      backdrop-filter:blur(6px);
+    }
+    .chip[aria-pressed=true]{
+      background:color-mix(in oklab, var(--rose-100) 80%, transparent);
+    }
+    /* Dish rows: same translucent warm tint (no blur — many rows, and the page
+       behind is near-flat, so blur would only cost paint work). */
+    .item-card{
+      background:color-mix(in oklab, var(--white) 42%, transparent);
+    }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .cat-card{background:color-mix(in oklab, var(--white) 78%, var(--color-surface))}
+      .chip{background:color-mix(in oklab, var(--white) 70%, var(--color-surface))}
+    }
+
     /* Full-page fixed grain (.hero__grain) uses mix-blend-mode, which forces the
        browser to recomposite it against whatever scrolls underneath. Without its
        own layer this ghosts/flickers on scroll, especially across a high-contrast
@@ -27,17 +99,18 @@
     .brunch-feature{position:relative;overflow:hidden}
     .brunch-feature:before{content:"";position:absolute;inset:0;background:radial-gradient(120% 140% at 100% -10%, color-mix(in oklab, var(--rose-700) 45%, transparent) 0%, transparent 55%);pointer-events:none}
     .brunch-feature .container{position:relative}
-    .brunch-feature__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+    .brunch-feature.section-pad{padding-block:clamp(3rem,6vw,5.5rem)}
+    .brunch-feature__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.3rem,3vw,2.4rem) clamp(2rem,5vw,4rem);align-items:stretch}
+    .brunch-feature__text{align-self:center}
     .brunch-feature__badge-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem}
-    .brunch-feature__lede{color:var(--color-on-dark-muted);max-width:44ch;font-size:1.05rem;line-height:1.65;margin-block:1.1rem 1.8rem}
-    .brunch-feature__prices{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+    .brunch-feature__lede{color:var(--color-on-dark-muted);max-width:46ch;font-size:1.05rem;line-height:1.6;margin-block:1rem 1.35rem}
+    .brunch-feature__prices{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
     .brunch-feature__price-card{display:flex;flex-direction:column;gap:.35rem;padding:.9rem 1.2rem;border:1px solid color-mix(in oklab, var(--cream-50) 18%, transparent);border-radius:var(--radius-m);background:color-mix(in oklab, var(--cream-50) 6%, transparent);min-width:190px}
     .brunch-feature__price-label{font-size:.72rem;letter-spacing:.03em;color:var(--color-on-dark-muted)}
     .brunch-feature__price-value{font-family:var(--font-accent);font-weight:800;font-size:1.5rem;color:var(--brass-300)}
-    .brunch-feature__gallery{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:1fr;gap:.9rem}
-    .brunch-feature__img{width:100%;height:100%;min-height:180px;object-fit:cover;border-radius:var(--radius-l);box-shadow:var(--shadow-soft);display:block}
-    .brunch-feature__img--main{grid-row:span 2}
-    .brunch-feature__menu{grid-column:1 / -1;display:flex;flex-direction:column;gap:.2rem;padding:1.3rem 1.4rem;border-radius:var(--radius-l);border:1px solid color-mix(in oklab, var(--cream-50) 18%, transparent);background:color-mix(in oklab, var(--cream-50) 6%, transparent);box-shadow:var(--shadow-soft)}
+    .brunch-feature__gallery{display:flex;flex-direction:column;gap:.9rem}
+    .brunch-feature__img{width:100%;flex:1 1 0;min-height:200px;object-fit:cover;border-radius:var(--radius-l);box-shadow:var(--shadow-soft);display:block}
+    .brunch-feature__menu{grid-column:1 / -1;margin-top:.4rem;display:flex;flex-direction:column;gap:.2rem;padding:1.3rem 1.4rem;border-radius:var(--radius-l);border:1px solid color-mix(in oklab, var(--cream-50) 18%, transparent);background:color-mix(in oklab, var(--cream-50) 6%, transparent);box-shadow:var(--shadow-soft)}
     .brunch-feature__menu-title{font-family:var(--font-display);font-size:1.15rem;color:#fff}
     .brunch-feature__menu-subtitle{font-size:.78rem;color:var(--color-on-dark-muted);margin-bottom:.7rem}
     .brunch-feature__menu-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem}
@@ -45,8 +118,13 @@
     .brunch-feature__menu-list li:first-child{border-top:0;padding-top:0}
     .brunch-feature__menu-list li>span:first-child{color:#fff}
     .brunch-feature__menu-price{font-family:var(--font-accent);font-weight:800;color:var(--brass-300);white-space:nowrap}
+    @media (min-width:901px){
+      .brunch-feature__menu-list{display:grid;grid-template-columns:1fr 1fr;column-gap:2.6rem;row-gap:.55rem}
+      .brunch-feature__menu-list li:nth-child(2){border-top:0;padding-top:0}
+    }
     @media (max-width:900px){
       .brunch-feature__grid{grid-template-columns:1fr}
+      .brunch-feature__text{align-self:auto}
       .brunch-feature__img{min-height:220px}
     }
     @media (max-width:520px){
@@ -139,21 +217,20 @@
           </div>
           <button class="btn btn-primary" type="button" id="btn-reservar-brunch">Reservar para el brunch</button>
         </div>
-        <div class="brunch-feature__gallery">
-          <img class="brunch-feature__img brunch-feature__img--main" src="/images/menu-photo-2.jpg" alt="Huevos benedictinos con salmón y aguacate de Lolita Café" loading="lazy" />
-          <img class="brunch-feature__img" src="/images/brunch-spread.jpg" alt="Mesa de brunch con tostadas, fruta y café" loading="lazy" />
-          <img class="brunch-feature__img" src="/images/menu-photo-1.jpg" alt="Café con leche y croissant de jamón de Lolita Café" loading="lazy" />
-          <div class="brunch-feature__menu">
-            <span class="brunch-feature__menu-title">Platos principales a elegir</span>
-            <span class="brunch-feature__menu-subtitle">También sueltos, de lunes a viernes de 13:00 a 16:00 h</span>
-            <ul class="brunch-feature__menu-list">
-              <li><span>Tosta de pan gallego con boniato, bacon crujiente, queso feta y frijoles</span><span class="brunch-feature__menu-price">9,95€</span></li>
-              <li><span>Sándwich brioche mixto con huevos trufados revueltos</span><span class="brunch-feature__menu-price">9,95€</span></li>
-              <li><span>Tosta de pan gallego con salmón noruego, aguacate, huevos poché y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
-              <li><span>Media berenjena asada con huevos revueltos, bechamel de queso y trufa</span><span class="brunch-feature__menu-price">9,95€</span></li>
-              <li><span>Tortitas de avena con pollo Satay, huevos poché, espinacas salteadas y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
-            </ul>
-          </div>
+        <div class="brunch-feature__gallery" data-reveal>
+          <img class="brunch-feature__img" src="/images/brunch-spread.jpg" alt="Tosta de burrata con pesto sobre pan de masa madre en Lolita Café" loading="lazy" />
+          <img class="brunch-feature__img" src="/images/brunch-internet.jpg" alt="Mesa de brunch con gofres, huevos, fruta fresca, zumo de naranja y café" loading="lazy" />
+        </div>
+        <div class="brunch-feature__menu" data-reveal>
+          <span class="brunch-feature__menu-title">Platos principales a elegir</span>
+          <span class="brunch-feature__menu-subtitle">También sueltos, de lunes a viernes de 13:00 a 16:00 h</span>
+          <ul class="brunch-feature__menu-list">
+            <li><span>Tosta de pan gallego con boniato, bacon crujiente, queso feta y frijoles</span><span class="brunch-feature__menu-price">9,95€</span></li>
+            <li><span>Sándwich brioche mixto con huevos trufados revueltos</span><span class="brunch-feature__menu-price">9,95€</span></li>
+            <li><span>Tosta de pan gallego con salmón noruego, aguacate, huevos poché y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+            <li><span>Media berenjena asada con huevos revueltos, bechamel de queso y trufa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+            <li><span>Tortitas de avena con pollo Satay, huevos poché, espinacas salteadas y salsa holandesa</span><span class="brunch-feature__menu-price">9,95€</span></li>
+          </ul>
         </div>
       </div>
     </div>
