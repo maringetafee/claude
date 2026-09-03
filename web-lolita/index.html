@@ -18,9 +18,21 @@
   <script type="module" crossorigin src="/assets/index-8Ltv3Syz.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-CwTK8Ik_.css">
   <style>
-    /* Page background: warm oat / "café con leche" instead of the pinkish cream.
-       Only feeds --color-surface (body + sticky nav); cards stay white and lift off it. */
+    /* Page background: warm oat base + two very soft off-canvas tints (rose top-right,
+       brass bottom-left) so it reads as an atmosphere, not a flat fill. Painted on <html>
+       so it stays put on scroll with no background-attachment jank; <body> goes transparent.
+       --color-surface keeps the solid oat for the sticky nav. */
     :root{--color-surface:#ece3d3}
+    html{
+      background-color:#ece3d3;
+      background-image:
+        radial-gradient(72% 55% at 100% 0%, color-mix(in oklab, var(--rose-400) 16%, transparent), transparent 68%),
+        radial-gradient(68% 52% at 0% 100%, color-mix(in oklab, var(--brass-500) 14%, transparent), transparent 66%);
+      background-repeat:no-repeat;
+    }
+    body{background:transparent}
+    /* a touch more of the existing paper grain now that flat areas show through cards */
+    .hero__grain{opacity:.05}
 
     /* Hero secondary CTA: proper frosted glass instead of the near-solid pale pill.
        Fallback (no backdrop-filter) swaps to a dark tint so white text stays legible. */
@@ -88,6 +100,25 @@
     @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
       .cat-card{background:color-mix(in oklab, var(--white) 78%, var(--color-surface))}
       .chip{background:color-mix(in oklab, var(--white) 70%, var(--color-surface))}
+    }
+
+    /* Floating "Reservar" (FAB): rose-tinted glass. Stays clearly the primary
+       action but picks up whatever it floats over (dark brunch / light carta). */
+    .fab{
+      background:color-mix(in oklab, var(--rose-600) 75%, transparent);
+      border:1px solid color-mix(in oklab, var(--white) 26%, transparent);
+      text-shadow:0 1px 2px color-mix(in oklab, #000 35%, transparent);
+      box-shadow:0 16px 34px -14px color-mix(in oklab, var(--rose-700) 78%, transparent),
+                 0 3px 10px color-mix(in oklab, var(--ink-900) 22%, transparent);
+      -webkit-backdrop-filter:blur(12px) saturate(1.6);
+      backdrop-filter:blur(12px) saturate(1.6);
+    }
+    .fab:hover{
+      background:color-mix(in oklab, var(--rose-600) 88%, transparent);
+      translate:0 -2px;
+    }
+    @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+      .fab{background:var(--color-accent)}
     }
 
     /* Full-page fixed grain (.hero__grain) uses mix-blend-mode, which forces the
