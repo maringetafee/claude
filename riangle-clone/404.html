@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +28,7 @@
       try {
         var stored = localStorage.getItem("theme");
         var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        var theme = stored || (sysDark ? "dark" : "light");
+        var theme = stored || "dark";
         document.documentElement.setAttribute("data-theme", theme);
         if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           document.documentElement.classList.add("js-anim");
@@ -43,6 +43,7 @@
   <link rel="stylesheet" href="assets/css/components.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
   <link rel="stylesheet" href="assets/css/scroll-thread.css" />
+  <link rel="stylesheet" href="assets/css/light-theme.css" />
 </head>
 <body>
   <div class="loading-screen" id="loading-screen" data-loading-screen aria-hidden="true">

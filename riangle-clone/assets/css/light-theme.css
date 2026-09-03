@@ -1,0 +1,137 @@
+/* =========================================================================
+   LIGHT THEME — visual-only refinements for light mode.
+   -------------------------------------------------------------------------
+   Every single rule in this file is scoped under
+   `:root:not([data-theme="dark"])`, which is strictly MORE specific than
+   the plain `:root { ... }` block in tokens.css but never overlaps with
+   `:root[data-theme="dark"]` (they can never match the same element at the
+   same time). That makes this file provably inert in dark mode: nothing
+   here can change a single pixel of the dark theme, no matter what it
+   contains, and dark mode's own rules in tokens.css are never touched.
+
+   Scope: colour, background, shadow, border and gradient only — no layout,
+   no new markup, no content, no structural or behavioural changes.
+   ========================================================================= */
+
+:root:not([data-theme="dark"]) {
+  /* ---- warm, sophisticated neutral palette (replaces the flat cool-gray
+     set) — off-whites/creams/warm greiges tied together into one family,
+     instead of a plain white page. ---- */
+  --ink-muted: #5c5650;
+  --ink-faint: #8f8677;
+  --surface-page: #f7f4ee;
+  --surface-1: #fefcf9;
+  --surface-2: #efe7d9;
+  --surface-3: #e6dac2;
+  --line: #e5dcc9;
+  --line-strong: #d5c6a8;
+  --header-scrim: rgb(247 244 238 / 74%);
+  --header-line: #e5dcc9;
+
+  /* ---- depth tokens, light-only: soft warm-tinted elevation instead of
+     flat borders-only cards ---- */
+  --card-shadow: 0 1px 2px rgba(35, 26, 12, 0.05), 0 12px 28px -12px rgba(35, 26, 12, 0.16);
+  --card-shadow-hover: 0 2px 4px rgba(35, 26, 12, 0.06), 0 22px 44px -16px rgba(35, 26, 12, 0.22);
+  --header-shadow: 0 1px 0 rgba(35, 26, 12, 0.03), 0 16px 32px -20px rgba(35, 26, 12, 0.22);
+}
+
+/* -------------------------------------------------------------------------
+   SECTION DEPTH — a whisper of each section's own accent colour (the same
+   --refract the rest of the site already uses per data-band), instead of
+   flat, identical surface blocks stacked back to back. The CTA band stays
+   untouched: it is deliberately always-dark, in both themes.
+   ------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .hero {
+  /* centred on the ribbon logo's own position (.hero__logo in animations.css:
+     left:50%/top:34% up to 991px, left:74%/top:50% from 992px) */
+  background-image: radial-gradient(
+    ellipse 34% 24% at 50% 34%,
+    color-mix(in srgb, var(--refract) 7%, transparent),
+    transparent 65%
+  );
+}
+@media (min-width: 992px) {
+  :root:not([data-theme="dark"]) .hero {
+    background-image: radial-gradient(
+      ellipse 26% 30% at 74% 50%,
+      color-mix(in srgb, var(--refract) 7%, transparent),
+      transparent 65%
+    );
+  }
+}
+
+:root:not([data-theme="dark"]) .section:not(.section--dark) {
+  background-image: radial-gradient(
+    ellipse 130% 55% at 12% 0%,
+    color-mix(in srgb, var(--refract) 6%, transparent),
+    transparent 65%
+  );
+}
+
+:root:not([data-theme="dark"]) .section--alt:not(.section--dark) {
+  background-image:
+    radial-gradient(ellipse 130% 55% at 88% 0%, color-mix(in srgb, var(--refract) 6%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--surface-1) 55%, transparent), transparent 40%);
+}
+
+/* -------------------------------------------------------------------------
+   HEADER — glass surface gains real weight once scrolled, instead of a
+   flat scrim; SaaS/product-navbar feel.
+   ------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .site-header::before {
+  box-shadow: var(--header-shadow);
+}
+
+/* -------------------------------------------------------------------------
+   CARDS + SURFACES — soft warm elevation instead of border-only blocks.
+   Corners stay sharp (matches the site's existing editorial language);
+   only depth is added.
+   ------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .media-frame--browser,
+:root:not([data-theme="dark"]) .plan-card,
+:root:not([data-theme="dark"]) .calc__result,
+:root:not([data-theme="dark"]) .calc__base {
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 320ms var(--ease-out), transform 320ms var(--ease-out), border-color 320ms var(--ease-standard);
+}
+
+:root:not([data-theme="dark"]) .plan-card:hover,
+:root:not([data-theme="dark"]) .media-frame--browser:hover {
+  box-shadow: var(--card-shadow-hover);
+  transform: translateY(-3px);
+}
+
+:root:not([data-theme="dark"]) .plan-card--featured {
+  box-shadow: var(--card-shadow-hover), inset 0 0 0 1px var(--refract);
+}
+
+/* the fake-browser chrome bar reads as one continuous glass strip */
+:root:not([data-theme="dark"]) .browser-chrome {
+  background: color-mix(in srgb, var(--surface-2) 92%, var(--refract) 8%);
+}
+
+/* -------------------------------------------------------------------------
+   BUTTONS — resting depth + a small tactile lift on hover (kept subtle;
+   the existing glow-on-hover behaviour is unchanged).
+   ------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .btn-primary {
+  box-shadow: 0 1px 2px rgba(35, 26, 12, 0.08), 0 14px 28px -14px color-mix(in srgb, var(--refract) 55%, transparent);
+}
+:root:not([data-theme="dark"]) .btn-primary:hover {
+  transform: translateY(-1px);
+}
+:root:not([data-theme="dark"]) .btn-primary:active {
+  transform: translateY(0);
+}
+
+:root:not([data-theme="dark"]) .btn-header-cta {
+  box-shadow: 0 1px 2px rgba(35, 26, 12, 0.06), 0 10px 20px -12px color-mix(in srgb, var(--refract) 50%, transparent);
+}
+
+/* -------------------------------------------------------------------------
+   THEME TOGGLE — a touch of glass so it doesn't read as a flat grey pill.
+   ------------------------------------------------------------------------- */
+:root:not([data-theme="dark"]) .theme-toggle {
+  background: color-mix(in srgb, var(--surface-2) 85%, var(--surface-1) 15%);
+  box-shadow: inset 0 1px 1px rgba(35, 26, 12, 0.04), 0 1px 2px rgba(35, 26, 12, 0.05);
+}
