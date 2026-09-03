@@ -45,6 +45,65 @@
   <link rel="stylesheet" href="assets/css/scroll-thread.css" />
 </head>
 <body>
+  <div class="loading-screen" id="loading-screen" data-loading-screen aria-hidden="true">
+    <div class="loading-screen__inner">
+      <div class="loading-screen__mark">
+        <svg class="loading-screen__logo" viewBox="0 0 210 168" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="loaderRibbon" x1="0.15" y1="0" x2="0.55" y2="1">
+              <stop offset="0" stop-color="#FF6A5C" />
+              <stop offset="0.5" stop-color="#F43333" />
+              <stop offset="1" stop-color="#C81414" />
+            </linearGradient>
+          </defs>
+          <path transform="translate(0 0)"   d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#loaderRibbon)" />
+          <path transform="translate(62 0)"  d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#loaderRibbon)" />
+          <path transform="translate(124 0)" d="M26 12 C44 2 68 4 82 18 C95 31 97 50 91 72 C83 100 68 128 46 152 C40 158 32 160 27 156 C22 152 22 144 27 136 C46 110 60 82 62 54 C63 36 55 22 42 16 C34 12 28 12 26 12 Z" fill="url(#loaderRibbon)" />
+        </svg>
+      </div>
+      <div class="loading-screen__bar" aria-hidden="true"><span class="loading-screen__bar-fill"></span></div>
+    </div>
+  </div>
+  <noscript><style>.loading-screen { display: none; }</style></noscript>
+  <script>
+    (function () {
+      try {
+        var el = document.getElementById("loading-screen");
+        if (!el) return;
+        var reduced = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+        var done = false;
+
+        function remove() {
+          if (el && el.parentNode) el.parentNode.removeChild(el);
+        }
+        function hide() {
+          if (done) return;
+          done = true;
+          el.setAttribute("data-hidden", "true");
+          if (reduced) { remove(); return; }
+          var cleared = false;
+          function onEnd() { if (cleared) return; cleared = true; remove(); }
+          el.addEventListener("transitionend", onEnd, { once: true });
+          setTimeout(onEnd, 340);
+        }
+
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { el.setAttribute("data-ready", "true"); });
+        });
+
+        if (document.readyState === "complete") {
+          hide();
+        } else {
+          window.addEventListener("load", hide, { once: true });
+        }
+        setTimeout(hide, 1000); // safety fallback: never leaves the loader stuck
+      } catch (e) {
+        var el2 = document.getElementById("loading-screen");
+        if (el2 && el2.parentNode) el2.parentNode.removeChild(el2);
+      }
+    })();
+  </script>
+
   <a class="skip-link" href="#main">Saltar al contenido</a>
 
   <header class="site-header" data-scrolled="false" data-hidden="false">
