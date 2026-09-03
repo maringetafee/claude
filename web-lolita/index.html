@@ -121,6 +121,42 @@
       .fab{background:var(--color-accent)}
     }
 
+    /* "Déjanos tu reseña": was a tall full-bleed pink band with a tiny centred
+       column. Now a compact rose card that sits inside the page margins, laid
+       out as a horizontal strip on desktop, with an oversized quote glyph. */
+    .review-strip{padding-block:clamp(2.5rem,6vw,4rem)}
+    .review-card{
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      gap:clamp(1.25rem,4vw,3rem);
+      text-align:left;
+      padding:clamp(1.6rem,3.5vw,2.4rem) clamp(1.6rem,4vw,3rem);
+      border-radius:var(--radius-l);
+      background:linear-gradient(120deg, var(--rose-100) 0%, var(--rose-50) 55%, color-mix(in oklab, var(--rose-50) 60%, var(--white)) 100%);
+      border:1px solid color-mix(in oklab, var(--rose-300) 60%, transparent);
+      box-shadow:0 24px 55px -28px color-mix(in oklab, var(--rose-700) 50%, transparent);
+    }
+    .review-card__quote{
+      position:absolute;
+      top:-.34em; left:-.04em;
+      font-family:var(--font-display);
+      font-size:clamp(6rem,13vw,10rem);
+      line-height:1;
+      color:color-mix(in oklab, var(--rose-300) 40%, transparent);
+      pointer-events:none;
+    }
+    .review-card__text{position:relative;flex:1;min-width:0}
+    .review-card .review-strip__stars{margin:0 0 .5rem}
+    .review-card__copy{color:var(--color-ink-muted);max-width:46ch;margin:0}
+    .review-card .btn{flex-shrink:0}
+    @media (max-width:640px){
+      .review-card{flex-direction:column;text-align:center;align-items:center;gap:1.1rem}
+      .review-card .review-strip__stars{margin-inline:auto}
+      .review-card__copy{margin-inline:auto}
+    }
+
     /* Full-page fixed grain (.hero__grain) uses mix-blend-mode, which forces the
        browser to recomposite it against whatever scrolls underneath. Without its
        own layer this ghosts/flickers on scroll, especially across a high-contrast
@@ -282,12 +318,17 @@
   </section>
 
   <!-- ============ EL LOCAL / RESEÑA ============ -->
-  <section id="el-local" class="review-strip surface-rose" data-reveal>
-    <div class="container container--narrow">
-      <p class="review-strip__stars">★★★★<span>★</span></p>
-      <h2 class="section-title" style="margin-bottom:.6rem;">Déjanos tu <em style="font-style:italic;color:var(--rose-600)">reseña</em></h2>
-      <p style="color:var(--color-ink-muted); max-width:32ch; margin-inline:auto; margin-bottom:1.6rem;">Si has disfrutado tu visita, nos ayuda un montón que lo cuentes en Google.</p>
-      <a class="btn btn-dark" href="https://www.google.com/maps/place/Lolita+Caf%C3%A9/@40.305931,-3.7296636,15z/data=!4m5!3m4!1s0x0:0x3f796a1550ca0346!8m2!3d40.305931!4d-3.7296636" target="_blank" rel="noopener">Escribir reseña en Google</a>
+  <section id="el-local" class="review-strip" data-reveal>
+    <div class="container">
+      <div class="review-card">
+        <span class="review-card__quote" aria-hidden="true">&rdquo;</span>
+        <div class="review-card__text">
+          <p class="review-strip__stars">★★★★<span>★</span></p>
+          <h2 class="section-title" style="margin:0 0 .35rem;">Déjanos tu <em style="font-style:italic;color:var(--rose-600)">reseña</em></h2>
+          <p class="review-card__copy">Si has disfrutado tu visita, nos ayuda un montón que lo cuentes en Google.</p>
+        </div>
+        <a class="btn btn-dark" href="https://www.google.com/maps/place/Lolita+Caf%C3%A9/@40.305931,-3.7296636,15z/data=!4m5!3m4!1s0x0:0x3f796a1550ca0346!8m2!3d40.305931!4d-3.7296636" target="_blank" rel="noopener">Escribir reseña en Google</a>
+      </div>
     </div>
   </section>
 
