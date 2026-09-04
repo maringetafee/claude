@@ -11,78 +11,18 @@
    ========================================================================= */
 
 /* -------------------------------------------------------------------------
-   1. SCROLL REVEALS
+   1. SCROLL REVEALS — removed. Content renders in its final, fully visible
+   state immediately, with no fade/slide/clip-path wipe on load or on
+   scroll-into-view. (js/animations.js still adds/tracks the .is-in class
+   for these elements; it's harmless and simply has no visual effect now.)
    ------------------------------------------------------------------------- */
-html.js-anim [data-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity 0.72s var(--ease-out),
-    transform 0.72s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
-}
-
-/* rules / hairlines wipe in horizontally instead of sliding */
-html.js-anim [data-reveal].draw-rule,
-html.js-anim [data-reveal].spectrum-rule {
-  opacity: 1;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.9s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-html.js-anim [data-reveal].is-in {
+[data-reveal],
+[data-reveal-heading] > span,
+.reveal-media,
+.reveal-media img {
   opacity: 1;
   transform: none;
-}
-
-/* hero headline — one line per <span>, clip-path wipe + slight rise, staggered */
-html.js-anim [data-reveal-heading] > span {
-  opacity: 0;
-  clip-path: inset(0 0 106% 0);
-  transform: translateY(0.16em);
-  transition:
-    clip-path 0.82s var(--ease-out),
-    opacity 0.5s linear,
-    transform 0.82s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 90ms + 120ms);
-}
-html.js-anim [data-reveal-heading].is-in > span {
-  opacity: 1;
-  clip-path: inset(-12% 0 -12% 0);
-  transform: none;
-}
-
-/* media frames — clip reveal + inner image settle */
-html.js-anim .reveal-media {
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path 1s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-html.js-anim .reveal-media.is-in {
-  clip-path: inset(0 0 0 0);
-}
-html.js-anim .reveal-media img {
-  transform: scale(1.08);
-  transition: transform 1.25s var(--ease-out);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-html.js-anim .reveal-media.is-in img {
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html.js-anim [data-reveal],
-  html.js-anim [data-reveal-heading] > span,
-  html.js-anim .reveal-media,
-  html.js-anim .reveal-media img {
-    opacity: 1 !important;
-    transform: none !important;
-    clip-path: none !important;
-    transition: none !important;
-  }
+  clip-path: none;
 }
 
 /* -------------------------------------------------------------------------
@@ -118,17 +58,11 @@ html.js-anim .reveal-media.is-in img {
   transform-origin: 50% 50%;
 }
 
-/* intro: blades rise + unrotate, staggered — fires when .hero gets .is-in */
-html.js-anim .hero__logo .blade {
-  opacity: 0;
-  transform: translateY(46px) rotate(-8deg) scale(0.86);
-}
-html.js-anim .hero.is-in .hero__logo .blade {
-  animation: bladeIn 0.9s var(--ease-out) forwards;
-  animation-delay: calc(var(--i) * 130ms + 200ms);
-}
-@keyframes bladeIn {
-  to { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
+/* entrance animation removed — blades render in their final position
+   immediately; the idle float below (gated on .hero.is-in) is unchanged */
+.hero__logo .blade {
+  opacity: 1;
+  transform: none;
 }
 
 /* idle: gentle out-of-phase float once the intro has played */

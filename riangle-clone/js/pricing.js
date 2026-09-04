@@ -11,9 +11,18 @@
   var roots = document.querySelectorAll("[data-calc]");
   if (!roots.length) return;
 
-  var BASE = 799;              // diseño + desarrollo, 1 página, todo incluido
-  var PER_EXTRA_PAGE = 120;    // cada página a partir de la primera
+  var BASE = 799;                       // diseño + desarrollo, página 1, todo incluido
+  var EXTRA_PAGE_PRICES = [649, 500, 500, 500]; // página 2, 3, 4, 5 — cada una más barata que la base
   var EXTRAS = { anim: 279, booking: 179, panel: 249 };
+
+  function extraPagesCost(pages) {
+    var n = Math.max(0, pages - 1);
+    var total = 0;
+    for (var i = 0; i < n; i++) {
+      total += EXTRA_PAGE_PRICES[Math.min(i, EXTRA_PAGE_PRICES.length - 1)];
+    }
+    return total;
+  }
 
   var euro = function (n) {
     // agrupación es-ES manual (Intl no está garantizado en todos lados)
@@ -55,7 +64,7 @@
       var pages = readPages();
       var extras = readExtras();
 
-      var total = BASE + Math.max(0, pages - 1) * PER_EXTRA_PAGE;
+      var total = BASE + extraPagesCost(pages);
       extras.forEach(function (k) { total += EXTRAS[k] || 0; });
 
       if (elPages) elPages.textContent = String(pages);

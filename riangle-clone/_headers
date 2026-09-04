@@ -6,6 +6,17 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=()
 
+# HTML must always be revalidated: it's what carries the current
+# ?v=YYYYMMDD cache-busting query string on every CSS/JS reference, so a
+# stale cached HTML page is what causes visitors to load a mismatched mix
+# of old + new assets. Bump the ?v= on every CSS/JS/HTML edit (see the
+# comment above the <link>/<script> tags in index.html/faq.html/404.html).
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
 # fonts never change — cache hard
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
@@ -13,11 +24,15 @@
 /assets/images/*
   Cache-Control: public, max-age=2592000
 
+# CSS/JS URLs are cache-busted with a ?v=YYYYMMDD query string bumped on
+# every content change, so it's safe (and much faster for return visits)
+# to cache these as long and as hard as possible — a version bump is what
+# forces a fresh fetch, not cache expiry.
 /assets/css/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=31536000, immutable
 
 /js/*
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=31536000, immutable
 
 /favicon.ico
   Cache-Control: public, max-age=604800
