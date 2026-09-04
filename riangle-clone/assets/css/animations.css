@@ -136,3 +136,51 @@ html.js-cursor .cursor-ring { opacity: 1; }
   html.js-cursor,
   html.js-cursor * { cursor: auto !important; }
 }
+
+/* -------------------------------------------------------------------------
+   4. MOUSE GLOW — a soft red light that follows the cursor, painted into
+   the BACKGROUND of each section/hero/footer (z-index: -1, inside that
+   element's own stacking context) so real content — text, cards, images,
+   buttons — renders on top of it and the glow only ever shows through the
+   empty background, never over the page's actual "things".
+
+   Position math: js/mouse-glow.js keeps one document-space cursor position
+   on <html> (--glow-x / --glow-y, updated every frame — cheap arithmetic,
+   no layout reads) plus each host's own document offset (--gx / --gy,
+   measured only on load/resize/FAQ-toggle). The gradient centre is just
+   the calc() difference of the two, so nothing is re-measured on scroll
+   or on every mousemove. */
+.hero,
+.section,
+.site-footer {
+  position: relative;
+  --gx: 0px;
+  --gy: 0px;
+}
+.hero::before,
+.section::before,
+.site-footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background: radial-gradient(
+    560px circle at calc(var(--glow-x, 50vw) - var(--gx)) calc(var(--glow-y, 50vh) - var(--gy)),
+    color-mix(in srgb, #f43333 16%, transparent),
+    transparent 65%
+  );
+}
+html.js-mouse-glow .hero::before,
+html.js-mouse-glow .section::before,
+html.js-mouse-glow .site-footer::before {
+  opacity: 1;
+}
+
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .section::before,
+  .site-footer::before { display: none !important; }
+}

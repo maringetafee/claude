@@ -234,7 +234,6 @@
   transition: opacity 320ms var(--ease-inout);
 }
 .site-header[data-scrolled="true"]::before { opacity: 1; }
-.site-header[data-hidden="true"] { transform: translateY(-120%); } /* hides on scroll-down */
 @supports not (backdrop-filter: blur(1px)) {
   .site-header::before { background: color-mix(in srgb, var(--surface-page) 96%, transparent); }
 }
@@ -1012,6 +1011,7 @@
 .magnetic__visual { display: inline-block; will-change: transform; }
 
 /* CTA email-capture form (replaces the plain "Pide tu presupuesto" mailto) */
+[data-cta-form-wrap] { width: 100%; } /* prevents shrink-to-fit under .cta__middle's align-items: center */
 .cta-form { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 .cta-form__input {
   height: 60px;
@@ -1034,8 +1034,8 @@
   margin-inline: auto;
   gap: 16px;
 }
-.cta-form__row { display: flex; flex-wrap: wrap; gap: 16px; }
-.cta-form__row > .cta-form__input { flex: 1 1 220px; min-width: 0; }
+.cta-form__row { display: flex; flex-direction: column; gap: 16px; }
+.cta-form__row > .cta-form__input { min-width: 0; }
 .cta-form--full .cta-form__input { width: 100%; min-width: 0; }
 .cta-form__select {
   appearance: none;
