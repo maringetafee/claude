@@ -28,23 +28,93 @@ TEMPLATE_SUBJECT = "Una propuesta de web para {business_name}"
 
 TEMPLATE_BODY = """Hola,
 
-Soy [TU NOMBRE], diseño y desarrollo páginas web para negocios locales en {city}.
+Soy Mario, diseño y desarrollo páginas web para negocios locales en {city}.
 
-Vi {business_name} y me tomé la libertad de preparar un boceto de cómo podría
-quedar vuestra web:
+He visto **{business_name}** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+
+ {preview_link}
+
+La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+
+**Podéis echarle un vistazo sin ningún compromiso.**
+
+Si os gusta la propuesta, hablamos y os paso el presupuesto.
+
+Un saludo,
+
+Mario
+644434860
+makemyweb.es
+"""
+
+# Varias variantes de redaccion para el mismo gancho (sin web propia). Mandar
+# el mismo texto literal a decenas de contactos seguidos es justo el patron
+# que dispara los filtros antispam de WhatsApp (ver feedback_whatsapp_spam_restriction
+# en memoria) - rotamos entre variantes para que no sea un texto idéntico.
+TEMPLATE_WHATSAPP_VARIANTES = [
+    """Hola buenas, soy Mario. He visto {business_name} y me he fijado en que no tenéis una web propia.
+
+Estoy creando páginas web para negocios de {city} y me animé a prepararos una demo gratuita y personalizada de cómo podría quedar la vuestra:
 
 {preview_link}
 
-Es una demo con contenido de ejemplo para que os hagáis una idea real del estilo
-y del resultado; con vuestras fotos, textos y datos quedaría lista en pocos días.
+La he hecho pensando específicamente en vuestro negocio, para que podáis verla sin ningún compromiso.
 
-Si os encaja, os paso presupuesto sin compromiso. Un saludo,
-[TU NOMBRE]
-[TU TELEFONO]
-"""
+Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
-TEMPLATE_WHATSAPP = """Hola! Soy Mario de MakeMyWeb.es, hacemos páginas web para negocios en {city}. Vi {business_name} y os preparé una demo de cómo podría quedar vuestra web: {preview_link}
-Es solo un ejemplo, con vuestros datos reales quedaría lista y mucho más personalizada en pocos días. Si os interesa os paso presupuesto sin compromiso, muchas gracias!"""
+Muchas gracias.""",
+    """¡Hola! Soy Mario, diseño páginas web para negocios de {city}. Vi {business_name} y noté que todavía no tenéis página propia, así que os preparé una demo de muestra sin compromiso:
+
+{preview_link}
+
+Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
+
+¡Un saludo!""",
+    """Hola, soy Mario. Trabajo haciendo páginas web para negocios locales de {city} y he preparado una muestra gratuita pensada para {business_name}, que vi que aún no tiene web propia:
+
+{preview_link}
+
+Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
+
+Gracias por vuestro tiempo.""",
+]
+
+# Variantes para leads que YA tienen web (tiene_web=True): no se puede decir que
+# "no tienen web propia" porque seria falso, asi que el gancho es ofrecer una
+# renovacion/mejora en vez de una primera web.
+TEMPLATE_WHATSAPP_CON_WEB_VARIANTES = [
+    """Hola buenas, soy Mario. He visto la web de {business_name} y me animé a prepararos una propuesta gratuita de cómo podría quedar renovada, con un diseño más moderno y pensado para conseguir más clientes:
+
+{preview_link}
+
+La he hecho pensando específicamente en vuestro negocio, para que podáis compararla con la actual sin ningún compromiso.
+
+Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
+
+Muchas gracias.""",
+    """¡Hola! Soy Mario. Vi la web de {business_name} y se me ocurrió preparar una versión renovada, con un diseño más actual pensado para atraer más clientes en {city}:
+
+{preview_link}
+
+Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
+
+¡Un saludo!""",
+    """Hola, soy Mario, diseño y renuevo páginas web para negocios de {city}. Al ver la web de {business_name} pensé que podría beneficiarse de un diseño más moderno, así que preparé esta propuesta gratuita:
+
+{preview_link}
+
+Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
+
+Gracias por vuestro tiempo.""",
+]
+
+
+def elegir_variante(variantes, business_name):
+    # Indice estable (no aleatorio) para que regenerar el CSV no cambie el
+    # texto ya usado con un lead, pero distintos leads caigan en distintas
+    # variantes.
+    indice = sum(ord(c) for c in business_name) % len(variantes)
+    return variantes[indice]
 
 
 def main():
@@ -88,7 +158,10 @@ def main():
             city=row["city"],
             preview_link=preview_link,
         )
-        mensaje_whatsapp = TEMPLATE_WHATSAPP.format(
+        tiene_web = row.get("tiene_web") in ("True", "1", True)
+        variantes = TEMPLATE_WHATSAPP_CON_WEB_VARIANTES if tiene_web else TEMPLATE_WHATSAPP_VARIANTES
+        template_whatsapp = elegir_variante(variantes, row["business_name"])
+        mensaje_whatsapp = template_whatsapp.format(
             business_name=row["business_name"],
             city=row["city"],
             preview_link=preview_link_whatsapp,
@@ -103,6 +176,7 @@ def main():
             "slug": slug,
             "email": email,
             "phone": row.get("phone", ""),
+            "instagram": row.get("instagram", ""),
             "contactar_por_telefono": contactar_telefono,
             "preview_link": preview_link,
             "estado": estados_previos.get(slug, "pendiente"),

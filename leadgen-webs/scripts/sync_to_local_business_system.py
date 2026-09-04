@@ -20,7 +20,16 @@ from slugify import slugify
 ROOT = Path(__file__).resolve().parent.parent
 LOCAL_BUSINESS_SYSTEM = ROOT.parent / "local-business-system"
 
-TIPOS_SOPORTADOS = {"Bar", "Restaurante", "Peluqueria"}
+TIPOS_SOPORTADOS = {"Restaurante"}
+# Nota: "Peluqueria" se genera ahora con scripts/personalize_peluquerias.py
+# (plantillas estaticas mujer/hombre), no con el motor Next.js/Studio X, asi
+# que ya no esta en este set — de lo contrario un rebuild de Next.js
+# sobreescribiria esas paginas. "Floristeria"/"Unas" tampoco tienen config en
+# leadConfig.ts; se generan con scripts/personalize_static.py. "Bar" se paso
+# de Casa Manolo (Next.js) a scripts/personalize_static.py con la plantilla
+# static-templates/bar/ por el mismo motivo — sacarlo de aqui evita que un
+# rebuild de Next.js (hecho por otro motivo, ej. Restaurante) sobreescriba
+# las paginas de bares ya generadas con la plantilla estatica.
 
 
 def main():

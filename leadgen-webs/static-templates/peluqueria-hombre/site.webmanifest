@@ -1,0 +1,19 @@
+{
+  "name": "[NOMBRE DEL NEGOCIO]",
+  "short_name": "[NOMBRE]",
+  "description": "Barbería en [Ciudad]. Corte clásico, fade, barba y afeitado.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#08090c",
+  "theme_color": "#08090c",
+  "lang": "es-ES",
+  "icons": [
+    {
+      "src": "/assets/placeholder-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

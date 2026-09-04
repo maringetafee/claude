@@ -6,7 +6,7 @@ de propuestas a los que no tienen web, o a los que la tienen pero floja).
 Uso:
     python scripts/find_leads.py --city "Getafe" --type restaurante --limit 40
 
-Tipos soportados: bar, restaurante, peluqueria
+Tipos soportados: bar, restaurante, peluqueria, dental, estetica, floristeria, fisioterapia, unas
 """
 import argparse
 import csv
@@ -29,6 +29,11 @@ TYPE_MAP = {
     "bar": {"query_es": "bares", "included_type": "bar", "label": "Bar"},
     "restaurante": {"query_es": "restaurantes", "included_type": "restaurant", "label": "Restaurante"},
     "peluqueria": {"query_es": "peluquerias", "included_type": "hair_care", "label": "Peluqueria"},
+    "dental": {"query_es": "clinicas dentales", "included_type": "dentist", "label": "Dental"},
+    "estetica": {"query_es": "centros de estetica", "included_type": "beauty_salon", "label": "Estetica"},
+    "floristeria": {"query_es": "floristerias", "included_type": "florist", "label": "Floristeria"},
+    "fisioterapia": {"query_es": "clinicas de fisioterapia", "included_type": "physiotherapist", "label": "Fisioterapia"},
+    "unas": {"query_es": "salones de unas", "included_type": "nail_salon", "label": "Unas"},
 }
 
 FIELD_MASK = ",".join([

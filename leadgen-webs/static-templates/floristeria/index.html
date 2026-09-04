@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+<meta content="#23281f" name="theme-color"/>
+<meta name="description" content="[NOMBRE DEL NEGOCIO], floristería en [CIUDAD]. Ramos de temporada, bodas y eventos, plantas y suscripción floral. Pedidos online."/>
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"/>
+<meta name="author" content="[NOMBRE DEL NEGOCIO]"/>
+<title>[NOMBRE DEL NEGOCIO] | Floristería en [CIUDAD]</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://images.unsplash.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
+<link rel="apple-touch-icon" href="assets/logo.svg"/>
+<link as="image" fetchpriority="high" href="assets/logo.svg" rel="preload" type="image/svg+xml"/>
+<style>
+    :root {
+      --ink: #23281f;
+      --ink-2: #2c3324;
+      --paper: #faf5ee;
+      --paper-2: #f0e3d3;
+      --muted: #8d8271;
+      --rose: #c2685a;
+      --rose-bright: #d98a73;
+      --rose-dark: #7a3b30;
+      --sage: #6b7a5e;
+      --sage-bright: #8a9c78;
+      --line: rgba(255,255,255,.14);
+      --shadow: 0 30px 90px rgba(0,0,0,.20);
+      --radius: 28px;
+      --header-h: 84px;
+      --ease: cubic-bezier(.22,1,.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: auto; background: var(--ink); }
+    body {
+      margin: 0;
+      color: var(--paper);
+      background:
+        radial-gradient(circle at 80% 8%, rgba(194,104,90,.20), transparent 30%),
+        radial-gradient(circle at 15% 40%, rgba(107,122,94,.16), transparent 32%),
+        var(--ink);
+      font-family: "Jost", system-ui, sans-serif;
+      line-height: 1.5;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.is-loading { overflow: hidden; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; color: inherit; }
+    ::selection { background: var(--rose-bright); color: var(--ink); }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    .section { padding: 130px 0; }
+    .eyebrow { display:flex; align-items:center; gap:10px; font-size:.75rem; text-transform:uppercase; letter-spacing:.22em; color: var(--rose-bright); font-weight:600; margin-bottom:18px; }
+    .eyebrow::before { content:""; width:26px; height:1px; background: var(--rose-bright); }
+    .display { margin:0; font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(3.2rem, 8vw, 8.5rem); line-height:.94; letter-spacing:-.01em; }
+    .section-title { margin:0; font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(2.6rem, 5.6vw, 5.4rem); line-height:1; letter-spacing:-.01em; }
+    .lead { max-width: 640px; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: rgba(255,255,255,.66); }
+
+    /* ---------- Cursor ---------- */
+    body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
+    .cursor-dot, .cursor-ring { position: fixed; top:0; left:0; z-index:1200; pointer-events:none; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; }
+    .cursor-dot { width:7px; height:7px; background: var(--rose-bright); box-shadow: 0 0 14px rgba(217,138,115,.8); }
+    .cursor-ring { width:42px; height:42px; border:1px solid rgba(217,138,115,.55); transition: width .28s var(--ease), height .28s var(--ease), border-color .28s var(--ease), background-color .28s var(--ease); }
+    .cursor-ring.is-active { width:70px; height:70px; background: rgba(217,138,115,.10); border-color: rgba(217,138,115,.9); }
+    @media (pointer:coarse), (prefers-reduced-motion:reduce) { .cursor-dot, .cursor-ring { display:none; } }
+
+    .noise { position:fixed; inset:0; z-index:1000; pointer-events:none; opacity:.03; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); mix-blend-mode:soft-light; }
+    .scroll-progress { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1100; transform:scaleX(0); transform-origin:left; background: linear-gradient(90deg, var(--rose-dark), var(--rose-bright), #f3d9c8); }
+
+    /* ---------- Preloader ---------- */
+    .preloader { position:fixed; inset:0; z-index:1300; display:grid; place-items:center; background:var(--ink); overflow:hidden; }
+    .preloader__inner { text-align:center; }
+    .preloader__word { font-family:"Cormorant Garamond", serif; font-style:italic; font-weight:500; font-size:clamp(3.2rem, 11vw, 7.5rem); line-height:.9; overflow:hidden; }
+    .preloader__line { height:1px; background:rgba(255,255,255,.16); margin-top:30px; width:220px; overflow:hidden; }
+    .preloader__line span { display:block; width:100%; height:100%; background: var(--rose-bright); transform-origin:left; transform:scaleX(0); }
+    .preloader__meta { display:flex; justify-content:space-between; margin-top:16px; width:220px; font-size:.68rem; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.5); }
+
+    /* ---------- Header ---------- */
+    .site-header { position:fixed; top:0; left:0; right:0; z-index:900; padding:18px 0; transition: background .3s, border-color .3s; border-bottom:1px solid transparent; }
+    .site-header.is-scrolled { background: rgba(35,40,31,.88); backdrop-filter: blur(16px); border-color: rgba(255,255,255,.08); }
+    .header-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:inline-flex; align-items:center; gap:14px; }
+    .brand__mark { width:52px; height:52px; flex:0 0 auto; }
+    .brand__name { display:flex; flex-direction:column; }
+    .brand__name strong { font-family:"Cormorant Garamond", serif; font-size:1.3rem; letter-spacing:.02em; }
+    .brand__name small { margin-top:2px; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color: var(--rose-bright); font-weight:600; }
+    .desktop-nav { display:flex; align-items:center; gap:34px; }
+    .desktop-nav a { font-size:.82rem; letter-spacing:.03em; color:rgba(255,255,255,.78); transition:color .2s; }
+    .desktop-nav a:hover { color:#fff; }
+    .header-actions { display:flex; align-items:center; gap:16px; }
+    .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; }
+    .btn--solid { background: var(--rose); color:#fff; border-color: var(--rose); box-shadow:0 14px 34px rgba(194,104,90,.30); }
+    .btn--solid:hover { background: var(--rose-bright); border-color:var(--rose-bright); }
+    .btn--ghost:hover { border-color:#fff; }
+    .menu-toggle { display:none; width:44px; height:44px; border:0; border-radius:50%; background:rgba(255,255,255,.08); cursor:pointer; }
+    .menu-toggle span { display:block; width:18px; height:1px; background:#fff; margin:4px auto; }
+
+    .mobile-menu { position:fixed; inset:0; z-index:950; background:rgba(35,40,31,.98); visibility:hidden; opacity:0; pointer-events:none; transition:opacity .35s, visibility .35s; display:flex; flex-direction:column; justify-content:center; padding:32px; }
+    .mobile-menu.is-open { visibility:visible; opacity:1; pointer-events:auto; }
+    .mobile-menu a { display:block; font-family:"Cormorant Garamond", serif; font-style:italic; font-size:clamp(2.4rem, 11vw, 4.4rem); padding:10px 0; border-bottom:1px solid rgba(255,255,255,.10); }
+
+    /* ---------- Hero ---------- */
+    .hero { position:relative; min-height:100vh; display:flex; align-items:flex-end; isolation:isolate; padding-top:var(--header-h); overflow:hidden; }
+    .hero__media { position:absolute; inset:0; z-index:-2; }
+    .hero__media::after { content:""; position:absolute; inset:0; background:
+      linear-gradient(180deg, rgba(20,16,10,.25) 0%, rgba(20,16,10,.20) 40%, rgba(18,15,9,.92) 100%),
+      linear-gradient(90deg, rgba(15,12,8,.72) 0%, rgba(15,12,8,.30) 55%, rgba(15,12,8,.66) 100%); }
+    .hero__petals { position:absolute; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
+    .petal { position:absolute; opacity:.85; will-change:transform; }
+    .hero__content { position:relative; width:100%; padding:0 0 90px; }
+    .hero__kicker { display:flex; align-items:center; gap:12px; margin-bottom:20px; font-size:.78rem; text-transform:uppercase; letter-spacing:.2em; color:rgba(255,255,255,.78); }
+    .hero__kicker span { width:7px; height:7px; border-radius:50%; background:var(--rose-bright); box-shadow:0 0 22px rgba(217,138,115,.8); }
+    .hero__title { overflow:hidden; }
+    .hero__title .line { display:block; overflow:hidden; }
+    .hero__title .line span { display:block; }
+    .hero__title .accent { font-style:italic; color: var(--rose-bright); }
+    .hero__copy { max-width:520px; margin:26px 0 0; font-size:clamp(1rem, 1.4vw, 1.2rem); color:rgba(255,255,255,.72); }
+    .hero__actions { display:flex; gap:16px; margin-top:34px; flex-wrap:wrap; }
+    .hero__scroll { position:absolute; bottom:34px; right:32px; writing-mode:vertical-rl; font-size:.66rem; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.5); }
+
+    /* ---------- Marquee ---------- */
+    .marquee { border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; padding:22px 0; background:rgba(255,255,255,.02); }
+    .marquee__track { display:flex; width:max-content; animation: marquee-scroll 26s linear infinite; }
+    @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee__item { display:flex; align-items:center; gap:26px; padding-right:26px; font-family:"Cormorant Garamond", serif; font-style:italic; font-size:clamp(1.8rem, 3.6vw, 3.4rem); white-space:nowrap; color:rgba(255,255,255,.8); }
+    .marquee__dot { width:7px; height:7px; border-radius:50%; background: var(--rose-bright); }
+
+    /* ---------- Manifesto ---------- */
+    .manifesto { background: var(--paper); color: var(--ink); overflow:hidden; }
+    .manifesto__grid { display:grid; grid-template-columns: .8fr 1.6fr; gap:60px; align-items:start; }
+    .manifesto__aside { position:sticky; top:140px; }
+    .manifesto__aside p { max-width:280px; color:rgba(35,40,31,.62); font-size:1.02rem; }
+    .manifesto__tag { display:inline-flex; gap:8px; flex-wrap:wrap; margin-top:22px; }
+    .manifesto__tag span { border:1px solid rgba(35,40,31,.18); border-radius:999px; padding:8px 12px; font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; }
+    .manifesto__text { font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(2.2rem, 4.6vw, 4.6rem); line-height:1.08; margin:0; }
+    .manifesto__text .word { display:inline-block; color:rgba(35,40,31,.14); transition:color .2s; }
+
+    /* ---------- Services (pinned horizontal) ---------- */
+    .services { background: var(--ink); }
+    .services__head { display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:60px; }
+    .services__viewport { overflow:hidden; padding-left:32px; }
+    .services__track { display:flex; gap:26px; width:max-content; animation: services-scroll 42s linear infinite; }
+    .services__track:hover { animation-play-state: paused; }
+    @keyframes services-scroll { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 13px)); } }
+    .service-card { position:relative; width:min(74vw, 400px); aspect-ratio:3/4; border-radius:var(--radius); overflow:hidden; border:1px solid rgba(255,255,255,.12); background:var(--ink-2); flex:0 0 auto; }
+    .service-card__media { position:absolute; inset:0; }
+    .service-card__media::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(122,59,48,.10) 10%, rgba(15,12,8,.92) 100%); }
+    .service-card__media img { transition: transform .9s var(--ease), filter .6s var(--ease); filter:saturate(.86) contrast(1.06); }
+    .service-card:hover .service-card__media img { transform:scale(1.06); filter:saturate(1) contrast(1.02); }
+    .service-card__number { position:absolute; top:22px; right:22px; width:42px; height:42px; display:grid; place-items:center; border:1px solid rgba(255,255,255,.35); border-radius:50%; font-size:.72rem; backdrop-filter:blur(10px); }
+    .service-card__content { position:absolute; left:0; right:0; bottom:0; padding:28px; }
+    .service-card__content h3 { margin:0 0 10px; font-family:"Cormorant Garamond", serif; font-style:italic; font-size:clamp(1.8rem, 3.4vw, 2.6rem); font-weight:500; line-height:1; }
+    .service-card__content p { margin:0; color:rgba(255,255,255,.68); font-size:.94rem; }
+    .service-card__meta { display:flex; justify-content:space-between; gap:14px; margin-top:22px; padding-top:16px; border-top:1px solid rgba(255,255,255,.18); font-size:.72rem; text-transform:uppercase; letter-spacing:.1em; }
+
+    /* ---------- Craft ---------- */
+    .craft { background: var(--paper); color: var(--ink); }
+    .craft__grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; }
+    .craft__media { position:relative; height:560px; }
+    .craft__img { position:absolute; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,.16); }
+    .craft__img img { transform:scale(1.12); }
+    .craft__img-a { left:0; top:0; width:58%; height:64%; border-radius:24px; z-index:2; }
+    .craft__img-b { right:0; top:8%; width:44%; height:40%; border-radius:20px; border:8px solid var(--paper); z-index:1; }
+    .craft__img-c { left:6%; bottom:0; width:40%; height:38%; border-radius:20px; border:8px solid var(--paper); z-index:3; }
+    .craft__img-d { right:2%; bottom:2%; width:50%; height:44%; border-radius:22px; z-index:1; }
+    .craft__content p { color:rgba(35,40,31,.62); font-size:1.04rem; }
+    .craft__list { margin:34px 0 0; padding:0; list-style:none; border-top:1px solid rgba(35,40,31,.14); }
+    .craft__list li { display:grid; grid-template-columns:46px 1fr; gap:16px; padding:18px 0; border-bottom:1px solid rgba(35,40,31,.14); }
+    .craft__list strong { font-family:"Cormorant Garamond", serif; font-size:1rem; color: var(--rose); }
+
+    /* ---------- Stats ---------- */
+    .stats { background: var(--sage); color: var(--paper); }
+    .stats__grid { display:grid; grid-template-columns:repeat(4, 1fr); gap:40px; text-align:center; }
+    .stat strong { display:block; font-family:"Cormorant Garamond", serif; font-weight:500; font-size:clamp(2.6rem, 5vw, 4.4rem); line-height:1; }
+    .stat span { display:block; margin-top:10px; font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(250,245,238,.78); }
+
+    /* ---------- Gallery ---------- */
+    .looks { background: var(--ink); }
+    .looks__head { display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:50px; }
+    .looks__grid { columns: 4 220px; column-gap:18px; }
+    .look { position:relative; break-inside:avoid; margin-bottom:18px; border-radius:20px; overflow:hidden; border:1px solid rgba(255,255,255,.10); }
+    .look img { transition: transform .8s var(--ease); }
+    .look:hover img { transform:scale(1.08); }
+    .look::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 45%, rgba(15,12,8,.85) 100%); }
+    .look__caption { position:absolute; left:16px; right:16px; bottom:14px; z-index:1; }
+    .look__caption strong { display:block; font-family:"Cormorant Garamond", serif; font-style:italic; font-size:1.2rem; }
+    .look__caption span { display:block; margin-top:2px; font-size:.76rem; color:rgba(255,255,255,.7); }
+
+    /* ---------- Reviews ---------- */
+    .reviews { background: linear-gradient(180deg, rgba(20,17,11,1) 0%, rgba(30,25,17,1) 100%); }
+    .reviews__wrap { display:grid; grid-template-columns: .9fr 1.6fr; gap:36px; }
+    .reviews__intro { padding:clamp(26px,3vw,38px); border-radius:30px; background:linear-gradient(135deg, rgba(194,104,90,.20), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.10); }
+    .reviews__score { display:flex; align-items:baseline; gap:10px; margin-top:18px; }
+    .reviews__score strong { font-family:"Cormorant Garamond", serif; font-size:clamp(2.8rem,7vw,4.6rem); font-weight:500; }
+    .reviews__stars { letter-spacing:.16em; color:#e7b872; font-size:.9rem; }
+    .reviews__meta { margin-top:6px; font-size:.76rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.6); }
+    .reviews__grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .review-card { padding:24px; border-radius:22px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10); }
+    .review-card__stars { color:#e7b872; font-size:.85rem; letter-spacing:.14em; }
+    .review-card p { margin:12px 0 0; color:rgba(255,255,255,.74); font-size:.94rem; }
+    .review-card strong { display:block; margin-top:14px; font-size:.82rem; }
+
+    /* ---------- Visit ---------- */
+    .visit { background: var(--paper); color: var(--ink); }
+    .visit__grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
+    .visit__details { display:grid; margin-top:32px; border-top:1px solid rgba(35,40,31,.16); }
+    .visit__row { display:grid; grid-template-columns:130px 1fr; gap:20px; padding:18px 0; border-bottom:1px solid rgba(35,40,31,.16); }
+    .visit__row span { color:rgba(35,40,31,.5); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; }
+    .visit__map { height:520px; border-radius:26px; overflow:hidden; position:relative; background:#ddd3c0; }
+    .visit__map iframe { width:100%; height:100%; border:0; filter: grayscale(.2) sepia(.08); }
+
+    /* ---------- Footer ---------- */
+    .site-footer { background:#161710; padding:90px 0 30px; }
+    .footer__top { display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:40px; padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,.10); }
+    .footer__title { margin:0 0 16px; font-family:"Cormorant Garamond", serif; font-style:italic; font-size:clamp(2.4rem,4.6vw,3.4rem); }
+    .footer__col h4 { margin:0 0 16px; font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; color:rgba(255,255,255,.5); }
+    .footer__col a, .footer__col p { display:block; margin:0 0 10px; color:rgba(255,255,255,.7); font-size:.92rem; }
+    .footer__bottom { display:flex; justify-content:space-between; padding-top:26px; font-size:.74rem; color:rgba(255,255,255,.42); flex-wrap:wrap; gap:10px; }
+
+    .reveal-img { position:relative; overflow:hidden; }
+    .reveal-img img { transform:scale(1.15); }
+    .craft__img.reveal-img { position:absolute; }
+
+    @media (max-width: 980px) {
+      .manifesto__grid, .visit__grid, .reviews__wrap { grid-template-columns:1fr; }
+      .manifesto__aside { position:static; top:auto; }
+      .craft__grid { grid-template-columns:1fr; }
+      .craft__media { height:440px; }
+      .stats__grid { grid-template-columns:1fr 1fr; row-gap:34px; }
+      .desktop-nav { display:none; }
+      .menu-toggle { display:block; }
+      .looks__grid { columns:2 160px; }
+      .reviews__grid { grid-template-columns:1fr; }
+    }
+    @media (max-width: 640px) {
+      .section { padding:86px 0; }
+      .container { padding:0 20px; }
+      .footer__top { grid-template-columns:1fr 1fr; row-gap:34px; }
+      .stats__grid { grid-template-columns:1fr 1fr; }
+      .looks__grid { columns:1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior:auto !important; }
+    }
+</style>
+</head>
+<body class="is-loading">
+<a class="skip-link" href="#main" style="position:absolute; left:-999px;">Saltar al contenido</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="scroll-progress"></div>
+<div aria-hidden="true" class="cursor-ring"></div>
+<div aria-hidden="true" class="cursor-dot"></div>
+
+<div aria-hidden="true" class="preloader">
+<div class="preloader__inner">
+<div class="preloader__word" style="display:flex; justify-content:center;"><span id="preloaderWord">[Nombre]</span></div>
+<div class="preloader__line"><span></span></div>
+<div class="preloader__meta"><span>[Barrio] · [Ciudad]</span><span class="preloader__percent">0%</span></div>
+</div>
+</div>
+
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand magnetic" href="/" aria-label="[NOMBRE DEL NEGOCIO], inicio">
+<svg class="brand__mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" fill="#2c3324"/>
+  <g fill="none" stroke="#d98a73" stroke-width="2.4">
+    <ellipse cx="50" cy="34" rx="9" ry="15"/>
+    <ellipse cx="50" cy="34" rx="9" ry="15" transform="rotate(72 50 50)"/>
+    <ellipse cx="50" cy="34" rx="9" ry="15" transform="rotate(144 50 50)"/>
+    <ellipse cx="50" cy="34" rx="9" ry="15" transform="rotate(216 50 50)"/>
+    <ellipse cx="50" cy="34" rx="9" ry="15" transform="rotate(288 50 50)"/>
+  </g>
+  <circle cx="50" cy="50" r="6" fill="#d98a73"/>
+</svg>
+<span class="brand__name"><strong>[NOMBRE]</strong><small>[RUBRO] · [CIUDAD]</small></span>
+</a>
+<nav class="desktop-nav" aria-label="Navegación principal">
+<a href="#servicios">Servicios</a>
+<a href="#metodo">El taller</a>
+<a href="#trabajos">Trabajos</a>
+<a href="#opiniones">Opiniones</a>
+<a href="#visitanos">Visítanos</a>
+</nav>
+<div class="header-actions">
+<a class="btn btn--solid magnetic" href="#pedir">Pedir ramo</a>
+<button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle"><span></span><span></span></button>
+</div>
+</div>
+</header>
+
+<div class="mobile-menu" aria-hidden="true">
+<a href="#servicios">Servicios</a>
+<a href="#metodo">El taller</a>
+<a href="#trabajos">Trabajos</a>
+<a href="#opiniones">Opiniones</a>
+<a href="#visitanos">Visítanos</a>
+<a href="#pedir">Pedir ramo</a>
+</div>
+
+<main id="main">
+<section class="hero" id="inicio">
+<div class="hero__media">
+<img alt="Escaparate de floristería con cubos de flores frescas" decoding="async" fetchpriority="high" sizes="100vw" src="https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=1600&q=80" srcset="https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=1200&q=80 1200w, https://images.unsplash.com/photo-1487070183336-b863922373d4?auto=format&fit=crop&w=1600&q=80 1600w"/>
+</div>
+<div class="hero__petals" aria-hidden="true">
+<svg class="petal" style="left:10%; top:20%; width:34px;" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="17" fill="#d98a73" opacity=".55"/></svg>
+<svg class="petal" style="left:78%; top:14%; width:26px;" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="17" fill="#f3d9c8" opacity=".5"/></svg>
+<svg class="petal" style="left:60%; top:60%; width:30px;" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="17" fill="#8a9c78" opacity=".45"/></svg>
+<svg class="petal" style="left:30%; top:70%; width:22px;" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="17" fill="#d98a73" opacity=".4"/></svg>
+<svg class="petal" style="left:88%; top:50%; width:20px;" viewBox="0 0 40 40"><ellipse cx="20" cy="20" rx="10" ry="17" fill="#f3d9c8" opacity=".5"/></svg>
+</div>
+<div class="container hero__content">
+<div class="hero__kicker"><span></span> [Barrio] · [Ciudad]</div>
+<h1 class="display hero__title">
+<span class="line"><span>Flores que</span></span>
+<span class="line"><span>cuentan</span></span>
+<span class="line"><span class="accent">tu historia.</span></span>
+</h1>
+<p class="hero__copy">Ramos de temporada, flor fresca a diario y diseño floral a medida para bodas, eventos y ese detalle que quieres hacer bien.</p>
+<div class="hero__actions">
+<a class="btn btn--solid magnetic" href="#pedir">Pedir ramo</a>
+<a class="btn btn--ghost magnetic" href="#trabajos">Ver nuestro trabajo</a>
+</div>
+</div>
+<div class="hero__scroll">Desliza para descubrir</div>
+</section>
+
+<div aria-hidden="true" class="marquee">
+<div class="marquee__track">
+<div class="marquee__item">Ramos de temporada <span class="marquee__dot"></span> Bodas &amp; eventos <span class="marquee__dot"></span> Plantas &amp; decoración <span class="marquee__dot"></span> Suscripción floral <span class="marquee__dot"></span> Entrega el mismo día <span class="marquee__dot"></span> </div>
+<div class="marquee__item">Ramos de temporada <span class="marquee__dot"></span> Bodas &amp; eventos <span class="marquee__dot"></span> Plantas &amp; decoración <span class="marquee__dot"></span> Suscripción floral <span class="marquee__dot"></span> Entrega el mismo día <span class="marquee__dot"></span> </div>
+</div>
+</div>
+
+<section class="section manifesto">
+<div class="container manifesto__grid">
+<aside class="manifesto__aside">
+<div class="eyebrow">Nuestra filosofía</div>
+<p>No hacemos ramos en serie. Elegimos flor de temporada y componemos cada pieza a mano, el mismo día que sale por la puerta.</p>
+<div class="manifesto__tag"><span>Flor fresca</span><span>Temporada</span><span>Hecho a mano</span></div>
+</aside>
+<p class="manifesto__text">Cada ramo es una pausa. Le damos <span style="color:#c2685a">forma</span>, <span style="color:#6b7a5e">color</span> y un motivo para regalar algo que de verdad se sienta especial.</p>
+</div>
+</section>
+
+<section class="section services" id="servicios">
+<div class="container services__head">
+<div><div class="eyebrow">Servicios</div><h2 class="section-title">Diseñamos flor<br/>para cada momento.</h2></div>
+<p class="lead">Desde un ramo espontáneo hasta la decoración floral completa de tu boda. Cuéntanos la ocasión y nos encargamos del resto.</p>
+</div>
+<div class="services__viewport">
+<div class="services__track">
+<article class="service-card">
+<div class="service-card__media"><img alt="Rosa rosa en jarrón de cristal" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">01</span>
+<div class="service-card__content"><h3>Ramos de temporada</h3><p>Composiciones frescas con la flor de cada época del año.</p><div class="service-card__meta"><span>Desde 25€</span><span>Recogida o entrega</span></div></div>
+</article>
+<article class="service-card">
+<div class="service-card__media"><img alt="Ramo de novia frondoso con rosas y follaje" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">02</span>
+<div class="service-card__content"><h3>Bodas &amp; eventos</h3><p>Ramo de novia, centros de mesa y decoración floral completa.</p><div class="service-card__meta"><span>Consulta previa</span><span>Proyecto a medida</span></div></div>
+</article>
+<article class="service-card">
+<div class="service-card__media"><img alt="Jarrón blanco con tulipanes sobre mesa de madera" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">03</span>
+<div class="service-card__content"><h3>Plantas &amp; decoración</h3><p>Plantas de interior y arreglos para dar vida a tu espacio.</p><div class="service-card__meta"><span>Desde 18€</span><span>Asesoramiento incluido</span></div></div>
+</article>
+<article class="service-card">
+<div class="service-card__media"><img alt="Rosa blanca en primer plano" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">04</span>
+<div class="service-card__content"><h3>Suscripción floral</h3><p>Un ramo nuevo cada semana o cada mes, sin tener que pensarlo.</p><div class="service-card__meta"><span>Desde 20€/mes</span><span>Cancela cuando quieras</span></div></div>
+</article>
+<article class="service-card" aria-hidden="true">
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">01</span>
+<div class="service-card__content"><h3>Ramos de temporada</h3><p>Composiciones frescas con la flor de cada época del año.</p><div class="service-card__meta"><span>Desde 25€</span><span>Recogida o entrega</span></div></div>
+</article>
+<article class="service-card" aria-hidden="true">
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1487530811176-3780de880c2d?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">02</span>
+<div class="service-card__content"><h3>Bodas &amp; eventos</h3><p>Ramo de novia, centros de mesa y decoración floral completa.</p><div class="service-card__meta"><span>Consulta previa</span><span>Proyecto a medida</span></div></div>
+</article>
+<article class="service-card" aria-hidden="true">
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">03</span>
+<div class="service-card__content"><h3>Plantas &amp; decoración</h3><p>Plantas de interior y arreglos para dar vida a tu espacio.</p><div class="service-card__meta"><span>Desde 18€</span><span>Asesoramiento incluido</span></div></div>
+</article>
+<article class="service-card" aria-hidden="true">
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<span class="service-card__number">04</span>
+<div class="service-card__content"><h3>Suscripción floral</h3><p>Un ramo nuevo cada semana o cada mes, sin tener que pensarlo.</p><div class="service-card__meta"><span>Desde 20€/mes</span><span>Cancela cuando quieras</span></div></div>
+</article>
+</div>
+</div>
+</section>
+
+<section class="section craft" id="metodo">
+<div class="container craft__grid">
+<div class="craft__media" aria-label="El taller floral en proceso">
+<div class="craft__img craft__img-a reveal-img"><img alt="Pala de jardinería con tierra" decoding="async" loading="lazy" sizes="(max-width:980px) 60vw, 32vw" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=78"/></div>
+<div class="craft__img craft__img-b reveal-img"><img alt="Suculenta en maceta blanca" decoding="async" loading="lazy" sizes="(max-width:980px) 44vw, 22vw" src="https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=700&q=78"/></div>
+<div class="craft__img craft__img-c reveal-img"><img alt="Tulipán rosa sobre fondo rosa" decoding="async" loading="lazy" sizes="(max-width:980px) 40vw, 20vw" src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=700&q=78"/></div>
+<div class="craft__img craft__img-d reveal-img"><img alt="Lirio rosa en jarrón de cristal" decoding="async" loading="lazy" sizes="(max-width:980px) 50vw, 25vw" src="https://images.unsplash.com/photo-1502977249166-824b3a8a4d6d?auto=format&fit=crop&w=700&q=78"/></div>
+</div>
+<div class="craft__content">
+<div class="eyebrow">El taller</div>
+<h2 class="section-title">Flor de temporada.<br/>Trabajo de taller.</h2>
+<p>No trabajamos con catálogo fijo — la flor cambia cada semana según lo que llega fresco del mercado, y eso se nota en cada ramo.</p>
+<ol class="craft__list">
+<li><strong>01</strong><span>Seleccionamos la flor de temporada cada mañana.</span></li>
+<li><strong>02</strong><span>Escuchamos qué ocasión estás celebrando.</span></li>
+<li><strong>03</strong><span>Componemos el ramo a mano en el taller.</span></li>
+<li><strong>04</strong><span>Entregamos el mismo día, fresco de verdad.</span></li>
+</ol>
+</div>
+</div>
+</section>
+
+<section class="section stats" aria-label="Datos de la floristería">
+<div class="container stats__grid">
+<div class="stat"><strong data-count="1200">0</strong><span>Ramos entregados al año</span></div>
+<div class="stat"><strong data-count="8">0</strong><span>Años de experiencia</span></div>
+<div class="stat"><strong data-count="300">0</strong><span>Bodas vestidas de flor</span></div>
+<div class="stat"><strong data-count="98">0</strong><span>% de pedidos a tiempo</span></div>
+</div>
+</section>
+
+<section class="section looks" id="trabajos">
+<div class="container">
+<div class="looks__head">
+<div><div class="eyebrow">Trabajos del taller</div><h2 class="section-title">Color, textura<br/>y flor real.</h2></div>
+<p class="lead">Una selección de composiciones reales del taller: ramos, centros y detalles hechos a mano.</p>
+</div>
+<div class="looks__grid">
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Amapolas naranjas en flor" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Campo en flor</strong><span>Amapolas de temporada recién cortadas.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Ramo de rosas multicolor" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Ramo arcoíris</strong><span>Un capricho de color para regalar alegría.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Composición floral en forma de corazón sostenida con las manos" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Detalle con cariño</strong><span>Piezas pequeñas para ocasiones especiales.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Amapolas en campo de trigo" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Silvestre</strong><span>Composiciones de aire natural y libre.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Rosa rosa en jarrón" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Rosa clásica</strong><span>Elegancia simple para cualquier mesa.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Tulipanes blancos en jarrón sobre mesa de madera" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1462530260150-162092dbf011?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Tulipanes blancos</strong><span>Frescura y luz para el salón.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Lirio rosa en jarrón de cristal" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1502977249166-824b3a8a4d6d?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Lirio en detalle</strong><span>Pétalos amplios y aroma intenso.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Rosa blanca en primer plano" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1495231916356-a86217efff12?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Blanco puro</strong><span>La opción segura que nunca falla.</span></figcaption></figure>
+</div>
+</div>
+</section>
+
+<section class="section reviews" id="opiniones">
+<div class="container reviews__wrap">
+<div class="reviews__intro">
+<div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.6);"><b style="color:#4285f4">G</b> Opiniones verificadas en Google</div>
+<div class="reviews__score"><strong>[X,X]</strong><div><div class="reviews__stars">★★★★★</div><div class="reviews__meta">Más de [XXX] reseñas</div></div></div>
+<p style="margin-top:18px; color:rgba(255,255,255,.72); max-width:46ch;">Una nota muy alta para un taller de barrio con una forma de trabajar la flor muy propia.</p>
+</div>
+<div class="reviews__grid">
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«El ramo de mi boda superó todo lo que había imaginado. Flor fresquísima y un gusto exquisito.»</p><strong>— Cliente verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Pedí la suscripción semanal y cada ramo es distinto y precioso. Ya no sé vivir sin ella.»</p><strong>— Cliente verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Entrega rapidísima y el detalle floral perfecto para el evento de la empresa.»</p><strong>— Cliente verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Trato cercano y una selección de flor que no encuentras en cualquier sitio.»</p><strong>— Cliente verificado</strong></div>
+</div>
+</div>
+</section>
+
+<section class="section visit" id="visitanos">
+<div class="container visit__grid">
+<div>
+<div class="eyebrow">Visítanos</div>
+<h2 class="section-title">Ven a ver<br/>la flor de hoy.</h2>
+<div class="visit__details">
+<div class="visit__row"><span>Dirección</span><div>[Dirección del negocio], [CP] [Ciudad]</div></div>
+<div class="visit__row"><span>Horario</span><div>Lunes a sábado, 10:00 – 20:00</div></div>
+<div class="visit__row"><span>Teléfono</span><div><a href="tel:+34000000000">000 00 00 00</a></div></div>
+<div class="visit__row"><span>Barrio</span><div>[Barrio] · [Ciudad]</div></div>
+</div>
+<div style="margin-top:30px"><a class="btn btn--solid magnetic" href="tel:+34000000000">Llamar a la floristería</a></div>
+</div>
+<div class="visit__map"><iframe title="Mapa de [NOMBRE DEL NEGOCIO]" loading="lazy" src="https://www.google.com/maps?q=Madrid,+España&output=embed"></iframe></div>
+</div>
+</section>
+</main>
+
+<footer class="site-footer" id="pedir">
+<div class="container">
+<div class="footer__top">
+<div>
+<p class="footer__title">[NOMBRE DEL NEGOCIO]</p>
+<p style="color:rgba(255,255,255,.6); max-width:34ch;">[NOMBRE DEL NEGOCIO] · [Barrio], [Ciudad]. Flor fresca y diseño floral hecho a mano.</p>
+</div>
+<div class="footer__col"><h4>Explora</h4><a href="#servicios">Servicios</a><a href="#metodo">El taller</a><a href="#trabajos">Trabajos</a><a href="#opiniones">Opiniones</a></div>
+<div class="footer__col"><h4>Contacto</h4><a href="tel:+34000000000">000 00 00 00</a><a href="#visitanos">[Dirección del negocio]</a><a href="#">Instagram</a></div>
+<div class="footer__col"><h4>Pedidos</h4><p>Pedidos con 24h de antelación para garantizar disponibilidad.</p><a class="btn btn--solid magnetic" href="tel:+34000000000">Pedir ahora</a></div>
+</div>
+<div class="footer__bottom"><span>© <span id="year"></span> [NOMBRE DEL NEGOCIO]. Todos los derechos reservados.</span><span>[Ciudad], España</span></div>
+</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+<script>
+    (() => {
+      'use strict';
+      const $ = (selector, scope = document) => scope.querySelector(selector);
+      const $$ = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const hasFinePointer = window.matchMedia('(pointer:fine)').matches;
+
+      $('#year').textContent = new Date().getFullYear();
+
+      /* Preloader */
+      let pageRevealed = false;
+      function revealPage() {
+        if (pageRevealed) return;
+        pageRevealed = true;
+        document.body.classList.remove('is-loading');
+        if (reduceMotion || !window.gsap) { $('.preloader')?.remove(); return; }
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        tl.to('.preloader__line span', { scaleX: 1, duration: .3 }, 0)
+          .to('.preloader__percent', { textContent: 100, duration: .3, snap: { textContent: 1 } }, 0)
+          .to('.preloader__word', { opacity: 0, y: -20, duration: .3 }, .2)
+          .to('.preloader', { yPercent: -100, duration: .5, ease: 'power4.inOut' }, .32)
+          .from('.site-header', { y: -40, opacity: 0, duration: .4 }, .5)
+          .from('.hero__kicker', { y: 16, opacity: 0, duration: .35 }, .55)
+          .from('.hero__title .line span', { yPercent: 110, duration: .55, stagger: .07 }, .58)
+          .from('.hero__copy, .hero__actions', { y: 20, opacity: 0, duration: .4, stagger: .06 }, .78)
+          .set('.preloader', { display: 'none' }, .85);
+      }
+      window.addEventListener('load', revealPage, { once: true });
+      setTimeout(revealPage, 900);
+
+      /* Header + mobile nav */
+      const header = $('.site-header');
+      const menuToggle = $('.menu-toggle');
+      const mobileMenu = $('.mobile-menu');
+      const setHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 30);
+      setHeader();
+      window.addEventListener('scroll', setHeader, { passive: true });
+      menuToggle.addEventListener('click', () => {
+        const opening = !mobileMenu.classList.contains('is-open');
+        mobileMenu.classList.toggle('is-open', opening);
+        menuToggle.setAttribute('aria-expanded', String(opening));
+        document.body.style.overflow = opening ? 'hidden' : '';
+      });
+      $$('.mobile-menu a').forEach(link => link.addEventListener('click', () => {
+        mobileMenu.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }));
+
+      /* Custom cursor */
+      if (!reduceMotion && hasFinePointer && window.gsap) {
+        const cursorDot = $('.cursor-dot');
+        const cursorRing = $('.cursor-ring');
+        if (cursorDot && cursorRing) {
+          document.body.classList.add('has-custom-cursor');
+          const dotX = gsap.quickTo(cursorDot, 'x', { duration: .12, ease: 'power3.out' });
+          const dotY = gsap.quickTo(cursorDot, 'y', { duration: .12, ease: 'power3.out' });
+          const ringX = gsap.quickTo(cursorRing, 'x', { duration: .38, ease: 'power3.out' });
+          const ringY = gsap.quickTo(cursorRing, 'y', { duration: .38, ease: 'power3.out' });
+          window.addEventListener('pointermove', e => { dotX(e.clientX); dotY(e.clientY); ringX(e.clientX); ringY(e.clientY); });
+          $$('a, button, .magnetic, .service-card, .look').forEach(el => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('is-active'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('is-active'));
+          });
+        }
+      }
+
+      /* Magnetic buttons */
+      if (!reduceMotion && hasFinePointer && window.gsap) {
+        $$('.magnetic').forEach(el => {
+          const strength = 0.35;
+          el.addEventListener('mousemove', e => {
+            const r = el.getBoundingClientRect();
+            gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * strength, y: (e.clientY - r.top - r.height / 2) * strength, duration: .4, ease: 'power3.out' });
+          });
+          el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: .5, ease: 'elastic.out(1, .4)' }));
+        });
+      }
+
+      if (!window.gsap || !window.ScrollTrigger) return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* Smooth scroll */
+      let lenis = null;
+      if (!reduceMotion && hasFinePointer) {
+        lenis = new Lenis({ duration: 1.05, smoothWheel: true });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add(time => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+      }
+
+      /* Scroll progress bar */
+      gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: true } });
+
+      /* Floating petals */
+      if (!reduceMotion) {
+        $$('.petal').forEach((petal, i) => {
+          gsap.to(petal, { y: '+=40', x: '+=18', rotate: 25, duration: 6 + i, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: i * .4 });
+        });
+      }
+
+      /* Manifesto word color reveal */
+      const manifesto = $('.manifesto__text');
+      if (manifesto) {
+        manifesto.innerHTML = manifesto.innerHTML.replace(/(?![^<]*>)([^\s<]+)/g, '<span class="word">$1</span>');
+        gsap.to('.manifesto__text .word', { color: '#23281f', stagger: .03, scrollTrigger: { trigger: '.manifesto__text', start: 'top 78%', end: 'bottom 55%', scrub: true } });
+      }
+
+      /* Reveal images (clip-path wipe) */
+      $$('.reveal-img').forEach(el => {
+        gsap.set(el, { clipPath: 'inset(0 0 0 100%)' });
+        gsap.to(el, { clipPath: 'inset(0 0 0 0%)', duration: 1, ease: 'power4.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+        const img = el.querySelector('img');
+        if (img) gsap.to(img, { scale: 1, duration: 1.3, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } });
+      });
+
+      /* Gallery stagger reveal */
+      gsap.from('.look', { opacity: 0, y: 40, duration: .7, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.looks__grid', start: 'top 85%' } });
+
+      /* Stat counters */
+      $$('.stat strong').forEach(el => {
+        const target = +el.dataset.count;
+        gsap.to(el, {
+          textContent: target, duration: 1.6, ease: 'power2.out', snap: { textContent: 1 },
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          onUpdate() { el.textContent = Math.round(+el.textContent).toLocaleString('es-ES'); }
+        });
+      });
+
+      /* Craft list stagger */
+      gsap.from('.craft__list li', { opacity: 0, x: -24, duration: .5, stagger: .1, ease: 'power3.out', scrollTrigger: { trigger: '.craft__list', start: 'top 82%' } });
+
+      /* Reviews stagger */
+      gsap.from('.review-card', { opacity: 0, y: 30, duration: .6, stagger: .08, ease: 'power3.out', scrollTrigger: { trigger: '.reviews__grid', start: 'top 85%' } });
+
+    })();
+</script>
+</body>
+</html>

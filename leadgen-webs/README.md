@@ -122,7 +122,7 @@ sitio público (el propio `PANEL_SLUG` en `.env` nunca se sube a git).
 
 ```bash
 python scripts/build_site.py
-netlify deploy --prod --site 45d3343b-c03c-41aa-857b-886c62675825 --dir output/sites --functions netlify/functions
+netlify deploy --prod --site d367649d-b60f-4a32-9aa4-076121c81a2a --dir output/sites --functions netlify/functions
 ```
 
 (`--functions` sube también `netlify/functions/estado.mjs`, la Netlify Function
@@ -148,6 +148,25 @@ cd ../local-business-system
 STATIC_EXPORT_BASE_PATH=/plantillas npm run build
 cp -r out/. ../leadgen-webs/output/sites/plantillas/
 ```
+
+## Envío por WhatsApp: ritmo y variedad (obligatorio)
+
+El 29/08/2026 se restringió la cuenta de WhatsApp del usuario por spam tras
+mandar 49 mensajes casi idénticos en poco más de una hora a contactos fríos
+(vía `web.whatsapp.com/send?phone=...&text=...`). Para evitar que se repita:
+
+- **Nunca mandar más de ~10-15 mensajes seguidos en una sola sesión.** Parar
+  ahí aunque queden leads pendientes, y retomar en otra sesión/día.
+- **Espaciar los envíos varios minutos**, no segundos, entre uno y otro —
+  nada de navegar-y-enviar en bucle rápido.
+- **El texto ya no es literal-idéntico entre leads**: `generate_email_drafts.py`
+  reparte cada negocio entre 3 variantes de redacción distintas (mismo gancho,
+  distinta forma), asignadas de forma estable por nombre de negocio en
+  `TEMPLATE_WHATSAPP_VARIANTES` / `TEMPLATE_WHATSAPP_CON_WEB_VARIANTES`. No hace
+  falta hacer nada manual para esto, ya sale así al generar los borradores.
+- Si la cuenta vuelve a quedar restringida, **no crear una cuenta/número nuevo
+  para saltárselo** — evaluar apelar la restricción o cambiar de canal (email,
+  SMS, llamada) para el volumen que quede.
 
 ## Notas importantes
 

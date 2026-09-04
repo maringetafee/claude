@@ -14,7 +14,7 @@ import csv
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, unquote
 
 import requests
 from bs4 import BeautifulSoup
@@ -35,9 +35,11 @@ def extract_emails(html):
     for a in soup.select("a[href^=mailto]"):
         addr = a["href"].split("mailto:")[1].split("?")[0].strip()
         if addr:
-            found.add(addr.lower())
+            # Algunos sitios ofuscan el mailto con %-encoding (ej. %69%6e%66%6f@...)
+            # para dificultar el scraping automatico; lo decodificamos igual.
+            found.add(unquote(addr).lower())
 
-    for match in EMAIL_RE.findall(soup.get_text(" ")):
+    for match in EMAIL_RE.findall(unquote(soup.get_text(" "))):
         found.add(match.lower())
 
     return {e for e in found if not any(bad in e for bad in IGNORE_SUBSTR)}

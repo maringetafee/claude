@@ -40,13 +40,18 @@ PANEL_DIR = OUT_SITES / PANEL_SLUG
 # Restaurante tiene una editorial y otra mas urbana/casual); se muestran
 # todas. Si un tipo no tiene ninguna todavia, simplemente no se muestra nada.
 PLANTILLAS_MAESTRAS = {
-    "Bar": [("Casa Manolo — bar de barrio, tema tavern-warm", "plantillas/casa-manolo.html")],
+    "Bar": [("Plantilla Bar — bar de barrio, animado", "plantillas/bar/index.html")],
     "Cocktail bar": [("Lolita — coctelería, tema nightlife", "plantillas/lolita.html")],
     "Restaurante": [
         ("Web Plantilla Burgers — hamburguesería", "plantillas/burgers/index.html"),
         ("LÚMINA — restaurante, tema luxury-editorial", "plantillas/lumina.html"),
     ],
-    "Peluqueria": [("Studio X — peluquería, tema fashion-minimal", "plantillas/studio-x.html")],
+    "Peluqueria": [
+        ("Plantilla Peluquería Mujer — salón, tema editorial", "plantillas/peluqueria-mujer/index.html"),
+        ("Plantilla Peluquería Hombre — barbería, tema steel-blue", "plantillas/peluqueria-hombre/index.html"),
+    ],
+    "Floristeria": [("Plantilla Floristería — tienda de flores, animada", "plantillas/floristeria/index.html")],
+    "Unas": [("Plantilla Uñas — salón de manicura, animada", "plantillas/unas/index.html")],
 }
 
 
