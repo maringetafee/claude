@@ -154,6 +154,9 @@ html.js-cursor .cursor-ring { opacity: 1; }
 .section,
 .site-footer {
   position: relative;
+  isolation: isolate; /* traps the ::before's z-index:-1 locally — without this it
+                          escapes to the root context and sinks below every other
+                          section's own opaque background, i.e. becomes invisible */
   --gx: 0px;
   --gy: 0px;
 }
