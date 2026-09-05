@@ -82,12 +82,14 @@
   --ink: #edeff4;
   --ink-muted: #99a1ae;
   --ink-faint: #626a78;
-  --surface-page: #07080b;
-  --surface-1: #10131a;
-  --surface-2: #0a0c11;
-  --surface-3: #10131a;
-  --line: #1e222c;
-  --line-strong: #2a2f3a;
+  /* near-black with a touch of brand red mixed in — darker than the first
+     pass, text tokens above are untouched so contrast doesn't move */
+  --surface-page: color-mix(in srgb, #050403 95%, #f43333 5%);
+  --surface-1: color-mix(in srgb, #0e0908 95%, #f43333 5%);
+  --surface-2: color-mix(in srgb, #070504 95%, #f43333 5%);
+  --surface-3: color-mix(in srgb, #0e0908 95%, #f43333 5%);
+  --line: #23201d;
+  --line-strong: #332c27;
 
   --header-ink: #edeff4;
   --header-scrim: rgb(7 8 11 / 62%);
@@ -103,13 +105,21 @@
    PER-SECTION ACCENT ("band")
    Put data-band="…" on any wrapper; descendants inherit --refract.
    ------------------------------------------------------------------------- */
-[data-band="brand"]   { --refract: var(--band-brand);   --refract-soft: var(--band-brand-soft);   --refract-strong: var(--band-brand-strong); }
-[data-band="violet"]  { --refract: var(--band-violet);  --refract-soft: var(--band-violet-soft);  --refract-strong: var(--band-violet-strong); }
-[data-band="indigo"]  { --refract: var(--band-indigo);  --refract-soft: var(--band-indigo-soft);  --refract-strong: var(--band-indigo-strong); }
-[data-band="cyan"]    { --refract: var(--band-cyan);    --refract-soft: var(--band-cyan-soft);    --refract-strong: var(--band-cyan-strong); }
-[data-band="emerald"] { --refract: var(--band-emerald); --refract-soft: var(--band-emerald-soft); --refract-strong: var(--band-emerald-strong); }
-[data-band="amber"]   { --refract: var(--band-amber);   --refract-soft: var(--band-amber-soft);   --refract-strong: var(--band-amber-strong); }
-[data-band="flare"]   { --refract: var(--band-flare);   --refract-soft: var(--band-flare-soft);   --refract-strong: var(--band-flare-strong); }
+/* every band now resolves to the single brand red (same as the Contactanos
+   buttons) — the per-section rainbow of accent hues has been removed. The
+   distinct --band-* ramps above are kept (harmless, unused) rather than
+   deleted, in case a future request wants a specific accent back. */
+[data-band="brand"],
+[data-band="violet"],
+[data-band="indigo"],
+[data-band="cyan"],
+[data-band="emerald"],
+[data-band="amber"],
+[data-band="flare"] {
+  --refract: var(--band-brand);
+  --refract-soft: var(--band-brand-soft);
+  --refract-strong: var(--band-brand-strong);
+}
 
 [data-band-scope] { display: contents; }
 

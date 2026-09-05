@@ -290,12 +290,26 @@
   height: 1lh;
   overflow: hidden;
 }
-.nav-link__roll > span {
-  display: block;
+.nav-link__roll > span { display: block; }
+
+/* animated red underline on hover, same wipe as .text-link */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--refract);
+  transform: scaleX(0);
+  transform-origin: right center;
   transition: transform 320ms var(--ease-out);
 }
-.nav-link:hover .nav-link__roll > span,
-.nav-link:focus-visible .nav-link__roll > span { transform: translateY(-100%); }
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
 
 /* theme toggle: 56×30 pill, thumb slides on [data-theme=dark] */
 .theme-toggle {
@@ -474,19 +488,14 @@
   background: var(--line);
 }
 
-/* the spectrum rule: a thin rainbow gradient divider */
+/* thin brand-red fading divider (previously a rainbow gradient) */
 .spectrum-rule {
   height: 1px;
   width: 100%;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    color-mix(in srgb, var(--band-violet) 45%, transparent) 12%,
-    color-mix(in srgb, var(--band-indigo) 45%, transparent) 27.2%,
-    color-mix(in srgb, var(--band-cyan) 45%, transparent) 42.4%,
-    color-mix(in srgb, var(--band-emerald) 45%, transparent) 57.6%,
-    color-mix(in srgb, var(--band-amber) 45%, transparent) 72.8%,
-    color-mix(in srgb, var(--band-flare) 45%, transparent) 88%,
+    color-mix(in srgb, var(--band-brand) 45%, transparent) 50%,
     transparent 100%
   );
 }

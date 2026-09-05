@@ -164,6 +164,23 @@ button, input, select, textarea, a, svg, svg * {
 }
 
 /* =========================================================================
+   VIGNETTE  (dark theme only — softens the flat charcoal toward the edges)
+   ========================================================================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 89; /* just under .grain (90) */
+  pointer-events: none;
+  opacity: 0;
+}
+:root[data-theme="dark"] body::before {
+  opacity: 1;
+  background: radial-gradient(120% 90% at 50% 30%, transparent 50%, rgba(0, 0, 0, 0.55) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================================
    REDUCED MOTION
    ========================================================================= */
 @media (prefers-reduced-motion: reduce) {
