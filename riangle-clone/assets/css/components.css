@@ -373,9 +373,10 @@
   .burger { display: none; }
 }
 
-/* header CTA — hidden on small screens (burger + theme toggle already busy) */
+/* header CTA — visible at every width; shrinks on small screens so it
+   still fits next to the theme toggle + burger */
 .btn-header-cta {
-  display: none;
+  display: inline-flex;
   height: 38px;
   padding: 0 20px;
   align-items: center;
@@ -392,8 +393,13 @@
   transition: 0.3s;
 }
 .btn-header-cta:hover { background: var(--refract-strong); border-color: var(--refract-strong); }
-@media (min-width: 1180px) {
-  .btn-header-cta { display: inline-flex; }
+@media (max-width: 480px) {
+  .btn-header-cta {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.5625rem;
+    letter-spacing: 0.05em;
+  }
 }
 
 /* -------------------------------------------------------------------------

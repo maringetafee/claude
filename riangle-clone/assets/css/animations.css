@@ -82,69 +82,6 @@ html.js-anim .hero.is-in .hero__logo .blade__float {
 }
 
 /* -------------------------------------------------------------------------
-   3. CUSTOM CURSOR  (small dot + trailing red ring)
-   ------------------------------------------------------------------------- */
-@media (pointer: fine) {
-  html.js-cursor,
-  html.js-cursor * { cursor: none !important; }
-}
-
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  left: 0;
-  top: 0;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.25s linear;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: #f43333;
-}
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid #f43333;
-  transition:
-    width 0.28s var(--ease-out),
-    height 0.28s var(--ease-out),
-    background-color 0.28s linear,
-    border-color 0.28s linear,
-    opacity 0.25s linear;
-}
-html.js-cursor .cursor-dot,
-html.js-cursor .cursor-ring { opacity: 1; }
-
-/* grows over anything clickable */
-.cursor-ring.is-hot {
-  width: 54px;
-  height: 54px;
-  background: color-mix(in srgb, #f43333 12%, transparent);
-}
-/* smaller grow over small, tightly-packed text links (nav, inline text
-   links) — the full 54px ring overlaps neighbouring words at that size */
-.cursor-ring.is-hot-sm {
-  width: 26px;
-  height: 26px;
-  background: color-mix(in srgb, #f43333 12%, transparent);
-}
-.cursor-ring.is-down { width: 24px; height: 24px; }
-.cursor-dot.is-hidden,
-.cursor-ring.is-hidden { opacity: 0; }
-
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .cursor-dot,
-  .cursor-ring { display: none !important; }
-  html.js-cursor,
-  html.js-cursor * { cursor: auto !important; }
-}
-
-/* -------------------------------------------------------------------------
    4. MOUSE GLOW — a soft red light that follows the cursor, painted into
    the BACKGROUND of each section/hero/footer (z-index: -1, inside that
    element's own stacking context) so real content — text, cards, images,
@@ -178,9 +115,10 @@ html.js-cursor .cursor-ring { opacity: 1; }
   opacity: 0;
   transition: opacity 0.5s ease;
   background: radial-gradient(
-    340px circle at calc(var(--glow-x, 50vw) - var(--gx)) calc(var(--glow-y, 50vh) - var(--gy)),
-    color-mix(in srgb, #f43333 16%, transparent),
-    transparent 65%
+    420px circle at calc(var(--glow-x, 50vw) - var(--gx)) calc(var(--glow-y, 50vh) - var(--gy)),
+    color-mix(in srgb, #f43333 9%, transparent) 0%,
+    color-mix(in srgb, #f43333 3%, transparent) 45%,
+    transparent 80%
   );
 }
 html.js-mouse-glow .hero::before,
