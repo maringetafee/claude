@@ -126,6 +126,13 @@ html.js-cursor .cursor-ring { opacity: 1; }
   height: 54px;
   background: color-mix(in srgb, #f43333 12%, transparent);
 }
+/* smaller grow over small, tightly-packed text links (nav, inline text
+   links) — the full 54px ring overlaps neighbouring words at that size */
+.cursor-ring.is-hot-sm {
+  width: 26px;
+  height: 26px;
+  background: color-mix(in srgb, #f43333 12%, transparent);
+}
 .cursor-ring.is-down { width: 24px; height: 24px; }
 .cursor-dot.is-hidden,
 .cursor-ring.is-hidden { opacity: 0; }

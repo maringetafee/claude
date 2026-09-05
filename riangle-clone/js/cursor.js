@@ -51,14 +51,21 @@
     ring.classList.remove("is-down");
   });
 
-  // "hot" state over interactive elements
+  // "hot" state over interactive elements — a smaller growth over small,
+  // tightly-packed text links (nav, inline text links) so the ring doesn't
+  // balloon over/across neighbouring words; the full grow is for buttons.
+  var HOT_SMALL = ".nav-link, .text-link";
   var HOT =
     'a, button, input, textarea, select, summary, label, [role="button"], .magnetic, .theme-toggle';
   addEventListener("mouseover", function (e) {
-    if (e.target.closest && e.target.closest(HOT)) ring.classList.add("is-hot");
+    if (!e.target.closest) return;
+    if (e.target.closest(HOT_SMALL)) ring.classList.add("is-hot-sm");
+    else if (e.target.closest(HOT)) ring.classList.add("is-hot");
   });
   addEventListener("mouseout", function (e) {
-    if (e.target.closest && e.target.closest(HOT)) ring.classList.remove("is-hot");
+    if (!e.target.closest) return;
+    if (e.target.closest(HOT_SMALL)) ring.classList.remove("is-hot-sm");
+    else if (e.target.closest(HOT)) ring.classList.remove("is-hot");
   });
 
   (function loop() {
