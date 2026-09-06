@@ -1,0 +1,82 @@
+/* =========================================================================
+   BACKGROUND VIDEO ATMOSPHERE
+   -------------------------------------------------------------------------
+   A fixed, full-viewport looping video sits behind the whole page: a plain
+   child of <body> at z-index -1, painted above body's own background-color
+   but below every normal (z-index:auto) element. Plain sections (.hero,
+   .section) have no background of their own and let it show through;
+   sections with a real background (.section--alt, .section--dark,
+   .site-footer) and any real content (photos, cards, panels) paint over it
+   normally — no extra plumbing needed, unlike the per-section isolation
+   trick the mouse-glow/scroll-thread effects need, since this is a single
+   layer meant to sit behind EVERYTHING, not weave between specific blocks.
+
+   Desktop + dark theme only: hidden in light mode (the bright light theme
+   would clash with graded dark footage) and below the 901px breakpoint
+   (matches every other ambient effect on this site — keeps mobile light).
+   ========================================================================= */
+.bg-video {
+  /* z-index:0 (NOT -1) is deliberate: body has no stacking context of its
+     own, so a negative-z-index child sinks below ALL normal-flow content
+     at the root level — even content with a fully transparent background —
+     because that is a hard painting-order boundary, not a question of what
+     the content in front actually draws. z-index:0 keeps it level with
+     (and, being first in the DOM, just behind) the page's own sections,
+     which is what actually lets it show through their transparent
+     backgrounds and still sit under real opaque content (cards, photos,
+     the header). Verified in-browser — this isn't an assumption. */
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #000;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+:root[data-theme="dark"] .bg-video { opacity: 1; }
+
+.bg-video__layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.bg-video__layer video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* the mmw-grade1/2 LUTs (built for the original, already-graded footage)
+   crush this clip to near-black at any usable opacity — skip them and grade
+   with plain filter functions instead, tuned to what this footage actually
+   needs: less contrast crush, slightly desaturated so the reds don't fight
+   the brand red used on real UI (buttons, accents). */
+.bg-video__layer--base { filter: brightness(0.9) contrast(0.92) saturate(0.85); opacity: 0.62; }
+.bg-video__layer--lift {
+  filter: brightness(1.05) saturate(0.7);
+  mix-blend-mode: plus-lighter;
+  opacity: 0.22;
+  -webkit-mask-image: linear-gradient(180deg, transparent 20%, #000 100%);
+  mask-image: linear-gradient(180deg, transparent 20%, #000 100%);
+}
+
+/* a soft edge vignette so the video reads as atmosphere rather than a
+   hard-edged plate — .bg-video is `fixed`, so this stays put on screen
+   (it is not a document-space "fade before the footer") */
+.bg-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+.svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+  .bg-video { display: none !important; }
+}

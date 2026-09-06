@@ -467,7 +467,9 @@
   width: 100%;
   padding-block: var(--pad-block);
   padding-inline: var(--pad-inline);
-  background: var(--surface-page);
+  /* no background here on purpose: it falls through to body's own
+     --surface-page, which lets the fixed .bg-video show through a plain
+     .section — .section--alt/--dark below still set their own */
 }
 .section--tight { padding-block: var(--pad-block-tight); }
 .section--alt { background: var(--surface-2); }
@@ -517,7 +519,7 @@
   justify-content: center;
   min-height: 100svh;
   padding: 70px var(--pad-inline) 96px;
-  background: var(--surface-page);
+  /* no background here on purpose — see .section above */
   color: var(--ink);
   overflow: hidden;
 }
@@ -859,16 +861,6 @@
 @media (min-width: 992px) {
   .cap-row__glyph { display: block; grid-column: 4; justify-self: end; }
 }
-
-/* the scroll thread lights a row as its comet head passes — mirrors :hover.
-   Added/removed by js/scroll-thread.js; harmless (and unused) without it. */
-.cap-row.thread-lit .cap-row__band { transform: scaleY(1); }
-.cap-row.thread-lit .cap-row__name { font-variation-settings: "wdth" 108; }
-.cap-row.thread-lit .cap-row__note { color: var(--ink); }
-.cap-row.thread-lit .cap-row__glyph { color: var(--refract); }
-.work-row.thread-lit .work-row__title svg { color: var(--refract); transform: translateX(4px); }
-.work-row.thread-lit .work-row__rule { background: var(--refract); }
-.work-row.thread-lit .media-zoom { transform: scale(1.035); }
 .work-row.thread-lit .tag-row > * { color: var(--refract); border-color: var(--refract); }
 
 /* -------------------------------------------------------------------------
