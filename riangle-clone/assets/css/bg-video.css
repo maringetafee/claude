@@ -11,9 +11,10 @@
    trick the mouse-glow/scroll-thread effects need, since this is a single
    layer meant to sit behind EVERYTHING, not weave between specific blocks.
 
-   Desktop + dark theme only: hidden in light mode (the bright light theme
-   would clash with graded dark footage) and below the 901px breakpoint
-   (matches every other ambient effect on this site — keeps mobile light).
+   Dark theme only — hidden in light mode, the bright light theme would
+   clash with graded dark footage. Runs on mobile too, but with a single
+   lightweight layer instead of the two full-size ones desktop gets (see
+   the mobile media query below and js/bg-video.js).
    ========================================================================= */
 .bg-video {
   /* z-index:0 (NOT -1) is deliberate: body has no stacking context of its
@@ -77,6 +78,15 @@
 
 .svgdefs { position: absolute; width: 0; height: 0; overflow: hidden; }
 
-@media (max-width: 900px), (prefers-reduced-motion: reduce) {
+/* mobile gets a single, much lighter layer (bg-video-mobile.mp4 — ~170KB vs
+   ~8MB, see js/bg-video.js) instead of two full-size decodes: drop the
+   "lift" blend layer entirely and lift the base layer's own opacity a touch
+   to compensate for the missing highlight pass */
+@media (max-width: 900px) {
+  .bg-video__layer--lift { display: none; }
+  .bg-video__layer--base { opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .bg-video { display: none !important; }
 }

@@ -150,7 +150,20 @@
   --pad-inline: clamp(20px, 4.5vw, 64px);
   --pad-block: clamp(96px, 10vw, 192px);
   --pad-block-tight: clamp(64px, 7vw, 128px);
+}
 
+/* below 768px the 10vw/7vw growth rate never reaches the desktop-tuned
+   96px/64px minimums, so those floors apply unconditionally and leave a
+   ~192px dead gap between adjacent sections on a phone screen — give
+   narrow viewports their own, smaller floor+ceiling pair */
+@media (max-width: 767px) {
+  :root {
+    --pad-block: clamp(56px, 14vw, 88px);
+    --pad-block-tight: clamp(40px, 10vw, 64px);
+  }
+}
+
+:root {
   --max-inner: 1440px; /* section content */
   --max-wide: 1760px;  /* header + hero */
 

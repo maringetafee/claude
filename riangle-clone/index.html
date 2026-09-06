@@ -75,20 +75,20 @@
 
   <!-- cache-busting: bump ?v=YYYYMMDD on every CSS/JS edit (see _headers) -->
   <link rel="stylesheet" href="assets/css/fonts.css?v=20260904e" />
-  <link rel="stylesheet" href="assets/css/tokens.css?v=20260904e" />
+  <link rel="stylesheet" href="assets/css/tokens.css?v=20260906e" />
   <link rel="stylesheet" href="assets/css/base.css?v=20260904e" />
   <link rel="stylesheet" href="assets/css/components.css?v=20260906b" />
   <link rel="stylesheet" href="assets/css/animations.css?v=20260904e" />
-  <link rel="stylesheet" href="assets/css/bg-video.css?v=20260906d" />
+  <link rel="stylesheet" href="assets/css/bg-video.css?v=20260906e" />
   <link rel="stylesheet" href="assets/css/light-theme.css?v=20260904e" />
 </head>
 <body>
   <div class="bg-video" aria-hidden="true">
     <div class="bg-video__layer bg-video__layer--base">
-      <video autoplay muted loop playsinline preload="auto" src="assets/video/bg-video.mp4"></video>
+      <video muted loop playsinline preload="none" data-src-desktop="assets/video/bg-video.mp4" data-src-mobile="assets/video/bg-video-mobile.mp4"></video>
     </div>
     <div class="bg-video__layer bg-video__layer--lift">
-      <video autoplay muted loop playsinline preload="auto" src="assets/video/bg-video.mp4"></video>
+      <video muted loop playsinline preload="none" data-src-desktop="assets/video/bg-video.mp4"></video>
     </div>
   </div>
   <svg class="svgdefs" aria-hidden="true" focusable="false">
@@ -845,7 +845,7 @@
   <script src="js/studio-clock.js?v=20260904e"></script>
   <script src="js/animations.js?v=20260904e"></script>
   <script src="js/mouse-glow.js?v=20260904e"></script>
-  <script src="js/bg-video.js?v=20260906"></script>
+  <script src="js/bg-video.js?v=20260906e"></script>
   <script src="js/pricing.js?v=20260904e"></script>
   <script src="js/contact-form.js?v=20260904e"></script>
 </body>
