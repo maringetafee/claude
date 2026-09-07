@@ -1,3 +1,19 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+[[edge_functions]]
+  path = "/"
+  function = "panel-auth"
+
+[[edge_functions]]
+  path = "/index.html"
+  function = "panel-auth"
+
+[[edge_functions]]
+  path = "/datos.html"
+  function = "panel-auth"
+
+[[edge_functions]]
+  path = "/.netlify/functions/estado"
+  function = "panel-auth"

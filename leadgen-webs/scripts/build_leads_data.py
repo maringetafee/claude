@@ -12,11 +12,10 @@ from pathlib import Path
 
 from slugify import slugify
 
-from site_common import ESTADO_SYNC_SCRIPT, PANEL_SLUG, SHARED_CSS, badge_html, cargar_estados, nav_tabs
+from site_common import ESTADO_SYNC_SCRIPT, SHARED_CSS, badge_html, cargar_estados, nav_tabs
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_SITES = ROOT / "output" / "sites"
-PANEL_DIR = OUT_SITES / PANEL_SLUG
 
 
 def cargar_leads():
@@ -41,7 +40,7 @@ def cargar_leads():
 
 def render_foto(lead):
     if lead["tiene_foto"]:
-        return f'<img class="foto" src="../img/{lead["slug"]}.jpg" alt="" loading="lazy" />'
+        return f'<img class="foto" src="img/{lead["slug"]}.jpg" alt="" loading="lazy" />'
     inicial = (lead["business_name"] or "?").strip()[:1].upper()
     return f'<div class="foto foto-placeholder">{inicial}</div>'
 
@@ -49,7 +48,7 @@ def render_foto(lead):
 def render_negocio(lead):
     nombre = lead["business_name"]
     if lead["tiene_demo"]:
-        nombre_html = f'<a href="../{lead["slug"]}.html">{nombre}</a>'
+        nombre_html = f'<a href="{lead["slug"]}.html">{nombre}</a>'
     else:
         nombre_html = nombre
     direccion = lead.get("address", "")
@@ -132,13 +131,6 @@ def render_grupo(clave, leads_grupo):
 
 
 def build():
-    if not PANEL_SLUG:
-        raise SystemExit(
-            "Falta PANEL_SLUG en .env — define una ruta no adivinable (ej. "
-            "PANEL_SLUG=panel-xxxxxxxx) para publicar el panel interno fuera "
-            "de la raiz del sitio."
-        )
-
     leads = cargar_leads()
 
     grupos = {}
@@ -228,9 +220,9 @@ def build():
 </body>
 </html>
 """
-    PANEL_DIR.mkdir(parents=True, exist_ok=True)
-    (PANEL_DIR / "datos.html").write_text(datos_html, encoding="utf-8")
-    print(f"Generado: {PANEL_DIR / 'datos.html'} ({len(leads)} leads, {len(grupos)} grupos)")
+    OUT_SITES.mkdir(parents=True, exist_ok=True)
+    (OUT_SITES / "datos.html").write_text(datos_html, encoding="utf-8")
+    print(f"Generado: {OUT_SITES / 'datos.html'} ({len(leads)} leads, {len(grupos)} grupos)")
 
 
 if __name__ == "__main__":

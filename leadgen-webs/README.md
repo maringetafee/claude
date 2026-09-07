@@ -28,22 +28,9 @@ pip install -r requirements.txt
 python scripts/find_leads.py --city "Getafe" --type restaurante --limit 40
 ```
 
-Tipos disponibles: `bar`, `restaurante`, `cafeteria`, `panaderia`, `peluqueria`,
-`dental`, `estetica`, `floristeria`, `fisioterapia`, `unas`, `taller`, `gimnasio`,
-`autoescuela`, `veterinario`, `abogado`, `inmobiliaria` (lista completa en
-`TYPE_MAP` de `scripts/find_leads.py`). Genera un CSV **por ciudad y tipo** en
-`leads/<ciudad>_<tipo>.csv`, con nombre, dirección, teléfono, si tiene web o no,
-valoración de Google y una foto de portada si la tienen en su ficha.
-
-Para buscar varias ciudades y tipos de una tirada (así te quedan los leads ya
-divididos por rubro sin ir uno a uno):
-
-```bash
-python scripts/find_leads_batch.py --cities "Getafe,Leganes,Mostoles" --types "cafeteria,taller,dental" --limit 40
-```
-
-Sin `--types` usa una selección por defecto (los rubros con plantilla + un par
-más con mucho negocio local sin web).
+Tipos disponibles: `bar`, `restaurante`, `peluqueria`. Genera un CSV en `leads/`
+con nombre, dirección, teléfono, si tiene web o no, y una foto de portada si la
+tienen en su ficha de Google.
 
 ## 4. Buscar emails (solo funciona para los que ya tienen web)
 
@@ -88,34 +75,6 @@ shutil.copytree(out / 'img', dest / 'img', dirs_exist_ok=True)
 uso activo — `scripts/personalize.py` sigue existiendo por si hace falta
 volver atrás, pero el flujo normal ahora es el de arriba.)
 
-### Rubros con plantilla estática propia
-
-Algunos rubros no pasan por `local-business-system`: tienen su propia plantilla
-de una sola pieza en `static-templates/<slug>/index.html`, y se personalizan
-sustituyendo los placeholders entre corchetes (`[NOMBRE DEL NEGOCIO]`,
-`[CIUDAD]`, `[Dirección del negocio]`, `[X,X]`, `[XXX]`...) con
-`scripts/personalize_static.py`:
-
-```bash
-python scripts/personalize_static.py leads/getafe_floristeria.csv floristeria
-python scripts/personalize_static.py leads/getafe_unas.csv unas
-python scripts/personalize_static.py leads/getafe_dental.csv clinica-dental
-python scripts/personalize_static.py leads/getafe_cafeteria.csv cafeteria
-python scripts/personalize_static.py leads/getafe_taller.csv taller-mecanico
-```
-
-Plantillas disponibles (segundo argumento): `floristeria`, `unas`,
-`peluqueria-mujer`, `peluqueria-hombre`, `bar`, `clinica-dental`, `cafeteria`,
-`taller-mecanico` (ver `RUBRO_LABEL` en `scripts/personalize_static.py`).
-Las peluquerías tienen un atajo, `scripts/personalize_peluquerias.py`, que
-elige mujer/hombre por el nombre del negocio.
-
-Para crear una plantilla nueva: copia `static-templates/floristeria/` o
-`static-templates/unas/` (misma estructura y placeholders), reescribe copia,
-colores y fotos para el rubro, y añádela a `RUBRO_LABEL`
-(`scripts/personalize_static.py`) y a `PLANTILLAS_MAESTRAS`
-(`scripts/build_site.py`, con la clave = `label` del tipo en `find_leads.py`).
-
 ## 6. Publicar las webs de muestra en algún sitio público
 
 Para que el link de la propuesta funcione en el email, `output/sites/` tiene que
@@ -135,12 +94,8 @@ de mandar nada** — esto solo prepara el contenido, no lo envía.
 
 ## 8. Regenerar el índice y desplegar
 
-Requiere `PANEL_SLUG` en `.env` (ver `.env.example`) — una ruta inventada y no
-adivinable, ej. `PANEL_SLUG=panel-7c4f91ab`. `python scripts/build_site.py`
-falla con un aviso si no está puesta.
-
-`python scripts/build_site.py` genera dos páginas en `output/sites/<PANEL_SLUG>/`,
-con pestañas para moverse entre ellas:
+`python scripts/build_site.py` genera dos páginas en la raíz de
+`output/sites/`, con pestañas para moverse entre ellas:
 
 - `index.html` — panel de propuestas: agrupa las webs de muestra por tipo de
   negocio y estado (pendiente/enviado/respondido/cliente/rechazado), y cada
@@ -152,14 +107,15 @@ con pestañas para moverse entre ellas:
   (se llama automáticamente desde `build_site.py`, no hace falta ejecutarlo
   aparte).
 
-**Por qué no está en la raíz:** las webs de muestra que se mandan a los leads
-viven en `output/sites/<slug>.html`. Si el panel estuviera en
-`output/sites/index.html`, cualquiera que recibiera el link de su demo y
-recortara la URL hasta el dominio vería el panel entero — todos los leads,
-sus datos de contacto y en qué estado está cada uno. Al vivir en una ruta
-propia (`/<PANEL_SLUG>/`), solo entra quien conozca el enlace exacto; guárdalo
-como marcador en vez de teclearlo, y no lo compartas ni lo pegues en ningún
-sitio público (el propio `PANEL_SLUG` en `.env` nunca se sube a git).
+**Cómo se protege el panel:** las webs de muestra que se mandan a los leads
+viven en `output/sites/<slug>.html` y son públicas sin más. El panel, en
+cambio, vive en la raíz del sitio (`/` y `/datos.html`) pero pide usuario y
+contraseña con HTTP Basic Auth antes de mostrar nada — lo hace
+`netlify/edge-functions/panel-auth.js`, una Netlify Edge Function que
+intercepta esas rutas (declaradas en `netlify.toml`) y también
+`/.netlify/functions/estado`. Usuario `make`, contraseña `web` (cámbialas
+directamente en `panel-auth.js` si quieres otras — ese archivo sí se sube a
+git, así que no pongas ahí nada más sensible que esto).
 
 ```bash
 python scripts/build_site.py

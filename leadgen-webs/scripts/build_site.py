@@ -22,8 +22,6 @@ from site_common import (
     ESTADO_LABELS,
     ESTADO_ORDEN,
     ESTADO_SYNC_SCRIPT,
-    PANEL_SLUG,
-    ROOT_PLACEHOLDER_HTML,
     SHARED_CSS,
     badge_html,
     checkbox_hecho,
@@ -32,7 +30,6 @@ from site_common import (
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_SITES = ROOT / "output" / "sites"
-PANEL_DIR = OUT_SITES / PANEL_SLUG
 
 # Tipo de negocio (tal y como aparece en las CSV de leads) -> plantillas
 # maestras publicadas en output/sites/plantillas/ (export estatico de
@@ -85,7 +82,7 @@ def render_tipo_section(tipo, entradas_tipo):
     maestras = PLANTILLAS_MAESTRAS.get(tipo, [])
     maestra_html = "\n".join(
         f"""
-        <a class="maestra" href="../{href}">
+        <a class="maestra" href="{href}">
           <span class="maestra-tag">Plantilla maestra</span>
           <span class="maestra-nombre">{nombre}</span>
           <span class="maestra-flecha">Ver demo &rarr;</span>
@@ -104,7 +101,7 @@ def render_tipo_section(tipo, entradas_tipo):
     if entradas_ordenadas:
         filas = "\n".join(
             f"""        <li class="lead">
-          <a href="../{e['slug']}.html">{e['business_name']}</a>
+          <a href="{e['slug']}.html">{e['business_name']}</a>
           <span class="lead-right">
             {checkbox_hecho(e['slug'], e['estado'])}
             {badge_html(e['slug'], e['estado'])}
@@ -127,13 +124,6 @@ def render_tipo_section(tipo, entradas_tipo):
 
 
 def build():
-    if not PANEL_SLUG:
-        raise SystemExit(
-            "Falta PANEL_SLUG en .env — define una ruta no adivinable (ej. "
-            "PANEL_SLUG=panel-xxxxxxxx) para publicar el panel interno fuera "
-            "de la raiz del sitio. No uses un valor predecible como 'panel' o 'admin'."
-        )
-
     entradas = cargar_entradas()
 
     por_tipo = {}
@@ -223,13 +213,9 @@ def build():
 </body>
 </html>
 """
-    PANEL_DIR.mkdir(parents=True, exist_ok=True)
-    (PANEL_DIR / "index.html").write_text(index_html, encoding="utf-8")
-    print(f"Indice regenerado: {PANEL_DIR / 'index.html'} ({total} leads, {len(por_tipo)} tipos)")
-
     OUT_SITES.mkdir(parents=True, exist_ok=True)
-    (OUT_SITES / "index.html").write_text(ROOT_PLACEHOLDER_HTML, encoding="utf-8")
-    print(f"Pagina neutra escrita en la raiz: {OUT_SITES / 'index.html'}")
+    (OUT_SITES / "index.html").write_text(index_html, encoding="utf-8")
+    print(f"Indice regenerado: {OUT_SITES / 'index.html'} ({total} leads, {len(por_tipo)} tipos)")
 
     build_leads_data.build()
 
