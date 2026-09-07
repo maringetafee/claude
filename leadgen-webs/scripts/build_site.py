@@ -52,6 +52,9 @@ PLANTILLAS_MAESTRAS = {
     ],
     "Floristeria": [("Plantilla Floristería — tienda de flores, animada", "plantillas/floristeria/index.html")],
     "Unas": [("Plantilla Uñas — salón de manicura, animada", "plantillas/unas/index.html")],
+    "Dental": [("Plantilla Clínica dental — tema teal calmado", "plantillas/clinica-dental/index.html")],
+    "Cafeteria": [("Plantilla Cafetería — café de especialidad, tema cálido", "plantillas/cafeteria/index.html")],
+    "Taller": [("Plantilla Taller mecánico — multimarca, tema industrial", "plantillas/taller-mecanico/index.html")],
 }
 
 

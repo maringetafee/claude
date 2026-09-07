@@ -28,9 +28,22 @@ pip install -r requirements.txt
 python scripts/find_leads.py --city "Getafe" --type restaurante --limit 40
 ```
 
-Tipos disponibles: `bar`, `restaurante`, `peluqueria`. Genera un CSV en `leads/`
-con nombre, dirección, teléfono, si tiene web o no, y una foto de portada si la
-tienen en su ficha de Google.
+Tipos disponibles: `bar`, `restaurante`, `cafeteria`, `panaderia`, `peluqueria`,
+`dental`, `estetica`, `floristeria`, `fisioterapia`, `unas`, `taller`, `gimnasio`,
+`autoescuela`, `veterinario`, `abogado`, `inmobiliaria` (lista completa en
+`TYPE_MAP` de `scripts/find_leads.py`). Genera un CSV **por ciudad y tipo** en
+`leads/<ciudad>_<tipo>.csv`, con nombre, dirección, teléfono, si tiene web o no,
+valoración de Google y una foto de portada si la tienen en su ficha.
+
+Para buscar varias ciudades y tipos de una tirada (así te quedan los leads ya
+divididos por rubro sin ir uno a uno):
+
+```bash
+python scripts/find_leads_batch.py --cities "Getafe,Leganes,Mostoles" --types "cafeteria,taller,dental" --limit 40
+```
+
+Sin `--types` usa una selección por defecto (los rubros con plantilla + un par
+más con mucho negocio local sin web).
 
 ## 4. Buscar emails (solo funciona para los que ya tienen web)
 
@@ -74,6 +87,34 @@ shutil.copytree(out / 'img', dest / 'img', dirs_exist_ok=True)
 (`templates/*.html` se conservan solo como plantillas Jinja antiguas, ya sin
 uso activo — `scripts/personalize.py` sigue existiendo por si hace falta
 volver atrás, pero el flujo normal ahora es el de arriba.)
+
+### Rubros con plantilla estática propia
+
+Algunos rubros no pasan por `local-business-system`: tienen su propia plantilla
+de una sola pieza en `static-templates/<slug>/index.html`, y se personalizan
+sustituyendo los placeholders entre corchetes (`[NOMBRE DEL NEGOCIO]`,
+`[CIUDAD]`, `[Dirección del negocio]`, `[X,X]`, `[XXX]`...) con
+`scripts/personalize_static.py`:
+
+```bash
+python scripts/personalize_static.py leads/getafe_floristeria.csv floristeria
+python scripts/personalize_static.py leads/getafe_unas.csv unas
+python scripts/personalize_static.py leads/getafe_dental.csv clinica-dental
+python scripts/personalize_static.py leads/getafe_cafeteria.csv cafeteria
+python scripts/personalize_static.py leads/getafe_taller.csv taller-mecanico
+```
+
+Plantillas disponibles (segundo argumento): `floristeria`, `unas`,
+`peluqueria-mujer`, `peluqueria-hombre`, `bar`, `clinica-dental`, `cafeteria`,
+`taller-mecanico` (ver `RUBRO_LABEL` en `scripts/personalize_static.py`).
+Las peluquerías tienen un atajo, `scripts/personalize_peluquerias.py`, que
+elige mujer/hombre por el nombre del negocio.
+
+Para crear una plantilla nueva: copia `static-templates/floristeria/` o
+`static-templates/unas/` (misma estructura y placeholders), reescribe copia,
+colores y fotos para el rubro, y añádela a `RUBRO_LABEL`
+(`scripts/personalize_static.py`) y a `PLANTILLAS_MAESTRAS`
+(`scripts/build_site.py`, con la clave = `label` del tipo en `find_leads.py`).
 
 ## 6. Publicar las webs de muestra en algún sitio público
 

@@ -6,7 +6,9 @@ de propuestas a los que no tienen web, o a los que la tienen pero floja).
 Uso:
     python scripts/find_leads.py --city "Getafe" --type restaurante --limit 40
 
-Tipos soportados: bar, restaurante, peluqueria, dental, estetica, floristeria, fisioterapia, unas
+Tipos soportados: bar, restaurante, cafeteria, panaderia, peluqueria, dental, estetica,
+floristeria, fisioterapia, unas, taller, gimnasio, autoescuela, veterinario, abogado,
+inmobiliaria
 """
 import argparse
 import csv
@@ -28,12 +30,20 @@ PHOTO_URL_TMPL = "https://places.googleapis.com/v1/{photo_name}/media?maxWidthPx
 TYPE_MAP = {
     "bar": {"query_es": "bares", "included_type": "bar", "label": "Bar"},
     "restaurante": {"query_es": "restaurantes", "included_type": "restaurant", "label": "Restaurante"},
+    "cafeteria": {"query_es": "cafeterias", "included_type": "cafe", "label": "Cafeteria"},
+    "panaderia": {"query_es": "panaderias", "included_type": "bakery", "label": "Panaderia"},
     "peluqueria": {"query_es": "peluquerias", "included_type": "hair_care", "label": "Peluqueria"},
     "dental": {"query_es": "clinicas dentales", "included_type": "dentist", "label": "Dental"},
     "estetica": {"query_es": "centros de estetica", "included_type": "beauty_salon", "label": "Estetica"},
     "floristeria": {"query_es": "floristerias", "included_type": "florist", "label": "Floristeria"},
     "fisioterapia": {"query_es": "clinicas de fisioterapia", "included_type": "physiotherapist", "label": "Fisioterapia"},
     "unas": {"query_es": "salones de unas", "included_type": "nail_salon", "label": "Unas"},
+    "taller": {"query_es": "talleres mecanicos", "included_type": "car_repair", "label": "Taller"},
+    "gimnasio": {"query_es": "gimnasios", "included_type": "gym", "label": "Gimnasio"},
+    "autoescuela": {"query_es": "autoescuelas", "included_type": "driving_school", "label": "Autoescuela"},
+    "veterinario": {"query_es": "clinicas veterinarias", "included_type": "veterinary_care", "label": "Veterinario"},
+    "abogado": {"query_es": "abogados", "included_type": "lawyer", "label": "Abogado"},
+    "inmobiliaria": {"query_es": "inmobiliarias", "included_type": "real_estate_agency", "label": "Inmobiliaria"},
 }
 
 FIELD_MASK = ",".join([

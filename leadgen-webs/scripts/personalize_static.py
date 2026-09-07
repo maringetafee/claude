@@ -11,6 +11,9 @@ output/sites/<slug-del-lead>.html, no junto a la carpeta assets/ original.
 Uso:
     python scripts/personalize_static.py leads/getafe_floristeria.csv floristeria
     python scripts/personalize_static.py leads/getafe_unas.csv unas
+    python scripts/personalize_static.py leads/getafe_dental.csv clinica-dental
+    python scripts/personalize_static.py leads/getafe_cafeteria.csv cafeteria
+    python scripts/personalize_static.py leads/getafe_taller.csv taller-mecanico
 """
 import argparse
 import csv
@@ -30,6 +33,9 @@ RUBRO_LABEL = {
     "peluqueria-mujer": "Peluquería",
     "peluqueria-hombre": "Barbería",
     "bar": "Bar",
+    "clinica-dental": "Clínica dental",
+    "cafeteria": "Cafetería",
+    "taller-mecanico": "Taller mecánico",
 }
 
 
