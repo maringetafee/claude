@@ -1,0 +1,129 @@
+{
+  "logo/diacort-sema-dur": {
+    "w": 1129,
+    "h": 471,
+    "widths": [
+      220,
+      440
+    ],
+    "ext": "png"
+  },
+  "catalogo/cuchillas": {
+    "w": 787,
+    "h": 560,
+    "widths": [
+      480,
+      768,
+      787
+    ],
+    "ext": "jpg"
+  },
+  "hero/brocas": {
+    "w": 1920,
+    "h": 1281,
+    "widths": [
+      480,
+      768,
+      1200,
+      1800
+    ],
+    "ext": "jpg"
+  },
+  "empresa/taller": {
+    "w": 2048,
+    "h": 1638,
+    "widths": [
+      480,
+      768,
+      1200,
+      1800
+    ],
+    "ext": "jpg"
+  },
+  "catalogo/fabricacion": {
+    "w": 409,
+    "h": 268,
+    "widths": [
+      409
+    ],
+    "ext": "jpg"
+  },
+  "catalogo/fresas": {
+    "w": 791,
+    "h": 501,
+    "widths": [
+      480,
+      768,
+      791
+    ],
+    "ext": "jpg"
+  },
+  "catalogo/herramientas-corte": {
+    "w": 2048,
+    "h": 1365,
+    "widths": [
+      480,
+      768,
+      1200,
+      1800
+    ],
+    "ext": "jpg"
+  },
+  "catalogo/pcd": {
+    "w": 676,
+    "h": 260,
+    "widths": [
+      480,
+      676
+    ],
+    "ext": "jpg"
+  },
+  "logos/ceratizit": {
+    "w": 1063,
+    "h": 354,
+    "widths": [
+      300,
+      600
+    ],
+    "ext": "png"
+  },
+  "logos/freud": {
+    "w": 1063,
+    "h": 354,
+    "widths": [
+      300,
+      600
+    ],
+    "ext": "png"
+  },
+  "empresa/resolucion-concesion": {
+    "w": 1044,
+    "h": 476,
+    "widths": [
+      480,
+      768,
+      1044
+    ],
+    "ext": "png"
+  },
+  "empresa/equipo-freud": {
+    "w": 838,
+    "h": 594,
+    "widths": [
+      480,
+      768,
+      838
+    ],
+    "ext": "jpg"
+  },
+  "empresa/produccion": {
+    "w": 841,
+    "h": 824,
+    "widths": [
+      480,
+      768,
+      841
+    ],
+    "ext": "jpg"
+  }
+}

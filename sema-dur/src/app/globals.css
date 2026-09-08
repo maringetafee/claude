@@ -1,0 +1,440 @@
+@import "tailwindcss";
+
+/*
+  Sema-Dur design system
+  ----------------------
+  :root  — literal palette + semantic tokens
+  @theme — exposes semantic tokens as Tailwind utilities (text-ink, bg-brand…)
+  @layer base / components — our resets and helpers, so utilities always win.
+*/
+
+:root {
+  /* --- Palette (literal) --- */
+  --navy-950: #08131f;
+  --navy-900: #0b1b2b;
+  --navy-800: #14283b;
+  --navy-700: #223a52;
+  --navy-600: #33475b;
+  --navy-500: #4f647a;
+  --navy-400: #728699;
+  --navy-300: #9fb0be;
+  --navy-200: #cbd5dd;
+  --navy-100: #e6ebef;
+  --navy-50: #f4f6f8;
+
+  --brand-900: #003162;
+  --brand-800: #003a7a;
+  --brand-700: #004998; /* primary — from live site */
+  --brand-600: #1160b4;
+  --brand-500: #2f7bd0;
+  --brand-100: #e3edf8;
+  --brand-50: #f1f6fc;
+
+  --cyan-700: #007e98;
+  --cyan-600: #0098b6; /* accent — from live site */
+  --cyan-500: #16b0cd;
+  --cyan-100: #dcf3f8;
+
+  --steel-100: #eef1f4;
+  --steel-200: #e2e7ec;
+  --steel-300: #d7dee5;
+
+  --amber-600: #b26a00;
+  --green-600: #1b8a5a;
+  --red-600: #c23934;
+  --white: #ffffff;
+
+  /* --- Semantic --- */
+  --color-bg: var(--white);
+  --color-bg-soft: var(--navy-50);
+  --color-bg-steel: var(--steel-100);
+  --color-bg-invert: var(--navy-900);
+
+  --color-ink: var(--navy-900);
+  --color-ink-soft: var(--navy-600);
+  --color-ink-muted: var(--navy-500);
+  --color-ink-invert: #eef3f8;
+  --color-ink-invert-soft: #a9bccc;
+
+  --color-line: var(--steel-300);
+  --color-line-strong: var(--navy-200);
+
+  --color-brand: var(--brand-700);
+  --color-brand-strong: var(--brand-800);
+  --color-brand-tint: var(--brand-100);
+  --color-accent: var(--cyan-600);
+  --color-accent-strong: #086377; /* AA on white and on --color-bg-soft */
+
+  --color-success: var(--green-600);
+  --color-warning: var(--amber-600);
+  --color-danger: var(--red-600);
+
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-display:
+    var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-xs: 3px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(11, 27, 43, 0.06), 0 1px 3px rgba(11, 27, 43, 0.08);
+  --shadow-md: 0 4px 12px rgba(11, 27, 43, 0.08), 0 2px 4px rgba(11, 27, 43, 0.06);
+  --shadow-lg: 0 18px 48px rgba(11, 27, 43, 0.16), 0 6px 16px rgba(11, 27, 43, 0.08);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --container: 1240px;
+  --gutter: clamp(1rem, 4vw, 2.75rem);
+  --header-h: 76px;
+}
+
+@theme inline {
+  --color-bg: var(--color-bg);
+  --color-bg-soft: var(--color-bg-soft);
+  --color-bg-steel: var(--color-bg-steel);
+  --color-bg-invert: var(--color-bg-invert);
+
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-ink-invert: var(--color-ink-invert);
+  --color-ink-invert-soft: var(--color-ink-invert-soft);
+
+  --color-line: var(--color-line);
+  --color-line-strong: var(--color-line-strong);
+
+  --color-brand: var(--color-brand);
+  --color-brand-strong: var(--color-brand-strong);
+  --color-brand-tint: var(--color-brand-tint);
+  --color-accent: var(--color-accent);
+  --color-accent-strong: var(--color-accent-strong);
+
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+
+  --color-navy-900: var(--navy-900);
+  --color-brand-600: var(--brand-600);
+  --color-cyan-100: var(--cyan-100);
+  --color-steel-200: var(--steel-200);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 640;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    color: inherit;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-brand);
+    color: var(--white);
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--navy-300);
+    border: 3px solid var(--color-bg);
+    border-radius: 999px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .visually-hidden:where(:not(:focus-within, :active)) {
+    position: absolute !important;
+    clip-path: inset(50%) !important;
+    overflow: hidden !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .skip-link:where(:focus-within, :active) {
+    position: fixed;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+    z-index: 200;
+    background: var(--color-brand);
+    color: var(--white);
+    padding: 0.75rem 1.1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.8rem;
+    height: 1px;
+    background: currentcolor;
+  }
+
+  .prose-block :where(p, ul, ol) {
+    margin-block: 0 1rem;
+    max-width: 68ch;
+    color: var(--color-ink-soft);
+  }
+  .prose-block :where(h2) {
+    margin-block: 2.4rem 0.9rem;
+    font-size: 1.6rem;
+    color: var(--color-ink);
+  }
+  .prose-block :where(h3) {
+    margin-block: 1.8rem 0.6rem;
+    font-size: 1.2rem;
+    color: var(--color-ink);
+  }
+  .prose-block :where(ul) {
+    padding-inline-start: 1.15rem;
+    list-style: none;
+  }
+  .prose-block :where(ul li) {
+    position: relative;
+  }
+  .prose-block :where(ul li)::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: -1.15rem;
+    inset-block-start: 0.62em;
+    width: 6px;
+    height: 6px;
+    background: var(--color-accent);
+    border-radius: 1px;
+    rotate: 45deg;
+  }
+  .prose-block :where(a) {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Only hide pre-reveal content when JS can bring it back. */
+  @media (scripting: enabled) {
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition:
+        opacity 0.6s var(--ease-out),
+        transform 0.6s var(--ease-out);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* ---- Native dialogs ---- */
+  dialog {
+    border: 0;
+    color: inherit;
+    max-inline-size: 100vw;
+    max-block-size: 100dvh;
+  }
+  dialog::backdrop {
+    background: rgba(8, 19, 31, 0.55);
+    backdrop-filter: blur(2px);
+    transition:
+      opacity 0.3s,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+    opacity: 1;
+  }
+
+  /* Full-screen mobile menu is opaque — no need to blur the page behind it. */
+  dialog.menu-dialog::backdrop {
+    background: transparent;
+    backdrop-filter: none;
+  }
+  dialog.menu-dialog {
+    transform: translateX(100%);
+    transition:
+      transform 0.3s var(--ease-out),
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+  dialog.menu-dialog[open] {
+    transform: translateX(0);
+  }
+  dialog:not([open]) {
+    display: none;
+  }
+
+  dialog.cart-drawer {
+    transform: translateX(100%);
+    transition:
+      transform 0.32s var(--ease-out),
+      overlay 0.32s allow-discrete,
+      display 0.32s allow-discrete;
+  }
+  dialog.cart-drawer[open] {
+    transform: translateX(0);
+  }
+
+  dialog.modal-pop {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+    transition:
+      opacity 0.24s var(--ease-out),
+      transform 0.24s var(--ease-out),
+      overlay 0.24s allow-discrete,
+      display 0.24s allow-discrete;
+  }
+  dialog.modal-pop[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    dialog.cart-drawer[open],
+    dialog.menu-dialog[open] {
+      transform: translateX(100%);
+    }
+    dialog.modal-pop[open] {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog.cart-drawer,
+    dialog.menu-dialog,
+    dialog.modal-pop,
+    dialog::backdrop {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+/* Cross-document view transitions — subtle cross-fade */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

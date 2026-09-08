@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Formularios Sema-Dur (registro para Netlify Forms)</title>
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <!--
+      Netlify detecta los formularios en HTML estático en tiempo de build.
+      Los formularios reales viven en componentes React (checkout, contacto…);
+      este fichero garantiza la detección de todos los campos.
+    -->
+    <form name="solicitud-presupuesto" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre" />
+      <input type="text" name="apellidos" />
+      <input type="text" name="empresa" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefono" />
+      <input type="text" name="direccion" />
+      <input type="text" name="cp" />
+      <input type="text" name="ciudad" />
+      <input type="text" name="provincia" />
+      <input type="text" name="pais" />
+      <input type="text" name="nif" />
+      <textarea name="observaciones"></textarea>
+      <textarea name="lineas"></textarea>
+      <input type="text" name="reference" />
+      <input type="text" name="bot-field" />
+    </form>
+
+    <form name="contacto" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre" />
+      <input type="text" name="empresa" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefono" />
+      <textarea name="mensaje"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
+    <form name="pedido" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre" />
+      <input type="text" name="empresa" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefono" />
+      <input type="text" name="referencias" />
+      <textarea name="mensaje"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+
+    <form name="empleo" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="nombre" />
+      <input type="text" name="empresa" />
+      <input type="email" name="email" />
+      <input type="tel" name="telefono" />
+      <input type="text" name="puesto" />
+      <textarea name="mensaje"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
+  </body>
+</html>
