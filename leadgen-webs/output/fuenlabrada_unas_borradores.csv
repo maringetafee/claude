@@ -1,5 +1,5 @@
-business_name,tipo,slug,email,phone,instagram,contactar_por_telefono,preview_link,estado,asunto,cuerpo,mensaje_whatsapp
-Candela Nails Fuenlabrada,Unas,candela-nails-fuenlabrada-fuenlabrada,,+34 641 00 61 71,,True,https://demos-pruebas.netlify.app/candela-nails-fuenlabrada-fuenlabrada.html,pendiente,Una propuesta de web para Candela Nails Fuenlabrada,"Hola,
+business_name,tipo,slug,email,phone,instagram,contactar_por_telefono,tiene_web,web_estado,web_obsoleta,web_motivos,preview_link,estado,asunto,cuerpo,mensaje_whatsapp
+Candela Nails Fuenlabrada,Unas,candela-nails-fuenlabrada-fuenlabrada,,+34 641 00 61 71,,True,False,ninguna,,,https://demos-pruebas.netlify.app/candela-nails-fuenlabrada-fuenlabrada.html,enviado,Una propuesta de web para Candela Nails Fuenlabrada,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -25,15 +25,15 @@ https://demos-pruebas.netlify.app/candela-nails-fuenlabrada-fuenlabrada
 Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-Hello Nails,Unas,hello-nails-fuenlabrada,,+34 614 98 41 57,,True,https://demos-pruebas.netlify.app/hello-nails-fuenlabrada.html,pendiente,Una propuesta de web para Hello Nails,"Hola,
+Hello Nails,Unas,hello-nails-fuenlabrada,,+34 614 98 41 57,,True,True,propia,,,https://demos-pruebas.netlify.app/hello-nails-fuenlabrada.html,enviado,Una propuesta para renovar la web de Hello Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Hello Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Hello Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/hello-nails-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -53,7 +53,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Siempre bella Nails & beauty,Unas,siempre-bella-nails-beauty-fuenlabrada,,+34 687 16 16 33,,True,https://demos-pruebas.netlify.app/siempre-bella-nails-beauty-fuenlabrada.html,pendiente,Una propuesta de web para Siempre bella Nails & beauty,"Hola,
+Siempre bella Nails & beauty,Unas,siempre-bella-nails-beauty-fuenlabrada,,+34 687 16 16 33,,True,False,social,,,https://demos-pruebas.netlify.app/siempre-bella-nails-beauty-fuenlabrada.html,enviado,Una propuesta de web para Siempre bella Nails & beauty,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -72,16 +72,18 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola buenas, soy Mario. He visto la web de Siempre bella Nails & beauty y me animé a prepararos una propuesta gratuita de cómo podría quedar renovada, con un diseño más moderno y pensado para conseguir más clientes:
+","Hola buenas, soy Mario. He visto Siempre bella Nails & beauty y me he fijado en que no tenéis una web propia.
+
+Estoy creando páginas web para negocios de Fuenlabrada y me animé a prepararos una demo gratuita y personalizada de cómo podría quedar la vuestra:
 
 https://demos-pruebas.netlify.app/siempre-bella-nails-beauty-fuenlabrada
 
-La he hecho pensando específicamente en vuestro negocio, para que podáis compararla con la actual sin ningún compromiso.
+La he hecho pensando específicamente en vuestro negocio, para que podáis verla sin ningún compromiso.
 
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Royal Nails,Unas,royal-nails-fuenlabrada,,+34 672 08 35 63,,True,https://demos-pruebas.netlify.app/royal-nails-fuenlabrada.html,pendiente,Una propuesta de web para Royal Nails,"Hola,
+Royal Nails,Unas,royal-nails-fuenlabrada,,+34 672 08 35 63,,True,False,ninguna,,,https://demos-pruebas.netlify.app/royal-nails-fuenlabrada.html,pendiente,Una propuesta de web para Royal Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -107,15 +109,15 @@ https://demos-pruebas.netlify.app/royal-nails-fuenlabrada
 Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-Maria Barbosa Salón,Unas,maria-barbosa-salon-fuenlabrada,hola@mariabarbosa.es,+34 639 52 32 11,,False,https://demos-pruebas.netlify.app/maria-barbosa-salon-fuenlabrada.html,enviado,Una propuesta de web para Maria Barbosa Salón,"Hola,
+Maria Barbosa Salón,Unas,maria-barbosa-salon-fuenlabrada,hola@mariabarbosa.es,+34 639 52 32 11,,False,True,propia,,,https://demos-pruebas.netlify.app/maria-barbosa-salon-fuenlabrada.html,enviado,Una propuesta para renovar la web de Maria Barbosa Salón,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Maria Barbosa Salón** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Maria Barbosa Salón** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/maria-barbosa-salon-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -135,7 +137,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-CiCi Nail,Unas,cici-nail-fuenlabrada,,+34 614 12 67 44,,True,https://demos-pruebas.netlify.app/cici-nail-fuenlabrada.html,pendiente,Una propuesta de web para CiCi Nail,"Hola,
+CiCi Nail,Unas,cici-nail-fuenlabrada,,+34 614 12 67 44,,True,False,social,,,https://demos-pruebas.netlify.app/cici-nail-fuenlabrada.html,pendiente,Una propuesta de web para CiCi Nail,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -154,22 +156,22 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola, soy Mario, diseño y renuevo páginas web para negocios de Fuenlabrada. Al ver la web de CiCi Nail pensé que podría beneficiarse de un diseño más moderno, así que preparé esta propuesta gratuita:
+","Hola, soy Mario. Trabajo haciendo páginas web para negocios locales de Fuenlabrada y he preparado una muestra gratuita pensada para CiCi Nail, que vi que aún no tiene web propia:
 
 https://demos-pruebas.netlify.app/cici-nail-fuenlabrada
 
-Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
+Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-El Sueño de Vivi,Unas,el-sueno-de-vivi-fuenlabrada,,+34 643 81 49 50,,True,https://demos-pruebas.netlify.app/el-sueno-de-vivi-fuenlabrada.html,pendiente,Una propuesta de web para El Sueño de Vivi,"Hola,
+El Sueño de Vivi,Unas,el-sueno-de-vivi-fuenlabrada,,+34 643 81 49 50,,True,True,propia,,,https://demos-pruebas.netlify.app/el-sueno-de-vivi-fuenlabrada.html,pendiente,Una propuesta para renovar la web de El Sueño de Vivi,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **El Sueño de Vivi** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **El Sueño de Vivi** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/el-sueno-de-vivi-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -187,15 +189,15 @@ https://demos-pruebas.netlify.app/el-sueno-de-vivi-fuenlabrada
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Iuli Nail Artist,Unas,iuli-nail-artist-fuenlabrada,,+34 643 68 69 43,,True,https://demos-pruebas.netlify.app/iuli-nail-artist-fuenlabrada.html,pendiente,Una propuesta de web para Iuli Nail Artist,"Hola,
+Iuli Nail Artist,Unas,iuli-nail-artist-fuenlabrada,,+34 643 68 69 43,,True,True,propia,,,https://demos-pruebas.netlify.app/iuli-nail-artist-fuenlabrada.html,pendiente,Una propuesta para renovar la web de Iuli Nail Artist,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Iuli Nail Artist** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Iuli Nail Artist** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/iuli-nail-artist-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -213,15 +215,15 @@ https://demos-pruebas.netlify.app/iuli-nail-artist-fuenlabrada
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-Beauty Academy by Andreea Bugheanu,Unas,beauty-academy-by-andreea-bugheanu-fuenlabrada,,+34 671 38 61 28,,True,https://demos-pruebas.netlify.app/beauty-academy-by-andreea-bugheanu-fuenlabrada.html,pendiente,Una propuesta de web para Beauty Academy by Andreea Bugheanu,"Hola,
+Beauty Academy by Andreea Bugheanu,Unas,beauty-academy-by-andreea-bugheanu-fuenlabrada,,+34 671 38 61 28,,True,True,propia,,,https://demos-pruebas.netlify.app/beauty-academy-by-andreea-bugheanu-fuenlabrada.html,pendiente,Una propuesta para renovar la web de Beauty Academy by Andreea Bugheanu,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Beauty Academy by Andreea Bugheanu** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Beauty Academy by Andreea Bugheanu** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/beauty-academy-by-andreea-bugheanu-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -239,15 +241,15 @@ https://demos-pruebas.netlify.app/beauty-academy-by-andreea-bugheanu-fuenlabrada
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-Nails Factory Fuenlabrada Avenida España,Unas,nails-factory-fuenlabrada-avenida-espana-fuenlabrada,fuenlabradaavespana@nailsfactory.es,+34 658 40 84 57,,False,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-avenida-espana-fuenlabrada.html,enviado,Una propuesta de web para Nails Factory Fuenlabrada Avenida España,"Hola,
+Nails Factory Fuenlabrada Avenida España,Unas,nails-factory-fuenlabrada-avenida-espana-fuenlabrada,fuenlabradaavespana@nailsfactory.es,+34 658 40 84 57,,False,True,propia,,,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-avenida-espana-fuenlabrada.html,enviado,Una propuesta para renovar la web de Nails Factory Fuenlabrada Avenida España,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Nails Factory Fuenlabrada Avenida España** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Nails Factory Fuenlabrada Avenida España** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-avenida-espana-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -265,15 +267,15 @@ https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-avenida-espana-fuenl
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-Manicuras con Alma,Unas,manicuras-con-alma-fuenlabrada,manicurasconalma@gmail.com,+34 650 93 98 65,,False,https://demos-pruebas.netlify.app/manicuras-con-alma-fuenlabrada.html,enviado,Una propuesta de web para Manicuras con Alma,"Hola,
+Manicuras con Alma,Unas,manicuras-con-alma-fuenlabrada,manicurasconalma@gmail.com,+34 650 93 98 65,,False,True,propia,,,https://demos-pruebas.netlify.app/manicuras-con-alma-fuenlabrada.html,enviado,Una propuesta para renovar la web de Manicuras con Alma,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Manicuras con Alma** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Manicuras con Alma** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/manicuras-con-alma-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -291,15 +293,15 @@ https://demos-pruebas.netlify.app/manicuras-con-alma-fuenlabrada
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Verónica Romero Nails&beauty,Unas,veronica-romero-nails-beauty-fuenlabrada,info@veronicaromeronails.com,+34 689 14 78 31,,False,https://demos-pruebas.netlify.app/veronica-romero-nails-beauty-fuenlabrada.html,enviado,Una propuesta de web para Verónica Romero Nails&beauty,"Hola,
+Verónica Romero Nails&beauty,Unas,veronica-romero-nails-beauty-fuenlabrada,info@veronicaromeronails.com,+34 689 14 78 31,,False,True,propia,,,https://demos-pruebas.netlify.app/veronica-romero-nails-beauty-fuenlabrada.html,enviado,Una propuesta para renovar la web de Verónica Romero Nails&beauty,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Verónica Romero Nails&beauty** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Verónica Romero Nails&beauty** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/veronica-romero-nails-beauty-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -319,7 +321,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-TANIA LLOPIZ UÑAS,Unas,tania-llopiz-unas-fuenlabrada,,+34 631 83 95 59,,True,https://demos-pruebas.netlify.app/tania-llopiz-unas-fuenlabrada.html,pendiente,Una propuesta de web para TANIA LLOPIZ UÑAS,"Hola,
+TANIA LLOPIZ UÑAS,Unas,tania-llopiz-unas-fuenlabrada,,+34 631 83 95 59,,True,False,social,,,https://demos-pruebas.netlify.app/tania-llopiz-unas-fuenlabrada.html,pendiente,Una propuesta de web para TANIA LLOPIZ UÑAS,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -338,22 +340,22 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","¡Hola! Soy Mario. Vi la web de TANIA LLOPIZ UÑAS y se me ocurrió preparar una versión renovada, con un diseño más actual pensado para atraer más clientes en Fuenlabrada:
+","¡Hola! Soy Mario, diseño páginas web para negocios de Fuenlabrada. Vi TANIA LLOPIZ UÑAS y noté que todavía no tenéis página propia, así que os preparé una demo de muestra sin compromiso:
 
 https://demos-pruebas.netlify.app/tania-llopiz-unas-fuenlabrada
 
-Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
+Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-LADY DIVA,Unas,lady-diva-fuenlabrada,,+34 640 79 03 17,,True,https://demos-pruebas.netlify.app/lady-diva-fuenlabrada.html,pendiente,Una propuesta de web para LADY DIVA,"Hola,
+LADY DIVA,Unas,lady-diva-fuenlabrada,,+34 640 79 03 17,,True,True,propia,,,https://demos-pruebas.netlify.app/lady-diva-fuenlabrada.html,pendiente,Una propuesta para renovar la web de LADY DIVA,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **LADY DIVA** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **LADY DIVA** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/lady-diva-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -371,15 +373,15 @@ https://demos-pruebas.netlify.app/lady-diva-fuenlabrada
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-The Panther Nails,Unas,the-panther-nails-fuenlabrada,,+34 614 52 81 55,,True,https://demos-pruebas.netlify.app/the-panther-nails-fuenlabrada.html,pendiente,Una propuesta de web para The Panther Nails,"Hola,
+The Panther Nails,Unas,the-panther-nails-fuenlabrada,,+34 614 52 81 55,,True,True,propia,,,https://demos-pruebas.netlify.app/the-panther-nails-fuenlabrada.html,pendiente,Una propuesta para renovar la web de The Panther Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **The Panther Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **The Panther Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/the-panther-nails-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -399,15 +401,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Alema Nails Studio,Unas,alema-nails-studio-fuenlabrada,contacto@alemaestetic.com,+34 601 48 75 05,,False,https://demos-pruebas.netlify.app/alema-nails-studio-fuenlabrada.html,enviado,Una propuesta de web para Alema Nails Studio,"Hola,
+Alema Nails Studio,Unas,alema-nails-studio-fuenlabrada,contacto@alemaestetic.com,+34 601 48 75 05,,False,True,propia,,,https://demos-pruebas.netlify.app/alema-nails-studio-fuenlabrada.html,enviado,Una propuesta para renovar la web de Alema Nails Studio,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Alema Nails Studio** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Alema Nails Studio** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/alema-nails-studio-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -425,7 +427,7 @@ https://demos-pruebas.netlify.app/alema-nails-studio-fuenlabrada
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Maithynails,Unas,maithynails-fuenlabrada,,+34 624 81 06 82,,True,https://demos-pruebas.netlify.app/maithynails-fuenlabrada.html,pendiente,Una propuesta de web para Maithynails,"Hola,
+Maithynails,Unas,maithynails-fuenlabrada,,+34 624 81 06 82,,True,False,ninguna,,,https://demos-pruebas.netlify.app/maithynails-fuenlabrada.html,pendiente,Una propuesta de web para Maithynails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -455,15 +457,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Nails Factory Fuenlabrada Plaza Estación,Unas,nails-factory-fuenlabrada-plaza-estacion-fuenlabrada,,+34 638 48 27 18,,True,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-plaza-estacion-fuenlabrada.html,pendiente,Una propuesta de web para Nails Factory Fuenlabrada Plaza Estación,"Hola,
+Nails Factory Fuenlabrada Plaza Estación,Unas,nails-factory-fuenlabrada-plaza-estacion-fuenlabrada,,+34 638 48 27 18,,True,True,propia,,,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-plaza-estacion-fuenlabrada.html,pendiente,Una propuesta para renovar la web de Nails Factory Fuenlabrada Plaza Estación,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Nails Factory Fuenlabrada Plaza Estación** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Nails Factory Fuenlabrada Plaza Estación** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-plaza-estacion-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -481,7 +483,7 @@ https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-plaza-estacion-fuenl
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Kalexa Nails,Unas,kalexa-nails-fuenlabrada,,+34 919 21 03 20,,True,https://demos-pruebas.netlify.app/kalexa-nails-fuenlabrada.html,pendiente,Una propuesta de web para Kalexa Nails,"Hola,
+Kalexa Nails,Unas,kalexa-nails-fuenlabrada,,+34 919 21 03 20,,True,False,ninguna,,,https://demos-pruebas.netlify.app/kalexa-nails-fuenlabrada.html,pendiente,Una propuesta de web para Kalexa Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -507,7 +509,7 @@ https://demos-pruebas.netlify.app/kalexa-nails-fuenlabrada
 Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-Nails By Nanda,Unas,nails-by-nanda-fuenlabrada,,+34 632 25 15 78,,True,https://demos-pruebas.netlify.app/nails-by-nanda-fuenlabrada.html,pendiente,Una propuesta de web para Nails By Nanda,"Hola,
+Nails By Nanda,Unas,nails-by-nanda-fuenlabrada,,+34 632 25 15 78,,True,False,social,,,https://demos-pruebas.netlify.app/nails-by-nanda-fuenlabrada.html,pendiente,Una propuesta de web para Nails By Nanda,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -526,24 +528,26 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola buenas, soy Mario. He visto la web de Nails By Nanda y me animé a prepararos una propuesta gratuita de cómo podría quedar renovada, con un diseño más moderno y pensado para conseguir más clientes:
+","Hola buenas, soy Mario. He visto Nails By Nanda y me he fijado en que no tenéis una web propia.
+
+Estoy creando páginas web para negocios de Fuenlabrada y me animé a prepararos una demo gratuita y personalizada de cómo podría quedar la vuestra:
 
 https://demos-pruebas.netlify.app/nails-by-nanda-fuenlabrada
 
-La he hecho pensando específicamente en vuestro negocio, para que podáis compararla con la actual sin ningún compromiso.
+La he hecho pensando específicamente en vuestro negocio, para que podáis verla sin ningún compromiso.
 
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-"Judy Cray Peluqueria, Laser y Uñas",Unas,judy-cray-peluqueria-laser-y-unas-fuenlabrada,,+34 916 15 36 44,,True,https://demos-pruebas.netlify.app/judy-cray-peluqueria-laser-y-unas-fuenlabrada.html,pendiente,"Una propuesta de web para Judy Cray Peluqueria, Laser y Uñas","Hola,
+"Judy Cray Peluqueria, Laser y Uñas",Unas,judy-cray-peluqueria-laser-y-unas-fuenlabrada,,+34 916 15 36 44,,True,True,propia,,,https://demos-pruebas.netlify.app/judy-cray-peluqueria-laser-y-unas-fuenlabrada.html,pendiente,"Una propuesta para renovar la web de Judy Cray Peluqueria, Laser y Uñas","Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Judy Cray Peluqueria, Laser y Uñas** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Judy Cray Peluqueria, Laser y Uñas** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/judy-cray-peluqueria-laser-y-unas-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -561,7 +565,7 @@ https://demos-pruebas.netlify.app/judy-cray-peluqueria-laser-y-unas-fuenlabrada
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-ELEGANT NAILS,Unas,elegant-nails-fuenlabrada,,+34 631 34 40 89,,True,https://demos-pruebas.netlify.app/elegant-nails-fuenlabrada.html,pendiente,Una propuesta de web para ELEGANT NAILS,"Hola,
+ELEGANT NAILS,Unas,elegant-nails-fuenlabrada,,+34 631 34 40 89,,True,False,ninguna,,,https://demos-pruebas.netlify.app/elegant-nails-fuenlabrada.html,pendiente,Una propuesta de web para ELEGANT NAILS,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
@@ -587,15 +591,15 @@ https://demos-pruebas.netlify.app/elegant-nails-fuenlabrada
 Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-Nails Factory Fuenlabrada Loranca,Unas,nails-factory-fuenlabrada-loranca-fuenlabrada,loranca@nailsfactory.es,+34 620 12 40 55,,False,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-loranca-fuenlabrada.html,enviado,Una propuesta de web para Nails Factory Fuenlabrada Loranca,"Hola,
+Nails Factory Fuenlabrada Loranca,Unas,nails-factory-fuenlabrada-loranca-fuenlabrada,loranca@nailsfactory.es,+34 620 12 40 55,,False,True,propia,,,https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-loranca-fuenlabrada.html,enviado,Una propuesta para renovar la web de Nails Factory Fuenlabrada Loranca,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Nails Factory Fuenlabrada Loranca** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Nails Factory Fuenlabrada Loranca** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-loranca-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -613,15 +617,15 @@ https://demos-pruebas.netlify.app/nails-factory-fuenlabrada-loranca-fuenlabrada
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Peluquería y Barbería Enredos,Unas,peluqueria-y-barberia-enredos-fuenlabrada,contacto@peluqueriabarberiaenredos.es,+34 685 75 53 69,,False,https://demos-pruebas.netlify.app/peluqueria-y-barberia-enredos-fuenlabrada.html,enviado,Una propuesta de web para Peluquería y Barbería Enredos,"Hola,
+Peluquería y Barbería Enredos,Unas,peluqueria-y-barberia-enredos-fuenlabrada,contacto@peluqueriabarberiaenredos.es,+34 685 75 53 69,,False,True,propia,,,https://demos-pruebas.netlify.app/peluqueria-y-barberia-enredos-fuenlabrada.html,enviado,Una propuesta para renovar la web de Peluquería y Barbería Enredos,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Peluquería y Barbería Enredos** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Peluquería y Barbería Enredos** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/peluqueria-y-barberia-enredos-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -639,15 +643,15 @@ https://demos-pruebas.netlify.app/peluqueria-y-barberia-enredos-fuenlabrada
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-Sizare,Unas,sizare-fuenlabrada,centrobelleza@sizare.com,+34 912 08 96 95,,False,https://demos-pruebas.netlify.app/sizare-fuenlabrada.html,enviado,Una propuesta de web para Sizare,"Hola,
+Sizare,Unas,sizare-fuenlabrada,centrobelleza@sizare.com,+34 912 08 96 95,,False,True,propia,,,https://demos-pruebas.netlify.app/sizare-fuenlabrada.html,enviado,Una propuesta para renovar la web de Sizare,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 
-He visto **Sizare** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Sizare** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/sizare-fuenlabrada.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -665,7 +669,7 @@ https://demos-pruebas.netlify.app/sizare-fuenlabrada
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-SALÓN DE UÑAS,Unas,salon-de-unas-fuenlabrada,,+34 614 21 29 38,,True,https://demos-pruebas.netlify.app/salon-de-unas-fuenlabrada.html,pendiente,Una propuesta de web para SALÓN DE UÑAS,"Hola,
+SALÓN DE UÑAS,Unas,salon-de-unas-fuenlabrada,,+34 614 21 29 38,,True,False,ninguna,,,https://demos-pruebas.netlify.app/salon-de-unas-fuenlabrada.html,pendiente,Una propuesta de web para SALÓN DE UÑAS,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Fuenlabrada.
 

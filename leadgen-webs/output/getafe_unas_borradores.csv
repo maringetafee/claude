@@ -1,5 +1,5 @@
-business_name,tipo,slug,email,phone,instagram,contactar_por_telefono,preview_link,estado,asunto,cuerpo,mensaje_whatsapp
-Me Molan tus Uñas,Unas,me-molan-tus-unas-getafe,,+34 674 86 33 86,,True,https://demos-pruebas.netlify.app/me-molan-tus-unas-getafe.html,pendiente,Una propuesta de web para Me Molan tus Uñas,"Hola,
+business_name,tipo,slug,email,phone,instagram,contactar_por_telefono,tiene_web,web_estado,web_obsoleta,web_motivos,preview_link,estado,asunto,cuerpo,mensaje_whatsapp
+Me Molan tus Uñas,Unas,me-molan-tus-unas-getafe,,+34 674 86 33 86,,True,False,social,,,https://demos-pruebas.netlify.app/me-molan-tus-unas-getafe.html,pendiente,Una propuesta de web para Me Molan tus Uñas,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -18,14 +18,14 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","¡Hola! Soy Mario. Vi la web de Me Molan tus Uñas y se me ocurrió preparar una versión renovada, con un diseño más actual pensado para atraer más clientes en Getafe:
+","¡Hola! Soy Mario, diseño páginas web para negocios de Getafe. Vi Me Molan tus Uñas y noté que todavía no tenéis página propia, así que os preparé una demo de muestra sin compromiso:
 
 https://demos-pruebas.netlify.app/me-molan-tus-unas-getafe
 
-Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
+Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-Atry Beauty Nails - Manicura & Pedicura Especializada en Getafe,Unas,atry-beauty-nails-manicura-pedicura-especializada-en-getafe-getafe,,+34 614 40 98 59,,True,https://demos-pruebas.netlify.app/atry-beauty-nails-manicura-pedicura-especializada-en-getafe-getafe.html,pendiente,Una propuesta de web para Atry Beauty Nails - Manicura & Pedicura Especializada en Getafe,"Hola,
+Atry Beauty Nails - Manicura & Pedicura Especializada en Getafe,Unas,atry-beauty-nails-manicura-pedicura-especializada-en-getafe-getafe,,+34 614 40 98 59,,True,False,ninguna,,,https://demos-pruebas.netlify.app/atry-beauty-nails-manicura-pedicura-especializada-en-getafe-getafe.html,pendiente,Una propuesta de web para Atry Beauty Nails - Manicura & Pedicura Especializada en Getafe,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -51,7 +51,7 @@ https://demos-pruebas.netlify.app/atry-beauty-nails-manicura-pedicura-especializ
 Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-d-uñas nails & beauty,Unas,d-unas-nails-beauty-getafe,,+34 615 73 50 03,,True,https://demos-pruebas.netlify.app/d-unas-nails-beauty-getafe.html,pendiente,Una propuesta de web para d-uñas nails & beauty,"Hola,
+d-uñas nails & beauty,Unas,d-unas-nails-beauty-getafe,,+34 615 73 50 03,,True,False,ninguna,,,https://demos-pruebas.netlify.app/d-unas-nails-beauty-getafe.html,pendiente,Una propuesta de web para d-uñas nails & beauty,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -81,7 +81,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Nail ballet uñas,Unas,nail-ballet-unas-getafe,,+34 602 18 65 56,,True,https://demos-pruebas.netlify.app/nail-ballet-unas-getafe.html,pendiente,Una propuesta de web para Nail ballet uñas,"Hola,
+Nail ballet uñas,Unas,nail-ballet-unas-getafe,,+34 602 18 65 56,,True,False,ninguna,,,https://demos-pruebas.netlify.app/nail-ballet-unas-getafe.html,pendiente,Una propuesta de web para Nail ballet uñas,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -111,7 +111,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Salón De Uñas,Unas,salon-de-unas-getafe,,+34 910 39 15 86,,True,https://demos-pruebas.netlify.app/salon-de-unas-getafe.html,pendiente,Una propuesta de web para Salón De Uñas,"Hola,
+Salón De Uñas,Unas,salon-de-unas-getafe,,+34 910 39 15 86,,True,False,ninguna,,,https://demos-pruebas.netlify.app/salon-de-unas-getafe.html,pendiente,Una propuesta de web para Salón De Uñas,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -137,15 +137,15 @@ https://demos-pruebas.netlify.app/salon-de-unas-getafe
 Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-Lalis Beauty Salon,Unas,lalis-beauty-salon-getafe,info@lalisbeautysalon.com,+34 647 33 87 53,,False,https://demos-pruebas.netlify.app/lalis-beauty-salon-getafe.html,enviado,Una propuesta de web para Lalis Beauty Salon,"Hola,
+Lalis Beauty Salon,Unas,lalis-beauty-salon-getafe,info@lalisbeautysalon.com,+34 647 33 87 53,,False,True,propia,,,https://demos-pruebas.netlify.app/lalis-beauty-salon-getafe.html,enviado,Una propuesta para renovar la web de Lalis Beauty Salon,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Lalis Beauty Salon** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Lalis Beauty Salon** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/lalis-beauty-salon-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -165,15 +165,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-MaXSuM Nails & Beauty | Getafe,Unas,maxsum-nails-beauty-getafe-getafe,info@maxsumnailsbeauty.com,+34 916 21 73 72,,False,https://demos-pruebas.netlify.app/maxsum-nails-beauty-getafe-getafe.html,enviado,Una propuesta de web para MaXSuM Nails & Beauty | Getafe,"Hola,
+MaXSuM Nails & Beauty | Getafe,Unas,maxsum-nails-beauty-getafe-getafe,info@maxsumnailsbeauty.com,+34 916 21 73 72,,False,True,propia,,,https://demos-pruebas.netlify.app/maxsum-nails-beauty-getafe-getafe.html,enviado,Una propuesta para renovar la web de MaXSuM Nails & Beauty | Getafe,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **MaXSuM Nails & Beauty | Getafe** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **MaXSuM Nails & Beauty | Getafe** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/maxsum-nails-beauty-getafe-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -191,7 +191,7 @@ https://demos-pruebas.netlify.app/maxsum-nails-beauty-getafe-getafe
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-Nails Room,Unas,nails-room-getafe,,+34 910 09 59 12,,True,https://demos-pruebas.netlify.app/nails-room-getafe.html,pendiente,Una propuesta de web para Nails Room,"Hola,
+Nails Room,Unas,nails-room-getafe,,+34 910 09 59 12,,True,False,ninguna,,,https://demos-pruebas.netlify.app/nails-room-getafe.html,pendiente,Una propuesta de web para Nails Room,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -221,15 +221,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Hello Nails,Unas,hello-nails-getafe,,+34 614 18 46 99,,True,https://demos-pruebas.netlify.app/hello-nails-getafe.html,pendiente,Una propuesta de web para Hello Nails,"Hola,
+Hello Nails,Unas,hello-nails-getafe,,+34 614 18 46 99,,True,True,propia,,,https://demos-pruebas.netlify.app/hello-nails-getafe.html,pendiente,Una propuesta para renovar la web de Hello Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Hello Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Hello Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/hello-nails-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -249,15 +249,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-La Esmaltería Getafe,Unas,la-esmalteria-getafe-getafe,comunicacion@laesmalteria.es,+34 605 77 11 89,,False,https://demos-pruebas.netlify.app/la-esmalteria-getafe-getafe.html,enviado,Una propuesta de web para La Esmaltería Getafe,"Hola,
+La Esmaltería Getafe,Unas,la-esmalteria-getafe-getafe,comunicacion@laesmalteria.es,+34 605 77 11 89,,False,True,propia,,,https://demos-pruebas.netlify.app/la-esmalteria-getafe-getafe.html,enviado,Una propuesta para renovar la web de La Esmaltería Getafe,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **La Esmaltería Getafe** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **La Esmaltería Getafe** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/la-esmalteria-getafe-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -275,7 +275,7 @@ https://demos-pruebas.netlify.app/la-esmalteria-getafe-getafe
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-LuuNails _NailArt,Unas,luunails-nailart-getafe,,+34 643 20 47 75,,True,https://demos-pruebas.netlify.app/luunails-nailart-getafe.html,pendiente,Una propuesta de web para LuuNails _NailArt,"Hola,
+LuuNails _NailArt,Unas,luunails-nailart-getafe,,+34 643 20 47 75,,True,False,ninguna,,,https://demos-pruebas.netlify.app/luunails-nailart-getafe.html,pendiente,Una propuesta de web para LuuNails _NailArt,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -305,7 +305,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Feiyan uñas,Unas,feiyan-unas-getafe,,+34 617 48 80 50,,True,https://demos-pruebas.netlify.app/feiyan-unas-getafe.html,pendiente,Una propuesta de web para Feiyan uñas,"Hola,
+Feiyan uñas,Unas,feiyan-unas-getafe,,+34 617 48 80 50,,True,False,social,,,https://demos-pruebas.netlify.app/feiyan-unas-getafe.html,pendiente,Una propuesta de web para Feiyan uñas,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -324,24 +324,26 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola buenas, soy Mario. He visto la web de Feiyan uñas y me animé a prepararos una propuesta gratuita de cómo podría quedar renovada, con un diseño más moderno y pensado para conseguir más clientes:
+","Hola buenas, soy Mario. He visto Feiyan uñas y me he fijado en que no tenéis una web propia.
+
+Estoy creando páginas web para negocios de Getafe y me animé a prepararos una demo gratuita y personalizada de cómo podría quedar la vuestra:
 
 https://demos-pruebas.netlify.app/feiyan-unas-getafe
 
-La he hecho pensando específicamente en vuestro negocio, para que podáis compararla con la actual sin ningún compromiso.
+La he hecho pensando específicamente en vuestro negocio, para que podáis verla sin ningún compromiso.
 
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Miriam Díaz Nails,Unas,miriam-diaz-nails-getafe,,+34 618 46 09 35,,True,https://demos-pruebas.netlify.app/miriam-diaz-nails-getafe.html,pendiente,Una propuesta de web para Miriam Díaz Nails,"Hola,
+Miriam Díaz Nails,Unas,miriam-diaz-nails-getafe,,+34 618 46 09 35,,True,True,propia,,,https://demos-pruebas.netlify.app/miriam-diaz-nails-getafe.html,pendiente,Una propuesta para renovar la web de Miriam Díaz Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Miriam Díaz Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Miriam Díaz Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/miriam-diaz-nails-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -361,15 +363,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-The Colors Nails,Unas,the-colors-nails-getafe,,,,True,https://demos-pruebas.netlify.app/the-colors-nails-getafe.html,pendiente,Una propuesta de web para The Colors Nails,"Hola,
+The Colors Nails,Unas,the-colors-nails-getafe,,,,True,True,propia,,,https://demos-pruebas.netlify.app/the-colors-nails-getafe.html,pendiente,Una propuesta para renovar la web de The Colors Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **The Colors Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **The Colors Nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/the-colors-nails-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -389,7 +391,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Queen Nails,Unas,queen-nails-getafe,,,,True,https://demos-pruebas.netlify.app/queen-nails-getafe.html,pendiente,Una propuesta de web para Queen Nails,"Hola,
+Queen Nails,Unas,queen-nails-getafe,,,,True,False,ninguna,,,https://demos-pruebas.netlify.app/queen-nails-getafe.html,pendiente,Una propuesta de web para Queen Nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -415,7 +417,7 @@ https://demos-pruebas.netlify.app/queen-nails-getafe
 Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-Cool Nails Getafe,Unas,cool-nails-getafe-getafe,,+34 603 04 87 79,,True,https://demos-pruebas.netlify.app/cool-nails-getafe-getafe.html,pendiente,Una propuesta de web para Cool Nails Getafe,"Hola,
+Cool Nails Getafe,Unas,cool-nails-getafe-getafe,,+34 603 04 87 79,,True,False,social,,,https://demos-pruebas.netlify.app/cool-nails-getafe-getafe.html,pendiente,Una propuesta de web para Cool Nails Getafe,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -434,22 +436,22 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","¡Hola! Soy Mario. Vi la web de Cool Nails Getafe y se me ocurrió preparar una versión renovada, con un diseño más actual pensado para atraer más clientes en Getafe:
+","¡Hola! Soy Mario, diseño páginas web para negocios de Getafe. Vi Cool Nails Getafe y noté que todavía no tenéis página propia, así que os preparé una demo de muestra sin compromiso:
 
 https://demos-pruebas.netlify.app/cool-nails-getafe-getafe
 
-Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
+Está pensada específicamente para vuestro negocio. Si os convence, me encargo de terminarla con vuestras fotos, textos y servicios reales.
 
 ¡Un saludo!"
-"ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.",Unas,artika-byn-estudio-de-unas-manicura-rusa-y-pedicura-perfecta-getafe,juliabrusa82@gmail.com,+34 609 38 31 55,,False,https://demos-pruebas.netlify.app/artika-byn-estudio-de-unas-manicura-rusa-y-pedicura-perfecta-getafe.html,enviado,"Una propuesta de web para ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.","Hola,
+"ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.",Unas,artika-byn-estudio-de-unas-manicura-rusa-y-pedicura-perfecta-getafe,juliabrusa82@gmail.com,+34 609 38 31 55,,False,True,propia,,,https://demos-pruebas.netlify.app/artika-byn-estudio-de-unas-manicura-rusa-y-pedicura-perfecta-getafe.html,enviado,"Una propuesta para renovar la web de ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.","Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **ARTIKA BYN ESTUDIO de uñas, manicura rusa y pedicura perfecta.** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/artika-byn-estudio-de-unas-manicura-rusa-y-pedicura-perfecta-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -469,15 +471,15 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Glossy Nailz,Unas,glossy-nailz-getafe,,+34 614 33 62 79,,True,https://demos-pruebas.netlify.app/glossy-nailz-getafe.html,pendiente,Una propuesta de web para Glossy Nailz,"Hola,
+Glossy Nailz,Unas,glossy-nailz-getafe,,+34 614 33 62 79,,True,True,propia,,,https://demos-pruebas.netlify.app/glossy-nailz-getafe.html,pendiente,Una propuesta para renovar la web de Glossy Nailz,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Glossy Nailz** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Glossy Nailz** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/glossy-nailz-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -495,15 +497,15 @@ https://demos-pruebas.netlify.app/glossy-nailz-getafe
 Es una propuesta sin compromiso, solo para que veáis cómo podría quedar. Si os gusta, me encargo de completarla con vuestros datos reales.
 
 ¡Un saludo!"
-Kapricho's gina,Unas,kapricho-s-gina-getafe,,+34 681 88 29 38,,True,https://demos-pruebas.netlify.app/kapricho-s-gina-getafe.html,pendiente,Una propuesta de web para Kapricho's gina,"Hola,
+Kapricho's gina,Unas,kapricho-s-gina-getafe,,+34 681 88 29 38,,True,True,propia,,,https://demos-pruebas.netlify.app/kapricho-s-gina-getafe.html,pendiente,Una propuesta para renovar la web de Kapricho's gina,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Kapricho's gina** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Kapricho's gina** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/kapricho-s-gina-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -521,15 +523,15 @@ https://demos-pruebas.netlify.app/kapricho-s-gina-getafe
 Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
 
 Gracias por vuestro tiempo."
-"RegiNails Salon de Belleza, Manicura y Pedicura",Unas,reginails-salon-de-belleza-manicura-y-pedicura-getafe,salon@reginails.es,+34 656 48 72 48,,False,https://demos-pruebas.netlify.app/reginails-salon-de-belleza-manicura-y-pedicura-getafe.html,enviado,"Una propuesta de web para RegiNails Salon de Belleza, Manicura y Pedicura","Hola,
+"RegiNails Salon de Belleza, Manicura y Pedicura",Unas,reginails-salon-de-belleza-manicura-y-pedicura-getafe,salon@reginails.es,+34 656 48 72 48,,False,True,propia,,,https://demos-pruebas.netlify.app/reginails-salon-de-belleza-manicura-y-pedicura-getafe.html,enviado,"Una propuesta para renovar la web de RegiNails Salon de Belleza, Manicura y Pedicura","Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **RegiNails Salon de Belleza, Manicura y Pedicura** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **RegiNails Salon de Belleza, Manicura y Pedicura** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/reginails-salon-de-belleza-manicura-y-pedicura-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -549,7 +551,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-"Sonia Style Centro De Estética en Getafe, Nails",Unas,sonia-style-centro-de-estetica-en-getafe-nails-getafe,,+34 674 54 38 70,,True,https://demos-pruebas.netlify.app/sonia-style-centro-de-estetica-en-getafe-nails-getafe.html,pendiente,"Una propuesta de web para Sonia Style Centro De Estética en Getafe, Nails","Hola,
+"Sonia Style Centro De Estética en Getafe, Nails",Unas,sonia-style-centro-de-estetica-en-getafe-nails-getafe,,+34 674 54 38 70,,True,False,social,,,https://demos-pruebas.netlify.app/sonia-style-centro-de-estetica-en-getafe-nails-getafe.html,pendiente,"Una propuesta de web para Sonia Style Centro De Estética en Getafe, Nails","Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -568,14 +570,14 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola, soy Mario, diseño y renuevo páginas web para negocios de Getafe. Al ver la web de Sonia Style Centro De Estética en Getafe, Nails pensé que podría beneficiarse de un diseño más moderno, así que preparé esta propuesta gratuita:
+","Hola, soy Mario. Trabajo haciendo páginas web para negocios locales de Getafe y he preparado una muestra gratuita pensada para Sonia Style Centro De Estética en Getafe, Nails, que vi que aún no tiene web propia:
 
 https://demos-pruebas.netlify.app/sonia-style-centro-de-estetica-en-getafe-nails-getafe
 
-Podéis compararla con la actual sin ningún compromiso; si os convence, la termino con vuestra información real.
+Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-Nail Aries Studio,Unas,nail-aries-studio-getafe,,+34 624 49 58 96,,True,https://demos-pruebas.netlify.app/nail-aries-studio-getafe.html,pendiente,Una propuesta de web para Nail Aries Studio,"Hola,
+Nail Aries Studio,Unas,nail-aries-studio-getafe,,+34 624 49 58 96,,True,False,ninguna,,,https://demos-pruebas.netlify.app/nail-aries-studio-getafe.html,pendiente,Una propuesta de web para Nail Aries Studio,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -605,7 +607,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis verla
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Nueva Imagen Nails Peluqueria,Unas,nueva-imagen-nails-peluqueria-getafe,,+34 912 49 75 97,,True,https://demos-pruebas.netlify.app/nueva-imagen-nails-peluqueria-getafe.html,pendiente,Una propuesta de web para Nueva Imagen Nails Peluqueria,"Hola,
+Nueva Imagen Nails Peluqueria,Unas,nueva-imagen-nails-peluqueria-getafe,,+34 912 49 75 97,,True,False,ninguna,,,https://demos-pruebas.netlify.app/nueva-imagen-nails-peluqueria-getafe.html,pendiente,Una propuesta de web para Nueva Imagen Nails Peluqueria,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -631,7 +633,7 @@ https://demos-pruebas.netlify.app/nueva-imagen-nails-peluqueria-getafe
 Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-Eva studio,Unas,eva-studio-getafe,,+34 641 16 65 59,,True,https://demos-pruebas.netlify.app/eva-studio-getafe.html,pendiente,Una propuesta de web para Eva studio,"Hola,
+Eva studio,Unas,eva-studio-getafe,,+34 641 16 65 59,,True,False,ninguna,,,https://demos-pruebas.netlify.app/eva-studio-getafe.html,pendiente,Una propuesta de web para Eva studio,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -657,15 +659,15 @@ https://demos-pruebas.netlify.app/eva-studio-getafe
 Es solo un boceto para que os hagáis una idea; si os gusta cómo queda, la completo con vuestra información real y sin ningún compromiso por vuestra parte.
 
 Gracias por vuestro tiempo."
-Bella nails,Unas,bella-nails-getafe,nailsbella2024@gmail.com,+34 632 40 92 14,,False,https://demos-pruebas.netlify.app/bella-nails-getafe.html,enviado,Una propuesta de web para Bella nails,"Hola,
+Bella nails,Unas,bella-nails-getafe,nailsbella2024@gmail.com,+34 632 40 92 14,,False,True,builder,,,https://demos-pruebas.netlify.app/bella-nails-getafe.html,enviado,Una propuesta para renovar la web de Bella nails,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
-He visto **Bella nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar vuestra web:
+He visto la web de **Bella nails** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
 
  https://demos-pruebas.netlify.app/bella-nails-getafe.html
 
-La demo está pensada específicamente para vuestro negocio, con contenido de ejemplo para que podáis haceros una idea de cómo se vería. Si os gusta el resultado, puedo desarrollar la web completa con **vuestras fotos, información, servicios y datos reales**, encargándome de todo el proceso para que vosotros no tengáis que preocuparos de nada.
+Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
 
 **Podéis echarle un vistazo sin ningún compromiso.**
 
@@ -685,7 +687,7 @@ La he hecho pensando específicamente en vuestro negocio, para que podáis compa
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Uñearte,Unas,unearte-getafe,,+34 692 04 31 64,,True,https://demos-pruebas.netlify.app/unearte-getafe.html,pendiente,Una propuesta de web para Uñearte,"Hola,
+Uñearte,Unas,unearte-getafe,,+34 692 04 31 64,,True,False,social,,,https://demos-pruebas.netlify.app/unearte-getafe.html,pendiente,Una propuesta de web para Uñearte,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
@@ -704,16 +706,18 @@ Un saludo,
 Mario Marín
 644434860
 makemyweb.es
-","Hola buenas, soy Mario. He visto la web de Uñearte y me animé a prepararos una propuesta gratuita de cómo podría quedar renovada, con un diseño más moderno y pensado para conseguir más clientes:
+","Hola buenas, soy Mario. He visto Uñearte y me he fijado en que no tenéis una web propia.
+
+Estoy creando páginas web para negocios de Getafe y me animé a prepararos una demo gratuita y personalizada de cómo podría quedar la vuestra:
 
 https://demos-pruebas.netlify.app/unearte-getafe
 
-La he hecho pensando específicamente en vuestro negocio, para que podáis compararla con la actual sin ningún compromiso.
+La he hecho pensando específicamente en vuestro negocio, para que podáis verla sin ningún compromiso.
 
 Si os gusta la idea, me encargo de desarrollar la web completa con vuestros datos, imágenes y servicios, para que vosotros no tengáis que preocuparos de nada.
 
 Muchas gracias."
-Uñas el bercial,Unas,unas-el-bercial-getafe,,+34 617 88 22 16,,True,https://demos-pruebas.netlify.app/unas-el-bercial-getafe.html,pendiente,Una propuesta de web para Uñas el bercial,"Hola,
+Uñas el bercial,Unas,unas-el-bercial-getafe,,+34 617 88 22 16,,True,False,ninguna,,,https://demos-pruebas.netlify.app/unas-el-bercial-getafe.html,pendiente,Una propuesta de web para Uñas el bercial,"Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en Getafe.
 
