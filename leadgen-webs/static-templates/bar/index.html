@@ -122,6 +122,50 @@
     .fi:nth-child(5) { transition-delay: .32s; }
     .fi:nth-child(6) { transition-delay: .40s; }
 
+    /* ── BOOKING (reservar mesa) ── */
+    .booking { background: var(--c5); padding: 8rem 4rem; }
+    .booking-lead { font-family: var(--font-serif); font-style: italic; font-size: .95rem; line-height: 1.85; color: rgba(238,232,255,.55); max-width: 480px; margin-top: 1.2rem; }
+    .booking-form { margin-top: 3.5rem; max-width: 760px; padding: clamp(1.8rem,4vw,3rem); border: 1px solid rgba(238,232,255,.14); border-radius: 4px; background: rgba(238,232,255,.03); }
+    .booking-form.is-hidden { display: none; }
+    .booking-step { margin-bottom: 2.4rem; }
+    .booking-step:last-of-type { margin-bottom: 0; }
+    .booking-step-label { display: flex; align-items: baseline; gap: .8rem; margin-bottom: 1.1rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .28em; color: rgba(238,232,255,.5); }
+    .booking-step-label b { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .04em; color: var(--c3); }
+    .chip-group { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .chip { padding: .6rem 1.1rem; border-radius: 3px; border: 1px solid rgba(238,232,255,.22); background: transparent; color: var(--c2); font-family: var(--font-body); font-size: .78rem; letter-spacing: .04em; cursor: none; transition: border-color .2s, background .2s, color .2s; }
+    .chip:hover { border-color: var(--c2); }
+    .chip.is-active { background: var(--c3); border-color: var(--c3); color: var(--c1); font-weight: 600; }
+    .booking-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+    .booking-form input[type="date"], .booking-form input[type="text"], .booking-form input[type="tel"] {
+      width: 100%; padding: .9rem 1rem; border-radius: 3px; border: 1px solid rgba(238,232,255,.18);
+      background: rgba(238,232,255,.03); color: var(--c2); font-family: var(--font-body); font-size: .88rem;
+    }
+    .booking-form input::placeholder { color: rgba(238,232,255,.32); }
+    .booking-submit { margin-top: .5rem; cursor: none; }
+    .table-map { position: relative; width: 100%; aspect-ratio: 16/10; border-radius: 4px; border: 1px solid rgba(238,232,255,.14); background: rgba(238,232,255,.02); overflow: hidden; margin-bottom: 1rem; }
+    .table-map__bar { position: absolute; left: 0; top: 0; bottom: 0; width: 3%; display: flex; align-items: center; justify-content: center; background: rgba(238,232,255,.08); color: rgba(238,232,255,.5); font-size: .55rem; text-transform: uppercase; letter-spacing: .22em; writing-mode: vertical-rl; }
+    .table-map__table { position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(238,232,255,.2); background: rgba(238,232,255,.04); color: var(--c2); cursor: none; transition: transform .2s, background .2s, border-color .2s; font-family: var(--font-display); }
+    .table-map__table.is-round { border-radius: 999px; }
+    .table-map__table.is-square { border-radius: 4px; }
+    .table-map__table span { font-size: 1rem; line-height: 1; }
+    .table-map__table small { font-family: var(--font-body); font-size: .58rem; opacity: .65; margin-top: .15rem; }
+    .table-map__table.is-selected { background: var(--c3); border-color: var(--c3); color: var(--c1); transform: scale(1.06); }
+    .table-map__table.is-occupied { background: rgba(238,232,255,.05); color: rgba(238,232,255,.28); cursor: not-allowed; }
+    .table-map__legend { display: flex; flex-wrap: wrap; gap: 1.4rem; font-size: .72rem; color: rgba(238,232,255,.5); }
+    .table-map__legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: .4rem; vertical-align: middle; }
+    .dot--available { background: rgba(238,232,255,.04); border: 1px solid rgba(238,232,255,.2); }
+    .dot--occupied { background: rgba(238,232,255,.14); }
+    .dot--selected { background: var(--c3); }
+    .booking-confirm { display: none; text-align: center; padding: 3.4rem 1rem; max-width: 760px; }
+    .booking-confirm.is-visible { display: block; }
+    .booking-confirm h3 { font-family: var(--font-display); font-size: 2.4rem; letter-spacing: .02em; margin: 0 0 .8rem; color: var(--c3); }
+    .booking-confirm p { color: rgba(238,232,255,.55); max-width: 46ch; margin: 0 auto; font-family: var(--font-serif); font-style: italic; }
+    .booking-confirm .btn-ghost { margin-top: 1.6rem; }
+    @media (max-width: 639px) { .booking-row { grid-template-columns: 1fr; } .booking { padding: 4rem 1.4rem; } }
+    @media (max-width: 374px) { .booking { padding-left: 1.1rem; padding-right: 1.1rem; } }
+    @media (min-width: 640px) and (max-width: 1023px) { .booking { padding: 5rem 3rem; } }
+    @media (min-width: 1440px) { .booking { padding: 9rem 7rem; } }
+
     /* ── MENU SECTION ── */
     .menu-section { background: var(--c1); padding: 8rem 4rem; }
     .menu-hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4.5rem; }
@@ -411,7 +455,7 @@
     <li><a href="#menu"     class="nav-close">Carta</a></li>
     <li><a href="#nosotros" class="nav-close">Nosotros</a></li>
     <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-    <li><a href="tel:+34000000000" class="nav-cta">Reservar mesa</a></li>
+    <li><a href="#reservar" class="nav-cta">Reservar mesa</a></li>
   </ul>
 </nav>
 
@@ -431,7 +475,7 @@
     <div class="hero-bottom">
       <p class="hero-desc">Ven a tomar algo con calma: cañas bien tiradas, tapas caseras y una barra donde apetece quedarse un rato más.</p>
       <div class="hero-actions">
-        <a href="tel:+34000000000" class="btn-primary">Reservar mesa</a>
+        <a href="#reservar" class="btn-primary">Reservar mesa</a>
         <a href="#menu" class="btn-ghost">Ver la carta</a>
       </div>
     </div>
@@ -548,7 +592,7 @@
       <div><span class="fstat-num">GRIFO</span><p class="fstat-label">Cerveza bien tirada</p></div>
     </div>
     <div style="margin-top:2.5rem">
-      <a href="tel:+34000000000" class="btn-primary">Reservar mesa</a>
+      <a href="#reservar" class="btn-primary">Reservar mesa</a>
     </div>
   </div>
 </div>
@@ -566,7 +610,7 @@
     <p class="section-label">Sobre nosotros</p>
     <h2 class="section-title">UN BAR<br>DE TODA<br>LA VIDA</h2>
     <p class="about-text">Somos el bar donde te conocen por tu nombre y tu pedido de siempre. Barra de madera, buena compañía y la calidad de un producto cuidado, plato a plato.</p>
-    <a href="tel:+34000000000" class="btn-primary">Reservar mesa</a>
+    <a href="#reservar" class="btn-primary">Reservar mesa</a>
     <div class="about-addr">
       <p><strong>Dirección</strong><br>[Dirección del negocio]</p>
       <p style="margin-top:1rem"><strong>Teléfono</strong><br>000 00 00 00</p>
@@ -697,6 +741,78 @@
   <a href="tel:+34000000000" class="btn-dark">Llamar ahora</a>
 </div>
 
+<!-- BOOKING -->
+<section class="booking" id="reservar">
+  <p class="section-label">Reservas</p>
+  <h2 class="section-title">RESERVA<br>TU MESA</h2>
+  <p class="booking-lead">Elige personas, mesa, día y hora. Os confirmamos la reserva — así es como se vería el proceso real en vuestra web.</p>
+
+  <form class="booking-form" id="bookingForm">
+    <div class="booking-step">
+      <div class="booking-step-label"><b>01</b> Personas</div>
+      <div class="chip-group" data-chip-group="personas">
+        <button type="button" class="chip">1</button>
+        <button type="button" class="chip">2</button>
+        <button type="button" class="chip">3</button>
+        <button type="button" class="chip">4</button>
+        <button type="button" class="chip">5</button>
+        <button type="button" class="chip">6+</button>
+      </div>
+    </div>
+
+    <div class="booking-step">
+      <div class="booking-step-label"><b>02</b> Mesa</div>
+      <div class="table-map" id="tableMap">
+        <div class="table-map__bar">Barra</div>
+        <button type="button" class="table-map__table is-round" data-table="t1" style="left:6%;top:10%;width:16%;height:16%"><span>1</span><small>2p</small></button>
+        <button type="button" class="table-map__table is-round is-occupied" data-table="t2" disabled style="left:6%;top:34%;width:16%;height:16%"><span>2</span><small>2p</small></button>
+        <button type="button" class="table-map__table is-square" data-table="t3" style="left:6%;top:60%;width:20%;height:20%"><span>3</span><small>4p</small></button>
+        <button type="button" class="table-map__table is-square" data-table="t4" style="left:32%;top:10%;width:20%;height:20%"><span>4</span><small>4p</small></button>
+        <button type="button" class="table-map__table is-square is-occupied" data-table="t5" disabled style="left:32%;top:38%;width:20%;height:20%"><span>5</span><small>4p</small></button>
+        <button type="button" class="table-map__table is-square" data-table="t6" style="left:30%;top:66%;width:24%;height:24%"><span>6</span><small>6p</small></button>
+        <button type="button" class="table-map__table is-round" data-table="t7" style="left:62%;top:12%;width:16%;height:16%"><span>7</span><small>2p</small></button>
+        <button type="button" class="table-map__table is-round" data-table="t8" style="left:62%;top:36%;width:16%;height:16%"><span>8</span><small>2p</small></button>
+        <button type="button" class="table-map__table is-square is-occupied" data-table="t9" disabled style="left:62%;top:60%;width:20%;height:20%"><span>9</span><small>4p</small></button>
+        <button type="button" class="table-map__table is-square" data-table="t10" style="left:84%;top:22%;width:15%;height:30%"><span>10</span><small>6p</small></button>
+      </div>
+      <div class="table-map__legend">
+        <span><i class="dot dot--available"></i>Disponible</span>
+        <span><i class="dot dot--occupied"></i>Ocupada</span>
+        <span><i class="dot dot--selected"></i>Seleccionada</span>
+      </div>
+    </div>
+
+    <div class="booking-step">
+      <div class="booking-step-label"><b>03</b> Fecha y hora</div>
+      <div class="booking-row">
+        <input type="date" name="fecha" required/>
+        <div class="chip-group" data-chip-group="hora">
+          <button type="button" class="chip">13:00</button>
+          <button type="button" class="chip">14:00</button>
+          <button type="button" class="chip">20:30</button>
+          <button type="button" class="chip">22:00</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="booking-step">
+      <div class="booking-step-label"><b>04</b> Tus datos</div>
+      <div class="booking-row">
+        <input type="text" name="nombre" placeholder="Nombre" required/>
+        <input type="tel" name="telefono" placeholder="Teléfono" required/>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary booking-submit">Confirmar reserva (demo)</button>
+  </form>
+
+  <div class="booking-confirm" id="bookingConfirm">
+    <h3>Reserva confirmada</h3>
+    <p>Esto es una demostración — aquí se conectaría con vuestro sistema de reservas real (propio, TheFork, o el que uséis).</p>
+    <button type="button" class="btn-ghost" id="bookingReset">Hacer otra reserva (demo)</button>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -709,13 +825,13 @@
       <ul>
         <li><a href="#menu">Ver la carta</a></li>
         <li><a href="#" target="_blank" rel="noopener noreferrer">Alérgenos</a></li>
-        <li><a href="tel:+34000000000">Reservar mesa</a></li>
+        <li><a href="#reservar">Reservar mesa</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <p class="footer-col-title">Visítanos</p>
       <ul>
-        <li><a href="tel:+34000000000">Reservar mesa</a></li>
+        <li><a href="#reservar">Reservar mesa</a></li>
         <li><a href="tel:+34000000000">000 00 00 00</a></li>
         <li><a href="https://www.google.com/maps?q=Madrid,+España" target="_blank" rel="noopener noreferrer">[Dirección del negocio]</a></li>
       </ul>
@@ -796,6 +912,34 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } });
   }, { threshold: 0.07 });
   document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  /* BOOKING FORM (demo) */
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    document.querySelectorAll('[data-chip-group] .chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        chip.closest('[data-chip-group]').querySelectorAll('.chip').forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+      });
+    });
+    document.querySelectorAll('.table-map__table:not(.is-occupied)').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.table-map__table').forEach(b => b.classList.remove('is-selected'));
+        btn.classList.add('is-selected');
+      });
+    });
+    bookingForm.addEventListener('submit', e => {
+      e.preventDefault();
+      bookingForm.classList.add('is-hidden');
+      document.getElementById('bookingConfirm').classList.add('is-visible');
+    });
+    document.getElementById('bookingReset')?.addEventListener('click', () => {
+      document.getElementById('bookingConfirm').classList.remove('is-visible');
+      bookingForm.classList.remove('is-hidden');
+      bookingForm.reset();
+      document.querySelectorAll('.chip.is-active, .table-map__table.is-selected').forEach(el => el.classList.remove('is-active', 'is-selected'));
+    });
+  }
 </script>
 
 <script type="application/ld+json">

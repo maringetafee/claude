@@ -24,18 +24,9 @@ load_dotenv(ROOT / ".env")
 
 PREVIEW_BASE_URL = os.environ.get("PREVIEW_BASE_URL", "").rstrip("/")
 
-# Asunto y cuerpo tienen dos versiones segun si el negocio YA tiene web:
-#  - SIN_WEB: el gancho es una primera web.
-#  - CON_WEB: no se puede decir "no tenéis web" (seria falso); el gancho es
-#    renovar / modernizar la que ya tienen y poder compararla con la actual.
-# La eleccion se hace con la columna tiene_web del CSV de leads.
-TEMPLATE_SUBJECT_SIN_WEB = "Una propuesta de web para {business_name}"
-TEMPLATE_SUBJECT_CON_WEB = "Una propuesta para renovar la web de {business_name}"
+TEMPLATE_SUBJECT = "Una propuesta de web para {business_name}"
 
-# Compatibilidad: algun script viejo importa TEMPLATE_SUBJECT / TEMPLATE_BODY.
-TEMPLATE_SUBJECT = TEMPLATE_SUBJECT_SIN_WEB
-
-TEMPLATE_BODY_SIN_WEB = """Hola,
+TEMPLATE_BODY = """Hola,
 
 Soy Mario, diseño y desarrollo páginas web para negocios locales en {city}.
 
@@ -51,34 +42,10 @@ Si os gusta la propuesta, hablamos y os paso el presupuesto.
 
 Un saludo,
 
-Mario Marín
+Mario
 644434860
 makemyweb.es
 """
-
-TEMPLATE_BODY_CON_WEB = """Hola,
-
-Soy Mario, diseño y desarrollo páginas web para negocios locales en {city}.
-
-He visto la web de **{business_name}** y me he tomado la libertad de preparar una propuesta visual de cómo podría quedar con un diseño más actual y mejor pensado para conseguir clientes:
-
- {preview_link}
-
-Podéis compararla con la que tenéis ahora sin ningún compromiso. Si os convence, desarrollo la web completa con **vuestras fotos, información, servicios y datos reales**, y me encargo de todo el proceso —incluido trasladar el contenido de la web actual— para que vosotros no tengáis que preocuparos de nada.
-
-**Podéis echarle un vistazo sin ningún compromiso.**
-
-Si os gusta la propuesta, hablamos y os paso el presupuesto.
-
-Un saludo,
-
-Mario Marín
-644434860
-makemyweb.es
-"""
-
-# Compatibilidad hacia atras.
-TEMPLATE_BODY = TEMPLATE_BODY_SIN_WEB
 
 # Varias variantes de redaccion para el mismo gancho (sin web propia). Mandar
 # el mismo texto literal a decenas de contactos seguidos es justo el patron
@@ -185,15 +152,13 @@ def main():
         # WhatsApp queda mas limpio sin la extension.
         preview_link_whatsapp = preview_link[:-len(".html")] if preview_link.endswith(".html") else preview_link
 
-        tiene_web = row.get("tiene_web") in ("True", "1", True)
-        subject_tmpl = TEMPLATE_SUBJECT_CON_WEB if tiene_web else TEMPLATE_SUBJECT_SIN_WEB
-        body_tmpl = TEMPLATE_BODY_CON_WEB if tiene_web else TEMPLATE_BODY_SIN_WEB
-        subject = subject_tmpl.format(business_name=row["business_name"])
-        body = body_tmpl.format(
+        subject = TEMPLATE_SUBJECT.format(business_name=row["business_name"])
+        body = TEMPLATE_BODY.format(
             business_name=row["business_name"],
             city=row["city"],
             preview_link=preview_link,
         )
+        tiene_web = row.get("tiene_web") in ("True", "1", True)
         variantes = TEMPLATE_WHATSAPP_CON_WEB_VARIANTES if tiene_web else TEMPLATE_WHATSAPP_VARIANTES
         template_whatsapp = elegir_variante(variantes, row["business_name"])
         mensaje_whatsapp = template_whatsapp.format(
@@ -213,10 +178,6 @@ def main():
             "phone": row.get("phone", ""),
             "instagram": row.get("instagram", ""),
             "contactar_por_telefono": contactar_telefono,
-            "tiene_web": tiene_web,
-            "web_estado": row.get("web_estado", ""),
-            "web_obsoleta": row.get("web_obsoleta", ""),
-            "web_motivos": row.get("web_motivos", ""),
             "preview_link": preview_link,
             "estado": estados_previos.get(slug, "pendiente"),
             "asunto": subject,

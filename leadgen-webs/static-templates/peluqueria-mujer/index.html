@@ -304,6 +304,27 @@
     .social-strip a { display:flex; align-items:center; gap:10px; color:rgba(255,255,255,.72); transition:color .2s; }
     .social-strip a:hover { color:white; }
 
+    .booking-form { background: var(--ink-2); border:1px solid var(--line); border-radius: var(--radius); padding: clamp(28px,4vw,48px); max-width: 760px; }
+    .booking-form.is-hidden { display:none; }
+    .booking-form__step { margin-bottom: 34px; }
+    .booking-form__step:last-of-type { margin-bottom: 0; }
+    .booking-form__label { display:flex; align-items:baseline; gap:12px; margin-bottom:16px; font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.55); }
+    .booking-form__label b { font-family:"Fraunces", serif; font-weight:400; font-size:1.4rem; color: var(--rolling-red-bright); }
+    .chip-group { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip { padding:10px 18px; border-radius:999px; border:1.5px solid var(--line); background:transparent; color: var(--paper); font-size:.86rem; cursor:pointer; transition: border-color .2s, background .2s, color .2s; }
+    .chip:hover { border-color: rgba(255,255,255,.4); }
+    .chip.is-active { background: var(--rolling-red); border-color: var(--rolling-red); color: white; font-weight:600; }
+    .booking-form__row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .booking-form input[type="date"], .booking-form input[type="text"], .booking-form input[type="tel"] { width:100%; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line); background: rgba(255,255,255,.04); color: var(--paper); font-size:.95rem; }
+    .booking-form input::placeholder { color: rgba(255,255,255,.35); }
+    .booking-form__submit { margin-top:8px; }
+    .booking-confirm { display:none; text-align:center; padding: 40px 20px; max-width:760px; }
+    .booking-confirm.is-visible { display:block; }
+    .booking-confirm h3 { font-family:"Fraunces", serif; font-weight:400; font-size:2.4rem; margin:0 0 12px; color: var(--rolling-red-bright); }
+    .booking-confirm p { color:rgba(255,255,255,.62); max-width:46ch; margin:0 auto; }
+    .booking-confirm button { margin-top:22px; }
+    @media (max-width:640px) { .booking-form__row { grid-template-columns:1fr; } }
+
     .site-footer { padding:80px 0 110px; }
     .footer__top { display:grid; grid-template-columns:1.4fr .6fr .6fr; gap:40px; }
     .footer__title { margin:0; font-family:"Fraunces",serif; font-size:clamp(3rem,7vw,7rem); line-height:.9; letter-spacing:-.05em; }
@@ -851,7 +872,7 @@
 <a href="#opiniones">Opiniones</a>
 <a href="#visitanos">Visítanos</a>
 </nav>
-<a aria-label="Abrir la agenda online de [NOMBRE DEL NEGOCIO]" class="btn btn--small btn--solid btn--booking magnetic reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank">Reservar cita</a>
+<a aria-label="Abrir la agenda online de [NOMBRE DEL NEGOCIO]" class="btn btn--small btn--solid btn--booking magnetic reserve-link" href="#reservar">Reservar cita</a>
 <button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle" type="button"><span></span><span></span></button>
 </header>
 <nav aria-label="Menú móvil" class="mobile-menu">
@@ -859,7 +880,7 @@
 <a href="#estilo">Estilo</a>
 <a href="#looks">Looks</a>
 <a href="#opiniones">Opiniones</a>
-<a class="reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank">Reservar</a>
+<a class="reserve-link" href="#reservar">Reservar</a>
 <a href="#visitanos">Visítanos</a>
 <div class="mobile-menu__meta">[Barrio] · [Ciudad]<br/>000 00 00 00</div>
 </nav>
@@ -994,7 +1015,7 @@
 </div>
 <div class="reviews__actions">
 <a class="btn btn--solid magnetic" href="#" rel="noopener noreferrer" target="_blank">Ver opiniones en Google</a>
-<a class="btn magnetic reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank">Reservar cita</a>
+<a class="btn magnetic reserve-link" href="#reservar">Reservar cita</a>
 </div>
 </div>
 <div class="reviews__cards">
@@ -1058,9 +1079,55 @@
 <a href="tel:+34000000000">000 00 00 00</a>
 </div>
 </div>
+
+<section class="section booking" id="reservar">
+<div class="container">
+<div class="eyebrow">Pedir cita</div>
+<h2 class="section-title">Reserva tu cita<br/>en dos minutos.</h2>
+<p class="lead" style="margin:18px 0 44px;">Elige servicio, día y hora. Os confirmamos la cita — así es como se vería el proceso real de reserva en vuestra web.</p>
+
+<form class="booking-form" id="bookingForm">
+<div class="booking-form__step">
+<div class="booking-form__label"><b>01</b> Servicio</div>
+<div class="chip-group" data-chip-group="servicio">
+<button type="button" class="chip">Corte &amp; styling</button>
+<button type="button" class="chip">Color a medida</button>
+<button type="button" class="chip">Novias &amp; eventos</button>
+<button type="button" class="chip">Rizos &amp; textura</button>
+</div>
+</div>
+<div class="booking-form__step">
+<div class="booking-form__label"><b>02</b> Fecha y hora</div>
+<div class="booking-form__row">
+<input type="date" name="fecha" required/>
+<div class="chip-group" data-chip-group="hora">
+<button type="button" class="chip">10:00</button>
+<button type="button" class="chip">12:30</button>
+<button type="button" class="chip">16:00</button>
+<button type="button" class="chip">19:00</button>
+</div>
+</div>
+</div>
+<div class="booking-form__step">
+<div class="booking-form__label"><b>03</b> Tus datos</div>
+<div class="booking-form__row">
+<input type="text" name="nombre" placeholder="Nombre" required/>
+<input type="tel" name="telefono" placeholder="Teléfono" required/>
+</div>
+</div>
+<button type="submit" class="btn btn--solid magnetic booking-form__submit">Confirmar cita (demo)</button>
+</form>
+
+<div class="booking-confirm" id="bookingConfirm">
+<h3>Cita confirmada</h3>
+<p>Esto es una demostración — aquí se conectaría con vuestro sistema de citas real (agenda propia, Booksy, Treatwell, o el que uséis).</p>
+<button type="button" class="btn magnetic" id="bookingReset">Pedir otra cita (demo)</button>
+</div>
+</div>
+</section>
 </main>
-<a aria-label="Reservar cita en la agenda online de [NOMBRE DEL NEGOCIO]" class="booking-fab reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank"><span>Reservar cita</span></a>
-<a aria-label="Abrir la agenda online de [NOMBRE DEL NEGOCIO]" class="mobile-booking-link reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank"><span><strong>Reservar cita</strong><small>Agenda online</small></span></a>
+<a aria-label="Reservar cita en la agenda online de [NOMBRE DEL NEGOCIO]" class="booking-fab reserve-link" href="#reservar"><span>Reservar cita</span></a>
+<a aria-label="Abrir la agenda online de [NOMBRE DEL NEGOCIO]" class="mobile-booking-link reserve-link" href="#reservar"><span><strong>Reservar cita</strong><small>Agenda online</small></span></a>
 <footer class="site-footer">
 <div class="container">
 <div class="footer__top">
@@ -1068,7 +1135,7 @@
 <img alt="Logo [NOMBRE DEL NEGOCIO]" class="footer__logo logo-art" decoding="async" height="1050" loading="lazy" src="assets/placeholder-logo.svg?v=2" width="1050">
 <div><h2 class="footer__title">Nos vemos pronto.</h2><p>[NOMBRE DEL NEGOCIO] · [Barrio], [Ciudad]</p></div>
 </img></div>
-<div class="footer__col"><h4>Explora</h4><a href="/peluqueria-getafe/">Peluquería en [Ciudad]</a><a href="/servicios/">Servicios</a><a href="/trabajos/">Trabajos</a><a href="/opiniones/">Opiniones</a><a href="#servicios">Servicios</a><a href="#looks">Looks</a><a href="#opiniones">Google</a><a class="reserve-link" href="#reservar" rel="noopener noreferrer" target="_blank">Reservar cita</a><a href="#visitanos">Visítanos</a></div>
+<div class="footer__col"><h4>Explora</h4><a href="/peluqueria-getafe/">Peluquería en [Ciudad]</a><a href="/servicios/">Servicios</a><a href="/trabajos/">Trabajos</a><a href="/opiniones/">Opiniones</a><a href="#servicios">Servicios</a><a href="#looks">Looks</a><a href="#opiniones">Google</a><a class="reserve-link" href="#reservar">Reservar cita</a><a href="#visitanos">Visítanos</a></div>
 <div class="footer__col"><h4>Contacto</h4><a href="tel:+34000000000">000 00 00 00</a><a href="#" rel="me noopener" target="_blank">Instagram</a><p>[Barrio] · [Ciudad]</p></div>
 </div>
 <div class="footer__bottom"><span>© <span id="year"></span> [NOMBRE DEL NEGOCIO]</span><span>Versión móvil verificada </span></div>
@@ -1293,6 +1360,28 @@
             gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * .12, y: (e.clientY - r.top - r.height / 2) * .18, duration: .35 });
           });
           el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: .55, ease: 'elastic.out(1,.4)' }));
+        });
+      }
+
+      /* Booking form (demo) */
+      const bookingForm = $('#bookingForm');
+      if (bookingForm) {
+        $$('[data-chip-group] .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            $$('.chip', chip.closest('[data-chip-group]')).forEach(c => c.classList.remove('is-active'));
+            chip.classList.add('is-active');
+          });
+        });
+        bookingForm.addEventListener('submit', e => {
+          e.preventDefault();
+          bookingForm.classList.add('is-hidden');
+          $('#bookingConfirm').classList.add('is-visible');
+        });
+        $('#bookingReset')?.addEventListener('click', () => {
+          $('#bookingConfirm').classList.remove('is-visible');
+          bookingForm.classList.remove('is-hidden');
+          bookingForm.reset();
+          $$('[data-chip-group] .chip.is-active').forEach(c => c.classList.remove('is-active'));
         });
       }
     })();

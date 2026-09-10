@@ -94,7 +94,7 @@
     .desktop-nav a { font-size:.82rem; letter-spacing:.03em; color:rgba(255,255,255,.78); transition:color .2s; }
     .desktop-nav a:hover { color:#fff; }
     .header-actions { display:flex; align-items:center; gap:16px; }
-    .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; }
+    .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; background:none; appearance:none; -webkit-appearance:none; cursor:pointer; }
     .btn--solid { background: var(--rose); color:#241a12; border-color: var(--rose); box-shadow:0 14px 34px rgba(201,138,60,.30); font-weight:600; }
     .btn--solid:hover { background: var(--rose-bright); border-color:var(--rose-bright); }
     .btn--ghost:hover { border-color:#fff; }
@@ -214,6 +214,42 @@
     .visit__row span { color:rgba(36,26,18,.5); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; }
     .visit__map { height:520px; border-radius:26px; overflow:hidden; position:relative; background:#ddceb8; }
     .visit__map iframe { width:100%; height:100%; border:0; filter: grayscale(.2) sepia(.12); }
+
+    /* ---------- Booking (reservar mesa) ---------- */
+    .booking-form { background: var(--ink-2); border:1px solid var(--line); border-radius: var(--radius); padding: clamp(28px,4vw,48px); max-width: 760px; }
+    .booking-form.is-hidden { display:none; }
+    .booking-form__step { margin-bottom: 34px; }
+    .booking-form__step:last-of-type { margin-bottom: 0; }
+    .booking-form__label { display:flex; align-items:baseline; gap:12px; margin-bottom:16px; font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.55); }
+    .booking-form__label b { font-family:"Playfair Display", serif; font-style:italic; font-size:1.4rem; color: var(--rose-bright); }
+    .chip-group { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip { padding:10px 18px; border-radius:999px; border:1.5px solid var(--line); background:transparent; color: var(--paper); font-size:.86rem; cursor:pointer; transition: border-color .2s, background .2s, color .2s; }
+    .chip:hover { border-color: rgba(255,255,255,.4); }
+    .chip.is-active { background: var(--rose); border-color: var(--rose); color: var(--ink); font-weight:600; }
+    .booking-form__row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .booking-form input[type="date"], .booking-form input[type="text"], .booking-form input[type="tel"] { width:100%; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line); background: rgba(255,255,255,.04); color: var(--paper); font-size:.95rem; }
+    .booking-form input::placeholder { color: rgba(255,255,255,.35); }
+    .booking-form__submit { margin-top:8px; }
+    .table-map { position:relative; width:100%; aspect-ratio:16/10; border-radius:18px; border:1px solid var(--line); background: rgba(255,255,255,.03); overflow:hidden; margin-bottom:14px; }
+    .table-map__bar { position:absolute; left:0; top:0; bottom:0; width:3%; display:flex; align-items:center; justify-content:center; background: rgba(255,255,255,.08); color: rgba(255,255,255,.5); font-size:.6rem; text-transform:uppercase; letter-spacing:.18em; writing-mode:vertical-rl; }
+    .table-map__table { position:absolute; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1.5px solid var(--line); background: rgba(255,255,255,.05); color: var(--paper); cursor:pointer; transition: transform .2s, background .2s, border-color .2s; font-family:"Playfair Display", serif; }
+    .table-map__table.is-round { border-radius:999px; }
+    .table-map__table.is-square { border-radius:12px; }
+    .table-map__table span { font-size:1rem; line-height:1; }
+    .table-map__table small { font-family:"DM Sans", sans-serif; font-size:.62rem; opacity:.7; margin-top:2px; }
+    .table-map__table.is-selected { background: var(--rose); border-color: var(--rose); color: var(--ink); transform:scale(1.06); }
+    .table-map__table.is-occupied { background: rgba(255,255,255,.06); border-color: var(--line); color: rgba(255,255,255,.35); cursor:not-allowed; }
+    .table-map__legend { display:flex; flex-wrap:wrap; gap:20px; font-size:.76rem; color: rgba(255,255,255,.55); }
+    .table-map__legend .dot { width:11px; height:11px; border-radius:50%; display:inline-block; margin-right:6px; vertical-align:middle; }
+    .dot--available { background: rgba(255,255,255,.05); border:1.5px solid var(--line); }
+    .dot--occupied { background: rgba(255,255,255,.15); }
+    .dot--selected { background: var(--rose); }
+    .booking-confirm { display:none; text-align:center; padding: 40px 20px; max-width:760px; }
+    .booking-confirm.is-visible { display:block; }
+    .booking-confirm h3 { font-family:"Playfair Display", serif; font-style:italic; font-size:2.2rem; margin:0 0 12px; color: var(--rose-bright); }
+    .booking-confirm p { color:rgba(255,255,255,.62); max-width:46ch; margin:0 auto; }
+    .booking-confirm button { margin-top:22px; }
+    @media (max-width:640px) { .booking-form__row { grid-template-columns:1fr; } }
 
     /* ---------- Footer ---------- */
     .site-footer { background:#191108; padding:90px 0 30px; }
@@ -468,7 +504,7 @@
 <div class="eyebrow">Dónde estamos</div>
 <h2 class="section-title">Ven a tomarte<br/>un café con calma.</h2>
 <div class="visit__details">
-<div class="visit__row"><span>Dirección</span><div>[Dirección del negocio]</div></div>
+<div class="visit__row"><span>Dirección</span><div>[Dirección del negocio], [CP] [Ciudad]</div></div>
 <div class="visit__row"><span>Horario</span><div>Lunes a domingo, 8:00 – 20:00</div></div>
 <div class="visit__row"><span>Teléfono</span><div><a href="tel:+34000000000">000 00 00 00</a></div></div>
 <div class="visit__row"><span>Barrio</span><div>[Barrio] · [Ciudad]</div></div>
@@ -478,9 +514,82 @@
 <div class="visit__map"><iframe title="Mapa de [NOMBRE DEL NEGOCIO]" loading="lazy" src="https://www.google.com/maps?q=Madrid,+España&output=embed"></iframe></div>
 </div>
 </section>
+
+<section class="section booking" id="reservar">
+<div class="container">
+<div class="eyebrow">Reservas</div>
+<h2 class="section-title">Reserva tu mesa<br/>en dos minutos.</h2>
+<p class="lead" style="margin:18px 0 44px;">Elige personas, mesa, día y hora. Os confirmamos la reserva — así es como se vería el proceso real en vuestra web.</p>
+
+<form class="booking-form" id="bookingForm">
+<div class="booking-form__step">
+<div class="booking-form__label"><b>01</b> Personas</div>
+<div class="chip-group" data-chip-group="personas">
+<button type="button" class="chip">1</button>
+<button type="button" class="chip">2</button>
+<button type="button" class="chip">3</button>
+<button type="button" class="chip">4</button>
+<button type="button" class="chip">5</button>
+<button type="button" class="chip">6+</button>
+</div>
+</div>
+
+<div class="booking-form__step">
+<div class="booking-form__label"><b>02</b> Mesa</div>
+<div class="table-map" id="tableMap">
+<div class="table-map__bar">Barra</div>
+<button type="button" class="table-map__table is-round" data-table="t1" style="left:6%;top:10%;width:16%;height:16%"><span>1</span><small>2p</small></button>
+<button type="button" class="table-map__table is-round is-occupied" data-table="t2" disabled style="left:6%;top:34%;width:16%;height:16%"><span>2</span><small>2p</small></button>
+<button type="button" class="table-map__table is-square" data-table="t3" style="left:6%;top:60%;width:20%;height:20%"><span>3</span><small>4p</small></button>
+<button type="button" class="table-map__table is-square" data-table="t4" style="left:32%;top:10%;width:20%;height:20%"><span>4</span><small>4p</small></button>
+<button type="button" class="table-map__table is-square is-occupied" data-table="t5" disabled style="left:32%;top:38%;width:20%;height:20%"><span>5</span><small>4p</small></button>
+<button type="button" class="table-map__table is-square" data-table="t6" style="left:30%;top:66%;width:24%;height:24%"><span>6</span><small>6p</small></button>
+<button type="button" class="table-map__table is-round" data-table="t7" style="left:62%;top:12%;width:16%;height:16%"><span>7</span><small>2p</small></button>
+<button type="button" class="table-map__table is-round" data-table="t8" style="left:62%;top:36%;width:16%;height:16%"><span>8</span><small>2p</small></button>
+<button type="button" class="table-map__table is-square is-occupied" data-table="t9" disabled style="left:62%;top:60%;width:20%;height:20%"><span>9</span><small>4p</small></button>
+<button type="button" class="table-map__table is-square" data-table="t10" style="left:84%;top:22%;width:15%;height:30%"><span>10</span><small>6p</small></button>
+</div>
+<div class="table-map__legend">
+<span><i class="dot dot--available"></i>Disponible</span>
+<span><i class="dot dot--occupied"></i>Ocupada</span>
+<span><i class="dot dot--selected"></i>Seleccionada</span>
+</div>
+</div>
+
+<div class="booking-form__step">
+<div class="booking-form__label"><b>03</b> Fecha y hora</div>
+<div class="booking-form__row">
+<input type="date" name="fecha" required/>
+<div class="chip-group" data-chip-group="hora">
+<button type="button" class="chip">10:00</button>
+<button type="button" class="chip">12:30</button>
+<button type="button" class="chip">16:00</button>
+<button type="button" class="chip">18:30</button>
+</div>
+</div>
+</div>
+
+<div class="booking-form__step">
+<div class="booking-form__label"><b>04</b> Tus datos</div>
+<div class="booking-form__row">
+<input type="text" name="nombre" placeholder="Nombre" required/>
+<input type="tel" name="telefono" placeholder="Teléfono" required/>
+</div>
+</div>
+
+<button type="submit" class="btn btn--solid magnetic booking-form__submit">Confirmar reserva (demo)</button>
+</form>
+
+<div class="booking-confirm" id="bookingConfirm">
+<h3>Reserva confirmada</h3>
+<p>Esto es una demostración — aquí se conectaría con vuestro sistema de reservas real (propio, TheFork, o el que uséis).</p>
+<button type="button" class="btn btn--ghost magnetic" id="bookingReset">Hacer otra reserva (demo)</button>
+</div>
+</div>
+</section>
 </main>
 
-<footer class="site-footer" id="reservar">
+<footer class="site-footer">
 <div class="container">
 <div class="footer__top">
 <div>
@@ -575,6 +684,34 @@
             gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * strength, y: (e.clientY - r.top - r.height / 2) * strength, duration: .4, ease: 'power3.out' });
           });
           el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: .5, ease: 'elastic.out(1, .4)' }));
+        });
+      }
+
+      /* Booking form (demo) */
+      const bookingForm = $('#bookingForm');
+      if (bookingForm) {
+        $$('[data-chip-group] .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            $$('.chip', chip.closest('[data-chip-group]')).forEach(c => c.classList.remove('is-active'));
+            chip.classList.add('is-active');
+          });
+        });
+        $$('.table-map__table:not(.is-occupied)').forEach(btn => {
+          btn.addEventListener('click', () => {
+            $$('.table-map__table').forEach(b => b.classList.remove('is-selected'));
+            btn.classList.add('is-selected');
+          });
+        });
+        bookingForm.addEventListener('submit', e => {
+          e.preventDefault();
+          bookingForm.classList.add('is-hidden');
+          $('#bookingConfirm').classList.add('is-visible');
+        });
+        $('#bookingReset')?.addEventListener('click', () => {
+          $('#bookingConfirm').classList.remove('is-visible');
+          bookingForm.classList.remove('is-hidden');
+          bookingForm.reset();
+          $$('.chip.is-active, .table-map__table.is-selected').forEach(el => el.classList.remove('is-active', 'is-selected'));
         });
       }
 
