@@ -6,6 +6,9 @@ import SolucionesSection from "@/components/sections/SolucionesSection";
 import ParticularesProfesionalesSection from "@/components/sections/ParticularesProfesionalesSection";
 import FabricacionSection from "@/components/sections/FabricacionSection";
 import GaleriaSection from "@/components/sections/GaleriaSection";
+import ProyectosSection from "@/components/sections/ProyectosSection";
+import ReviewsSection from "@/components/sections/ReviewsSection";
+import StatsSection from "@/components/sections/StatsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 export default function Home() {
@@ -43,6 +46,8 @@ export default function Home() {
         </div>
       </HeroSequence>
 
+      <StatsSection />
+
       <PanelSection from="right">
         <ToldosSection />
       </PanelSection>
@@ -60,6 +65,12 @@ export default function Home() {
       </PanelSection>
       <PanelSection from="left">
         <GaleriaSection />
+      </PanelSection>
+      <PanelSection from="right">
+        <ProyectosSection />
+      </PanelSection>
+      <PanelSection from="left">
+        <ReviewsSection />
       </PanelSection>
       <PanelSection from="bottom">
         <ContactSection />

@@ -3,6 +3,8 @@ import { Manrope, Fraunces } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FixedCinematicBackground from "@/components/layout/FixedCinematicBackground";
+import StructuredData from "@/components/StructuredData";
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -35,10 +37,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${manrope.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-paper text-ink">
+        <StructuredData />
         <FixedCinematicBackground />
         <Header />
         {children}
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

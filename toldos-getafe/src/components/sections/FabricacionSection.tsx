@@ -44,7 +44,7 @@ export default function FabricacionSection() {
           </Link>
         </div>
 
-        <div className="relative hidden overflow-hidden rounded-2xl sm:block">
+        <div className="relative hidden overflow-hidden rounded-2xl lg:block">
           <Image
             src={fabrica.profesionalesHero.src}
             alt={fabrica.profesionalesHero.alt}

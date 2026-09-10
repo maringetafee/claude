@@ -223,6 +223,91 @@ export const soluciones = {
   },
 } satisfies Record<string, SiteImage>;
 
+export type Proyecto = {
+  /** Municipio donde se hizo la instalación (se muestra sobre la foto). */
+  municipio: string;
+  tipo: string;
+  /** Foto del proyecto terminado. */
+  imagen: SiteImage;
+  /**
+   * Opcional: foto del MISMO encuadre antes de la instalación. Si se
+   * rellena, la tarjeta pasa a mostrar el comparador antes/después.
+   */
+  antes?: SiteImage;
+};
+
+/**
+ * Proyectos reales para la galería de la portada.
+ *
+ * TODO (cliente):
+ *  - `municipio` y `tipo` de cada foto son provisionales: ajústalos a la
+ *    instalación real que aparece en la imagen.
+ *  - Para activar el "antes / después", añade en `antes` una foto del
+ *    mismo encuadre previo a la obra (guárdala en /public/images/proyectos/).
+ */
+export const proyectos: Proyecto[] = [
+  {
+    municipio: "Madrid Sur",
+    tipo: "Pérgola para terraza de restaurante",
+    imagen: {
+      src: "/images/carrusel/terraza-restaurante-madrid.webp",
+      width: 768,
+      height: 576,
+      alt: "Terraza de restaurante con pérgola instalada por Toldos Getafe",
+    },
+  },
+  {
+    municipio: "Madrid Sur",
+    tipo: "Pérgola bioclimática en vivienda",
+    imagen: {
+      src: "/images/pergolas/pergola-bioclimatica-2.webp",
+      width: 2144,
+      height: 1984,
+      alt: "Pérgola bioclimática sobre una terraza",
+    },
+  },
+  {
+    municipio: "Madrid Sur",
+    tipo: "Toldo cofre en fachada",
+    imagen: {
+      src: "/images/toldos/toldo-cofre-hero.webp",
+      width: 705,
+      height: 591,
+      alt: "Toldo cofre motorizado instalado en una fachada",
+    },
+  },
+  {
+    municipio: "Madrid Sur",
+    tipo: "Pérgola en jardín",
+    imagen: {
+      src: "/images/soluciones/jardines.webp",
+      width: 1600,
+      height: 1068,
+      alt: "Pérgola moderna instalada en un jardín",
+    },
+  },
+  {
+    municipio: "Madrid Sur",
+    tipo: "Toldo en vivienda unifamiliar",
+    imagen: {
+      src: "/images/soluciones/viviendas.webp",
+      width: 1600,
+      height: 1065,
+      alt: "Toldo instalado en la fachada de una vivienda",
+    },
+  },
+  {
+    municipio: "Madrid Sur",
+    tipo: "Toldos para local comercial",
+    imagen: {
+      src: "/images/soluciones/espacios-comerciales.webp",
+      width: 1600,
+      height: 1067,
+      alt: "Protección solar instalada en la fachada de un local comercial",
+    },
+  },
+];
+
 export const carrusel: SiteImage[] = [
   {
     src: "/images/carrusel/pergola-restauracion.webp",

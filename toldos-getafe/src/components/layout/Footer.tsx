@@ -11,6 +11,22 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-stone">
               {siteConfig.tagline}
             </p>
+            <a
+              href={siteConfig.google.profileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm text-ink-soft transition-colors hover:border-accent hover:text-accent"
+            >
+              <span className="font-medium">
+                {siteConfig.google.rating.toLocaleString("es-ES")}
+              </span>
+              <span aria-hidden="true" className="text-accent">
+                ★★★★★
+              </span>
+              <span className="text-stone">
+                {siteConfig.google.reviewCount} reseñas · Google
+              </span>
+            </a>
             <div className="mt-6 flex gap-4 text-sm text-stone">
               <a
                 href={siteConfig.social.facebook}

@@ -2,8 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { primaryNav } from "@/lib/site-config";
+import { primaryNav, siteConfig } from "@/lib/site-config";
 import MobileMenu from "./MobileMenu";
+
+function PhoneIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className={className}
+    >
+      <path
+        d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .5 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.5-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.4 0 .8-.3 1l-2.5 2.3z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
 
 export default function Header() {
   const [solid, setSolid] = useState(false);
@@ -67,7 +85,17 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 lg:gap-4">
+            <a
+              href={siteConfig.phone.href}
+              className="flex items-center gap-2 text-sm font-medium text-paper transition-colors hover:text-accent-soft"
+            >
+              <PhoneIcon />
+              <span className="hidden sm:inline">{siteConfig.phone.display}</span>
+              <span className="sr-only sm:hidden">
+                Llamar al {siteConfig.phone.display}
+              </span>
+            </a>
             <a
               href="/contacto/"
               className="hidden rounded-none border border-paper/40 px-5 py-2.5 text-sm font-medium text-paper transition-colors duration-300 hover:border-accent-soft hover:bg-accent-soft lg:block"
