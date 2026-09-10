@@ -61,6 +61,11 @@ def personalize_html(template_slug, row):
         ("[NOMBRE]", business_name),
         ("[Nombre]", business_name),
         ("[RUBRO]", RUBRO_LABEL[template_slug]),
+        # El scraping no da barrio, asi que [Barrio] cae en la ciudad. Colapsa
+        # las parejas "[Barrio] · [Ciudad]" / "[Barrio], [Ciudad]" antes de
+        # sustituir cada token suelto, para no repetir "Getafe · Getafe".
+        ("[Barrio] · [Ciudad]", city),
+        ("[Barrio], [Ciudad]", city),
         ("[CIUDAD]", city),
         ("[Ciudad]", city),
         ("[Barrio]", city),
