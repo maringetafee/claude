@@ -1,7 +1,12 @@
 .env
-leads/*.csv
+
+# Fotos scrapeadas (215 MB, regenerables con find_leads / Places API)
 leads/photos/
-output/
+
+# Todo output/ es generado, EXCEPTO los borradores de envio (texto, versionables)
+output/*
+!output/*_borradores.csv
+
 __pycache__/
 *.pyc
 node_modules/
