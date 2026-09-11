@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0D0B1A"/>
+  <rect x="0.5" y="0.5" width="799" height="599" fill="none" stroke="#EEE8FF" stroke-opacity="0.12"/>
+  <g fill="none" stroke="#EEE8FF" stroke-opacity="0.35" stroke-width="2">
+    <rect x="300" y="235" width="200" height="150" rx="8"/>
+    <circle cx="345" cy="280" r="16"/>
+    <path d="M300 360 L370 300 L420 340 L460 300 L500 340 L500 385 L300 385 Z"/>
+  </g>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="20" letter-spacing="3" fill="#EEE8FF" fill-opacity="0.4" text-anchor="middle">FOTO PLACEHOLDER</text>
+</svg>

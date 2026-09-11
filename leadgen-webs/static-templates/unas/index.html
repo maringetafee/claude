@@ -95,7 +95,7 @@
     .desktop-nav a { font-size:.82rem; letter-spacing:.03em; color:rgba(255,255,255,.78); transition:color .2s; }
     .desktop-nav a:hover { color:#fff; }
     .header-actions { display:flex; align-items:center; gap:16px; }
-    .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; }
+    .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; background:none; appearance:none; -webkit-appearance:none; cursor:pointer; }
     .btn--solid { background: var(--rose); color:#fff; border-color: var(--rose); box-shadow:0 14px 34px rgba(227,92,114,.32); }
     .btn--solid:hover { background: var(--rose-bright); border-color:var(--rose-bright); }
     .btn--ghost:hover { border-color:#fff; }
@@ -224,6 +224,28 @@
     .visit__row span { color:rgba(35,21,26,.5); font-size:.78rem; text-transform:uppercase; letter-spacing:.1em; }
     .visit__map { height:520px; border-radius:26px; overflow:hidden; position:relative; background:#ddd0c8; }
     .visit__map iframe { width:100%; height:100%; border:0; filter: grayscale(.2) sepia(.08); }
+
+    /* ---------- Booking (pedir cita) ---------- */
+    .booking-form { background: var(--ink-2); border:1px solid var(--line); border-radius: var(--radius); padding: clamp(28px,4vw,48px); max-width: 760px; }
+    .booking-form.is-hidden { display:none; }
+    .booking-form__step { margin-bottom: 34px; }
+    .booking-form__step:last-of-type { margin-bottom: 0; }
+    .booking-form__label { display:flex; align-items:baseline; gap:12px; margin-bottom:16px; font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.55); }
+    .booking-form__label b { font-family:"Bodoni Moda", serif; font-style:italic; font-size:1.4rem; color: var(--rose-bright); }
+    .chip-group { display:flex; flex-wrap:wrap; gap:10px; }
+    .chip { padding:10px 18px; border-radius:999px; border:1.5px solid var(--line); background:transparent; color: var(--paper); font-size:.86rem; cursor:pointer; transition: border-color .2s, background .2s, color .2s; }
+    .chip:hover { border-color: rgba(255,255,255,.4); }
+    .chip.is-active { background: var(--rose); border-color: var(--rose); color: var(--ink); font-weight:600; }
+    .booking-form__row { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .booking-form input[type="date"], .booking-form input[type="text"], .booking-form input[type="tel"] { width:100%; padding:14px 16px; border-radius:14px; border:1.5px solid var(--line); background: rgba(255,255,255,.04); color: var(--paper); font-size:.95rem; }
+    .booking-form input::placeholder { color: rgba(255,255,255,.35); }
+    .booking-form__submit { margin-top:8px; }
+    .booking-confirm { display:none; text-align:center; padding: 40px 20px; max-width:760px; }
+    .booking-confirm.is-visible { display:block; }
+    .booking-confirm h3 { font-family:"Bodoni Moda", serif; font-style:italic; font-size:2.2rem; margin:0 0 12px; color: var(--rose-bright); }
+    .booking-confirm p { color:rgba(255,255,255,.62); max-width:46ch; margin:0 auto; }
+    .booking-confirm button { margin-top:22px; }
+    @media (max-width:640px) { .booking-form__row { grid-template-columns:1fr; } }
 
     /* ---------- Footer ---------- */
     .site-footer { background:#180f12; padding:90px 0 30px; }
@@ -502,7 +524,7 @@
 <div class="eyebrow">Visítanos</div>
 <h2 class="section-title">Ven a elegir<br/>tu próximo color.</h2>
 <div class="visit__details">
-<div class="visit__row"><span>Dirección</span><div>[Dirección del negocio]</div></div>
+<div class="visit__row"><span>Dirección</span><div>[Dirección del negocio], [CP] [Ciudad]</div></div>
 <div class="visit__row"><span>Horario</span><div>Lunes a sábado, 10:00 – 20:00</div></div>
 <div class="visit__row"><span>Teléfono</span><div><a href="tel:+34000000000">000 00 00 00</a></div></div>
 <div class="visit__row"><span>Barrio</span><div>[Barrio] · [Ciudad]</div></div>
@@ -512,9 +534,55 @@
 <div class="visit__map"><iframe title="Mapa de [NOMBRE DEL NEGOCIO]" loading="lazy" src="https://www.google.com/maps?q=Madrid,+España&output=embed"></iframe></div>
 </div>
 </section>
+
+<section class="section booking" id="reservar">
+<div class="container">
+<div class="eyebrow">Pedir cita</div>
+<h2 class="section-title">Reserva tu cita<br/>en dos minutos.</h2>
+<p class="lead" style="margin:18px 0 44px;">Elige servicio, día y hora. Os confirmamos la cita — así es como se vería el proceso real de reserva en vuestra web.</p>
+
+<form class="booking-form" id="bookingForm">
+<div class="booking-form__step">
+<div class="booking-form__label"><b>01</b> Servicio</div>
+<div class="chip-group" data-chip-group="servicio">
+<button type="button" class="chip">Manicura clásica</button>
+<button type="button" class="chip">Uñas de gel</button>
+<button type="button" class="chip">Nail art &amp; diseños</button>
+<button type="button" class="chip">Pedicura spa</button>
+</div>
+</div>
+<div class="booking-form__step">
+<div class="booking-form__label"><b>02</b> Fecha y hora</div>
+<div class="booking-form__row">
+<input type="date" name="fecha" required/>
+<div class="chip-group" data-chip-group="hora">
+<button type="button" class="chip">10:00</button>
+<button type="button" class="chip">12:30</button>
+<button type="button" class="chip">16:00</button>
+<button type="button" class="chip">18:30</button>
+</div>
+</div>
+</div>
+<div class="booking-form__step">
+<div class="booking-form__label"><b>03</b> Tus datos</div>
+<div class="booking-form__row">
+<input type="text" name="nombre" placeholder="Nombre" required/>
+<input type="tel" name="telefono" placeholder="Teléfono" required/>
+</div>
+</div>
+<button type="submit" class="btn btn--solid magnetic booking-form__submit">Confirmar cita (demo)</button>
+</form>
+
+<div class="booking-confirm" id="bookingConfirm">
+<h3>Cita confirmada</h3>
+<p>Esto es una demostración — aquí se conectaría con vuestro sistema de citas real (agenda propia, Booksy, Treatwell, o el que uséis).</p>
+<button type="button" class="btn btn--ghost magnetic" id="bookingReset">Pedir otra cita (demo)</button>
+</div>
+</div>
+</section>
 </main>
 
-<footer class="site-footer" id="reservar">
+<footer class="site-footer">
 <div class="container">
 <div class="footer__top">
 <div>
@@ -622,6 +690,28 @@
             gsap.to(dot, { rotateY: px * 20, rotateX: -py * 20, y: -8, scale: 1.1, transformPerspective: 600, duration: .35, ease: 'power2.out' });
           });
           dot.addEventListener('mouseleave', () => gsap.to(dot, { rotateY: 0, rotateX: 0, y: 0, scale: 1, duration: .5, ease: 'elastic.out(1, .5)' }));
+        });
+      }
+
+      /* Booking form (demo) */
+      const bookingForm = $('#bookingForm');
+      if (bookingForm) {
+        $$('[data-chip-group] .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            $$('.chip', chip.closest('[data-chip-group]')).forEach(c => c.classList.remove('is-active'));
+            chip.classList.add('is-active');
+          });
+        });
+        bookingForm.addEventListener('submit', e => {
+          e.preventDefault();
+          bookingForm.classList.add('is-hidden');
+          $('#bookingConfirm').classList.add('is-visible');
+        });
+        $('#bookingReset')?.addEventListener('click', () => {
+          $('#bookingConfirm').classList.remove('is-visible');
+          bookingForm.classList.remove('is-hidden');
+          bookingForm.reset();
+          $$('[data-chip-group] .chip.is-active').forEach(c => c.classList.remove('is-active'));
         });
       }
 

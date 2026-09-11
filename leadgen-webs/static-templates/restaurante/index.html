@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://tudominio.com/">
   <meta property="og:title" content="[NOMBRE DEL NEGOCIO] | [ESLOGAN CORTO PARA SEO]">
   <meta property="og:description" content="[Descripción SEO breve para redes sociales].">
-  <meta property="og:image" content="img/placeholder.svg">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=75">
   <meta property="og:url" content="https://tudominio.com/">
   <meta property="og:type" content="restaurant">
   <meta property="og:locale" content="es_ES">
@@ -16,18 +16,18 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="[NOMBRE DEL NEGOCIO] | [ESLOGAN CORTO PARA SEO]">
   <meta name="twitter:description" content="[Descripción SEO breve].">
-  <meta name="twitter:image" content="img/placeholder.svg">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=75">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --c1: #06050F;
-      --c2: #EEE8FF;
-      --c3: #F060D8;
-      --c5: #0D0B1A;
+      --c1: #0F0D0A;
+      --c2: #F3ECE1;
+      --c3: #C6A15B;
+      --c5: #17130E;
       --ease: cubic-bezier(0.76, 0, 0.24, 1);
-      --font-display: 'Bebas Neue', sans-serif;
+      --font-display: 'Playfair Display', serif;
       --font-body: 'DM Sans', sans-serif;
       --font-serif: 'Libre Baskerville', serif;
     }
@@ -43,7 +43,7 @@
     }
     .cur-ring {
       position: fixed; top: 0; left: 0; width: 38px; height: 38px;
-      border: 1px solid rgba(240,96,216,.35); border-radius: 50%;
+      border: 1px solid rgba(198,161,91,.35); border-radius: 50%;
       pointer-events: none; z-index: 9998; transform: translate(-50%,-50%);
       transition: width .3s var(--ease), height .3s var(--ease), border-color .3s;
     }
@@ -79,7 +79,7 @@
     .hero-content { position: relative; z-index: 2; padding: 0 4rem 5rem; }
     .hero-eyebrow { font-size: .62rem; letter-spacing: .32em; text-transform: uppercase; color: var(--c3); margin-bottom: 1.5rem; overflow: hidden; }
     .hero-eyebrow span { display: inline-block; transform: translateY(120%); animation: slideUp .8s .25s var(--ease) forwards; }
-    .hero-title { font-family: var(--font-display); font-size: clamp(5.5rem, 13vw, 15rem); line-height: .88; letter-spacing: .01em; }
+    .hero-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(3.4rem, 9vw, 8.5rem); line-height: .96; letter-spacing: 0; }
     .htl { display: block; overflow: hidden; }
     .htl span { display: block; transform: translateY(115%); animation: slideUp 1s var(--ease) forwards; }
     .htl:nth-child(1) span { animation-delay: .35s; }
@@ -96,7 +96,7 @@
 
     /* ── BUTTONS ── */
     .btn-primary { background: var(--c3); color: var(--c1); border: none; padding: .9rem 2.1rem; font-family: var(--font-body); font-size: .75rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; cursor: none; display: inline-block; transition: background .25s, transform .25s; }
-    .btn-primary:hover { background: #d040b8; transform: translateY(-2px); }
+    .btn-primary:hover { background: #A8823F; transform: translateY(-2px); }
     .btn-ghost { background: transparent; color: var(--c2); border: 1px solid rgba(238,232,255,.22); padding: .9rem 2.1rem; font-family: var(--font-body); font-size: .75rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; cursor: none; display: inline-block; transition: border-color .25s, transform .25s; }
     .btn-ghost:hover { border-color: var(--c2); transform: translateY(-2px); }
     .btn-dark { background: var(--c1); color: var(--c2); border: none; padding: 1rem 2.8rem; font-family: var(--font-body); font-size: .78rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; display: inline-block; cursor: none; transition: opacity .25s, transform .25s; }
@@ -111,7 +111,7 @@
 
     /* ── LABELS & TITLES ── */
     .section-label { font-size: .6rem; letter-spacing: .35em; text-transform: uppercase; color: var(--c3); margin-bottom: .8rem; }
-    .section-title { font-family: var(--font-display); font-size: clamp(3rem, 5vw, 5.5rem); letter-spacing: .02em; line-height: .95; color: var(--c2); }
+    .section-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.3rem, 4vw, 4rem); letter-spacing: 0; line-height: 1.02; color: var(--c2); }
 
     /* ── SCROLL REVEAL ── */
     .fi { opacity: 0; transform: translateY(36px); transition: opacity .85s ease, transform .85s var(--ease); }
@@ -130,7 +130,7 @@
     .booking-step { margin-bottom: 2.4rem; }
     .booking-step:last-of-type { margin-bottom: 0; }
     .booking-step-label { display: flex; align-items: baseline; gap: .8rem; margin-bottom: 1.1rem; font-size: .62rem; text-transform: uppercase; letter-spacing: .28em; color: rgba(238,232,255,.5); }
-    .booking-step-label b { font-family: var(--font-display); font-size: 1.3rem; letter-spacing: .04em; color: var(--c3); }
+    .booking-step-label b { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; letter-spacing: .04em; color: var(--c3); }
     .chip-group { display: flex; flex-wrap: wrap; gap: .6rem; }
     .chip { padding: .6rem 1.1rem; border-radius: 3px; border: 1px solid rgba(238,232,255,.22); background: transparent; color: var(--c2); font-family: var(--font-body); font-size: .78rem; letter-spacing: .04em; cursor: none; transition: border-color .2s, background .2s, color .2s; }
     .chip:hover { border-color: var(--c2); }
@@ -158,7 +158,7 @@
     .dot--selected { background: var(--c3); }
     .booking-confirm { display: none; text-align: center; padding: 3.4rem 1rem; max-width: 760px; }
     .booking-confirm.is-visible { display: block; }
-    .booking-confirm h3 { font-family: var(--font-display); font-size: 2.4rem; letter-spacing: .02em; margin: 0 0 .8rem; color: var(--c3); }
+    .booking-confirm h3 { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; letter-spacing: 0; margin: 0 0 .8rem; color: var(--c3); }
     .booking-confirm p { color: rgba(238,232,255,.55); max-width: 46ch; margin: 0 auto; font-family: var(--font-serif); font-style: italic; }
     .booking-confirm .btn-ghost { margin-top: 1.6rem; }
     @media (max-width: 639px) { .booking-row { grid-template-columns: 1fr; } .booking { padding: 4rem 1.4rem; } }
@@ -178,7 +178,7 @@
     }
     .menu-row::before {
       content: ''; position: absolute; inset: 0;
-      background: rgba(240,96,216,.045);
+      background: rgba(198,161,91,.045);
       transform: scaleX(0); transform-origin: left;
       transition: transform .55s var(--ease);
     }
@@ -190,12 +190,12 @@
     }
     .menu-row:hover::after { width: 100%; }
 
-    .menu-row-num { font-family: var(--font-display); font-size: 1rem; color: rgba(240,96,216,.55); letter-spacing: .1em; min-width: 2rem; position: relative; z-index: 1; flex-shrink: 0; }
+    .menu-row-num { font-family: var(--font-display); font-size: 1rem; color: rgba(198,161,91,.55); letter-spacing: .1em; min-width: 2rem; position: relative; z-index: 1; flex-shrink: 0; }
     .menu-row-body { flex: 1; position: relative; z-index: 1; transition: transform .4s var(--ease); }
     .menu-row:hover .menu-row-body { transform: translateX(8px); }
     .menu-row-name { font-family: var(--font-display); font-size: clamp(1.7rem, 2.8vw, 2.8rem); letter-spacing: .04em; color: var(--c2); line-height: 1; }
     .menu-row-desc { font-size: .76rem; color: rgba(238,232,255,.38); line-height: 1.65; margin-top: .35rem; max-width: 500px; }
-    .menu-row-tag { font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--c3); border: 1px solid rgba(240,96,216,.22); padding: .2rem .6rem; position: relative; z-index: 1; flex-shrink: 0; }
+    .menu-row-tag { font-size: .56rem; letter-spacing: .22em; text-transform: uppercase; color: var(--c3); border: 1px solid rgba(198,161,91,.22); padding: .2rem .6rem; position: relative; z-index: 1; flex-shrink: 0; }
     .menu-row-arrow { font-size: 1.3rem; color: rgba(238,232,255,.18); position: relative; z-index: 1; flex-shrink: 0; transition: color .3s, transform .4s var(--ease); }
     .menu-row:hover .menu-row-arrow { color: var(--c3); transform: translateX(5px) rotate(-45deg); }
 
@@ -215,7 +215,7 @@
     .feature-vis img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.65) contrast(1.1); display: block; }
     .feature-vis::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent 55%, var(--c5) 100%); }
     .feature-body { display: flex; flex-direction: column; justify-content: center; padding: 5rem 4rem; }
-    .feature-title { font-family: var(--font-display); font-size: clamp(3.5rem, 5.5vw, 7rem); line-height: .88; letter-spacing: .02em; color: var(--c2); margin: 1.5rem 0; }
+    .feature-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.6rem, 4.4vw, 4.8rem); line-height: 1; letter-spacing: 0; color: var(--c2); margin: 1.5rem 0; }
     .feature-desc { font-size: .86rem; color: rgba(238,232,255,.52); line-height: 1.9; max-width: 340px; }
     .feature-stats { display: flex; gap: 2.5rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(238,232,255,.08); }
     .fstat-num { font-family: var(--font-display); font-size: 2.2rem; color: var(--c3); display: block; }
@@ -258,7 +258,7 @@
     .rating-big .total { font-size: .72rem; color: rgba(238,232,255,.33); letter-spacing: .1em; }
     .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(238,232,255,.05); }
     .review-card { background: var(--c5); padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: 1rem; transition: background .3s; }
-    .review-card:hover { background: rgba(240,96,216,.06); }
+    .review-card:hover { background: rgba(198,161,91,.06); }
     .review-top { display: flex; align-items: center; gap: 1rem; }
     .review-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--c3); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; color: var(--c1); flex-shrink: 0; }
     .review-meta { flex: 1; }
@@ -271,7 +271,7 @@
 
     /* ── CTA ── */
     .cta-full { background: var(--c3); text-align: center; padding: 8rem 4rem; position: relative; overflow: hidden; }
-    .cta-full::before { content: 'ORDER'; position: absolute; font-family: var(--font-display); font-size: clamp(8rem,20vw,22rem); color: rgba(6,5,15,.08); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: .05em; }
+    .cta-full::before { content: 'RESERVA'; position: absolute; font-family: var(--font-display); font-size: clamp(8rem,20vw,22rem); color: rgba(6,5,15,.08); top: 50%; left: 50%; transform: translate(-50%,-50%); white-space: nowrap; pointer-events: none; letter-spacing: .05em; }
     .cta-full .section-label { color: rgba(6,5,15,.45); margin-bottom: 1.5rem; }
     .cta-full .section-title { color: var(--c1); margin-bottom: 1.5rem; }
     .cta-full > p { font-size: .95rem; color: rgba(6,5,15,.55); margin-bottom: 2.5rem; position: relative; }
@@ -296,7 +296,7 @@
     @keyframes fadeIn  { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.09); } }
     @keyframes float    { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    @keyframes ctaPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(240,96,216,.4); } 50% { box-shadow: 0 0 16px 5px rgba(240,96,216,.28); } }
+    @keyframes ctaPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(198,161,91,.4); } 50% { box-shadow: 0 0 16px 5px rgba(198,161,91,.28); } }
 
     /* ── ACCESSIBILITY: REDUCED MOTION ── */
     @media (prefers-reduced-motion: reduce) {
@@ -329,7 +329,7 @@
       .menu-row-img { order: -1; position: relative; width: 100%; height: 180px; clip-path: none !important; flex-shrink: 0; }
       .menu-row-img::after { background: linear-gradient(to bottom, transparent 60%, rgba(6,5,15,.3) 100%); }
       .menu-row-img img { filter: saturate(.55); }
-      .menu-row-num { position: absolute; top: .6rem; right: 1rem; font-size: 3rem; color: rgba(240,96,216,.7); text-shadow: 0 2px 10px rgba(0,0,0,.7); line-height: 1; min-width: auto; }
+      .menu-row-num { position: absolute; top: .6rem; right: 1rem; font-size: 3rem; color: rgba(198,161,91,.7); text-shadow: 0 2px 10px rgba(0,0,0,.7); line-height: 1; min-width: auto; }
       .menu-row-body { padding: 1.4rem 1.4rem .4rem; }
       .menu-row:hover .menu-row-body { transform: none; }
       .menu-row-name { font-size: 1.6rem; }
@@ -462,7 +462,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg" id="heroBg">
-    <img src="img/placeholder.svg" alt="" loading="eager">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=78" alt="" loading="eager">
   </div>
   <div class="hero-content">
     <p class="hero-eyebrow"><span>[CIUDAD] &nbsp;·&nbsp; Desde [AÑO]</span></p>
@@ -475,8 +475,8 @@
     <div class="hero-bottom">
       <p class="hero-desc">[Frase corta y evocadora sobre tu producto o negocio. 1-2 líneas, tono cercano.]</p>
       <div class="hero-actions">
-        <a href="[URL_PEDIDO_DELIVERY]" target="_blank" rel="noopener noreferrer" class="btn-primary">[Acción principal]</a>
-        <a href="#reservar" class="btn-ghost">Reservar mesa</a>
+        <a href="#reservar" class="btn-primary">Reservar mesa</a>
+        <a href="#menu" class="btn-ghost">Ver la carta</a>
       </div>
     </div>
   </div>
@@ -522,7 +522,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta, ej. Más pedido]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 1]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 1]" loading="lazy"></div>
     </div>
     <div class="menu-row fi">
       <span class="menu-row-num">02</span>
@@ -532,7 +532,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 2]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 2]" loading="lazy"></div>
     </div>
     <div class="menu-row fi">
       <span class="menu-row-num">03</span>
@@ -542,7 +542,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 3]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 3]" loading="lazy"></div>
     </div>
     <div class="menu-row fi">
       <span class="menu-row-num">04</span>
@@ -552,7 +552,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta, ej. Para compartir]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 4]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 4]" loading="lazy"></div>
     </div>
     <div class="menu-row fi">
       <span class="menu-row-num">05</span>
@@ -562,7 +562,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta, ej. Novedad]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 5]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 5]" loading="lazy"></div>
     </div>
     <div class="menu-row fi">
       <span class="menu-row-num">06</span>
@@ -572,7 +572,7 @@
       </div>
       <span class="menu-row-tag">[Etiqueta]</span>
       <span class="menu-row-arrow">↗</span>
-      <div class="menu-row-img"><img src="img/placeholder.svg" alt="[PRODUCTO 6]" loading="lazy"></div>
+      <div class="menu-row-img"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=800&q=78" alt="[PRODUCTO 6]" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -580,7 +580,7 @@
 <!-- FEATURE -->
 <div class="feature fi">
   <div class="feature-vis">
-    <img src="img/placeholder.svg" alt="[PRODUCTO DESTACADO]" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="[PRODUCTO DESTACADO]" loading="lazy">
   </div>
   <div class="feature-body">
     <p class="section-label">[Especialidad de la casa]</p>
@@ -600,7 +600,7 @@
 <!-- ABOUT -->
 <section class="about" id="nosotros">
   <div class="about-vis fi">
-    <img class="about-img" src="img/placeholder.svg" alt="Interior de [NOMBRE DEL NEGOCIO]" loading="lazy">
+    <img class="about-img" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80" alt="Interior de [NOMBRE DEL NEGOCIO]" loading="lazy">
     <div class="about-stat">
       <span class="about-stat-num">★ [4.8]</span>
       <span class="about-stat-label">Valoración media</span>
@@ -610,7 +610,7 @@
     <p class="section-label">Sobre nosotros</p>
     <h2 class="section-title">TU<br>HISTORIA<br>AQUÍ</h2>
     <p class="about-text">[Texto "sobre nosotros": quiénes sois, filosofía del negocio, qué os diferencia. 2-4 frases con tono cercano.]</p>
-    <a href="[URL_PEDIDO_DELIVERY]" target="_blank" rel="noopener noreferrer" class="btn-primary">[Llamada a la acción]</a>
+    <a href="#reservar" class="btn-primary">Reservar mesa</a>
     <div class="about-addr">
       <p><strong>Dirección</strong><br>[Calle y número]<br>[Ciudad, Código Postal] · [Provincia]</p>
       <p style="margin-top:1rem"><strong>Teléfono</strong><br>[Teléfono de contacto]</p>
@@ -627,34 +627,34 @@
   <div class="marq-wrap">
     <div class="marq-row go-left">
       <div class="marq-inner">
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=72" alt=""></div>
       </div>
     </div>
     <div class="marq-row go-right">
       <div class="marq-inner">
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
-        <div class="marq-photo"><img src="img/placeholder.svg" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=500&q=72" alt=""></div>
+        <div class="marq-photo"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=500&q=72" alt=""></div>
       </div>
     </div>
   </div>
@@ -735,10 +735,10 @@
 
 <!-- CTA -->
 <div class="cta-full fi">
-  <p class="section-label">[Delivery disponible]</p>
+  <p class="section-label">[Reservas abiertas]</p>
   <h2 class="section-title">LLAMADA<br>A LA ACCIÓN</h2>
   <p>[Frase de cierre invitando a pedir/reservar/visitar.]<br>[Segunda línea opcional.]</p>
-  <a href="[URL_PEDIDO_DELIVERY]" target="_blank" rel="noopener noreferrer" class="btn-dark">[Texto del botón]</a>
+  <a href="#reservar" class="btn-dark">Reservar mesa</a>
 </div>
 
 <!-- BOOKING -->
@@ -825,7 +825,6 @@
       <ul>
         <li><a href="#" target="_blank" rel="noopener noreferrer">Ver carta PDF</a></li>
         <li><a href="#" target="_blank" rel="noopener noreferrer">Alérgenos</a></li>
-        <li><a href="[URL_PEDIDO_DELIVERY]" target="_blank" rel="noopener noreferrer">Pedir a domicilio</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -849,7 +848,7 @@
     <p class="footer-copy">© [AÑO] [NOMBRE DEL NEGOCIO] · Todos los derechos reservados</p>
     <div class="footer-social">
       <a href="[URL_INSTAGRAM]" target="_blank" rel="noopener noreferrer">Instagram →</a>
-      <a href="[URL_PEDIDO_DELIVERY]" target="_blank" rel="noopener noreferrer">Pedir online →</a>
+      <a href="#reservar">Reservar mesa →</a>
     </div>
   </div>
 </footer>
@@ -948,10 +947,10 @@
   "@type": "Restaurant",
   "name": "[NOMBRE DEL NEGOCIO]",
   "url": "https://tudominio.com",
-  "image": "img/placeholder.svg",
+  "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=75",
   "description": "[Descripción para SEO/structured data].",
   "servesCuisine": ["[Tipo de cocina]"],
-  "priceRange": "€€",
+  "priceRange": "€€€",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "[Calle y número]",

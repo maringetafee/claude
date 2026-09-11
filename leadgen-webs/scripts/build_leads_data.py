@@ -4,6 +4,10 @@ valoracion y estado) de todos los leads/*.csv, en vez de tener que abrir
 el CSV en bruto para verlos. Es la segunda pestaña del sitio, junto al panel
 de propuestas que genera build_site.py.
 
+Las tarjetas se agrupan por tipo de negocio (una sección por tipo, con las
+ciudades como sub-etiqueta dentro de cada tarjeta) en vez de por tipo+ciudad,
+para que el tipo sea el nivel principal de navegación.
+
 Uso:
     python scripts/build_leads_data.py
 """
@@ -12,7 +16,20 @@ from pathlib import Path
 
 from slugify import slugify
 
-from site_common import ESTADO_SYNC_SCRIPT, SHARED_CSS, badge_html, cargar_estados, nav_tabs
+from site_common import (
+    ESTADO_SYNC_SCRIPT,
+    PLANTILLAS_MAESTRAS,
+    SHARED_CSS,
+    badge_html,
+    cargar_estados,
+    jump_nav,
+    nav_tabs,
+    orden_tipo,
+    page_head_extra,
+    stat_card,
+    tipo_color,
+    tipo_icon,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_SITES = ROOT / "output" / "sites"
@@ -38,22 +55,11 @@ def cargar_leads():
     return leads
 
 
-def render_foto(lead):
+def render_avatar(lead, color):
     if lead["tiene_foto"]:
-        return f'<img class="foto" src="img/{lead["slug"]}.jpg" alt="" loading="lazy" />'
+        return f'<img class="avatar" src="img/{lead["slug"]}.jpg" alt="" loading="lazy" />'
     inicial = (lead["business_name"] or "?").strip()[:1].upper()
-    return f'<div class="foto foto-placeholder">{inicial}</div>'
-
-
-def render_negocio(lead):
-    nombre = lead["business_name"]
-    if lead["tiene_demo"]:
-        nombre_html = f'<a href="{lead["slug"]}.html">{nombre}</a>'
-    else:
-        nombre_html = nombre
-    direccion = lead.get("address", "")
-    return f"""<div class="nombre">{nombre_html}</div>
-        <div class="direccion">{direccion}</div>"""
+    return f'<div class="avatar avatar-placeholder" style="background:{color}1a;color:{color}">{inicial}</div>'
 
 
 def render_contacto(lead):
@@ -67,7 +73,7 @@ def render_contacto(lead):
     if not lineas:
         lineas.append('<span class="muted">Sin contacto</span>')
     elif not email:
-        lineas.append('<span class="muted">Solo por teléfono/WhatsApp</span>')
+        lineas.append('<span class="muted">Solo teléfono/WhatsApp</span>')
     return "<br>".join(lineas)
 
 
@@ -83,8 +89,8 @@ def render_rating(lead):
     rating = lead.get("rating", "")
     reviews = lead.get("review_count", "")
     if not rating:
-        return '<span class="muted">—</span>'
-    return f'★ {rating} <span class="reviews">({reviews})</span>'
+        return ""
+    return f'<span class="rating">★ {rating} <span class="reviews">({reviews})</span></span>'
 
 
 def render_estado(lead):
@@ -94,38 +100,64 @@ def render_estado(lead):
     return badge_html(lead["slug"], estado)
 
 
-def render_grupo(clave, leads_grupo):
-    tipo, city = clave
-    filas = "\n".join(
-        f"""      <tr>
-        <td class="col-foto">{render_foto(lead)}</td>
-        <td class="col-negocio">{render_negocio(lead)}</td>
-        <td class="col-contacto">{render_contacto(lead)}</td>
-        <td class="col-web">{render_web(lead)}</td>
-        <td class="col-rating">{render_rating(lead)}</td>
-        <td class="col-estado">{render_estado(lead)}</td>
-      </tr>"""
-        for lead in leads_grupo
+def render_card(lead, color):
+    nombre = lead["business_name"]
+    nombre_html = f'<a href="{lead["slug"]}.html">{nombre}</a>' if lead["tiene_demo"] else nombre
+    direccion = lead.get("address", "")
+    return f"""      <article class="card">
+        {render_avatar(lead, color)}
+        <div class="card-body">
+          <div class="card-top">
+            <div class="nombre">{nombre_html}</div>
+            <span class="ciudad-tag">{lead.get('city', '')}</span>
+          </div>
+          <div class="direccion">{direccion}</div>
+          <div class="card-meta">
+            <span class="contacto">{render_contacto(lead)}</span>
+            {render_rating(lead)}
+          </div>
+          <div class="card-foot">
+            {render_web(lead)}
+            {render_estado(lead)}
+          </div>
+        </div>
+      </article>"""
+
+
+def render_tipo_section(tipo, leads_tipo):
+    color = tipo_color(tipo)
+    ciudades = {}
+    for lead in leads_tipo:
+        ciudades[lead.get("city", "")] = ciudades.get(lead.get("city", ""), 0) + 1
+    chips_html = "\n".join(
+        f'<span>{ciudad} · {n}</span>' for ciudad, n in sorted(ciudades.items())
     )
+
+    maestras = PLANTILLAS_MAESTRAS.get(tipo, [])
+    maestra_html = "\n".join(
+        f"""
+        <a class="maestra" href="{href}">
+          <span class="maestra-tag">Plantilla maestra</span>
+          <span class="maestra-nombre">{nombre}</span>
+          <span class="maestra-flecha">Ver demo &rarr;</span>
+        </a>"""
+        for nombre, href in maestras
+    )
+
+    leads_ordenados = sorted(leads_tipo, key=lambda l: (l.get("city", ""), l.get("business_name", "")))
+    tarjetas = "\n".join(render_card(lead, color) for lead in leads_ordenados)
+
+    con_web = sum(1 for l in leads_tipo if l.get("tiene_web") == "True")
+
     return f"""
-    <section class="grupo">
-      <h2>{tipo} <span class="ciudad">· {city}</span> <span class="conteo">({len(leads_grupo)})</span></h2>
-      <div class="tabla-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Foto</th>
-            <th>Negocio</th>
-            <th>Contacto</th>
-            <th>Web</th>
-            <th>Valoración</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-{filas}
-        </tbody>
-      </table>
+    <section class="tipo" id="tipo-{tipo.lower()}" style="--tipo-color:{color}">
+      <h2><span class="tipo-icon">{tipo_icon(tipo)}</span>{tipo} <span class="conteo">({len(leads_tipo)} · {len(leads_tipo) - con_web} sin web)</span></h2>
+      <div class="ciudad-chips">
+      {chips_html}
+      </div>
+      {maestra_html}
+      <div class="card-grid">
+{tarjetas}
       </div>
     </section>"""
 
@@ -133,17 +165,24 @@ def render_grupo(clave, leads_grupo):
 def build():
     leads = cargar_leads()
 
-    grupos = {}
+    por_tipo = {}
     for lead in leads:
-        clave = (lead.get("type_label", "Otros") or "Otros", lead.get("city", ""))
-        grupos.setdefault(clave, []).append(lead)
+        tipo = lead.get("type_label", "Otros") or "Otros"
+        por_tipo.setdefault(tipo, []).append(lead)
 
-    secciones = "\n".join(
-        render_grupo(clave, grupos[clave]) for clave in sorted(grupos.keys())
-    )
+    tipos_ordenados = sorted(por_tipo.keys(), key=orden_tipo)
+    secciones = "\n".join(render_tipo_section(tipo, por_tipo[tipo]) for tipo in tipos_ordenados)
 
     con_web = sum(1 for lead in leads if lead.get("tiene_web") == "True")
-    resumen = f"{len(leads)} leads en total — {len(leads) - con_web} sin web, {con_web} con web"
+    sin_web = len(leads) - con_web
+    conteos_nav = {tipo: len(por_tipo[tipo]) for tipo in tipos_ordenados}
+
+    stats_html = "\n      ".join([
+        stat_card(len(leads), "Leads en total"),
+        stat_card(sin_web, "Sin web"),
+        stat_card(con_web, "Con web"),
+        stat_card(len(tipos_ordenados), "Tipos de negocio"),
+    ])
 
     datos_html = f"""<!doctype html>
 <html lang="es">
@@ -152,69 +191,64 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Datos de leads — panel interno</title>
 <meta name="robots" content="noindex, nofollow" />
+{page_head_extra()}
 <style>
 {SHARED_CSS}
-  body {{ max-width: 1180px; }}
-  section.grupo {{
-    background: #fff;
-    border: 1px solid #e5e5e8;
-    border-radius: 14px;
-    padding: 1.5rem 1.5rem 0.5rem;
-    margin-bottom: 2rem;
+  .card-grid {{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
   }}
-  h2 {{ font-size: 1.1rem; margin: 0 0 1rem; font-weight: 600; }}
-  h2 .ciudad {{ font-weight: 400; color: #6b6b70; }}
-  h2 .conteo {{ font-weight: 400; color: #8a8a90; font-size: 0.9rem; }}
-  .tabla-wrap {{ overflow-x: auto; margin: 0 -1.5rem; }}
-  table {{ width: 100%; border-collapse: collapse; font-size: 0.88rem; }}
-  th {{
-    text-align: left;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: #8a8a90;
-    padding: 0 1rem 0.6rem 1.5rem;
-    border-bottom: 1px solid #e5e5e8;
+  .card {{
+    display: flex;
+    gap: .9rem;
+    padding: 1rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
   }}
-  th:first-child, td:first-child {{ padding-left: 1.5rem; }}
-  td {{
-    padding: 0.7rem 1rem 0.7rem 1.5rem;
-    border-bottom: 1px solid #f2f2f4;
-    vertical-align: middle;
-  }}
-  tr:last-child td {{ border-bottom: none; }}
-  .foto {{
-    width: 42px;
-    height: 42px;
-    border-radius: 8px;
+  .avatar {{
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
     object-fit: cover;
+    flex-shrink: 0;
     display: block;
   }}
-  .foto-placeholder {{
+  .avatar-placeholder {{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #ececec;
-    color: #8a8a90;
-    font-weight: 600;
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 1.3rem;
   }}
-  .col-negocio {{ min-width: 200px; }}
-  .nombre {{ font-weight: 600; }}
+  .card-body {{ flex: 1; min-width: 0; }}
+  .card-top {{ display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }}
+  .nombre {{ font-weight: 600; font-size: .95rem; line-height: 1.3; }}
   .nombre a {{ color: inherit; text-decoration: none; }}
   .nombre a:hover {{ text-decoration: underline; }}
-  .direccion {{ color: #8a8a90; font-size: 0.8rem; margin-top: 0.15rem; }}
-  .col-contacto a {{ color: #1a4fd6; text-decoration: none; }}
-  .col-contacto a:hover {{ text-decoration: underline; }}
+  .ciudad-tag {{ font-size: .68rem; color: var(--ink-soft); white-space: nowrap; flex-shrink: 0; }}
+  .direccion {{ color: var(--ink-soft); font-size: .78rem; margin-top: .15rem; }}
+  .card-meta {{ display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .55rem; font-size: .82rem; }}
+  .card-meta a {{ color: #1a4fd6; text-decoration: none; }}
+  .card-meta a:hover {{ text-decoration: underline; }}
+  .rating {{ white-space: nowrap; color: #a3791a; font-size: .8rem; flex-shrink: 0; }}
+  .reviews {{ color: var(--ink-soft); font-size: .74rem; }}
   .muted {{ color: #b0b0b6; }}
-  .web-link {{ color: #157a3d; text-decoration: none; font-weight: 500; white-space: nowrap; }}
+  .web-link {{ color: #157a3d; text-decoration: none; font-weight: 500; font-size: .82rem; white-space: nowrap; }}
   .web-link:hover {{ text-decoration: underline; }}
-  .reviews {{ color: #8a8a90; font-size: 0.8rem; }}
+  .card-foot {{ display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .65rem; }}
 </style>
 </head>
 <body>
 {nav_tabs('datos')}
 <h1>Datos de leads</h1>
-<p class="resumen">{resumen}</p>
+<p class="resumen">Todos los leads/*.csv, agrupados por tipo de negocio.</p>
+<div class="stats-row">
+      {stats_html}
+</div>
+{jump_nav(conteos_nav)}
 {secciones}
 {ESTADO_SYNC_SCRIPT}
 </body>
@@ -222,7 +256,7 @@ def build():
 """
     OUT_SITES.mkdir(parents=True, exist_ok=True)
     (OUT_SITES / "datos.html").write_text(datos_html, encoding="utf-8")
-    print(f"Generado: {OUT_SITES / 'datos.html'} ({len(leads)} leads, {len(grupos)} grupos)")
+    print(f"Generado: {OUT_SITES / 'datos.html'} ({len(leads)} leads, {len(tipos_ordenados)} tipos)")
 
 
 if __name__ == "__main__":
