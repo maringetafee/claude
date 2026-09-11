@@ -12,7 +12,7 @@ export const siteConfig = {
   shortName: "Rosangel",
   legalName: "Autoescuela Rosangel", // TODO: confirmar razón social exacta (S.L. / autónomo) para el aviso legal.
   dgtCode: "M-1711",
-  tagline: "Autoescuela en Getafe con tres centros y más de dos décadas dando clases.",
+  tagline: "Autoescuela en Getafe con cuatro centros y más de dos décadas dando clases.",
 
   // Centro con más presencia en directorios / número más citado. Se usa como
   // contacto "general" en el header y el footer.
@@ -30,15 +30,14 @@ export const siteConfig = {
   instagram: "https://www.instagram.com/autoescuelarosangel/",
   facebook: "https://www.facebook.com/AutoescuelaRoSangel/",
 
-  // Valoración agregada: las fuentes públicas discrepan entre 4.0 y 4.8/5.
-  // TODO: sustituir por el dato en vivo del perfil de Google Business antes
-  // de publicar.
-  rating: { value: 4.8, count: 31, verified: false },
+  // Valoración media en Google Maps: 4,8 en tres fichas y 5,0 (6 reseñas) en
+  // Los Molinos, media ponderada 4,8. El número total de reseñas se suma
+  // desde centers[].googleRating.
+  rating: { value: 4.8, source: "Google Maps", checkedAt: "septiembre de 2026" },
 
   google: {
-    // TODO: sustituir por el enlace corto real del perfil de Google Business una vez lo confirme el cliente.
-    profileSearchUrl:
-      "https://www.google.com/search?q=Autoescuela+Rosangel+Getafe",
+    // Búsqueda en Google Maps: muestra las fichas de todos los centros con sus reseñas.
+    profileSearchUrl: "https://www.google.com/maps/search/Autoescuela+Rosangel+Getafe",
   },
 } as const;
 
@@ -60,6 +59,8 @@ export type Center = {
   // cliente confirme horario por centro. TODO: confirmar horario real de
   // cada centro (puede variar).
   hours: { label: string; value: string }[];
+  // Valoración de la ficha de Google Maps de cada centro (septiembre de 2026).
+  googleRating: { value: number; count: number };
   mapsQuery: string;
   mapEmbedUrl: string;
   geo: { lat: number; lng: number } | null;
@@ -69,10 +70,34 @@ export type Center = {
 
 export const centers: Center[] = [
   {
-    slug: "titulcia",
+    slug: "manzana",
     shortName: "Centro",
-    fullName: "Rosangel Titulcia",
+    fullName: "Rosangel Centro",
     zoneLabel: "Getafe Centro",
+    street: "C. Manzana, 14",
+    postalCode: "28901",
+    city: "Getafe",
+    addressLine: "C. Manzana, 14, 28901 Getafe, Madrid",
+    phone: { display: "640 27 40 38", href: "tel:+34640274038" },
+    whatsapp: { number: "34640274038", display: "640 27 40 38" },
+    hours: [
+      { label: "Lunes a jueves", value: "10:00–13:30 y 17:00–21:00" },
+      { label: "Viernes", value: "10:00–13:30 y 17:00–20:00" },
+      { label: "Sábado y domingo", value: "Cerrado" },
+    ],
+    googleRating: { value: 4.8, count: 211 },
+    mapsQuery: "Autoescuela Rosangel, Calle Manzana 14, 28901 Getafe",
+    mapEmbedUrl:
+      "https://maps.google.com/maps?q=Calle%20Manzana%2014%2C%2028901%20Getafe%2C%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    geo: { lat: 40.3082344, lng: -3.7276747 },
+    verified: true,
+    note: "Dirección, teléfono y horario confirmados por dos fuentes públicas independientes.",
+  },
+  {
+    slug: "titulcia",
+    shortName: "Juan de la Cierva",
+    fullName: "Rosangel Juan de la Cierva",
+    zoneLabel: "Juan de la Cierva",
     street: "C. Titulcia, 23",
     postalCode: "28903",
     city: "Getafe",
@@ -84,10 +109,11 @@ export const centers: Center[] = [
       { label: "Viernes", value: "10:00–13:30 y 17:00–20:00" },
       { label: "Sábado y domingo", value: "Cerrado" },
     ],
+    googleRating: { value: 4.8, count: 141 },
     mapsQuery: "Autoescuela Rosangel, Calle Titulcia 23, 28903 Getafe",
     mapEmbedUrl:
       "https://maps.google.com/maps?q=Calle%20Titulcia%2023%2C%2028903%20Getafe%2C%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    geo: null,
+    geo: { lat: 40.3126573, lng: -3.7236126 },
     verified: true,
     note: "Dirección y teléfono confirmados por varias fuentes públicas independientes.",
   },
@@ -100,42 +126,45 @@ export const centers: Center[] = [
     postalCode: "28903",
     city: "Getafe",
     addressLine: "Av. Rigoberta Menchú, 19, 28903 Getafe, Madrid",
-    phone: { display: "916 82 48 51", href: "tel:+34916824851" },
+    phone: { display: "685 65 95 63", href: "tel:+34685659563" },
     whatsapp: { number: "34916824851", display: "916 82 48 51" },
     hours: [
       { label: "Lunes a jueves", value: "10:00–13:30 y 17:00–21:00" },
       { label: "Viernes", value: "10:00–13:30 y 17:00–20:00" },
       { label: "Sábado y domingo", value: "Cerrado" },
     ],
+    googleRating: { value: 4.8, count: 186 },
     mapsQuery: "Autoescuela Rosangel Norte, Avenida Rigoberta Menchú 19, 28903 Getafe",
     mapEmbedUrl:
       "https://maps.google.com/maps?q=Avenida%20Rigoberta%20Menchu%2019%2C%2028903%20Getafe%2C%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    geo: null,
+    geo: { lat: 40.3228738, lng: -3.715331 },
     verified: true,
-    note: "El propio negocio identifica este centro como \"Rosangel Norte\" en directorios locales. Teléfono: algunas fuentes citan también un móvil distinto (685 65 95 63) — confirmar cuál usar.",
+    note: "El propio negocio identifica este centro como \"Rosangel Norte\" en directorios locales. Teléfono tomado de su ficha de Google Maps (septiembre de 2026).",
   },
   {
-    slug: "manzana",
-    shortName: "Manzana",
-    fullName: "Rosangel Manzana",
-    zoneLabel: "Getafe Manzana",
-    street: "C. Manzana, 14",
-    postalCode: "28901",
+    slug: "los-molinos",
+    shortName: "Los Molinos",
+    fullName: "Rosangel Los Molinos",
+    zoneLabel: "Los Molinos",
+    street: "Av. del Ingenioso Hidalgo, 7",
+    postalCode: "28906",
     city: "Getafe",
-    addressLine: "C. Manzana, 14, 28901 Getafe, Madrid",
-    phone: { display: "640 27 40 38", href: "tel:+34640274038" },
-    whatsapp: { number: "34640274038", display: "640 27 40 38" },
+    addressLine: "Av. del Ingenioso Hidalgo, 7, 28906 Getafe, Madrid",
+    phone: { display: "665 89 27 39", href: "tel:+34665892739" },
+    // Sin WhatsApp propio confirmado: se usa el WhatsApp general.
+    whatsapp: siteConfig.whatsapp,
     hours: [
       { label: "Lunes a jueves", value: "10:00–13:30 y 17:00–21:00" },
       { label: "Viernes", value: "10:00–13:30 y 17:00–20:00" },
       { label: "Sábado y domingo", value: "Cerrado" },
     ],
-    mapsQuery: "Autoescuela Rosangel, Calle Manzana 14, 28901 Getafe",
+    googleRating: { value: 5.0, count: 6 },
+    mapsQuery: "Autoescuela Rosangel, Avenida del Ingenioso Hidalgo 7, 28906 Getafe",
     mapEmbedUrl:
-      "https://maps.google.com/maps?q=Calle%20Manzana%2014%2C%2028901%20Getafe%2C%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    geo: null,
+      "https://maps.google.com/maps?q=Avenida%20del%20Ingenioso%20Hidalgo%207%2C%2028906%20Getafe%2C%20Madrid&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    geo: { lat: 40.3180203, lng: -3.7037502 },
     verified: true,
-    note: "Dirección, teléfono y horario confirmados por dos fuentes públicas independientes.",
+    note: "Ficha propia de Autoescuela Rosangel en Google Maps (septiembre de 2026). Añadido a petición del equipo.",
   },
 ];
 

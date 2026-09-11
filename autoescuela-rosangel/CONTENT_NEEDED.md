@@ -9,20 +9,13 @@ dejado marcado y fácil de sustituir en `src/lib/site-config.ts`,
 
 ## CRÍTICO — antes de publicar
 
-- **WhatsApp Business oficial.** Se han encontrado varios números distintos
-  asociados a Rosangel en directorios públicos (916 82 48 51, 660 36 71 99,
-  685 65 95 63, 605 04 63 63, 640 27 40 38). De momento la web usa
-  **640 27 40 38** por defecto (`src/lib/site-config.ts`, `siteConfig.whatsapp`).
-  Hay que confirmar cuál es el WhatsApp Business real y activo.
-- **Teléfono exacto por centro**, especialmente el de Rigoberta Menchú
-  (Norte): las fuentes dan 916 82 48 51 (compartido con Titulcia) o un móvil
-  distinto (685 65 95 63 / 605 04 63 63).
-- **Dirección "Av. del Ingenioso Hidalgo, 7"**: estaba en la lista de partida
-  pero ninguna fuente pública la confirma como centro activo de Rosangel. Se
-  ha excluido de la web. Confirmar si sigue operativo y, si es así, añadirlo
-  en `src/lib/site-config.ts` (`centers`) siguiendo el mismo patrón que los
-  otros tres.
-- **Logo oficial en alta resolución** (SVG o PNG grande, con fondo
+- **Reseñas de ejemplo en la sección de Opiniones.** Las cuatro tarjetas de
+  `src/data/testimonials.ts` son textos y nombres INVENTADOS para maquetar
+  (`testimonialsAreExamples = true`). Antes de publicar, sustituirlas por
+  reseñas reales con permiso del autor o quitarlas: publicar opiniones
+  inventadas como si fueran reales es una práctica comercial desleal. La
+  valoración (4,8), el número de reseñas por centro y los temas destacados
+  sí son reales (Google Maps, septiembre de 2026).- **Logo oficial en alta resolución** (SVG o PNG grande, con fondo
   transparente). Ahora mismo la web usa un lockup tipográfico propio ("L" +
   "Rosangel") porque el único material disponible era el avatar de
   Instagram, de muy baja resolución — no apto para producción. Ver
@@ -36,24 +29,19 @@ dejado marcado y fácil de sustituir en `src/lib/site-config.ts`,
 
 ## IMPORTANTE
 
-- **Fotografías reales**: centros, vehículos de prácticas, equipo. La web
+- **Fotografías reales**: centros, vehículos de prácticas, equipo. Ahora
+  mismo las tarjetas y páginas de permisos usan dos fotos genéricas de
+  Unsplash (`public/images/permits/`) que no son de Rosangel. La web
   está diseñada para funcionar perfectamente sin fotos (identidad gráfica
   editorial con motivos de señalización vial), pero fotos reales elevarían
   mucho la sección de Centros y el hero. Estructura ya preparada en
   `public/images/{brand,centers,cars,team,permits,reviews}`.
 - **Horario real por centro.** Se usa el mismo patrón horario (L-J 10-13:30 y
-  17-21h, V 10-13:30 y 17-20h) en los tres centros porque es el único dato
+  17-21h, V 10-13:30 y 17-20h) en los cuatro centros porque es el único dato
   verificado (para el centro de Manzana, por dos fuentes independientes).
-  Puede no ser exacto para Titulcia y Rigoberta Menchú.
-- **Valoración / reseñas.** Las fuentes públicas dan entre 4.0 y 4.8 sobre 5
-  con ~31 opiniones. Se usa 4.8 como aproximación
-  (`siteConfig.rating`, `verified: false`). Antes de publicar, coger el dato
-  en vivo del perfil de Google Business.
-- **Reseñas reales citadas textualmente** (3-5, con nombre y permiso, con
-  permiso del autor o captura como evidencia) para sustituir el estado
-  "próximamente" de la sección de Opiniones (`ReviewsSection.tsx`).
-- **Enlace corto del perfil de Google Business** (`siteConfig.google`), para
-  el botón "Ver opiniones en Google" y para futuras reseñas embebidas.
+  Puede no ser exacto para Titulcia, Rigoberta Menchú y Los Molinos.
+- **Refrescar la valoración de Google** antes de publicar: los datos por
+  centro (`centers[].googleRating`) se tomaron en septiembre de 2026.
 - **Confirmar permisos ofrecidos.** Varios directorios listan también A1, A,
   B+E y ciclomotor además de B y A2, pero es un listado genérico que
   repiten muchas fichas de autoescuela — no se ha podido verificar de forma
@@ -79,9 +67,16 @@ dejado marcado y fácil de sustituir en `src/lib/site-config.ts`,
 
 ## Datos que SÍ están verificados con razonable confianza
 
+- WhatsApp general **640 27 40 38** (confirmado por el equipo, septiembre de 2026).
+- Teléfonos por centro según sus fichas de Google Maps: Centro (Manzana)
+  640 27 40 38, Juan de la Cierva (Titulcia) 916 82 48 51, Norte
+  685 65 95 63, Los Molinos 665 89 27 39. Los Molinos no tiene WhatsApp
+  propio confirmado: usa el general.
 - Autoescuela Rosangel, código DGT **M-1711**.
-- Tres centros: C. Titulcia 23 (28903), Av. Rigoberta Menchú 19 — "Rosangel
-  Norte" (28903), C. Manzana 14 (28901). Getafe, Madrid.
+- Cuatro centros: C. Manzana 14 — Getafe Centro (28901), C. Titulcia 23 —
+  Juan de la Cierva (28903), Av. Rigoberta Menchú 19 — "Rosangel Norte"
+  (28903) y Av. del Ingenioso Hidalgo 7 — Los Molinos (28906). Getafe,
+  Madrid. Etiquetas de zona confirmadas por el equipo (septiembre de 2026).
 - Instagram: [@autoescuelarosangel](https://www.instagram.com/autoescuelarosangel/).
   Facebook: [Autoescuela RoSangeL](https://www.facebook.com/AutoescuelaRoSangel/).
 - Estadísticas oficiales de la DGT (microdatos públicos), periodo

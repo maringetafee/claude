@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s — Autoescuela Rosangel",
   },
   description:
-    "Autoescuela en Getafe con tres centros: Titulcia, Rigoberta Menchú (Norte) y Manzana. Sácate el carnet B o el A2 con clases adaptadas a tu horario.",
+    "Autoescuela en Getafe con cuatro centros: Centro, Juan de la Cierva, Norte y Los Molinos. Sácate el carnet B o el A2 con clases adaptadas a tu horario.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
     siteName: "Autoescuela Rosangel",
     title: "Autoescuela Rosangel — Autoescuela en Getafe",
     description:
-      "Tres centros en Getafe. Carnet B y A2. Clases adaptadas a tu horario.",
+      "Cuatro centros en Getafe. Carnet B y A2. Clases adaptadas a tu horario.",
     url: "/",
   },
   twitter: {
     card: "summary",
     title: "Autoescuela Rosangel — Autoescuela en Getafe",
     description:
-      "Tres centros en Getafe. Carnet B y A2. Clases adaptadas a tu horario.",
+      "Cuatro centros en Getafe. Carnet B y A2. Clases adaptadas a tu horario.",
   },
 };
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { centers, whatsappHref, whatsappMessages } from "@/lib/site-config";
 import { ArrowIcon, WhatsAppIcon } from "@/components/icons";
-import RouteGraphic from "./RouteGraphic";
+import GetafeMap from "./GetafeMap";
 
 export default function Hero() {
   return (
@@ -17,7 +17,7 @@ export default function Hero() {
             saca aquí.
           </h1>
           <p className="mt-6 max-w-md text-lg text-ink-soft">
-            Autoescuela Rosangel: tres centros en Getafe y más de veinte años
+            Autoescuela Rosangel: cuatro centros en Getafe y más de veinte años
             enseñando a conducir con paciencia, a los vecinos de siempre.
           </p>
 
@@ -57,7 +57,7 @@ export default function Hero() {
         </div>
 
         <div className="relative">
-          <RouteGraphic />
+          <GetafeMap />
         </div>
       </div>
     </section>

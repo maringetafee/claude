@@ -12,7 +12,7 @@ export const faqs: FaqItem[] = [
   {
     question: "¿Dónde está Autoescuela Rosangel?",
     answer:
-      "Rosangel tiene tres centros en Getafe: Titulcia 23, Avenida Rigoberta Menchú 19 (Rosangel Norte) y Calle Manzana 14. Puedes elegir el que te quede más cerca en la sección de Centros.",
+      "Rosangel tiene cuatro centros en Getafe: Calle Manzana 14 (Centro), Calle Titulcia 23 (Juan de la Cierva), Avenida Rigoberta Menchú 19 (Rosangel Norte) y Avenida del Ingenioso Hidalgo 7 (Los Molinos). Puedes elegir el que te quede más cerca en la sección de Centros.",
   },
   {
     question: "¿Cuánto tarda en sacarse el carnet?",

@@ -17,6 +17,10 @@ export type Permit = {
   name: string;
   title: string;
   subtitle: string;
+  // Fotos genéricas de Unsplash (licencia gratuita para uso comercial, sin
+  // atribución obligatoria). No son de Rosangel: sustituir por fotos reales
+  // de sus vehículos en cuanto las haya.
+  image: { src: string; alt: string; credit: string };
   minAge: string;
   canDrive: string[];
   requirements: string[];
@@ -32,6 +36,11 @@ export const permits: Permit[] = [
     name: "Permiso B",
     title: "Carnet de coche — Permiso B",
     subtitle: "El permiso más solicitado: te permite conducir turismos y furgonetas.",
+    image: {
+      src: "/images/permits/permiso-b.jpg",
+      alt: "Profesor de autoescuela explicando la prueba práctica a un alumno junto al coche",
+      credit: "https://unsplash.com/photos/tyhpK_QelPo",
+    },
     minAge: "18 años cumplidos (puedes empezar la teórica antes de cumplirlos).",
     canDrive: [
       "Automóviles de hasta 3.500 kg de masa máxima autorizada.",
@@ -87,6 +96,11 @@ export const permits: Permit[] = [
     name: "Permiso A2",
     title: "Carnet de moto — Permiso A2",
     subtitle: "Para motos de potencia media: el paso natural para quien ya sabe lo que quiere.",
+    image: {
+      src: "/images/permits/permiso-a2.jpg",
+      alt: "Motorista con casco circulando por una carretera de curvas",
+      credit: "https://unsplash.com/photos/LZVkAbIw74Q",
+    },
     minAge: "18 años cumplidos.",
     canDrive: [
       "Motocicletas de hasta 35 kW de potencia.",

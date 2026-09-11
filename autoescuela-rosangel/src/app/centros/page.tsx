@@ -10,7 +10,7 @@ import ContactSection from "@/components/sections/ContactSection";
 export const metadata: Metadata = {
   title: "Centros en Getafe",
   description:
-    "Los tres centros de Autoescuela Rosangel en Getafe: Titulcia, Rigoberta Menchú (Norte) y Manzana. Dirección, teléfono, horario y cómo llegar.",
+    "Los cuatro centros de Autoescuela Rosangel en Getafe: Centro, Juan de la Cierva, Norte y Los Molinos. Dirección, teléfono, horario y cómo llegar.",
   alternates: { canonical: "/centros/" },
 };
 
@@ -24,7 +24,7 @@ export default function CentrosPage() {
             Nuestros centros en Getafe
           </h1>
           <p className="mt-4 text-lg text-ink-soft">
-            Tres centros para que siempre tengas uno cerca, elijas la zona
+            Cuatro centros para que siempre tengas uno cerca, elijas la zona
             que elijas de la ciudad.
           </p>
         </Container>
@@ -33,7 +33,7 @@ export default function CentrosPage() {
       <CentersSection heading="Elige tu centro" />
 
       <section className="border-b border-line bg-paper py-16 sm:py-20">
-        <Container className="grid gap-6 sm:grid-cols-3">
+        <Container className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {centers.map((c) => (
             <Link
               key={c.slug}

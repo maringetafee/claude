@@ -13,6 +13,14 @@ referencíalo desde los componentes correspondientes:
 - `reviews/` — capturas de reseñas reales (como evidencia, no para usar
   directamente como imagen en la web salvo que el cliente lo pida así).
 
-No subas fotografías de stock genéricas: si no hay foto real disponible
-para un hueco, es mejor dejar el diseño gráfico actual que rellenar con una
-imagen que no representa a Rosangel.
+`getafe-map.svg` (mapa del hero) se genera con
+`node scripts/build-getafe-map.mjs <volcado-overpass.json>` a partir de datos
+de OpenStreetMap (ODbL, la atribución se muestra sobre el mapa). La consulta
+Overpass está documentada en el propio script.
+
+Excepción (septiembre de 2026, a petición del equipo): `permits/` contiene
+dos fotos genéricas de Unsplash (licencia gratuita para uso comercial) para
+las tarjetas y páginas de permiso. No son de Rosangel — sustitúyelas por
+fotos reales en cuanto las haya (enlaces de origen en `src/data/permits.ts`).
+Para el resto de huecos, mejor dejar el diseño gráfico actual que rellenar
+con stock.

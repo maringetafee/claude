@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { getPermit, permits } from "@/data/permits";
 import { whatsappHref, whatsappMessages } from "@/lib/site-config";
@@ -82,6 +83,17 @@ export default async function PermitPage({
             >
               <WhatsAppIcon className="h-4 w-4" /> Hablar por WhatsApp
             </a>
+          </div>
+
+          <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-sm border border-line bg-paper-soft">
+            <Image
+              src={permit.image.src}
+              alt={permit.image.alt}
+              fill
+              priority
+              sizes="(min-width: 768px) 768px, 100vw"
+              className="object-cover"
+            />
           </div>
         </Container>
       </section>

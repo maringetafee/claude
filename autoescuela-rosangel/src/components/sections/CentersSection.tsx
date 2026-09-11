@@ -19,8 +19,8 @@ export default function CentersSection({
             {heading}
           </h2>
           <p className="mt-4 max-w-lg text-ink-soft">
-            Tres centros repartidos por Getafe para que siempre tengas uno
-            cerca: Centro, Norte y Manzana.
+            Cuatro centros repartidos por Getafe para que siempre tengas uno
+            cerca: Centro, Juan de la Cierva, Norte y Los Molinos.
           </p>
         </Reveal>
 

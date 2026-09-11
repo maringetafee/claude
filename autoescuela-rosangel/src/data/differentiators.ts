@@ -26,9 +26,9 @@ export const differentiators: Differentiator[] = [
       "Las clases prácticas se organizan intentando ajustarse a la disponibilidad de cada alumno, algo muy valorado por quienes compaginan estudios o trabajo.",
   },
   {
-    title: "Tres centros en Getafe",
+    title: "Cuatro centros en Getafe",
     description:
-      "Titulcia, Rigoberta Menchú (Norte) y Manzana: puedes elegir el centro que te quede más cerca de casa o del trabajo.",
+      "Centro, Juan de la Cierva, Norte y Los Molinos: puedes elegir el centro que te quede más cerca de casa o del trabajo.",
   },
   {
     title: "Más de dos décadas en Getafe",

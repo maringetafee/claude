@@ -1,10 +1,10 @@
 import { centers, siteConfig } from "@/lib/site-config";
 
 /**
- * JSON-LD para las tres sedes (DrivingSchool + LocalBusiness). No se incluye
- * aggregateRating: la valoración pública encontrada no está verificada en
- * vivo (ver siteConfig.rating.verified) y no queremos afirmar en datos
- * estructurados algo que no podemos confirmar.
+ * JSON-LD para cada sede (DrivingSchool + LocalBusiness). No se incluye
+ * aggregateRating: Google no muestra estrellas para reseñas "autoservidas"
+ * de un LocalBusiness en su propia web, y la fuente de verdad de la
+ * valoración ya es la ficha de Google Maps de cada centro.
  */
 const locationsLd = centers.map((center) => ({
   "@context": "https://schema.org",
