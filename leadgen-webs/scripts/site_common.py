@@ -77,6 +77,9 @@ TIPO_META = {
     "Taller":        {"icon": "🔧", "color": "#55606b"},
     "Abogado":       {"icon": "⚖️", "color": "#8a6d1a"},
     "Inmobiliaria":  {"icon": "🏠", "color": "#b3134f"},
+    "Panaderia":     {"icon": "🥐", "color": "#a3722c"},
+    "Autoescuela":   {"icon": "🚗", "color": "#3a5a8a"},
+    "Veterinario":   {"icon": "🐾", "color": "#5c7a3f"},
 }
 TIPO_ORDEN = list(TIPO_META.keys())
 
@@ -110,6 +113,9 @@ PLANTILLAS_MAESTRAS = {
     "Taller": [("Plantilla Taller mecánico — multimarca, tema industrial", "plantillas/taller-mecanico/index.html")],
     "Abogado": [("Plantilla Abogado — despacho, solicitar consulta", "plantillas/abogado/index.html")],
     "Inmobiliaria": [("Plantilla Inmobiliaria — copia literal de Inmo Retail, con mapa", "plantillas/inmobiliaria/index.html")],
+    "Panaderia": [("Plantilla Panadería — obrador artesano, hacer un encargo", "plantillas/panaderia/index.html")],
+    "Autoescuela": [("Plantilla Autoescuela — reservar clase", "plantillas/autoescuela/index.html")],
+    "Veterinario": [("Plantilla Veterinario — clínica, pedir cita", "plantillas/veterinario/index.html")],
     # Estetica y Fisioterapia: leads ya descargados, todavia sin plantilla propia.
 }
 

@@ -39,6 +39,9 @@ RUBRO_LABEL = {
     "restaurante": "Restaurante",
     "abogado": "Despacho de abogados",
     "inmobiliaria": "Inmobiliaria",
+    "panaderia": "Panadería",
+    "autoescuela": "Autoescuela",
+    "veterinario": "Clínica veterinaria",
 }
 
 

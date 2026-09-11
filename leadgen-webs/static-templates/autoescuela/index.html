@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="#10242b" name="theme-color"/>
-<meta name="description" content="[NOMBRE DEL NEGOCIO], clínica dental en [CIUDAD]. Revisión y limpieza, ortodoncia invisible, implantes y estética dental. Primera visita sin coste y presupuesto cerrado."/>
+<meta content="#12213b" name="theme-color"/>
+<meta name="description" content="[NOMBRE DEL NEGOCIO], autoescuela en [CIUDAD]. Clases de coche, teórica online y exámenes en la DGT. Primera clase de prueba."/>
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"/>
 <meta name="author" content="[NOMBRE DEL NEGOCIO]"/>
-<title>[NOMBRE DEL NEGOCIO] | Clínica dental en [CIUDAD]</title>
+<title>[NOMBRE DEL NEGOCIO] | Autoescuela en [CIUDAD]</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://images.unsplash.com" rel="preconnect"/>
@@ -17,16 +17,16 @@
 <link as="image" fetchpriority="high" href="assets/logo.svg" rel="preload" type="image/svg+xml"/>
 <style>
     :root {
-      --ink: #10242b;
-      --ink-2: #17303a;
-      --paper: #f3f8f8;
-      --paper-2: #dcecec;
-      --muted: #7d8f92;
-      --rose: #14a8ac;
-      --rose-bright: #3fc9c4;
-      --rose-dark: #0c565a;
-      --sage: #4d7fa0;
-      --sage-bright: #7fb0cb;
+      --ink: #12213b;
+      --ink-2: #1a2e4d;
+      --paper: #f4f6f9;
+      --paper-2: #dde4ee;
+      --muted: #7c8aa0;
+      --rose: #e2a610;
+      --rose-bright: #f4c430;
+      --rose-dark: #a97a08;
+      --sage: #b5342f;
+      --sage-bright: #d65750;
       --line: rgba(255,255,255,.14);
       --shadow: 0 30px 90px rgba(0,0,0,.20);
       --radius: 28px;
@@ -40,8 +40,8 @@
       margin: 0;
       color: var(--paper);
       background:
-        radial-gradient(circle at 80% 8%, rgba(20,168,172,.20), transparent 30%),
-        radial-gradient(circle at 15% 40%, rgba(77,127,160,.16), transparent 32%),
+        radial-gradient(circle at 80% 8%, rgba(226,166,16,.20), transparent 30%),
+        radial-gradient(circle at 15% 40%, rgba(181,52,47,.16), transparent 32%),
         var(--ink);
       font-family: "Manrope", system-ui, sans-serif;
       line-height: 1.5;
@@ -65,13 +65,13 @@
     /* ---------- Cursor ---------- */
     body.has-custom-cursor, body.has-custom-cursor a, body.has-custom-cursor button { cursor: none; }
     .cursor-dot, .cursor-ring { position: fixed; top:0; left:0; z-index:1200; pointer-events:none; border-radius:50%; transform:translate(-50%,-50%); will-change:transform; }
-    .cursor-dot { width:7px; height:7px; background: var(--rose-bright); box-shadow: 0 0 14px rgba(63,201,196,.8); }
-    .cursor-ring { width:42px; height:42px; border:1px solid rgba(63,201,196,.55); transition: width .28s var(--ease), height .28s var(--ease), border-color .28s var(--ease), background-color .28s var(--ease); }
-    .cursor-ring.is-active { width:70px; height:70px; background: rgba(63,201,196,.10); border-color: rgba(63,201,196,.9); }
+    .cursor-dot { width:7px; height:7px; background: var(--rose-bright); box-shadow: 0 0 14px rgba(244,196,48,.8); }
+    .cursor-ring { width:42px; height:42px; border:1px solid rgba(244,196,48,.55); transition: width .28s var(--ease), height .28s var(--ease), border-color .28s var(--ease), background-color .28s var(--ease); }
+    .cursor-ring.is-active { width:70px; height:70px; background: rgba(244,196,48,.10); border-color: rgba(244,196,48,.9); }
     @media (pointer:coarse), (prefers-reduced-motion:reduce) { .cursor-dot, .cursor-ring { display:none; } }
 
     .noise { position:fixed; inset:0; z-index:1000; pointer-events:none; opacity:.03; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.9'/%3E%3C/svg%3E"); mix-blend-mode:soft-light; }
-    .scroll-progress { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1100; transform:scaleX(0); transform-origin:left; background: linear-gradient(90deg, var(--rose-dark), var(--rose-bright), #cdeeec); }
+    .scroll-progress { position:fixed; top:0; left:0; width:100%; height:3px; z-index:1100; transform:scaleX(0); transform-origin:left; background: linear-gradient(90deg, var(--rose-dark), var(--rose-bright), #f9e7ae); }
 
     /* ---------- Preloader ---------- */
     .preloader { position:fixed; inset:0; z-index:1300; display:grid; place-items:center; background:var(--ink); overflow:hidden; }
@@ -95,7 +95,7 @@
     .desktop-nav a:hover { color:#fff; }
     .header-actions { display:flex; align-items:center; gap:16px; }
     .btn { position:relative; display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 22px; border:1px solid rgba(255,255,255,.16); border-radius:999px; font-size:.82rem; letter-spacing:.03em; overflow:hidden; transition:border-color .25s, color .25s; background:none; appearance:none; -webkit-appearance:none; cursor:pointer; }
-    .btn--solid { background: var(--rose); color:#04222a; border-color: var(--rose); box-shadow:0 14px 34px rgba(20,168,172,.30); font-weight:600; }
+    .btn--solid { background: var(--rose); color:#04222a; border-color: var(--rose); box-shadow:0 14px 34px rgba(226,166,16,.30); font-weight:600; }
     .btn--solid:hover { background: var(--rose-bright); border-color:var(--rose-bright); }
     .btn--ghost:hover { border-color:#fff; }
     .menu-toggle { display:none; width:44px; height:44px; border:0; border-radius:50%; background:rgba(255,255,255,.08); cursor:pointer; }
@@ -115,7 +115,7 @@
     .orb { position:absolute; opacity:.8; will-change:transform; border-radius:50%; }
     .hero__content { position:relative; width:100%; padding:0 0 90px; }
     .hero__kicker { display:flex; align-items:center; gap:12px; margin-bottom:20px; font-size:.78rem; text-transform:uppercase; letter-spacing:.2em; color:rgba(255,255,255,.78); }
-    .hero__kicker span { width:7px; height:7px; border-radius:50%; background:var(--rose-bright); box-shadow:0 0 22px rgba(63,201,196,.8); }
+    .hero__kicker span { width:7px; height:7px; border-radius:50%; background:var(--rose-bright); box-shadow:0 0 22px rgba(244,196,48,.8); }
     .hero__title { overflow:hidden; }
     .hero__title .line { display:block; overflow:hidden; }
     .hero__title .line span { display:block; }
@@ -195,7 +195,7 @@
     /* ---------- Reviews ---------- */
     .reviews { background: linear-gradient(180deg, rgba(9,22,26,1) 0%, rgba(14,32,38,1) 100%); }
     .reviews__wrap { display:grid; grid-template-columns: .9fr 1.6fr; gap:36px; }
-    .reviews__intro { padding:clamp(26px,3vw,38px); border-radius:30px; background:linear-gradient(135deg, rgba(20,168,172,.20), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.10); }
+    .reviews__intro { padding:clamp(26px,3vw,38px); border-radius:30px; background:linear-gradient(135deg, rgba(226,166,16,.20), rgba(255,255,255,.04)); border:1px solid rgba(255,255,255,.10); }
     .reviews__score { display:flex; align-items:baseline; gap:10px; margin-top:18px; }
     .reviews__score strong { font-family:"Fraunces", serif; font-size:clamp(2.8rem,7vw,4.6rem); font-weight:500; }
     .reviews__stars { letter-spacing:.16em; color:#e7b872; font-size:.9rem; }
@@ -291,58 +291,56 @@
 <div class="container header-inner">
 <a class="brand magnetic" href="/" aria-label="[NOMBRE DEL NEGOCIO], inicio">
 <svg class="brand__mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" fill="#17303a"/>
-  <path d="M50 24c-9-7-24-4-24 12 0 10 3 15 5 24 2 8 4 16 8 16 4 0 4-12 7-12s3 12 7 12c4 0 6-8 8-16 2-9 5-14 5-24 0-16-15-19-24-12z" fill="none" stroke="#3fc9c4" stroke-width="2.6" stroke-linejoin="round"/>
-  <circle cx="66" cy="30" r="4.5" fill="#3fc9c4"/>
+  <circle cx="50" cy="50" r="48" fill="#1a2e4d"/>
+  <circle cx="50" cy="50" r="24" fill="none" stroke="#f4c430" stroke-width="2.6"/><circle cx="50" cy="50" r="5" fill="#f4c430"/><path d="M50 26v13M50 61v13M26 50h13M61 50h13" stroke="#f4c430" stroke-width="2.6" stroke-linecap="round"/>
 </svg>
 <span class="brand__name"><strong>[NOMBRE]</strong><small>[RUBRO] · [CIUDAD]</small></span>
 </a>
 <nav class="desktop-nav" aria-label="Navegación principal">
-<a href="#servicios">Tratamientos</a>
-<a href="#metodo">La clínica</a>
-<a href="#instalaciones">Instalaciones</a>
+<a href="#servicios">Nuestros cursos</a>
+<a href="#metodo">La autoescuela</a>
+<a href="#instalaciones">Nuestra flota</a>
 <a href="#opiniones">Opiniones</a>
 <a href="#visitanos">Cómo llegar</a>
 </nav>
 <div class="header-actions">
-<a class="btn btn--solid magnetic" href="#pedir">Pedir cita</a>
+<a class="btn btn--solid magnetic" href="#pedir">Reservar clase</a>
 <button aria-expanded="false" aria-label="Abrir menú" class="menu-toggle"><span></span><span></span></button>
 </div>
 </div>
 </header>
 
 <div class="mobile-menu" aria-hidden="true">
-<a href="#servicios">Tratamientos</a>
-<a href="#metodo">La clínica</a>
-<a href="#instalaciones">Instalaciones</a>
+<a href="#servicios">Nuestros cursos</a>
+<a href="#metodo">La autoescuela</a>
+<a href="#instalaciones">Nuestra flota</a>
 <a href="#opiniones">Opiniones</a>
 <a href="#visitanos">Cómo llegar</a>
-<a href="#pedir">Pedir cita</a>
+<a href="#pedir">Reservar clase</a>
 </div>
 
 <main id="main">
 <section class="hero" id="inicio">
 <div class="hero__media">
-<img alt="Sala de tratamiento de una clínica dental moderna" decoding="async" fetchpriority="high" sizes="100vw" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80" srcset="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80 1200w, https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80 1600w"/>
+<img alt="Manos al volante conduciendo al atardecer" decoding="async" fetchpriority="high" sizes="100vw" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=80" srcset="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80 800w, https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=80 1200w, https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1600&q=80 1600w"/>
 </div>
 <div class="hero__orbs" aria-hidden="true">
-<span class="orb" style="left:10%; top:20%; width:26px; height:26px; background:#3fc9c4;"></span>
-<span class="orb" style="left:78%; top:14%; width:18px; height:18px; background:#7fb0cb;"></span>
-<span class="orb" style="left:60%; top:60%; width:22px; height:22px; background:#14a8ac;"></span>
-<span class="orb" style="left:30%; top:70%; width:14px; height:14px; background:#3fc9c4;"></span>
-<span class="orb" style="left:88%; top:50%; width:12px; height:12px; background:#7fb0cb;"></span>
+<span class="orb" style="left:10%; top:20%; width:26px; height:26px; background:#f4c430;"></span>
+<span class="orb" style="left:78%; top:14%; width:18px; height:18px; background:#d65750;"></span>
+<span class="orb" style="left:60%; top:60%; width:22px; height:22px; background:#e2a610;"></span>
+<span class="orb" style="left:30%; top:70%; width:14px; height:14px; background:#f4c430;"></span>
+<span class="orb" style="left:88%; top:50%; width:12px; height:12px; background:#d65750;"></span>
 </div>
 <div class="container hero__content">
 <div class="hero__kicker"><span></span> [Barrio] · [Ciudad]</div>
 <h1 class="display hero__title">
-<span class="line"><span>Tu sonrisa,</span></span>
-<span class="line"><span>en las mejores</span></span>
-<span class="line"><span class="accent">manos.</span></span>
+<span class="line"><span>Aprende a conducir,</span></span>
+<span class="line"><span class="accent">con confianza.</span></span>
 </h1>
-<p class="hero__copy">Revisiones, ortodoncia invisible, implantes y estética dental, con un equipo que te explica cada paso sin prisa y con presupuesto cerrado.</p>
+<p class="hero__copy">Clases de coche, teórica online a tu ritmo y profesores que se adaptan a cómo aprendes tú.</p>
 <div class="hero__actions">
-<a class="btn btn--solid magnetic" href="#pedir">Pedir cita</a>
-<a class="btn btn--ghost magnetic" href="#servicios">Ver tratamientos</a>
+<a class="btn btn--solid magnetic" href="#pedir">Reservar clase</a>
+<a class="btn btn--ghost magnetic" href="#servicios">Ver cursos</a>
 </div>
 </div>
 </section>
@@ -351,59 +349,59 @@
 <div class="container manifesto__grid">
 <aside class="manifesto__aside">
 <div class="eyebrow">Nuestra filosofía</div>
-<p>No trabajamos con prisa. Explicamos cada tratamiento, damos presupuesto cerrado y solo hacemos lo que de verdad necesitas.</p>
-<div class="manifesto__tag"><span>Presupuesto cerrado</span><span>Primera visita sin coste</span><span>Financiación</span></div>
+<p>No enseñamos para el examen. Enseñamos para conducir toda la vida, con paciencia y sin agobios.</p>
+<div class="manifesto__tag"><span>Clase de prueba</span><span>Teórica online</span><span>Profesor fijo</span></div>
 </aside>
-<p class="manifesto__text">Cada boca es distinta. Cuidamos el <span style="color:#14a8ac">diagnóstico</span>, el <span style="color:#4d7fa0">trato</span> y el tiempo para que vengas sin miedo al dentista.</p>
+<p class="manifesto__text">Cada alumno aprende distinto. Cuidamos el <span style="color:#e2a610">ritmo</span>, la <span style="color:#b5342f">confianza</span> y el tiempo para que salgas seguro a la carretera.</p>
 </div>
 </section>
 
 <section class="section services" id="servicios">
 <div class="container services__head">
-<div><div class="eyebrow">Tratamientos</div><h2 class="section-title">Cuidamos tu boca<br/>en cada etapa.</h2></div>
-<p class="lead">Desde la revisión anual hasta un tratamiento completo de ortodoncia o implantes. Cuéntanos qué necesitas y te damos un plan claro.</p>
+<div><div class="eyebrow">Nuestros cursos</div><h2 class="section-title">Te acompañamos<br/>hasta el examen.</h2></div>
+<p class="lead">Desde la primera clase hasta el día del examen. Cuéntanos tu nivel y te damos un plan claro.</p>
 </div>
 <div class="services__viewport">
 <div class="services__track">
 <article class="service-card">
-<div class="service-card__media"><img alt="Higienista realizando una limpieza dental" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="Manos al volante conduciendo al atardecer" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">01</span>
-<div class="service-card__content"><h3>Revisión y limpieza</h3><p>Diagnóstico completo, tartrectomía y consejos de higiene.</p><div class="service-card__meta"><span>Desde 40€</span><span>30-45 min</span></div></div>
+<div class="service-card__content"><h3>Carné B</h3><p>Clases prácticas de coche, a tu ritmo, con el mismo profesor de principio a fin.</p><div class="service-card__meta"><span>Clase de prueba gratis</span><span>Profesor fijo</span></div></div>
 </article>
 <article class="service-card">
-<div class="service-card__media"><img alt="Persona colocándose una férula de ortodoncia invisible" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="Calle de ciudad con tráfico" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">02</span>
-<div class="service-card__content"><h3>Ortodoncia invisible</h3><p>Férulas transparentes para alinear los dientes sin brackets.</p><div class="service-card__meta"><span>Estudio previo</span><span>Financiable</span></div></div>
+<div class="service-card__content"><h3>Prácticas en ciudad</h3><p>Tráfico, rotondas y aparcamiento: practicamos donde de verdad vas a conducir.</p><div class="service-card__meta"><span>Rutas reales</span><span>Sin agobios</span></div></div>
 </article>
 <article class="service-card">
-<div class="service-card__media"><img alt="Instrumental dental preparado para un implante" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="Coche circulando por una carretera abierta" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">03</span>
-<div class="service-card__content"><h3>Implantes dentales</h3><p>Reposición de piezas con planificación guiada por escáner 3D.</p><div class="service-card__meta"><span>Consulta previa</span><span>Garantía por escrito</span></div></div>
+<div class="service-card__content"><h3>Carretera y autovía</h3><p>Incorporaciones, adelantamientos y velocidad: preparado para el examen y para la vida real.</p><div class="service-card__meta"><span>Clases fuera de ciudad</span><span>Antes del examen</span></div></div>
 </article>
 <article class="service-card">
-<div class="service-card__media"><img alt="Sonrisa tras un tratamiento de estética dental" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="Coche aparcado junto a un edificio" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">04</span>
-<div class="service-card__content"><h3>Estética dental</h3><p>Blanqueamiento y carillas para una sonrisa natural.</p><div class="service-card__meta"><span>Desde 250€</span><span>1-2 sesiones</span></div></div>
+<div class="service-card__content"><h3>Recuperación de puntos</h3><p>Cursos de sensibilización vial para recuperar el carné con toda la documentación en regla.</p><div class="service-card__meta"><span>Grupos reducidos</span><span>Certificado DGT</span></div></div>
 </article>
 <article class="service-card" aria-hidden="true">
-<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">01</span>
-<div class="service-card__content"><h3>Revisión y limpieza</h3><p>Diagnóstico completo, tartrectomía y consejos de higiene.</p><div class="service-card__meta"><span>Desde 40€</span><span>30-45 min</span></div></div>
+<div class="service-card__content"><h3>Carné B</h3><p>Clases prácticas de coche, a tu ritmo, con el mismo profesor de principio a fin.</p><div class="service-card__meta"><span>Clase de prueba gratis</span><span>Profesor fijo</span></div></div>
 </article>
 <article class="service-card" aria-hidden="true">
-<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">02</span>
-<div class="service-card__content"><h3>Ortodoncia invisible</h3><p>Férulas transparentes para alinear los dientes sin brackets.</p><div class="service-card__meta"><span>Estudio previo</span><span>Financiable</span></div></div>
+<div class="service-card__content"><h3>Prácticas en ciudad</h3><p>Tráfico, rotondas y aparcamiento: practicamos donde de verdad vas a conducir.</p><div class="service-card__meta"><span>Rutas reales</span><span>Sin agobios</span></div></div>
 </article>
 <article class="service-card" aria-hidden="true">
-<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">03</span>
-<div class="service-card__content"><h3>Implantes dentales</h3><p>Reposición de piezas con planificación guiada por escáner 3D.</p><div class="service-card__meta"><span>Consulta previa</span><span>Garantía por escrito</span></div></div>
+<div class="service-card__content"><h3>Carretera y autovía</h3><p>Incorporaciones, adelantamientos y velocidad: preparado para el examen y para la vida real.</p><div class="service-card__meta"><span>Clases fuera de ciudad</span><span>Antes del examen</span></div></div>
 </article>
 <article class="service-card" aria-hidden="true">
-<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=800&q=78 800w"/></div>
+<div class="service-card__media"><img alt="" decoding="async" loading="lazy" sizes="(max-width:640px) 74vw, 400px" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=78" srcset="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=500&q=78 500w, https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=78 800w"/></div>
 <span class="service-card__number">04</span>
-<div class="service-card__content"><h3>Estética dental</h3><p>Blanqueamiento y carillas para una sonrisa natural.</p><div class="service-card__meta"><span>Desde 250€</span><span>1-2 sesiones</span></div></div>
+<div class="service-card__content"><h3>Recuperación de puntos</h3><p>Cursos de sensibilización vial para recuperar el carné con toda la documentación en regla.</p><div class="service-card__meta"><span>Grupos reducidos</span><span>Certificado DGT</span></div></div>
 </article>
 </div>
 </div>
@@ -411,50 +409,50 @@
 
 <section class="section craft" id="metodo">
 <div class="container craft__grid">
-<div class="craft__media" aria-label="La clínica y su equipo">
-<div class="craft__img craft__img-a reveal-img"><img alt="Box dental equipado con tecnología moderna" decoding="async" loading="lazy" sizes="(max-width:980px) 60vw, 32vw" src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=800&q=78"/></div>
-<div class="craft__img craft__img-b reveal-img"><img alt="Odontólogo del equipo" decoding="async" loading="lazy" sizes="(max-width:980px) 44vw, 22vw" src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=78"/></div>
-<div class="craft__img craft__img-c reveal-img"><img alt="Dentista atendiendo a un paciente infantil" decoding="async" loading="lazy" sizes="(max-width:980px) 40vw, 20vw" src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=700&q=78"/></div>
-<div class="craft__img craft__img-d reveal-img"><img alt="Dos profesionales trabajando en un tratamiento" decoding="async" loading="lazy" sizes="(max-width:980px) 50vw, 25vw" src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=700&q=78"/></div>
+<div class="craft__media" aria-label="La autoescuela y su equipo">
+<div class="craft__img craft__img-a reveal-img"><img alt="Calle de ciudad con tráfico" decoding="async" loading="lazy" sizes="(max-width:980px) 60vw, 32vw" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=800&q=78"/></div>
+<div class="craft__img craft__img-b reveal-img"><img alt="Coche circulando por una carretera abierta" decoding="async" loading="lazy" sizes="(max-width:980px) 44vw, 22vw" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=78"/></div>
+<div class="craft__img craft__img-c reveal-img"><img alt="Coche aparcado junto a un edificio" decoding="async" loading="lazy" sizes="(max-width:980px) 40vw, 20vw" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=78"/></div>
+<div class="craft__img craft__img-d reveal-img"><img alt="Manos al volante conduciendo al atardecer" decoding="async" loading="lazy" sizes="(max-width:980px) 50vw, 25vw" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=700&q=78"/></div>
 </div>
 <div class="craft__content">
-<div class="eyebrow">La clínica</div>
-<h2 class="section-title">Sin prisa.<br/>Con diagnóstico.</h2>
-<p>Cada primera visita empieza con un escáner y una explicación clara de lo que vemos, sin tecnicismos y sin compromiso.</p>
+<div class="eyebrow">La autoescuela</div>
+<h2 class="section-title">Sin prisa.<br/>Con confianza.</h2>
+<p>Cada alumno empieza con una clase de prueba y una valoración honesta de su nivel, sin compromiso.</p>
 <ol class="craft__list">
-<li><strong>01</strong><span>Primera visita y diagnóstico con escáner 3D.</span></li>
-<li><strong>02</strong><span>Te explicamos las opciones y el presupuesto cerrado.</span></li>
-<li><strong>03</strong><span>Realizamos el tratamiento con cita amplia y sin agobios.</span></li>
-<li><strong>04</strong><span>Revisiones de seguimiento incluidas.</span></li>
+<li><strong>01</strong><span>Clase de prueba y valoración de nivel.</span></li>
+<li><strong>02</strong><span>Teórica a tu ritmo, online.</span></li>
+<li><strong>03</strong><span>Prácticas con el mismo profesor siempre.</span></li>
+<li><strong>04</strong><span>Acompañamiento hasta el día del examen.</span></li>
 </ol>
 </div>
 </div>
 </section>
 
-<section class="section stats" aria-label="Datos de la clínica">
+<section class="section stats" aria-label="Datos de la autoescuela">
 <div class="container stats__grid">
-<div class="stat"><strong data-count="4200">0</strong><span>Pacientes atendidos</span></div>
-<div class="stat"><strong data-count="15">0</strong><span>Años en [Ciudad]</span></div>
-<div class="stat"><strong data-count="1800">0</strong><span>Sonrisas rehabilitadas</span></div>
-<div class="stat"><strong data-count="98">0</strong><span>% de pacientes que repiten</span></div>
+<div class="stat"><strong data-count="1200">0</strong><span>Alumnos aprobados</span></div>
+<div class="stat"><strong data-count="20">0</strong><span>Años de experiencia</span></div>
+<div class="stat"><strong data-count="12">0</strong><span>Coches en flota</span></div>
+<div class="stat"><strong data-count="88">0</strong><span>% aprobados primer intento</span></div>
 </div>
 </section>
 
 <section class="section looks" id="instalaciones">
 <div class="container">
 <div class="looks__head">
-<div><div class="eyebrow">Instalaciones</div><h2 class="section-title">Un espacio<br/>que tranquiliza.</h2></div>
-<p class="lead">Boxes amplios, esterilización certificada y tecnología de diagnóstico para que cada visita sea más cómoda.</p>
+<div><div class="eyebrow">Nuestra flota</div><h2 class="section-title">Coches listos<br/>para aprender.</h2></div>
+<p class="lead">Vehículos revisados, dobles mandos y aula teórica equipada para que cada clase cunda.</p>
 </div>
 <div class="looks__grid">
-<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Sala de tratamiento con sillón dental" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Box de tratamiento</strong><span>Equipado y luminoso.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Sillón dental preparado" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Cada detalle listo</strong><span>Material esterilizado por cita.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Profesional con mascarilla revisando una radiografía" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Diagnóstico por imagen</strong><span>Escáner y radiografía digital.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Sala clínica de color claro" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1616391182219-e080b4d1043a?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Recepción</strong><span>Un ambiente que calma los nervios.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Instrumental dental ordenado" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Protocolo de higiene</strong><span>Esterilización certificada.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Odontóloga trabajando con un paciente" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>El equipo</strong><span>Profesionales que te explican todo.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Dentista atendiendo a un niño" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Odontopediatría</strong><span>Primeras visitas sin miedo.</span></figcaption></figure>
-<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Consulta dental con luz natural" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Consulta</strong><span>Espacio amplio y accesible.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Manos al volante conduciendo al atardecer" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Clase práctica</strong><span>Con dobles mandos.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Coche aparcado junto a un edificio" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Flota revisada</strong><span>Coches siempre a punto.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Coche circulando por una carretera abierta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Salidas de carretera</strong><span>Antes del examen.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Calle de ciudad con tráfico" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Prácticas en ciudad</strong><span>Tráfico real, sin sustos.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Coche aparcado junto a un edificio" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Aula teórica</strong><span>Con test online incluido.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:4/5"><img alt="Manos al volante conduciendo al atardecer" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>El equipo</strong><span>Profesores con paciencia.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:3/4"><img alt="Coche circulando por una carretera abierta" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Salida a autovía</strong><span>Preparados para el examen.</span></figcaption></figure>
+<figure class="look reveal-img magnetic" style="aspect-ratio:1/1"><img alt="Calle de ciudad con tráfico" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=700&q=78"/><figcaption class="look__caption"><strong>Zona de examen</strong><span>Practicamos la ruta real.</span></figcaption></figure>
 </div>
 </div>
 </section>
@@ -464,13 +462,13 @@
 <div class="reviews__intro">
 <div style="font-size:.78rem; text-transform:uppercase; letter-spacing:.14em; color:rgba(255,255,255,.6);"><b style="color:#4285f4">G</b> Opiniones verificadas en Google</div>
 <div class="reviews__score"><strong>[X,X]</strong><div><div class="reviews__stars">★★★★★</div><div class="reviews__meta">Más de [XXX] reseñas</div></div></div>
-<p style="margin-top:18px; color:rgba(255,255,255,.72); max-width:46ch;">Una valoración muy alta para una clínica de barrio en la que el trato importa tanto como el tratamiento.</p>
+<p style="margin-top:18px; color:rgba(255,255,255,.72); max-width:46ch;">Una valoración muy alta para una autoescuela en la que la paciencia importa tanto como aprobar.</p>
 </div>
 <div class="reviews__grid">
-<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Me da pánico el dentista y aquí, por primera vez, me sentí tranquila. Todo explicado con calma.»</p><strong>— Paciente verificado</strong></div>
-<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Presupuesto cerrado desde el principio, sin sorpresas al final. Se agradece muchísimo.»</p><strong>— Paciente verificado</strong></div>
-<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Me hicieron la ortodoncia invisible y el seguimiento fue impecable. Muy contentos con el resultado.»</p><strong>— Paciente verificado</strong></div>
-<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Llevo a mis hijos desde pequeños y salen encantados. Un trato con los niños excelente.»</p><strong>— Paciente verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Le tenía pánico a la carretera y con el mismo profesor todas las clases cogí confianza rápido.»</p><strong>— Alumno verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«La teórica online me la hice a mi ritmo entre turnos de trabajo. Aprobé a la primera.»</p><strong>— Alumno verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Recuperé los puntos con el curso de sensibilización sin complicaciones y con buen trato.»</p><strong>— Alumno verificado</strong></div>
+<div class="review-card"><div class="review-card__stars">★★★★★</div><p>«Salimos varias veces a la autovía antes del examen. Se nota la diferencia el día bueno.»</p><strong>— Alumno verificado</strong></div>
 </div>
 </div>
 </section>
@@ -479,14 +477,14 @@
 <div class="container visit__grid">
 <div>
 <div class="eyebrow">Cómo llegar</div>
-<h2 class="section-title">Ven a tu<br/>primera visita.</h2>
+<h2 class="section-title">Ven a tu<br/>clase de prueba.</h2>
 <div class="visit__details">
 <div class="visit__row"><span>Dirección</span><div>[Dirección del negocio], [CP] [Ciudad]</div></div>
 <div class="visit__row"><span>Horario</span><div>Lunes a viernes, 9:00 – 20:30</div></div>
 <div class="visit__row"><span>Teléfono</span><div><a href="tel:+34000000000">000 00 00 00</a></div></div>
-<div class="visit__row"><span>Urgencias</span><div>Atención el mismo día para pacientes en tratamiento</div></div>
+<div class="visit__row"><span>Clase de prueba</span><div>Primera clase práctica gratuita, sin compromiso</div></div>
 </div>
-<div style="margin-top:30px"><a class="btn btn--solid magnetic" href="tel:+34000000000">Llamar a la clínica</a></div>
+<div style="margin-top:30px"><a class="btn btn--solid magnetic" href="tel:+34000000000">Llamar a la autoescuela</a></div>
 </div>
 <div class="visit__map"><iframe title="Mapa de [NOMBRE DEL NEGOCIO]" loading="lazy" src="https://www.google.com/maps?q=Madrid,+España&output=embed"></iframe></div>
 </div>
@@ -494,18 +492,18 @@
 
 <section class="section booking" id="pedir">
 <div class="container">
-<div class="eyebrow">Pedir cita</div>
-<h2 class="section-title">Reserva tu cita<br/>en dos minutos.</h2>
-<p class="lead" style="margin:18px 0 44px;">Elige tratamiento, día y hora. Os confirmamos la cita — así es como se vería el proceso real de reserva en vuestra web.</p>
+<div class="eyebrow">Reservar clase</div>
+<h2 class="section-title">Reserva tu clase<br/>en dos minutos.</h2>
+<p class="lead" style="margin:18px 0 44px;">Elige tipo de clase, día y hora. Os confirmamos la reserva — así es como se vería el proceso real en vuestra web.</p>
 
 <form class="booking-form" id="bookingForm">
 <div class="booking-form__step">
-<div class="booking-form__label"><b>01</b> Tratamiento</div>
+<div class="booking-form__label"><b>01</b> Tipo de clase</div>
 <div class="chip-group" data-chip-group="servicio">
-<button type="button" class="chip">Revisión y limpieza</button>
-<button type="button" class="chip">Ortodoncia invisible</button>
-<button type="button" class="chip">Implantes dentales</button>
-<button type="button" class="chip">Estética dental</button>
+<button type="button" class="chip">Clase de prueba</button>
+<button type="button" class="chip">Práctica coche</button>
+<button type="button" class="chip">Teórica</button>
+<button type="button" class="chip">Recuperación de puntos</button>
 </div>
 </div>
 <div class="booking-form__step">
@@ -527,28 +525,52 @@
 <input type="tel" name="telefono" placeholder="Teléfono" required/>
 </div>
 </div>
-<button type="submit" class="btn btn--solid magnetic booking-form__submit">Confirmar cita (demo)</button>
+<button type="submit" class="btn btn--solid magnetic booking-form__submit">Confirmar clase (demo)</button>
 </form>
 
 <div class="booking-confirm" id="bookingConfirm">
-<h3>Cita confirmada</h3>
-<p>Esto es una demostración — aquí se conectaría con vuestro sistema de citas real (agenda propia, Doctoralia, o el que uséis).</p>
-<button type="button" class="btn btn--ghost magnetic" id="bookingReset">Pedir otra cita (demo)</button>
+<h3>Clase confirmada</h3>
+<p>Esto es una demostración — aquí se conectaría con vuestro sistema de reservas real (agenda propia, o el que uséis).</p>
+<button type="button" class="btn btn--ghost magnetic" id="bookingReset">Reservar otra clase (demo)</button>
 </div>
 </div>
 </section>
 </main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "[NOMBRE DEL NEGOCIO]",
+  "image": "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=75",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[Dirección del negocio]",
+    "addressLocality": "[Ciudad]",
+    "postalCode": "[CP]",
+    "addressRegion": "Madrid",
+    "addressCountry": "ES"
+  },
+  "telephone": "+34000000000",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "[X,X]",
+    "reviewCount": "[XXX]",
+    "bestRating": "5"
+  }
+}
+</script>
 
 <footer class="site-footer">
 <div class="container">
 <div class="footer__top">
 <div>
 <p class="footer__title">[NOMBRE DEL NEGOCIO]</p>
-<p style="color:rgba(255,255,255,.6); max-width:34ch;">[NOMBRE DEL NEGOCIO] · [Barrio], [Ciudad]. Clínica dental con primera visita sin coste y presupuesto cerrado.</p>
+<p style="color:rgba(255,255,255,.6); max-width:34ch;">[NOMBRE DEL NEGOCIO] · [Barrio], [Ciudad]. Autoescuela con clase de prueba gratuita y profesor fijo.</p>
 </div>
-<div class="footer__col"><h4>Explora</h4><a href="#servicios">Tratamientos</a><a href="#metodo">La clínica</a><a href="#instalaciones">Instalaciones</a><a href="#opiniones">Opiniones</a></div>
+<div class="footer__col"><h4>Explora</h4><a href="#servicios">Nuestros cursos</a><a href="#metodo">La autoescuela</a><a href="#instalaciones">Nuestra flota</a><a href="#opiniones">Opiniones</a></div>
 <div class="footer__col"><h4>Contacto</h4><a href="tel:+34000000000">000 00 00 00</a><a href="#visitanos">[Dirección del negocio]</a><a href="#">Instagram</a></div>
-<div class="footer__col"><h4>Citas</h4><p>Pide tu primera visita y te damos hora esta misma semana.</p><a class="btn btn--solid magnetic" href="tel:+34000000000">Pedir cita</a></div>
+<div class="footer__col"><h4>Clases</h4><p>Pide tu clase de prueba y empieza esta misma semana.</p><a class="btn btn--solid magnetic" href="tel:+34000000000">Reservar clase</a></div>
 </div>
 <div class="footer__bottom"><span>© <span id="year"></span> [NOMBRE DEL NEGOCIO]. Todos los derechos reservados.</span><span>[Ciudad], España</span></div>
 </div>
@@ -685,7 +707,7 @@
       const manifesto = $('.manifesto__text');
       if (manifesto) {
         manifesto.innerHTML = manifesto.innerHTML.replace(/(?![^<]*>)([^\s<]+)/g, '<span class="word">$1</span>');
-        gsap.to('.manifesto__text .word', { color: '#10242b', stagger: .03, scrollTrigger: { trigger: '.manifesto__text', start: 'top 78%', end: 'bottom 55%', scrub: true } });
+        gsap.to('.manifesto__text .word', { color: '#12213b', stagger: .03, scrollTrigger: { trigger: '.manifesto__text', start: 'top 78%', end: 'bottom 55%', scrub: true } });
       }
 
       /* Reveal images (clip-path wipe) */

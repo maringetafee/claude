@@ -100,8 +100,7 @@ TYPE_MAP = {
     "fisioterapia": {"query_es": "clinicas de fisioterapia", "included_type": "physiotherapist", "label": "Fisioterapia"},
     "unas": {"query_es": "salones de unas", "included_type": "nail_salon", "label": "Unas"},
     "taller": {"query_es": "talleres mecanicos", "included_type": "car_repair", "label": "Taller"},
-    "gimnasio": {"query_es": "gimnasios", "included_type": "gym", "label": "Gimnasio"},
-    "autoescuela": {"query_es": "autoescuelas", "included_type": "driving_school", "label": "Autoescuela"},
+    "autoescuela": {"query_es": "autoescuelas", "included_type": None, "label": "Autoescuela"},
     "veterinario": {"query_es": "clinicas veterinarias", "included_type": "veterinary_care", "label": "Veterinario"},
     "abogado": {"query_es": "abogados", "included_type": "lawyer", "label": "Abogado"},
     "inmobiliaria": {"query_es": "inmobiliarias", "included_type": "real_estate_agency", "label": "Inmobiliaria"},
@@ -128,7 +127,9 @@ def fetch_page(query_text, included_type, page_token=None):
     }
     # Google exige que una peticion de paginacion repita exactamente los
     # mismos parametros que la peticion inicial, y solo anada pageToken.
-    body = {"textQuery": query_text, "includedType": included_type, "languageCode": "es"}
+    body = {"textQuery": query_text, "languageCode": "es"}
+    if included_type:
+        body["includedType"] = included_type
     if page_token:
         body["pageToken"] = page_token
     resp = requests.post(SEARCH_URL, json=body, headers=headers, timeout=20)
