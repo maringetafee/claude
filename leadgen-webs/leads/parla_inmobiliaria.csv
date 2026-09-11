@@ -1,6 +1,6 @@
 place_id,business_name,type_label,city,address,phone,website,tiene_web,rating,review_count,photo_path,web_estado,email,contactar_por_telefono,web_obsoleta,web_motivos
 ChIJT9TcCD_1QQ0Rx48-IxWBjiw,Agencia inmobiliaria LAS AMÉRICAS,Inmobiliaria,Parla,"C. Isabel II, 30, 28982 Parla, Madrid, España",+34 916 99 91 07,http://www.inmobiliarialasamericas.com/,True,5,231,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJT9TcCD_1QQ0Rx48-IxWBjiw.jpg,propia,,True,no,web moderna
-ChIJ94J6vg_1QQ0R6OY4bs6FAFA,Casalia Property's Inmobiliaria,Inmobiliaria,Parla,"Calle Real, 23, Loc Izquierda, 28981 Parla, Madrid, España",+34 911 52 20 86,http://www.casalia.org/,True,5,326,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJ94J6vg_1QQ0R6OY4bs6FAFA.jpg,propia,inmobiliaria@casalia.org,False,no,web moderna
+ChIJ94J6vg_1QQ0R6OY4bs6FAFA,Casalia Property's Inmobiliaria,Inmobiliaria,Parla,"Calle Real, 23, Loc Izquierda, 28981 Parla, Madrid, España",+34 911 52 20 86,http://www.casalia.org/,True,5,326,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJ94J6vg_1QQ0R6OY4bs6FAFA.jpg,propia,inmobiliaria@casalia.org,False,?,no carga (ReadTimeout)
 ChIJCYe0Usn1QQ0RZrQEkbhogJc,Inmobiliaria Empire Real Estate Properties,Inmobiliaria,Parla,"C. de Pinto, 77, 28982 Parla, Madrid, España",+34 912 42 71 34,http://www.empirerealestateprop.es/,True,4.8,459,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJCYe0Usn1QQ0RZrQEkbhogJc.jpg,propia,,True,no,web moderna
 ChIJm6EPAff1QQ0RMqv-EJPNUuQ,ROOM-HOUSE Inmobiliaria S.L.,Inmobiliaria,Parla,"C. de Getafe, 17, Loc 38, 28981 Parla, Madrid, España",+34 910 34 46 81,http://www.rhinmo.com/,True,4.9,160,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJm6EPAff1QQ0RMqv-EJPNUuQ.jpg,propia,info@rhinmo.com,False,no,web moderna
 ChIJ0cm31Tb1QQ0R0oOgTEvntaw,Jacqueline Álvarez Servicios Inmobiliarios,Inmobiliaria,Parla,"C. San Antón, 49, 28982 Parla, Madrid, España",+34 692 90 90 18,https://www.jalvarezinmobiliaria.net/,True,4.9,183,C:\Users\mario\leadgen\leadgen-webs\leads\photos\ChIJ0cm31Tb1QQ0R0oOgTEvntaw.jpg,propia,info@jacquelinealvarez.es,False,no,web moderna
@@ -40,22 +40,22 @@ ChIJJTwxYWGLQQ0R2fUlj_a4aC4,La Casa Agency Fuenlabrada,Inmobiliaria,Parla,"C. Lu
 ChIJOY5zXzn1QQ0R2h0WTBGrbA8,Iglesia China ACyM Fuente de Gracia,Inmobiliaria,Parla,"C. Alfonso XIII, 4, posterior, 28982 Parla, Madrid, España",+34 916 05 52 13,,False,5,4,,ninguna,,True,,
 ChIJQT4FGjH1QQ0RROPLwTAXg-A,cf gestión inmobiliaria,Inmobiliaria,Parla,"C. Río Miño, 4, 28981 Parla, Madrid, España",+34 916 99 05 67,,False,1.5,51,,ninguna,,True,,
 ,Asian Consulting Immobiliaria,Inmobiliaria,Parla,"Calle Real, 99, 28981 Parla, Madrid, España",+34 910 56 14 66,,False,,,,ninguna,,True,,
-,C.R. HOMES INMOBILIARIA GETAFE,Inmobiliaria,Parla,"Av. España, 13, 28903 Getafe, Madrid, España",+34 910 32 91 37,http://www.crhomes.es/,True,,,,propia,,True,,
+,C.R. HOMES INMOBILIARIA GETAFE,Inmobiliaria,Parla,"Av. España, 13, 28903 Getafe, Madrid, España",+34 910 32 91 37,http://www.crhomes.es/,True,,,,propia,,True,si,sin https
 ,Club Inmobiliario Parla,Inmobiliaria,Parla,"C. la Pila, 2, Loc 10, 28981 Parla, Madrid, España",+34 916 98 92 77,,False,,,,ninguna,,True,,
-,Credit Farcasa,Inmobiliaria,Parla,"C. Pablo Casals, 27, Loc 10, 28981 Parla, Madrid, España",+34 919 37 42 69,http://creditfarcasa.com.es/,True,,,,propia,,True,,
+,Credit Farcasa,Inmobiliaria,Parla,"C. Pablo Casals, 27, Loc 10, 28981 Parla, Madrid, España",+34 919 37 42 69,http://creditfarcasa.com.es/,True,,,,propia,,True,?,no carga (ConnectionError)
 ,D&A asociados grupo inmobiliario,Inmobiliaria,Parla,"C. de Pinto, 29, 28982 Parla, Madrid, España",+34 910 42 97 03,,False,,,,ninguna,,True,,
 ,"G&M INMOBILIARIA, HIPOTECAS, SEGUROS Y ASESORIA",Inmobiliaria,Parla,"C. Reina Victoria, 18, Loc 2, 28982 Parla, Madrid, España",+34 607 67 79 52,,False,,,,ninguna,,True,,
-,Globalquiler,Inmobiliaria,Parla,"C. Isabel II, 30, 28980 Parla, Madrid, España",+34 916 99 91 07,https://globalquiler.es/,True,,,,propia,,True,,
+,Globalquiler,Inmobiliaria,Parla,"C. Isabel II, 30, 28980 Parla, Madrid, España",+34 916 99 91 07,https://globalquiler.es/,True,,,,propia,,True,no,web moderna
 ,IG,Inmobiliaria,Parla,"C. Hoyos, 28981 Parla, Madrid, España",,,False,,,,ninguna,,True,,
 ,INMOPARLA J.A.D,Inmobiliaria,Parla,"C. San Antón, 60, 28982 Parla, Madrid, España",+34 911 13 68 40,,False,,,,ninguna,,True,,
 ,Inmobiliaria Credyjoven,Inmobiliaria,Parla,"C. de Pablo VI, 6, 28982 Parla, Madrid, España",+34 648 19 54 25,,False,,,,ninguna,,True,,
-,Inmobiliaria Human House,Inmobiliaria,Parla,"C. Estanislao Zazo, 39, local 1, 28970 Humanes de Madrid, Madrid, España",+34 914 98 08 88,http://www.humanhouse.es/,True,,,,propia,,True,,
+,Inmobiliaria Human House,Inmobiliaria,Parla,"C. Estanislao Zazo, 39, local 1, 28970 Humanes de Madrid, Madrid, España",+34 914 98 08 88,http://www.humanhouse.es/,True,,,,propia,,True,?,HTTP 403
 ,Inmobiliaria Venta y Alquiler Parla | Victor García,Inmobiliaria,Parla,"Calle Real, 60, 28981 Parla, Madrid, España",+34 629 92 90 96,,False,,,,ninguna,,True,,
 ,Invierte en Colombia,Inmobiliaria,Parla,"C. de la Paloma, 12, Local 3, 28981 Parla, Madrid, España",+34 641 19 49 21,,False,,,,ninguna,,True,,
 ,Nexus Real Estate,Inmobiliaria,Parla,"C. Reina Victoria, 28982 Parla, Madrid, España",,,False,,,,ninguna,,True,,
-,Residencial Terral-Parla by Vivia Homes,Inmobiliaria,Parla,"C. Constelación de Perseo, 41, 28983 Parla, Madrid, España",+34 900 924 545,https://viviahomes.com/parla/,True,,,,propia,,True,,
+,Residencial Terral-Parla by Vivia Homes,Inmobiliaria,Parla,"C. Constelación de Perseo, 41, 28983 Parla, Madrid, España",+34 900 924 545,https://viviahomes.com/parla/,True,,,,propia,,True,?,HTTP 403
 ,Su Confianza Es Nuestro Objetivo,Inmobiliaria,Parla,"Calle Real, 76, 28982 Parla, Madrid, España",+34 647 57 92 14,,False,,,,ninguna,,True,,
 ,Trasteros Josan,Inmobiliaria,Parla,"C. Berlín, 8, 28983 Parla, Madrid, España",+34 623 04 12 60,,False,,,,ninguna,,True,,
 ,Tuhipotekasa,Inmobiliaria,Parla,"Tr.ª San Blas, 2, 28981 Parla, Madrid, España",,,False,,,,ninguna,,True,,
-,Valazanca,Inmobiliaria,Parla,"Calle Real, 63, 28981 Parla, Madrid, España",+34 916 99 01 19,https://www.valazanca.com/,True,,,,propia,,True,,
+,Valazanca,Inmobiliaria,Parla,"Calle Real, 63, 28981 Parla, Madrid, España",+34 916 99 01 19,https://www.valazanca.com/,True,,,,propia,,True,?,HTTP 403
 ,Viviendas Cebrisan,Inmobiliaria,Parla,"C. Leganés, 34, 28981 Parla, Madrid, España",,,False,,,,ninguna,,True,,
