@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+:root {
+  /* Asfalto y papel — base neutra, editorial */
+  --color-paper: #f6f4f0;
+  --color-paper-soft: #eeebe4;
+  --color-ink: #17181b;
+  --color-ink-soft: #45474c;
+  --color-stone: #6b6c72; /* AA (≥4.5:1) sobre --color-paper para texto pequeño */
+  --color-stone-light: #a9a9a6;
+  --color-line: #ddd9d0;
+
+  /* Rojo L de aprendizaje — identidad propia de autoescuela, no un rojo
+     corporativo genérico. Uso reservado a acentos: CTAs, números, detalles. */
+  --color-signal: #c8311f;
+  --color-signal-dark: #a3271a;
+  --color-signal-soft: #f3ddd6;
+
+  /* Ámbar de señalización — distingue el mundo moto (A2) sin recurrir a un
+     segundo azul/rojo corporativo. Dos tonos, igual que el rojo: uno para
+     superficies/gráficos y uno más oscuro para texto, ambos calculados
+     para cumplir el contraste mínimo AA sobre paper/paper-soft. */
+  --color-amber: #b8791f;
+  --color-amber-dark: #7a4f14;
+  --color-amber-soft: #f1e2c6;
+
+  /* Verde WhatsApp, oscurecido lo justo para que el texto/icono blanco
+     encima cumpla 4.5:1 (el #25D366 "oficial" no lo cumple). */
+  --color-whatsapp: #0d7a37;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-archivo);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-soft: var(--color-paper-soft);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-stone: var(--color-stone);
+  --color-stone-light: var(--color-stone-light);
+  --color-line: var(--color-line);
+  --color-signal: var(--color-signal);
+  --color-signal-dark: var(--color-signal-dark);
+  --color-signal-soft: var(--color-signal-soft);
+  --color-amber: var(--color-amber);
+  --color-amber-dark: var(--color-amber-dark);
+  --color-amber-soft: var(--color-amber-soft);
+  --color-whatsapp: var(--color-whatsapp);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-signal);
+  color: var(--color-paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 3px;
+}
+
+/* Motivo de señalización vial: línea discontinua sutil, reutilizable como
+   separador editorial entre secciones. Decorativa: aria-hidden en el uso. */
+.road-line {
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-line) 0,
+    var(--color-line) 22px,
+    transparent 22px,
+    transparent 40px
+  );
+  height: 2px;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
