@@ -59,7 +59,7 @@ export function Footer({ content }: { content: SiteContent }) {
         </div>
         <div className="footer__credit">
           <a className="magnetic" href="https://makemyweb.es" target="_blank" rel="noopener">
-            <img src="/makemyweb-mark.webp" alt="" width={35} height={18} />
+            <img src="/makemyweb-mark.svg" alt="" width={23} height={18} />
             <span>Web creada por</span>{" "}
             <strong>makemyweb.es</strong>{" "}
             <span className="footer__credit-arrow" aria-hidden="true">

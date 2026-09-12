@@ -1,6 +1,9 @@
+# Monorepo: en Netlify, Base directory = coronas-y-flores
 [build]
   command = "npm run build"
   publish = ".next"
+  # Solo compila si ha cambiado esta carpeta (el repo tiene más proyectos)
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ."
 
 [build.environment]
   NODE_VERSION = "22"
