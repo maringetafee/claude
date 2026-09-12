@@ -7,3 +7,8 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Motor de Next.js en Netlify (SSR, API routes, proxy). Sin él se publica
+# .next como estáticos y todo da 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
