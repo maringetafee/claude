@@ -22,7 +22,9 @@ python post_social.py --text "Texto del post" --image-url "https://..." [--faceb
 
 ## Automatización
 
-Ya existe una rutina programada en la nube de Claude (routine `trig_01MkBGqLJLK9JHxBeGqazBcS`, https://claude.ai/code/routines/trig_01MkBGqLJLK9JHxBeGqazBcS) que publica sola lunes/miércoles/viernes a las 10:00 (Madrid) en ambas redes. Corre en la nube, no depende de este portátil ni de que este script exista localmente — el token vive embebido en la configuración de esa rutina.
+Tarea del Programador de tareas de Windows `MakeMyWeb-SocialAutopilot`, en el portátil local, que ejecuta `python auto_post.py` lunes/miércoles/viernes a las 10:00 con `StartWhenAvailable` (si el PC está apagado a esa hora, se lanza en cuanto se enciende). `auto_post.py` rota entre 6 textos y 4 imágenes fijas (sin IA) y publica llamando a las funciones de `post_social.py`; guarda el índice de rotación en `auto_post_state.json` (local, no se sube a git).
+
+Hubo un intento previo con una rutina programada en la nube de Claude (`trig_01MkBGqLJLK9JHxBeGqazBcS`) pero el entorno en la nube bloquea por política de red las llamadas salientes a `graph.facebook.com` (403 en el CONNECT) — no hay forma de añadirlo al allowlist, así que se abandonó y esa rutina quedó deshabilitada.
 
 ## Limitaciones conocidas de la API (no son bugs)
 
