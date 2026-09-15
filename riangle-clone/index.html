@@ -77,7 +77,7 @@
   <link rel="stylesheet" href="assets/css/fonts.css?v=20260904e" />
   <link rel="stylesheet" href="assets/css/tokens.css?v=20260906e" />
   <link rel="stylesheet" href="assets/css/base.css?v=20260904e" />
-  <link rel="stylesheet" href="assets/css/components.css?v=20260906b" />
+  <link rel="stylesheet" href="assets/css/components.css?v=20260915" />
   <link rel="stylesheet" href="assets/css/animations.css?v=20260904e" />
   <link rel="stylesheet" href="assets/css/bg-video.css?v=20260906e" />
   <link rel="stylesheet" href="assets/css/light-theme.css?v=20260904e" />
@@ -547,44 +547,105 @@
                   <span class="cap-row__band" aria-hidden="true"></span>
                   <span class="index-number index-number--muted cap-row__index">01</span>
                   <h3 class="cap-row__name"><span data-reveal>Diseño + Desarrollo</span></h3>
-                  <span class="cap-row__hint">Desde 799 €</span>
+                  <span class="cap-row__hint">Desde 579 €</span>
                   <span class="cap-row__sign" aria-hidden="true"></span>
                 </summary>
                 <div class="cap-fold__body">
-                  <p class="cap-fold__intro">Un solo equipo lleva tu web de la idea al sitio publicado: diseño, desarrollo, ayuda con los contenidos y SEO, todo incluido. Vale igual si partes de cero o si quieres rediseñar la web que ya tienes. Mueve las opciones para un presupuesto aproximado.</p>
+                  <p class="cap-fold__intro">Un solo equipo lleva tu web de la idea al sitio publicado: diseño, desarrollo, ayuda con los contenidos y SEO, todo incluido. Vale igual si partes de cero o si quieres rediseñar la web que ya tienes. Dinos a qué te dedicas y te enseñamos lo que le hace falta a la tuya.</p>
 
-                  <div class="calc calc--fold" data-calc>
-                    <form class="calc__form" aria-label="Calculadora de presupuesto">
-                      <fieldset class="calc__group">
-                        <legend class="calc__legend">Base</legend>
-                        <div class="calc__base">
-                          <span>Diseño + desarrollo, de principio a fin</span>
-                          <span class="calc__base-tag">Siempre incluido</span>
+                  <!-- business-type picker: the radios drive which panel shows via
+                       :has() in components.css (works without JS); js/business-picker.js
+                       only updates the summary card + pre-fills the contact form -->
+                  <div class="calc calc--fold calc--biz" data-biz>
+                    <div class="biz">
+                      <fieldset class="biz__picker">
+                        <legend class="biz__question">¿Qué tipo de negocio tienes?</legend>
+                        <div class="biz__chips">
+                          <label class="biz__chip"><input type="radio" name="biz" value="restaurante" checked
+                            data-biz-for="Para tu restaurante añadimos" data-biz-spec="Reservas online · Carta digital · Pedidos por WhatsApp"
+                            data-biz-cta="Quiero esto para mi restaurante" data-biz-msg="Tengo un restaurante / bar y me interesa una web con reservas online y carta digital." />Restaurante / Bar</label>
+                          <label class="biz__chip"><input type="radio" name="biz" value="peluqueria"
+                            data-biz-for="Para tu salón añadimos" data-biz-spec="Cita online · Servicios y precios · Galería de trabajos"
+                            data-biz-cta="Quiero esto para mi salón" data-biz-msg="Tengo una peluquería / centro de estética y me interesa una web con cita online." />Peluquería / Estética</label>
+                          <label class="biz__chip"><input type="radio" name="biz" value="clinica"
+                            data-biz-for="Para tu clínica añadimos" data-biz-spec="Cita online · Tratamientos · Equipo e instalaciones"
+                            data-biz-cta="Quiero esto para mi clínica" data-biz-msg="Tengo una clínica y me interesa una web con cita online para pacientes." />Clínica / Salud</label>
+                          <label class="biz__chip"><input type="radio" name="biz" value="tienda"
+                            data-biz-for="Para tu tienda añadimos" data-biz-spec="Pasarela de pago · Panel de administración · Catálogo"
+                            data-biz-cta="Quiero mi tienda online" data-biz-msg="Quiero una tienda online con pasarela de pago y panel de administración." />Tienda online</label>
+                          <label class="biz__chip"><input type="radio" name="biz" value="servicios"
+                            data-biz-for="Para tu negocio añadimos" data-biz-spec="Presupuestos online · Llamada y WhatsApp · Trabajos realizados"
+                            data-biz-cta="Quiero esto para mi negocio" data-biz-msg="Tengo un negocio de servicios y me interesa una web para recibir peticiones de presupuesto." />Servicios / Oficios</label>
+                          <label class="biz__chip"><input type="radio" name="biz" value="otro"
+                            data-biz-for="Para tu negocio añadimos" data-biz-spec="Lo que tu negocio necesite, a medida"
+                            data-biz-cta="Cuéntanos tu negocio" data-biz-msg="Mi negocio es… y me gustaría que la web sirviera para…" />Otro</label>
                         </div>
                       </fieldset>
 
-                      <fieldset class="calc__group">
-                        <legend class="calc__legend">Número de páginas</legend>
-                        <div class="calc__pages">
-                          <div class="calc__range-track">
-                            <input class="calc__range" type="range" name="pages" min="1" max="5" step="1" value="1" aria-label="Número de páginas" />
-                            <span class="calc__pages-value" data-calc-pages-value>1</span>
-                          </div>
-                          <div class="calc__range-scale" aria-hidden="true"><span>1</span><span>5</span></div>
+                      <div class="biz__panels">
+                        <div class="biz__panel" data-biz-panel="restaurante">
+                          <p class="biz__lead">Que te reserven mesa a cualquier hora, sin tener que coger el teléfono en pleno servicio.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Sistema de reservas online</h4><p class="biz__feature-note">El cliente elige día, hora y número de personas desde el móvil. Te llega el aviso al momento.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Carta digital</h4><p class="biz__feature-note">Tu carta siempre al día, con fotos y alérgenos, y un QR para las mesas.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Pedidos por WhatsApp</h4><p class="biz__feature-note">Un botón directo a tu WhatsApp para encargos y comida para llevar.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Horario, mapa y reseñas</h4><p class="biz__feature-note">Lo que la gente mira antes de ir: cuándo abres, cómo llegar y qué opinan otros.</p></li>
+                          </ul>
+                          <p class="biz__proof">Ya lo hemos hecho: <a class="text-link" href="#trabajo">Lolita Café</a> tiene reserva de mesa online y <a class="text-link" href="#trabajo">Mocca Café</a>, su carta digital.</p>
                         </div>
-                      </fieldset>
 
-                      <fieldset class="calc__group">
-                        <legend class="calc__legend">Extras</legend>
-                        <div class="calc__checks">
-                          <label class="calc__check"><input type="checkbox" name="extra" value="anim" /> Página animada 3D <span class="calc__check-hint">(esta web es un ejemplo)</span> <span class="calc__check-note">+279 €</span></label>
-                          <label class="calc__check"><input type="checkbox" name="extra" value="booking" /> Sistema de reservas <span class="calc__check-note">+179 €</span></label>
-                          <label class="calc__check"><input type="checkbox" name="extra" value="panel" /> Panel de gestión <span class="calc__check-hint">(base de datos propia)</span> <span class="calc__check-note">+249 €</span></label>
+                        <div class="biz__panel" data-biz-panel="peluqueria">
+                          <p class="biz__lead">Tus clientes piden cita a las once de la noche desde el sofá. Que puedan hacerlo sin llamarte.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Pedir cita online</h4><p class="biz__feature-note">Eligen servicio y hueco libre en tu agenda. Te llega aviso de cada cita nueva.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Servicios y precios claros</h4><p class="biz__feature-note">Corte, color, tratamientos… con precio y duración, para que lleguen sabiendo lo que van a pagar.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Galería de trabajos</h4><p class="biz__feature-note">Tus mejores resultados, que es lo que de verdad convence a un cliente nuevo.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">WhatsApp e Instagram a un toque</h4><p class="biz__feature-note">Para dudas rápidas y para que vean tu trabajo del día a día.</p></li>
+                          </ul>
                         </div>
-                        <p class="calc__hint">¿No necesitas reservas? Con el panel de gestión actualizas tú mismo catálogo, precios, horarios u ofertas, sin escribirnos.</p>
-                        <p class="calc__hint">La ayuda con los contenidos y el SEO ya van incluidos en el precio, sin coste extra.</p>
-                      </fieldset>
-                    </form>
+
+                        <div class="biz__panel" data-biz-panel="clinica">
+                          <p class="biz__lead">Un paciente nuevo decide en segundos si tu clínica le da confianza. Y lo primero que ve es tu web.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Cita online</h4><p class="biz__feature-note">El paciente elige tratamiento y hora disponible. Menos llamadas en recepción.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Tratamientos explicados</h4><p class="biz__feature-note">Una página por tratamiento, clara y sin tecnicismos, que además te ayuda a salir en Google.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Equipo e instalaciones</h4><p class="biz__feature-note">Caras, titulaciones y fotos reales de la clínica: confianza antes de la primera visita.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Llamar o escribir a un toque</h4><p class="biz__feature-note">Teléfono, WhatsApp y cómo llegar siempre visibles, también para urgencias.</p></li>
+                          </ul>
+                        </div>
+
+                        <div class="biz__panel" data-biz-panel="tienda">
+                          <p class="biz__lead">Vende también cuando tienes la persiana bajada, y gestiónalo todo tú desde el móvil.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Pasarela de pago</h4><p class="biz__feature-note">Cobra con tarjeta directamente en tu web, con pago seguro y el dinero en tu cuenta.</p></li>
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Panel de administración</h4><p class="biz__feature-note">Tú subes productos, cambias precios, controlas el stock y ves los pedidos. Sin depender de nadie.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Catálogo con variantes</h4><p class="biz__feature-note">Tallas, colores, tamaños… por categorías y fácil de encontrar desde el móvil.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Aviso de cada pedido</h4><p class="biz__feature-note">Te llega un email con cada venta y el cliente recibe su confirmación al momento.</p></li>
+                          </ul>
+                        </div>
+
+                        <div class="biz__panel" data-biz-panel="servicios">
+                          <p class="biz__lead">Que el cliente que busca tu servicio en Google te llame a ti y no a la competencia.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature biz__feature--key"><span class="biz__tag">Clave</span><h4 class="biz__feature-name">Petición de presupuesto</h4><p class="biz__feature-note">El cliente te cuenta qué necesita en un formulario corto y te llega todo ordenado para contestarle.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Llamada y WhatsApp siempre a mano</h4><p class="biz__feature-note">Botones fijos en el móvil: un toque y ya está hablando contigo.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Trabajos realizados</h4><p class="biz__feature-note">Fotos de trabajos terminados, la mejor prueba de que sabes lo que haces.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Tu zona en Google</h4><p class="biz__feature-note">Páginas pensadas para que te encuentren al buscar tu servicio en tu ciudad.</p></li>
+                          </ul>
+                          <p class="biz__proof">Así es la web que hicimos para <a class="text-link" href="#trabajo">S.B.S Telecomunicaciones</a>, instaladores en Madrid.</p>
+                        </div>
+
+                        <div class="biz__panel" data-biz-panel="otro">
+                          <p class="biz__lead">Cada negocio funciona distinto. Cuéntanos cómo trabajas y te proponemos lo que de verdad te hace falta.</p>
+                          <ul class="biz__features">
+                            <li class="biz__feature"><h4 class="biz__feature-name">Panel de gestión</h4><p class="biz__feature-note">Actualiza tú mismo textos, fotos, precios u horarios, sin tener que escribirnos.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Reservas o citas</h4><p class="biz__feature-note">Si trabajas con agenda, tus clientes reservan solos desde la web.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Web animada</h4><p class="biz__feature-note">Animaciones como las de esta web, para que tu marca no se parezca a ninguna otra.</p></li>
+                            <li class="biz__feature"><h4 class="biz__feature-name">Contacto directo</h4><p class="biz__feature-note">Teléfono, WhatsApp y formulario justo donde el cliente los busca.</p></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
 
                     <aside class="calc__result" data-reveal>
                       <div class="calc__vs">
@@ -593,9 +654,14 @@
                       </div>
                       <div class="calc__mmw">
                         <span class="calc__result-label">Con MakeMyWeb</span>
-                        <p class="calc__total" data-calc-total>799 €</p>
-                        <p class="calc__spec" data-calc-spec>Diseño + desarrollo · 1 página</p>
-                        <a class="btn-primary" href="#contacto">Contáctanos</a>
+                        <p class="calc__total"><span class="calc__from">Desde</span>579 €</p>
+                        <p class="calc__spec">Diseño, desarrollo, contenidos y SEO incluidos.</p>
+                        <div class="biz__addon">
+                          <span class="calc__result-label" data-biz-out="for">Para tu restaurante añadimos</span>
+                          <p class="biz__addon-spec" data-biz-out="spec">Reservas online · Carta digital · Pedidos por WhatsApp</p>
+                          <p class="calc__disclaimer">Te pasamos el precio cerrado en menos de 24 h, sin sorpresas.</p>
+                        </div>
+                        <a class="btn-primary" href="#contacto" data-biz-out="cta">Quiero esto para mi restaurante</a>
                       </div>
                     </aside>
                   </div>
@@ -846,7 +912,7 @@
   <script src="js/animations.js?v=20260904e"></script>
   <script src="js/mouse-glow.js?v=20260904e"></script>
   <script src="js/bg-video.js?v=20260906e"></script>
-  <script src="js/pricing.js?v=20260904e"></script>
+  <script src="js/business-picker.js?v=20260915b"></script>
   <script src="js/contact-form.js?v=20260904e"></script>
 </body>
 </html>

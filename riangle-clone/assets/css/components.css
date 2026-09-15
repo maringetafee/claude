@@ -1239,55 +1239,6 @@
   text-transform: uppercase;
   color: var(--ink-faint);
 }
-.calc__options { display: flex; flex-direction: column; border: 1px solid var(--line); }
-.calc__option {
-  position: relative;
-  padding: 15px 18px;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--font-display);
-  font-size: 0.9375rem;
-  color: var(--ink-muted);
-  cursor: pointer;
-  transition: background-color 0.25s var(--ease-standard), color 0.25s var(--ease-standard);
-}
-.calc__option:last-child { border-bottom: 0; }
-.calc__option input { position: absolute; opacity: 0; pointer-events: none; }
-.calc__option:hover { color: var(--ink); }
-.calc__option:has(input:checked) { background: var(--refract); color: var(--on-refract); }
-.calc__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px var(--refract-soft); }
-
-.calc__pages { display: flex; flex-direction: column; gap: 14px; }
-.calc__range-track { position: relative; padding-top: 32px; }
-.calc__pages-value {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 1.125rem;
-  font-variant-numeric: tabular-nums;
-  color: var(--refract);
-  pointer-events: none;
-}
-.calc__range { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: var(--line-strong); accent-color: var(--refract); }
-.calc__range::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--refract); cursor: pointer; margin-top: -1px; }
-.calc__range::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: var(--refract); cursor: pointer; }
-
-.calc__checks { display: flex; flex-direction: column; }
-.calc__check {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-  cursor: pointer;
-  font-family: var(--font-display);
-  color: var(--ink);
-}
-.calc__check:last-child { border-bottom: 1px solid var(--line); }
-.calc__check input { width: 16px; height: 16px; accent-color: var(--refract); flex-shrink: 0; translate: 0 2px; }
-.calc__check-note { margin-left: auto; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
-
 /* result card */
 .calc__result { border: 1px solid var(--line-strong); background: var(--surface-1); padding: clamp(24px, 3vw, 40px); position: sticky; top: 96px; }
 .calc__result-label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint); }
@@ -1400,25 +1351,6 @@
   text-transform: uppercase;
   color: var(--refract);
 }
-.calc__range-scale {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  color: var(--ink-faint);
-}
-.calc__check { flex-wrap: wrap; column-gap: 12px; row-gap: 2px; }
-.calc__check-hint { color: var(--ink-faint); font-size: 0.9em; }
-.calc__check > .calc__check-note { margin-left: auto; white-space: nowrap; flex-shrink: 0; }
-.calc__hint {
-  margin: 12px 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.55;
-  color: var(--ink-faint);
-}
-.calc__hint + .calc__hint { margin-top: 8px; }
-
 .calc__vs { display: flex; flex-direction: column; gap: 12px; }
 .calc__vs-row {
   display: flex;
@@ -1446,6 +1378,124 @@
 .calc__mmw .calc__spec { margin-top: 10px; }
 .calc__mmw .btn-primary { margin-top: 20px; width: 100%; }
 .calc--fold .calc__disclaimer { margin-top: 16px; }
+.calc__total .calc__from {
+  margin-right: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: var(--ink-faint);
+}
+
+/* -------------------------------------------------------------------------
+   ¿QUÉ TIPO DE NEGOCIO TIENES? — replaces the old budget calculator.
+   Radios styled as chips; the checked one shows its panel through :has()
+   (no JS needed for the swap). js/business-picker.js keeps the summary
+   card on the right in step and pre-fills the contact form.
+   ------------------------------------------------------------------------- */
+.biz { display: flex; flex-direction: column; gap: 32px; min-width: 0; }
+.biz__picker { border: 0; margin: 0; padding: 0; min-width: 0; }
+.biz__question {
+  padding: 0;
+  margin-bottom: 18px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-stretch: 108%;
+  font-size: clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.biz__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.biz__chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border: 1px solid var(--line-strong);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  color: var(--ink-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s var(--ease-standard), border-color 0.2s var(--ease-standard),
+    color 0.2s var(--ease-standard), transform 0.15s var(--ease-out);
+}
+.biz__chip input { position: absolute; opacity: 0; pointer-events: none; }
+.biz__chip:active { transform: scale(0.97); }
+.biz__chip:has(input:checked) { background: var(--refract); border-color: var(--refract); color: var(--on-refract); }
+.biz__chip:has(input:focus-visible) { outline: 2px solid var(--refract); outline-offset: 2px; }
+@media (hover: hover) {
+  .biz__chip:not(:has(input:checked)):hover { border-color: var(--ink-faint); color: var(--ink); }
+}
+@media (max-width: 599px) {
+  .biz__chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .biz__chip { padding: 12px 10px; font-size: 0.875rem; text-align: center; }
+}
+
+.biz__panel { display: none; }
+.biz:has(input[value="restaurante"]:checked) [data-biz-panel="restaurante"],
+.biz:has(input[value="peluqueria"]:checked) [data-biz-panel="peluqueria"],
+.biz:has(input[value="clinica"]:checked) [data-biz-panel="clinica"],
+.biz:has(input[value="tienda"]:checked) [data-biz-panel="tienda"],
+.biz:has(input[value="servicios"]:checked) [data-biz-panel="servicios"],
+.biz:has(input[value="otro"]:checked) [data-biz-panel="otro"] {
+  display: block;
+  animation: biz-in 0.4s var(--ease-out);
+}
+@keyframes biz-in {
+  from { opacity: 0; translate: 0 8px; }
+  to { opacity: 1; translate: none; }
+}
+
+.biz__lead {
+  max-width: 44ch;
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.45;
+  color: var(--ink);
+}
+.biz__features { list-style: none; margin: 0; padding: 0; display: grid; column-gap: 32px; }
+@media (min-width: 640px) { .biz__features { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.biz__feature {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--line);
+}
+.biz__feature--key { border-top-color: var(--refract); box-shadow: inset 0 1px 0 var(--refract); }
+.biz__tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--refract);
+}
+.biz__feature-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.biz__feature-note { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--ink-muted); }
+.biz__proof { margin: 16px 0 0; font-size: 0.875rem; line-height: 1.55; color: var(--ink-faint); }
+.biz__proof .text-link { color: var(--ink); }
+
+.biz__addon { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); }
+.biz__addon-spec {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.biz__addon .calc__disclaimer { margin-top: 8px; }
 
 /* the scroll thread lights the row as its head passes — keep it working
    on the foldable summary too */

@@ -19,7 +19,7 @@ same motion. The brand mark is MakeMyWeb's red triple-ribbon monogram.
 
 | File | Content |
 |---|---|
-| `index.html` | Hero · `Trabajo real` (4 projects) · Servicios (6, with embedded presupuesto calculator, `js/pricing.js`) · Proceso (4 steps) · FAQ teaser · CTA |
+| `index.html` | Hero · `Trabajo real` (4 projects) · Servicios (Diseño + Desarrollo with the "¿Qué tipo de negocio tienes?" picker, `js/business-picker.js`; Mantenimiento plans) · Proceso (4 steps) · FAQ teaser · CTA |
 | `faq.html` | All questions as a `<details>` accordion |
 
 `Trabajo real` links out to four real client sites — **Mocca Café**
@@ -60,7 +60,7 @@ Open the printed URL. No build step — plain HTML/CSS/JS.
 
 ```
 index.html                     home — sections + anchors (#servicios #trabajo #proceso),
-                               includes the presupuesto calculator + comparison + Cuido plans
+                               includes the business-type picker + comparison + Mantenimiento plans
 faq.html                       <details> accordion
 assets/css/
   fonts.css                    @font-face (Archivo + JetBrains Mono)
@@ -79,7 +79,8 @@ js/
   studio-clock.js              live "Studio time" (Europe/Zurich)
   animations.js                scroll reveals, parallax, count-up, hero-logo, magnetic button
   cursor.js                    custom dot + trailing red ring
-  pricing.js                   index.html calculator (reads inputs, writes € — no motion)
+  business-picker.js           "¿Qué tipo de negocio tienes?" summary card + contact pre-fill
+                               (the panel swap itself is CSS :has(), no JS needed)
   scroll-thread.js             the gutter comet-line: path through the page's points of interest
 _reference/                    the captured originals (page HTML, hydrated DOM,
                                the site's full styled-components CSS)

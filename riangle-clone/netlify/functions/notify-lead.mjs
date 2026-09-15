@@ -22,7 +22,7 @@ function leadEmailHtml(name) {
 
     <h2 style="font-size: 16px; margin: 28px 0 8px;">Lo que incluye</h2>
     <ul style="font-size: 14px; line-height: 1.7; padding-left: 18px;">
-      <li>Diseño + desarrollo, de principio a fin, desde <strong>799 €</strong></li>
+      <li>Diseño + desarrollo, de principio a fin, desde <strong>579 €</strong></li>
       <li>Sitios listos en 24/48h (para proyectos sencillos)</li>
       <li>Revisión en móvil y una ronda de ajustes antes de publicar</li>
       <li>Ayuda con contenidos y SEO ya incluida, sin coste extra</li>
