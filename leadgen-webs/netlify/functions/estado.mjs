@@ -6,7 +6,7 @@
 // POST { slug, estado } -> guarda/actualiza el estado de un lead.
 import { getStore } from "@netlify/blobs";
 
-const ESTADOS_VALIDOS = ["pendiente", "enviado", "respondido", "cliente", "rechazado"];
+const ESTADOS_VALIDOS = ["pendiente", "enviado", "en_conversacion", "respondido", "cliente", "rechazado"];
 
 export default async (req) => {
   const store = getStore("estados");

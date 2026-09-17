@@ -150,6 +150,16 @@ def download_photo(photo_name, place_id, out_dir):
     return ""
 
 
+def cargar_place_ids_rechazados(rechazados_csv):
+    """place_id de leads/rechazados.csv (lista negra alimentada por
+    scripts/sync_rechazados.py) para no volver a proponerlos en futuras
+    búsquedas."""
+    if not rechazados_csv.exists():
+        return set()
+    with rechazados_csv.open(encoding="utf-8") as f:
+        return {row["place_id"] for row in csv.DictReader(f) if row.get("place_id")}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--city", required=True, help="Ciudad a buscar, ej: Getafe")
@@ -184,6 +194,13 @@ def main():
     leads_dir.mkdir(exist_ok=True)
     photos_dir = leads_dir / "photos"
     csv_path = leads_dir / f"{slugify(args.city)}_{args.type}.csv"
+
+    rechazados_ids = cargar_place_ids_rechazados(leads_dir / "rechazados.csv")
+    antes = len(results)
+    results = [p for p in results if p.get("id", "") not in rechazados_ids]
+    saltados = antes - len(results)
+    if saltados:
+        print(f"Saltados {saltados} negocio(s) que ya estaban en leads/rechazados.csv")
 
     rows = []
     for place in results:

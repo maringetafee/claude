@@ -25,7 +25,7 @@ from site_common import (
     PLANTILLAS_MAESTRAS,
     SHARED_CSS,
     badge_html,
-    checkbox_hecho,
+    estado_selector,
     jump_nav,
     nav_tabs,
     orden_tipo,
@@ -89,7 +89,7 @@ def render_tipo_section(tipo, entradas_tipo):
             f"""        <li class="lead">
           <a href="{e['slug']}.html">{e['business_name']}</a>
           <span class="lead-right">
-            {checkbox_hecho(e['slug'], e['estado'])}
+            {estado_selector(e['slug'], e['estado'])}
             {badge_html(e['slug'], e['estado'])}
           </span>
         </li>"""

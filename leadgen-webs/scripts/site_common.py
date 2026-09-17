@@ -14,11 +14,12 @@ load_dotenv(ROOT / ".env")
 ESTADO_LABELS = {
     "pendiente": "Pendiente",
     "enviado": "Enviado",
+    "en_conversacion": "En conversación",
     "respondido": "Respondido",
     "cliente": "Cliente",
     "rechazado": "Rechazado",
 }
-ESTADO_ORDEN = ["pendiente", "enviado", "respondido", "cliente", "rechazado"]
+ESTADO_ORDEN = ["pendiente", "enviado", "en_conversacion", "respondido", "cliente", "rechazado"]
 
 
 def badge_class(estado):
@@ -35,17 +36,23 @@ def badge_html(slug, estado):
     )
 
 
-def checkbox_hecho(slug, estado):
-    """Checkbox 'marcar como hecho' — solo se pinta para leads pendientes.
-    Al marcarlo, un script en el cliente llama a la Netlify Function
-    estado.mjs para pasar el lead a 'enviado' (persistido en Netlify Blobs,
-    visible desde cualquier dispositivo). Al desmarcarlo, vuelve a pendiente."""
-    if estado != "pendiente":
-        return ""
+def estado_selector(slug, estado):
+    """Desplegable para cambiar el estado de un lead a cualquiera de los
+    valores válidos (incluido 'rechazado'), sin tener que editar el CSV a
+    mano. Al cambiarlo, un script en el cliente llama a la Netlify Function
+    estado.mjs y persiste el cambio en Netlify Blobs (visible desde
+    cualquier dispositivo). Si el nuevo estado es 'rechazado', el propio
+    script hace desaparecer el lead de la lista en pantalla; la limpieza
+    real del CSV versionado (y el registro en la lista negra para no
+    repetirlo) la hace `scripts/sync_rechazados.py` aparte."""
+    opciones = "\n".join(
+        f'<option value="{valor}"{" selected" if valor == estado else ""}>{label}</option>'
+        for valor, label in ESTADO_LABELS.items()
+    )
     return (
-        f'<label class="check-hecho">'
-        f'<input type="checkbox" data-slug="{slug}" data-target-estado="enviado" />'
-        f"Marcar enviado</label>"
+        f'<select class="estado-select" data-slug="{slug}" data-estado-actual="{estado}">'
+        f"{opciones}"
+        f"</select>"
     )
 
 
@@ -300,29 +307,23 @@ SHARED_CSS = """
   }
   .badge-pendiente { background: #f2eddc; color: #8a6d1a; }
   .badge-enviado { background: #dce8fc; color: #1a4fd6; }
+  .badge-en_conversacion { background: #fcedcf; color: #a3650a; }
   .badge-respondido { background: #e8dcfc; color: #6b1ad6; }
   .badge-cliente { background: #d9f2e1; color: #157a3d; }
   .badge-rechazado { background: #fcdcdc; color: #b31a1a; }
   .badge-otro { background: #ececec; color: #666; }
   .badge-sinweb { background: #fde3d0; color: #a34d0a; }
 
-  .check-hecho {
-    display: flex;
-    align-items: center;
-    gap: .35rem;
+  .estado-select {
     font-size: .74rem;
     color: var(--ink-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    padding: .2rem .4rem;
+    background: #fff;
     cursor: pointer;
-    user-select: none;
-    white-space: nowrap;
   }
-  .check-hecho input {
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-    accent-color: var(--ink);
-  }
-  .check-hecho input:disabled { cursor: wait; opacity: .5; }
+  .estado-select:disabled { cursor: wait; opacity: .5; }
 
   @media (max-width: 640px) {
     section.tipo, section.grupo { padding: 1.4rem 1.15rem 1.15rem; }
@@ -367,13 +368,16 @@ def stat_card(valor, etiqueta):
 
 # Script compartido por index.html y datos.html: al cargar, pide a la Netlify
 # Function estado.mjs el estado real (Netlify Blobs) de cada lead y actualiza
-# los badges en pantalla; ademas conecta los checkboxes "Marcar enviado" para
-# que persistan el cambio sin depender de rehacer el build.
+# los badges en pantalla; ademas conecta los <select> de estado para que los
+# cambios (incluido "rechazado") persistan sin depender de rehacer el build.
+# Un lead que pasa a "rechazado" (a mano o por la regla automatica de 15
+# dias sin respuesta) desaparece al momento de la lista; la limpieza real
+# del CSV y el registro en la lista negra los hace scripts/sync_rechazados.py.
 ESTADO_SYNC_SCRIPT = """
 <script>
 (function () {
   var FN_URL = "/.netlify/functions/estado";
-  var LABELS = { pendiente: "Pendiente", enviado: "Enviado", respondido: "Respondido", cliente: "Cliente", rechazado: "Rechazado" };
+  var LABELS = { pendiente: "Pendiente", enviado: "Enviado", en_conversacion: "En conversación", respondido: "Respondido", cliente: "Cliente", rechazado: "Rechazado" };
   var VALIDOS = Object.keys(LABELS);
 
   function badgeClass(estado) {
@@ -385,8 +389,13 @@ ESTADO_SYNC_SCRIPT = """
       span.className = badgeClass(estado);
       span.textContent = LABELS[estado] || estado;
     });
-    var cb = document.querySelector('input[type=checkbox][data-slug="' + CSS.escape(slug) + '"]');
-    if (cb) cb.checked = estado !== "pendiente";
+    var sel = document.querySelector('select.estado-select[data-slug="' + CSS.escape(slug) + '"]');
+    if (sel) sel.value = estado;
+    if (estado === "rechazado") {
+      var contenedor = (sel || document.querySelector('.badge-wrap[data-slug="' + CSS.escape(slug) + '"]'));
+      var li = contenedor && contenedor.closest("li.lead");
+      if (li) li.remove();
+    }
   }
 
   fetch(FN_URL)
@@ -396,11 +405,12 @@ ESTADO_SYNC_SCRIPT = """
     })
     .catch(function () {});
 
-  document.querySelectorAll("input[type=checkbox][data-slug]").forEach(function (cb) {
-    cb.addEventListener("change", function () {
-      var slug = cb.getAttribute("data-slug");
-      var destino = cb.checked ? cb.getAttribute("data-target-estado") : "pendiente";
-      cb.disabled = true;
+  document.querySelectorAll("select.estado-select[data-slug]").forEach(function (sel) {
+    sel.addEventListener("change", function () {
+      var slug = sel.getAttribute("data-slug");
+      var destino = sel.value;
+      var anterior = sel.getAttribute("data-estado-actual") || "pendiente";
+      sel.disabled = true;
       fetch(FN_URL, {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -408,13 +418,14 @@ ESTADO_SYNC_SCRIPT = """
       })
         .then(function (r) {
           if (!r.ok) throw new Error("fallo al guardar");
+          sel.setAttribute("data-estado-actual", destino);
           aplicar(slug, destino);
         })
         .catch(function () {
-          cb.checked = !cb.checked;
+          sel.value = anterior;
           alert("No se pudo guardar el cambio. Revisa tu conexión e inténtalo de nuevo.");
         })
-        .finally(function () { cb.disabled = false; });
+        .finally(function () { sel.disabled = false; });
     });
   });
 })();
