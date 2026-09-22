@@ -7,6 +7,7 @@ import { signOut } from "../actions";
 const ITEMS = [
   { href: "/admin", label: "Resumen", exact: true },
   { href: "/admin/pedidos", label: "Pedidos" },
+  { href: "/admin/clientes", label: "Clientes" },
   { href: "/admin/productos", label: "Productos" },
   { href: "/admin/categorias", label: "Categorías" },
   { href: "/admin/envios", label: "Envíos y entregas" },

@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ClockIcon, LeafIcon, LockIcon, TruckIcon } from "@/components/Icons";
+import { ClockIcon, GiftIcon, HeartIcon, LeafIcon, LockIcon, TruckIcon } from "@/components/Icons";
 import { AddToCart } from "@/components/shop/AddToCart";
 import { Breadcrumbs } from "@/components/shop/PageHero";
 import { ProductGallery } from "@/components/shop/ProductGallery";
 import { ProductGrid } from "@/components/shop/ProductCard";
 import { BRAND } from "@/lib/brand";
 import { getProductBySlug, getProducts, getRelatedProducts } from "@/lib/catalog";
+import { fillTemplate, resolveProductTexts } from "@/lib/content-shared";
+import { formatDateLong } from "@/lib/delivery";
 import { SITE_URL } from "@/lib/env";
-import { fromPriceCents, isSoldOut } from "@/lib/product-utils";
-import { getSettings } from "@/lib/site-data";
+import { activeDiscount, applyDiscount, fromPriceCents, isSoldOut } from "@/lib/product-utils";
+import { getSettings, getSiteContent } from "@/lib/site-data";
+import type { PerkIcon } from "@/lib/types";
+
+const PERK_ICONS: Record<PerkIcon, typeof TruckIcon> = {
+  truck: TruckIcon,
+  clock: ClockIcon,
+  leaf: LeafIcon,
+  lock: LockIcon,
+  gift: GiftIcon,
+  heart: HeartIcon,
+};
 
 export const revalidate = 300;
 
@@ -48,9 +60,17 @@ function latestSameDay(slots: { sameDayUntil: string | null }[]): string | null 
 export default async function ProductPage({ params }: Params) {
   const product = await getProductBySlug((await params).slug);
   if (!product) notFound();
-  const [related, settings] = await Promise.all([getRelatedProducts(product), getSettings()]);
+  const [related, settings, content] = await Promise.all([getRelatedProducts(product), getSettings(), getSiteContent()]);
   const cutoff = latestSameDay(settings.delivery.slots);
   const url = `${SITE_URL}/producto/${product.slug}`;
+  const texts = resolveProductTexts(content.product, product.texts);
+  const discount = activeDiscount(product);
+  const perks = texts.perks
+    .map((p) => ({ icon: PERK_ICONS[p.icon] ?? LeafIcon, text: fillTemplate(p.text, { hora: cutoff }) }))
+    .filter((p): p is { icon: typeof TruckIcon; text: string } => Boolean(p.text?.trim()));
+  const saleUntil =
+    discount > 0 && product.sale_ends_on ? fillTemplate(texts.saleUntil, { fecha: formatDateLong(product.sale_ends_on).replace(/^[^,]+, /, "") }) : null;
+  const priceValidUntil = discount > 0 && product.sale_ends_on ? product.sale_ends_on : undefined;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -67,8 +87,8 @@ export default async function ProductPage({ params }: Params) {
           ? {
               "@type": "AggregateOffer",
               priceCurrency: "EUR",
-              lowPrice: (fromPriceCents(product) / 100).toFixed(2),
-              highPrice: (Math.max(...product.variants.map((v) => v.price_cents)) / 100).toFixed(2),
+              lowPrice: (applyDiscount(fromPriceCents(product), discount) / 100).toFixed(2),
+              highPrice: (applyDiscount(Math.max(...product.variants.map((v) => v.price_cents)), discount) / 100).toFixed(2),
               offerCount: product.variants.length,
               availability: isSoldOut(product) ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
               url,
@@ -76,7 +96,8 @@ export default async function ProductPage({ params }: Params) {
           : {
               "@type": "Offer",
               priceCurrency: "EUR",
-              price: (product.price_cents / 100).toFixed(2),
+              price: (applyDiscount(product.price_cents, discount) / 100).toFixed(2),
+              priceValidUntil,
               availability: isSoldOut(product) ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
               url,
               seller: { "@type": "Organization", name: BRAND.name },
@@ -114,6 +135,15 @@ export default async function ProductPage({ params }: Params) {
             <div>
               {product.category && <div className="eyebrow">{product.category.name}</div>}
               <h1 className="pdp__title">{product.name}</h1>
+              {discount > 0 && (
+                <div className="pdp__sale">
+                  <span className="sale-tag sale-tag--inline">
+                    <strong>-{discount}%</strong>
+                    <span>{product.sale_label.trim() || "Oferta"}</span>
+                  </span>
+                  {saleUntil && <span className="pdp__sale-until">{saleUntil}</span>}
+                </div>
+              )}
               {product.short_description && <p className="pdp__short">{product.short_description}</p>}
               <AddToCart
                 product={{
@@ -126,31 +156,23 @@ export default async function ProductPage({ params }: Params) {
                   allow_ribbon: product.allow_ribbon,
                   image: product.images[0]?.url ?? null,
                   variants: product.variants,
+                  discountPercent: discount,
                 }}
+                texts={texts}
               />
-              <ul className="pdp__perks">
-                <li>
-                  <TruckIcon />
-                  <span>Entrega a domicilio en {BRAND.city} y alrededores, o recogida en tienda.</span>
-                </li>
-                {cutoff && (
-                  <li>
-                    <ClockIcon />
-                    <span>¿Lo necesitas hoy? Pídelo antes de las {cutoff} h y lo llevamos en el día.</span>
-                  </li>
-                )}
-                <li>
-                  <LeafIcon />
-                  <span>Flor natural compuesta a mano. Según temporada podemos sustituir alguna flor por otra de igual calidad y estilo.</span>
-                </li>
-                <li>
-                  <LockIcon />
-                  <span>Pago 100% seguro con tarjeta, Apple Pay o Google Pay.</span>
-                </li>
-              </ul>
+              {perks.length > 0 && (
+                <ul className="pdp__perks">
+                  {perks.map(({ icon: Icon, text }, i) => (
+                    <li key={i}>
+                      <Icon />
+                      <span>{text}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
               {product.description && (
                 <div className="pdp__desc prose">
-                  <h2>Descripción</h2>
+                  <h2>{texts.descriptionTitle}</h2>
                   {product.description.split(/\n{2,}/).map((para, i) => (
                     <p key={i}>{para}</p>
                   ))}
@@ -166,8 +188,8 @@ export default async function ProductPage({ params }: Params) {
           <div className="container">
             <div className="featured__head">
               <div>
-                <div className="eyebrow">También te puede gustar</div>
-                <h2 className="section-title">Más del taller</h2>
+                <div className="eyebrow">{texts.relatedEyebrow}</div>
+                <h2 className="section-title">{texts.relatedTitle}</h2>
               </div>
             </div>
             <ProductGrid products={related} />

@@ -13,7 +13,7 @@ export default async function ContentPage() {
       <div className="adm-head">
         <div>
           <h1 className="adm-title">Contenido de la web</h1>
-          <p className="adm-sub">Textos y fotos de la portada, datos de contacto y pie de página.</p>
+          <p className="adm-sub">Textos y fotos de la portada, textos de las fichas de producto y de las ofertas, contacto y pie de página.</p>
         </div>
         <a className="adm-btn" href="/" target="_blank" rel="noopener">
           Ver la portada ↗

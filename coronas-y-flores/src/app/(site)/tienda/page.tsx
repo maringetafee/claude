@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CatalogView } from "@/components/shop/CatalogView";
 import { PageHero } from "@/components/shop/PageHero";
 import { BRAND } from "@/lib/brand";
-import { getCategories, getProducts } from "@/lib/catalog";
+import { getCategories, getProducts, getSaleProducts } from "@/lib/catalog";
 
 export const revalidate = 300;
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ShopPage() {
-  const [categories, products] = await Promise.all([getCategories(), getProducts()]);
+  const [categories, products, sale] = await Promise.all([getCategories(), getProducts(), getSaleProducts()]);
   return (
     <main id="main">
       <PageHero
@@ -28,7 +28,7 @@ export default async function ShopPage() {
         }
         lead={`Ramos, coronas y centros compuestos a mano en nuestro taller de ${BRAND.city}. Elige el día y la franja de entrega al finalizar el pedido.`}
       />
-      <CatalogView categories={categories} products={products} activeSlug={null} />
+      <CatalogView categories={categories} products={products} activeSlug={null} hasOffers={sale.length > 0} />
     </main>
   );
 }

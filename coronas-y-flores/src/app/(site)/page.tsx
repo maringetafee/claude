@@ -3,7 +3,7 @@ import { ProductGrid } from "@/components/shop/ProductCard";
 import { MapEmbed } from "@/components/site/MapEmbed";
 import { Preloader } from "@/components/site/Preloader";
 import { BRAND } from "@/lib/brand";
-import { getProducts } from "@/lib/catalog";
+import { getProducts, getSaleProducts } from "@/lib/catalog";
 import { telHref } from "@/lib/content-shared";
 import { SITE_URL } from "@/lib/env";
 import { unsplashSrcSet } from "@/lib/product-utils";
@@ -32,7 +32,7 @@ function ManifestoWords() {
 const GALLERY_RATIOS = ["3/4", "1/1", "4/5"];
 
 export default async function HomePage() {
-  const [content, featured] = await Promise.all([getSiteContent(), getProducts(undefined, true, 4)]);
+  const [content, featured, sale] = await Promise.all([getSiteContent(), getProducts(undefined, true, 4), getSaleProducts(4)]);
   const { hero, services, stats, reviews, gallery, contact } = content;
 
   const jsonLd = {
@@ -187,6 +187,28 @@ export default async function HomePage() {
             ))}
           </div>
         </section>
+
+        {sale.length > 0 && (
+          <section className="section shop offers" id="ofertas" aria-labelledby="offers-title">
+            <div className="container">
+              <div className="featured__head">
+                <div>
+                  <div className="eyebrow">{content.shop.offersEyebrow}</div>
+                  <h2 className="section-title" id="offers-title">
+                    {content.shop.offersTitle}
+                  </h2>
+                </div>
+                {content.shop.offersLead && <p className="lead">{content.shop.offersLead}</p>}
+              </div>
+              <ProductGrid products={sale} />
+              <div className="featured__more">
+                <Link className="btn btn--solid btn--lg magnetic" href="/tienda/ofertas">
+                  Ver todas las ofertas
+                </Link>
+              </div>
+            </div>
+          </section>
+        )}
 
         {featured.length > 0 && (
           <section className="section shop" id="tienda" aria-labelledby="featured-title">

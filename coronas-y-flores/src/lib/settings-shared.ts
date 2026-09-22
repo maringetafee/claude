@@ -14,6 +14,7 @@ export type StoreSettings = {
   notifyEmail: string;
   delivery: DeliveryRules;
   legal: LegalData;
+  payments: { bizum: boolean };
 };
 
 export const DEFAULT_SETTINGS: StoreSettings = {
@@ -36,6 +37,7 @@ export const DEFAULT_SETTINGS: StoreSettings = {
     telefono: "+34 636 55 65 56",
     registro: "",
   },
+  payments: { bizum: false },
 };
 
 type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? (T[K] extends unknown[] ? T[K] : DeepPartial<T[K]>) : T[K] };
@@ -48,5 +50,6 @@ export function mergeSettings(stored: unknown): StoreSettings {
     notifyEmail: typeof s.notifyEmail === "string" ? s.notifyEmail : DEFAULT_SETTINGS.notifyEmail,
     delivery,
     legal: { ...DEFAULT_SETTINGS.legal, ...(s.legal ?? {}) },
+    payments: { bizum: s.payments?.bizum === true },
   };
 }

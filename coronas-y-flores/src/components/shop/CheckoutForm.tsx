@@ -17,21 +17,61 @@ import {
 import { formatEUR } from "@/lib/money";
 import type { ShippingMethod } from "@/lib/types";
 
+export type CheckoutProfile = {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  postalCode: string;
+  city: string;
+};
+
 type Props = {
   methods: ShippingMethod[];
   rules: DeliveryRules;
   cancelled: boolean;
+  /** Datos de la cuenta si el cliente ha iniciado sesión */
+  profile: CheckoutProfile | null;
+  bizum: boolean;
+  testMode: boolean;
+  secureNote: string;
 };
 
-export function CheckoutForm({ methods, rules, cancelled }: Props) {
+type RedsysForm = { url: string; fields: Record<string, string> };
+
+/** Envía el formulario firmado a la pasarela de Redsys (POST, como exige el TPV). */
+function goToRedsys({ url, fields }: RedsysForm) {
+  const form = document.createElement("form");
+  form.method = "POST";
+  form.action = url;
+  for (const [name, value] of Object.entries(fields)) {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+  }
+  document.body.appendChild(form);
+  form.submit();
+}
+
+export function CheckoutForm({ methods, rules, cancelled, profile, bizum, testMode, secureNote }: Props) {
   const items = useCart();
   const mounted = useMounted();
   const errorRef = useRef<HTMLDivElement>(null);
 
-  const [customer, setCustomer] = useState({ name: "", email: "", phone: "" });
+  const [customer, setCustomer] = useState({ name: profile?.name ?? "", email: profile?.email ?? "", phone: profile?.phone ?? "" });
   const [methodId, setMethodId] = useState(methods[0]?.id ?? "");
-  const [selfRecipient, setSelfRecipient] = useState(false);
-  const [recipient, setRecipient] = useState({ name: "", phone: "", address: "", postalCode: "", city: "Alcorcón" });
+  const [selfRecipient, setSelfRecipient] = useState(Boolean(profile?.address));
+  const [recipient, setRecipient] = useState({
+    name: "",
+    phone: "",
+    address: profile?.address ?? "",
+    postalCode: profile?.postalCode ?? "",
+    city: profile?.city || "Alcorcón",
+  });
+  const [payMethod, setPayMethod] = useState<"card" | "bizum">("card");
+  const [saveProfile, setSaveProfile] = useState(true);
   const [pickedDate, setPickedDate] = useState("");
   const [pickedSlot, setPickedSlot] = useState("");
   const [cardMessage, setCardMessage] = useState("");
@@ -111,12 +151,14 @@ export function CheckoutForm({ methods, rules, cancelled }: Props) {
           slotId,
           cardMessage,
           notes,
+          payMethod: bizum ? payMethod : "card",
+          saveProfile: Boolean(profile) && saveProfile,
           acceptTerms: accept,
         }),
       });
-      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string };
-      if (!res.ok || !data.url) throw new Error(data.error || "No hemos podido iniciar el pago. Inténtalo de nuevo.");
-      window.location.assign(data.url);
+      const data = (await res.json().catch(() => ({}))) as { redsys?: RedsysForm; error?: string };
+      if (!res.ok || !data.redsys) throw new Error(data.error || "No hemos podido iniciar el pago. Inténtalo de nuevo.");
+      goToRedsys(data.redsys);
     } catch (err) {
       setSubmitting(false);
       showError(err instanceof Error ? err.message : "Algo ha fallado. Inténtalo de nuevo.");
@@ -132,6 +174,16 @@ export function CheckoutForm({ methods, rules, cancelled }: Props) {
           <div ref={errorRef} className="alert" role="alert" style={{ marginBottom: 28 }}>
             {error}
           </div>
+        )}
+        {testMode && (
+          <div className="alert alert--info" role="note" style={{ marginBottom: 28 }}>
+            <strong>Tienda en modo pruebas: no se cobra nada.</strong> Para probar el pago usa la tarjeta 4548 8100 0000 0003, caducidad 12/49, CVV 123.
+          </div>
+        )}
+        {!profile && (
+          <p className="checkout__account">
+            ¿Ya tienes cuenta? <Link href="/cuenta/entrar?next=/checkout">Inicia sesión</Link> y rellenamos tus datos. Si no, puedes comprar sin registrarte.
+          </p>
         )}
 
         <section className="step" aria-labelledby="step-1">
@@ -154,6 +206,12 @@ export function CheckoutForm({ methods, rules, cancelled }: Props) {
               <span className="field__label">Teléfono</span>
               <input className="input" type="tel" required minLength={9} autoComplete="tel" value={customer.phone} onChange={(e) => setCustomer({ ...customer, phone: e.target.value })} />
             </label>
+            {profile && (
+              <label className="check span-2">
+                <input type="checkbox" checked={saveProfile} onChange={(e) => setSaveProfile(e.target.checked)} />
+                <span>Guardar estos datos en mi cuenta para la próxima vez</span>
+              </label>
+            )}
           </div>
         </section>
 
@@ -327,6 +385,33 @@ export function CheckoutForm({ methods, rules, cancelled }: Props) {
             </span>
           </label>
         </section>
+
+        {bizum && (
+          <section className="step" aria-labelledby="step-4">
+            <div className="step__head">
+              <span className="step__num">04</span>
+              <h2 className="step__title" id="step-4">
+                Pago
+              </h2>
+            </div>
+            <div className="choice-list" role="radiogroup" aria-label="Forma de pago">
+              <label className="choice">
+                <input type="radio" name="pay" value="card" checked={payMethod === "card"} onChange={() => setPayMethod("card")} />
+                <span className="choice__body">
+                  <span className="choice__title">Tarjeta</span>
+                  <span className="choice__desc">Débito o crédito, en la pasarela segura de tu banco (Redsys).</span>
+                </span>
+              </label>
+              <label className="choice">
+                <input type="radio" name="pay" value="bizum" checked={payMethod === "bizum"} onChange={() => setPayMethod("bizum")} />
+                <span className="choice__body">
+                  <span className="choice__title">Bizum</span>
+                  <span className="choice__desc">Con tu móvil: te pedirá confirmarlo en la app de tu banco.</span>
+                </span>
+              </label>
+            </div>
+          </section>
+        )}
       </div>
 
       <aside className="summary" aria-label="Resumen del pedido">
@@ -368,7 +453,7 @@ export function CheckoutForm({ methods, rules, cancelled }: Props) {
           {submitting ? "Redirigiendo al pago…" : `Pagar ${formatEUR(total)}`}
         </button>
         <p className="secure-note">
-          <LockIcon /> Pago seguro con Stripe. IVA incluido.
+          <LockIcon /> {secureNote}. IVA incluido.
         </p>
       </aside>
     </form>

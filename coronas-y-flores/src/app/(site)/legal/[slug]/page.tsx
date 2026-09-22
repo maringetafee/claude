@@ -65,6 +65,9 @@ const DOCS: Record<string, Doc> = {
             <strong>Pedidos:</strong> nombre, email, teléfono y, si hay entrega, los datos de la persona destinataria y la dirección. Los usamos para preparar, entregar y facturar el pedido y para comunicarnos contigo sobre él.
           </li>
           <li>
+            <strong>Cuenta de cliente (opcional):</strong> si te registras, tu nombre, email, teléfono, dirección habitual y una contraseña cifrada, para que puedas consultar tus pedidos y no tengas que escribir tus datos cada vez. Puedes pedirnos que borremos tu cuenta cuando quieras.
+          </li>
+          <li>
             <strong>Mensajes de tarjeta y cintas:</strong> el texto que nos pides escribir, solo para preparar el pedido.
           </li>
           <li>
@@ -74,17 +77,17 @@ const DOCS: Record<string, Doc> = {
         <p>No hacemos perfiles comerciales ni enviamos publicidad sin tu consentimiento.</p>
         <h2>Base jurídica</h2>
         <p>
-          La ejecución del contrato de compraventa (art. 6.1.b RGPD) y el cumplimiento de obligaciones legales, fiscales y contables (art. 6.1.c RGPD). Los datos de la persona destinataria se tratan por interés legítimo para poder hacer la entrega que tú nos encargas.
+          La ejecución del contrato de compraventa y, en su caso, de las condiciones de tu cuenta de cliente (art. 6.1.b RGPD) y el cumplimiento de obligaciones legales, fiscales y contables (art. 6.1.c RGPD). Los datos de la persona destinataria se tratan por interés legítimo para poder hacer la entrega que tú nos encargas.
         </p>
         <h2>Conservación</h2>
-        <p>Conservamos los datos de los pedidos durante el tiempo exigido por la normativa fiscal y mercantil (con carácter general, 6 años) y después los eliminamos.</p>
+        <p>Conservamos los datos de los pedidos durante el tiempo exigido por la normativa fiscal y mercantil (con carácter general, 6 años) y después los eliminamos. Los datos de la cuenta de cliente se conservan mientras la mantengas activa.</p>
         <h2>Destinatarios y encargados</h2>
         <p>No cedemos tus datos a terceros salvo obligación legal. Nos apoyamos en proveedores que tratan datos por nuestra cuenta con las garantías del RGPD:</p>
         <ul>
-          <li>Stripe Payments Europe Ltd. — procesamiento de pagos. No tenemos acceso a los datos de tu tarjeta.</li>
-          <li>Supabase — alojamiento de la base de datos de pedidos.</li>
+          <li>Redsys Servicios de Procesamiento, S.L. y nuestra entidad bancaria — procesamiento de pagos con tarjeta y Bizum. No tenemos acceso a los datos de tu tarjeta.</li>
+          <li>Supabase — alojamiento de la base de datos de pedidos y de las cuentas de cliente.</li>
           <li>Netlify — alojamiento de la web.</li>
-          <li>Resend — envío de los emails de confirmación del pedido.</li>
+          <li>Resend — envío de los emails de confirmación del pedido y de la cuenta.</li>
         </ul>
         <p>
           Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo, amparados en cláusulas contractuales tipo de la Comisión Europea o en el Marco de Privacidad de Datos UE-EE. UU.
@@ -108,12 +111,12 @@ const DOCS: Record<string, Doc> = {
             <strong>Carrito de compra</strong> (almacenamiento local del navegador): recuerda los productos que añades. No sale de tu dispositivo.
           </li>
           <li>
-            <strong>Sesión del panel de administración</strong>: solo para el personal de la floristería.
+            <strong>Sesión de usuario</strong>: si inicias sesión en tu cuenta de cliente (o el personal en el panel de administración), una cookie técnica mantiene la sesión abierta. Desaparece al cerrar sesión.
           </li>
         </ul>
         <h2>Contenidos de terceros</h2>
         <p>
-          La portada muestra un mapa de <strong>Google Maps</strong> para indicar cómo llegar a la tienda; Google puede instalar sus propias cookies según su política de privacidad. El <strong>pago</strong> se realiza en la página segura de Stripe, que aplica su propia política de cookies.
+          La portada muestra un mapa de <strong>Google Maps</strong> para indicar cómo llegar a la tienda; Google puede instalar sus propias cookies según su política de privacidad. El <strong>pago</strong> se realiza en la pasarela segura de Redsys (el TPV virtual de nuestro banco), que aplica su propia política de cookies.
         </p>
         <h2>Cómo gestionarlas</h2>
         <p>Puedes borrar el almacenamiento local y las cookies desde la configuración de tu navegador en cualquier momento.</p>
@@ -135,11 +138,11 @@ const DOCS: Record<string, Doc> = {
         </p>
         <h2>3. Precios</h2>
         <p>
-          Los precios se muestran en euros e incluyen el IVA. Los gastos de entrega se indican antes de pagar, según el método elegido. Nos reservamos el derecho a modificar los precios, aplicándose siempre los vigentes en el momento del pedido.
+          Los precios se muestran en euros e incluyen el IVA. Los gastos de entrega se indican antes de pagar, según el método elegido. Nos reservamos el derecho a modificar los precios, aplicándose siempre los vigentes en el momento del pedido. Las ofertas son válidas durante las fechas indicadas en cada producto o hasta agotar existencias; el precio tachado es el que tenía el producto antes de la oferta.
         </p>
         <h2>4. Pago</h2>
         <p>
-          El pago se realiza con tarjeta de débito o crédito, Apple Pay o Google Pay a través de Stripe, una pasarela segura. {BRAND.name} no tiene acceso ni almacena los datos de tu tarjeta.
+          El pago se realiza con tarjeta de débito o crédito (y, cuando esté disponible, Bizum) en la pasarela segura de Redsys, el TPV virtual de nuestra entidad bancaria, con autenticación reforzada de tu banco. {BRAND.name} no tiene acceso ni almacena los datos de tu tarjeta.
         </p>
         <h2>5. Flor natural</h2>
         <p>

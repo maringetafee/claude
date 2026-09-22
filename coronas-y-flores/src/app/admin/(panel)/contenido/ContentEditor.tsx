@@ -3,6 +3,16 @@
 import { useState, useTransition } from "react";
 import { ImageField } from "@/components/admin/ImageField";
 import type { SiteContent } from "@/lib/content-shared";
+import type { PerkIcon } from "@/lib/types";
+
+const PERK_ICONS: { value: PerkIcon; label: string }[] = [
+  { value: "truck", label: "Furgoneta" },
+  { value: "clock", label: "Reloj" },
+  { value: "leaf", label: "Hoja" },
+  { value: "lock", label: "Candado" },
+  { value: "gift", label: "Regalo" },
+  { value: "heart", label: "Corazón" },
+];
 import { saveContent } from "./actions";
 
 type Field<T> = { key: keyof T & string; label: string; area?: boolean; hint?: string };
@@ -62,7 +72,7 @@ export function ContentEditor({ initial }: { initial: SiteContent }) {
         setMsg(null);
         startTransition(async () => {
           const res = await saveContent(c);
-          setMsg(res.ok ? { ok: true, text: "Guardado. La portada ya muestra los cambios." } : { ok: false, text: res.error });
+          setMsg(res.ok ? { ok: true, text: "Guardado. La web ya muestra los cambios." } : { ok: false, text: res.error });
         });
       }}
     >
@@ -251,6 +261,100 @@ export function ContentEditor({ initial }: { initial: SiteContent }) {
               { key: "email", label: "Email público (opcional)" },
               { key: "instagram", label: "Instagram (opcional)", hint: "Enlace completo: https://instagram.com/…" },
               { key: "area", label: "Barrio / zona" },
+            ]}
+          />
+        </div>
+      </section>
+
+      <section className="adm-card" id="ficha">
+        <h2>
+          Ficha de producto <small>Textos generales de todas las fichas · cada producto puede cambiarlos en su editor</small>
+        </h2>
+        <div className="adm-form">
+          <div className="adm-sub-card" style={{ marginTop: 0 }}>
+            <div className="adm-sub-card__head">Lista de ventajas (bajo el botón de compra)</div>
+            <div className="adm-repeat">
+              {c.product.perks.map((perk, i) => (
+                <div className="adm-repeat__row adm-repeat__row--perk" key={i}>
+                  <label className="adm-field">
+                    <span>Icono</span>
+                    <select
+                      className="adm-input"
+                      value={perk.icon}
+                      onChange={(e) => set("product", { ...c.product, perks: c.product.perks.map((x, j) => (j === i ? { ...x, icon: e.target.value as PerkIcon } : x)) })}
+                    >
+                      {PERK_ICONS.map((o) => (
+                        <option key={o.value} value={o.value}>
+                          {o.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="adm-field">
+                    <span>Texto</span>
+                    <input
+                      className="adm-input"
+                      value={perk.text}
+                      onChange={(e) => set("product", { ...c.product, perks: c.product.perks.map((x, j) => (j === i ? { ...x, text: e.target.value } : x)) })}
+                    />
+                  </label>
+                  <ListControls
+                    index={i}
+                    length={c.product.perks.length}
+                    min={0}
+                    onMove={(dir) => set("product", { ...c.product, perks: move(c.product.perks, i, dir) })}
+                    onRemove={() => set("product", { ...c.product, perks: c.product.perks.filter((_, j) => j !== i) })}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="adm-row" style={{ marginTop: 10 }}>
+              {c.product.perks.length < 8 && (
+                <button type="button" className="adm-btn adm-btn--sm" onClick={() => set("product", { ...c.product, perks: [...c.product.perks, { icon: "leaf", text: "" }] })}>
+                  + Añadir ventaja
+                </button>
+              )}
+              <span className="adm-hint">
+                {"{hora}"} se cambia por la hora límite para entregar en el día (Envíos y entregas). Si ese día no hay entrega en el día, la línea no se muestra.
+              </span>
+            </div>
+          </div>
+          <div className="adm-grid-3">
+            <TextFields
+              value={c.product}
+              onChange={(product) => set("product", product)}
+              fields={[
+                { key: "addToCart", label: "Botón «Añadir al carrito»" },
+                { key: "buyNow", label: "Botón «Comprar ahora»" },
+                { key: "soldOut", label: "Texto de agotado" },
+                { key: "sizeLabel", label: "Título de los tamaños" },
+                { key: "lowStock", label: "Aviso de pocas unidades", hint: "{n} = unidades que quedan" },
+                { key: "descriptionTitle", label: "Título de la descripción" },
+                { key: "ribbonLabel", label: "Título del campo cinta" },
+                { key: "ribbonPlaceholder", label: "Ejemplo dentro del campo cinta" },
+                { key: "saleUntil", label: "Fin de la oferta", hint: "{fecha} = último día de la oferta" },
+                { key: "relatedEyebrow", label: "Relacionados · texto pequeño" },
+                { key: "relatedTitle", label: "Relacionados · título" },
+              ]}
+            />
+          </div>
+          <TextFields value={c.product} onChange={(product) => set("product", product)} fields={[{ key: "ribbonHint", label: "Ayuda bajo el campo cinta", area: true }]} />
+        </div>
+      </section>
+
+      <section className="adm-card">
+        <h2>
+          Tienda y ofertas <small>Sección «Ofertas» de la portada y página /tienda/ofertas</small>
+        </h2>
+        <div className="adm-grid-2">
+          <TextFields
+            value={c.shop}
+            onChange={(shop) => set("shop", shop)}
+            fields={[
+              { key: "offersEyebrow", label: "Ofertas · texto pequeño" },
+              { key: "offersTitle", label: "Ofertas · título" },
+              { key: "offersLead", label: "Ofertas · texto", area: true },
+              { key: "secureNote", label: "Nota de pago seguro (carrito y checkout)", area: true },
             ]}
           />
         </div>

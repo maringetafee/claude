@@ -2,6 +2,8 @@
 // son exactamente los de la plantilla original: sin fila en la base de datos,
 // la web se ve igual que la demo.
 
+import type { Perk, ProductTexts } from "./types";
+
 export type ServiceCard = { title: string; text: string; metaLeft: string; metaRight: string; image: string; alt: string };
 export type StatItem = { value: number; label: string };
 export type ReviewItem = { text: string; author: string };
@@ -23,6 +25,35 @@ export type SiteContent = {
     area: string;
   };
   footer: { tagline: string; ordersNote: string };
+  /** Textos generales de la ficha de producto (cada producto puede cambiarlos) */
+  product: ProductPageTexts;
+  shop: ShopTexts;
+};
+
+export type ProductPageTexts = {
+  /** Lista de ventajas bajo el botón. {hora} = hora límite de entrega en el día. */
+  perks: Perk[];
+  sizeLabel: string;
+  ribbonLabel: string;
+  ribbonPlaceholder: string;
+  ribbonHint: string;
+  addToCart: string;
+  buyNow: string;
+  soldOut: string;
+  /** {n} = unidades que quedan */
+  lowStock: string;
+  descriptionTitle: string;
+  relatedEyebrow: string;
+  relatedTitle: string;
+  /** {fecha} = último día de la oferta */
+  saleUntil: string;
+};
+
+export type ShopTexts = {
+  secureNote: string;
+  offersEyebrow: string;
+  offersTitle: string;
+  offersLead: string;
 };
 
 const U = (id: string, w = 800, q = 78) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=${q}`;
@@ -83,6 +114,32 @@ export const DEFAULT_CONTENT: SiteContent = {
     tagline: "Coronas y Flores · Alcorcón. Flor fresca y diseño floral hecho a mano.",
     ordersNote: "Pedidos con 24h de antelación para garantizar disponibilidad.",
   },
+  product: {
+    perks: [
+      { icon: "truck", text: "Entrega a domicilio en Alcorcón y alrededores, o recogida en tienda." },
+      { icon: "clock", text: "¿Lo necesitas hoy? Pídelo antes de las {hora} h y lo llevamos en el día." },
+      { icon: "leaf", text: "Flor natural compuesta a mano. Según temporada podemos sustituir alguna flor por otra de igual calidad y estilo." },
+      { icon: "lock", text: "Pago 100% seguro con tarjeta a través de la pasarela de Redsys." },
+    ],
+    sizeLabel: "Tamaño",
+    ribbonLabel: "Texto de la cinta",
+    ribbonPlaceholder: "Ej.: Tus hijos y nietos no te olvidan",
+    ribbonHint: "Opcional. Lo imprimimos en la cinta tal cual lo escribas (máx. 80 caracteres).",
+    addToCart: "Añadir al carrito",
+    buyNow: "Comprar ahora",
+    soldOut: "Agotado",
+    lowStock: "Solo quedan {n} unidades.",
+    descriptionTitle: "Descripción",
+    relatedEyebrow: "También te puede gustar",
+    relatedTitle: "Más del taller",
+    saleUntil: "Oferta válida hasta el {fecha}",
+  },
+  shop: {
+    secureNote: "Pago seguro con tarjeta · Redsys",
+    offersEyebrow: "Ofertas",
+    offersTitle: "Precios de temporada",
+    offersLead: "Ramos y detalles con descuento durante unos días, con la misma flor fresca de siempre.",
+  },
 };
 
 function pickArray<T>(value: unknown, fallback: T[]): T[] {
@@ -100,6 +157,13 @@ export function mergeContent(stored: unknown): SiteContent {
     gallery: pickArray(s.gallery, d.gallery),
     contact: { ...d.contact, ...(s.contact ?? {}) },
     footer: { ...d.footer, ...(s.footer ?? {}) },
+    product: {
+      ...d.product,
+      ...(s.product ?? {}),
+      // Una lista vacía es válida: la floristería puede quitar todas las ventajas
+      perks: Array.isArray(s.product?.perks) ? s.product.perks : d.product.perks,
+    },
+    shop: { ...d.shop, ...(s.shop ?? {}) },
   };
 }
 
@@ -112,4 +176,36 @@ export function whatsappHref(phone: string): string {
   let digits = phone.replace(/\D/g, "");
   if (digits.length === 9) digits = `34${digits}`;
   return `https://wa.me/${digits}`;
+}
+
+/** Sustituye {clave} por su valor; devuelve null si falta algún valor necesario. */
+export function fillTemplate(text: string, values: Record<string, string | null | undefined>): string | null {
+  let missing = false;
+  const out = text.replace(/\{(\w+)\}/g, (m, key: string) => {
+    if (!(key in values)) return m;
+    const v = values[key];
+    if (!v) missing = true;
+    return v ?? "";
+  });
+  return missing ? null : out;
+}
+
+/** Textos de una ficha: los propios del producto y, si están vacíos, los generales. */
+export function resolveProductTexts(general: ProductPageTexts, own: ProductTexts | null | undefined): ProductPageTexts {
+  const o = own ?? {};
+  const pick = (key: Exclude<keyof ProductTexts, "perks">) => {
+    const v = o[key];
+    return typeof v === "string" && v.trim() ? v : general[key];
+  };
+  return {
+    ...general,
+    perks: Array.isArray(o.perks) ? o.perks : general.perks,
+    sizeLabel: pick("sizeLabel"),
+    ribbonLabel: pick("ribbonLabel"),
+    ribbonPlaceholder: pick("ribbonPlaceholder"),
+    ribbonHint: pick("ribbonHint"),
+    addToCart: pick("addToCart"),
+    buyNow: pick("buyNow"),
+    descriptionTitle: pick("descriptionTitle"),
+  };
 }

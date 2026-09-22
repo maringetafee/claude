@@ -1,19 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { formatEUR } from "@/lib/money";
-import { fromPriceCents, hasPriceRange, isSoldOut } from "@/lib/product-utils";
+import { activeDiscount, fromPriceCents, hasPriceRange, isSoldOut, priceFor } from "@/lib/product-utils";
 import type { Product } from "@/lib/types";
 
 export function ProductCard({ product, headingLevel = "h3" }: { product: Product; headingLevel?: "h2" | "h3" }) {
   const Heading = headingLevel;
   const img = product.images[0];
   const soldOut = isSoldOut(product);
-  const price = fromPriceCents(product);
-  const onSale = !product.variants.length && product.compare_at_cents != null && product.compare_at_cents > product.price_cents;
+  const { price, compareAt, percent } = priceFor(product, fromPriceCents(product));
+  const saleLabel = activeDiscount(product) > 0 ? product.sale_label.trim() : "";
   const href = `/producto/${product.slug}`;
 
   return (
-    <article className={`product-card${soldOut ? " is-soldout" : ""}`}>
+    <article className={`product-card${soldOut ? " is-soldout" : ""}${compareAt ? " is-onsale" : ""}`}>
       <Link href={href} className="product-card__media" tabIndex={-1} aria-hidden="true">
         {img && (
           <Image
@@ -25,8 +25,11 @@ export function ProductCard({ product, headingLevel = "h3" }: { product: Product
         )}
         {soldOut ? (
           <span className="product-card__badge">Agotado</span>
-        ) : onSale ? (
-          <span className="product-card__badge product-card__badge--rose">Oferta</span>
+        ) : compareAt ? (
+          <span className="sale-tag">
+            {percent ? <strong>-{percent}%</strong> : null}
+            <span>{saleLabel || "Oferta"}</span>
+          </span>
         ) : null}
       </Link>
       <div>
@@ -35,11 +38,16 @@ export function ProductCard({ product, headingLevel = "h3" }: { product: Product
           <Link href={href}>{product.name}</Link>
         </Heading>
         <div className="product-card__price">
-          <span>
+          <span className={compareAt ? "is-sale" : undefined}>
             {hasPriceRange(product) ? "Desde " : ""}
             {formatEUR(price)}
           </span>
-          {onSale && <s>{formatEUR(product.compare_at_cents!)}</s>}
+          {compareAt && (
+            <s>
+              <span className="sr-only">Antes </span>
+              {formatEUR(compareAt)}
+            </s>
+          )}
         </div>
       </div>
     </article>

@@ -3,10 +3,23 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { uploadImage } from "@/lib/admin/upload";
-import { centsToInput, toCents } from "@/lib/money";
-import { slugify } from "@/lib/product-utils";
-import type { Category, Product } from "@/lib/types";
+import type { ProductPageTexts } from "@/lib/content-shared";
+import { centsToInput, formatEUR, toCents } from "@/lib/money";
+import { applyDiscount, slugify } from "@/lib/product-utils";
+import type { Category, Perk, PerkIcon, Product } from "@/lib/types";
 import { deleteProduct, saveProduct } from "../actions";
+
+const DISCOUNTS = [10, 15, 20, 25, 30, 40, 50];
+export const PERK_ICON_OPTIONS: { value: PerkIcon; label: string }[] = [
+  { value: "truck", label: "Furgoneta" },
+  { value: "clock", label: "Reloj" },
+  { value: "leaf", label: "Hoja" },
+  { value: "lock", label: "Candado" },
+  { value: "gift", label: "Regalo" },
+  { value: "heart", label: "Corazón" },
+];
+const TEXT_FIELDS = ["sizeLabel", "ribbonLabel", "ribbonPlaceholder", "ribbonHint", "addToCart", "buyNow", "descriptionTitle"] as const;
+type TextKey = (typeof TEXT_FIELDS)[number];
 
 type VariantDraft = { key: string; id?: string; name: string; price: string };
 type ImageDraft = { key: string; url: string; storage_path: string | null; alt: string };
@@ -27,13 +40,28 @@ function draftFrom(p: Product | null) {
     sort_order: String(p?.sort_order ?? 0),
     seo_title: p?.seo_title ?? "",
     seo_description: p?.seo_description ?? "",
+    discount: p?.discount_percent ? String(p.discount_percent) : "",
+    sale_label: p?.sale_label ?? "",
+    sale_starts_on: p?.sale_starts_on ?? "",
+    sale_ends_on: p?.sale_ends_on ?? "",
+    texts: Object.fromEntries(TEXT_FIELDS.map((k) => [k, p?.texts?.[k] ?? ""])) as Record<TextKey, string>,
+    ownPerks: Array.isArray(p?.texts?.perks) ? (p.texts.perks as Perk[]) : null,
     variants: (p?.variants ?? []).map<VariantDraft>((v) => ({ key: v.id, id: v.id, name: v.name, price: centsToInput(v.price_cents) })),
     images: (p?.images ?? []).map<ImageDraft>((i) => ({ key: i.id, url: i.url, storage_path: i.storage_path, alt: i.alt })),
   };
 }
 type Draft = ReturnType<typeof draftFrom>;
 
-export function ProductEditor({ product, categories }: { product: Product | null; categories: Category[] }) {
+export function ProductEditor({
+  product,
+  categories,
+  defaults,
+}: {
+  product: Product | null;
+  categories: Category[];
+  /** Textos generales de la ficha (Contenido → Ficha de producto) */
+  defaults: ProductPageTexts;
+}) {
   const router = useRouter();
   const [d, setD] = useState<Draft>(() => draftFrom(product));
   const [slugTouched, setSlugTouched] = useState(Boolean(product));
@@ -79,6 +107,11 @@ export function ProductEditor({ product, categories }: { product: Product | null
       setMsg({ type: "error", text: "Revisa los precios: usa números, por ejemplo 24,90." });
       return;
     }
+    const discount = d.discount.trim() === "" ? 0 : Number.parseInt(d.discount, 10);
+    if (Number.isNaN(discount) || discount < 0 || discount > 90) {
+      setMsg({ type: "error", text: "El descuento debe ser un número entre 0 y 90." });
+      return;
+    }
     const stock = d.stock.trim() === "" ? null : Number.parseInt(d.stock, 10);
     if (stock !== null && (Number.isNaN(stock) || stock < 0)) {
       setMsg({ type: "error", text: "El stock debe ser un número entero (o vacío para no controlarlo)." });
@@ -101,6 +134,11 @@ export function ProductEditor({ product, categories }: { product: Product | null
         sort_order: Number.parseInt(d.sort_order, 10) || 0,
         seo_title: d.seo_title,
         seo_description: d.seo_description,
+        discount_percent: discount,
+        sale_label: d.sale_label,
+        sale_starts_on: d.sale_starts_on || null,
+        sale_ends_on: d.sale_ends_on || null,
+        texts: { ...d.texts, perks: d.ownPerks },
         variants,
         images: d.images.map(({ url, storage_path, alt }) => ({ url, storage_path, alt })),
       });
@@ -268,6 +306,10 @@ export function ProductEditor({ product, categories }: { product: Product | null
             </div>
           </section>
 
+          <OfferCard d={d} set={set} />
+
+          <TextsCard d={d} set={set} defaults={defaults} />
+
           <section className="adm-card">
             <h2>
               SEO <small>Opcional · cómo aparece en Google</small>
@@ -344,5 +386,160 @@ export function ProductEditor({ product, categories }: { product: Product | null
         </aside>
       </div>
     </form>
+  );
+}
+
+type SetFn = <K extends keyof Draft>(key: K, value: Draft[K]) => void;
+
+function OfferCard({ d, set }: { d: Draft; set: SetFn }) {
+  const pct = Number.parseInt(d.discount, 10) || 0;
+  const bases = d.variants.length
+    ? d.variants.map((v) => ({ name: v.name || "Tamaño", cents: toCents(v.price) }))
+    : [{ name: "Precio", cents: toCents(d.price) }];
+  return (
+    <section className="adm-card">
+      <h2>
+        Oferta <small>Aparece con la etiqueta de descuento en la tienda y en la portada</small>
+      </h2>
+      <div className="adm-form">
+        <div className="adm-field">
+          <span>Descuento</span>
+          <div className="adm-chips" role="group" aria-label="Descuento">
+            <button type="button" className={`adm-chip${pct === 0 ? " is-active" : ""}`} onClick={() => set("discount", "")}>
+              Sin oferta
+            </button>
+            {DISCOUNTS.map((n) => (
+              <button type="button" key={n} className={`adm-chip${pct === n ? " is-active" : ""}`} onClick={() => set("discount", String(n))}>
+                -{n}%
+              </button>
+            ))}
+            <label className="adm-chip adm-chip--input">
+              <input
+                inputMode="numeric"
+                aria-label="Otro porcentaje"
+                placeholder="Otro"
+                value={DISCOUNTS.includes(pct) || pct === 0 ? "" : d.discount}
+                onChange={(e) => set("discount", e.target.value.replace(/\D/g, "").slice(0, 2))}
+              />
+              %
+            </label>
+          </div>
+        </div>
+        {pct > 0 && (
+          <>
+            <div className="adm-grid-3">
+              <label className="adm-field">
+                <span>Etiqueta (opcional)</span>
+                <input className="adm-input" maxLength={30} value={d.sale_label} onChange={(e) => set("sale_label", e.target.value)} placeholder="Oferta" />
+                <span className="adm-hint">Ej.: San Valentín, Día de la Madre…</span>
+              </label>
+              <label className="adm-field">
+                <span>Empieza (opcional)</span>
+                <input className="adm-input" type="date" value={d.sale_starts_on} onChange={(e) => set("sale_starts_on", e.target.value)} />
+              </label>
+              <label className="adm-field">
+                <span>Termina (opcional)</span>
+                <input className="adm-input" type="date" value={d.sale_ends_on} min={d.sale_starts_on || undefined} onChange={(e) => set("sale_ends_on", e.target.value)} />
+                <span className="adm-hint">Incluido ese día. Vacío = hasta que la quites.</span>
+              </label>
+            </div>
+            <div className="adm-offer-preview">
+              {bases.map((b, i) =>
+                Number.isNaN(b.cents) ? null : (
+                  <span key={i}>
+                    {b.name}: <s>{formatEUR(b.cents)}</s> <strong>{formatEUR(applyDiscount(b.cents, pct))}</strong>
+                  </span>
+                ),
+              )}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function TextsCard({ d, set, defaults }: { d: Draft; set: SetFn; defaults: ProductPageTexts }) {
+  const field = (key: TextKey, label: string, area = false) => (
+    <label className="adm-field" key={key}>
+      <span>{label}</span>
+      {area ? (
+        <textarea
+          className="adm-input"
+          style={{ minHeight: 70 }}
+          value={d.texts[key]}
+          placeholder={defaults[key]}
+          onChange={(e) => set("texts", { ...d.texts, [key]: e.target.value })}
+        />
+      ) : (
+        <input className="adm-input" value={d.texts[key]} placeholder={defaults[key]} onChange={(e) => set("texts", { ...d.texts, [key]: e.target.value })} />
+      )}
+    </label>
+  );
+  const perks = d.ownPerks;
+  const setPerks = (next: Perk[] | null) => set("ownPerks", next);
+
+  return (
+    <section className="adm-card">
+      <h2>
+        Textos de la ficha <small>Vacío = se usa el texto general de «Contenido → Ficha de producto»</small>
+      </h2>
+      <div className="adm-form">
+        <div className="adm-grid-3">
+          {field("addToCart", "Botón «Añadir»")}
+          {field("buyNow", "Botón «Comprar ahora»")}
+          {field("descriptionTitle", "Título de la descripción")}
+          {d.variants.length > 0 && field("sizeLabel", "Título de los tamaños")}
+        </div>
+        {d.allow_ribbon && (
+          <div className="adm-grid-3">
+            {field("ribbonLabel", "Título del campo cinta")}
+            {field("ribbonPlaceholder", "Ejemplo dentro del campo")}
+            {field("ribbonHint", "Ayuda bajo el campo", true)}
+          </div>
+        )}
+
+        <label className="adm-check">
+          <input type="checkbox" checked={perks !== null} onChange={(e) => setPerks(e.target.checked ? defaults.perks.map((x) => ({ ...x })) : null)} />
+          <span>
+            Lista de ventajas propia para este producto
+            <small>Entrega, pedidos en el día, pago seguro… Si no la marcas se usa la lista general.</small>
+          </span>
+        </label>
+        {perks !== null && (
+          <div className="adm-repeat">
+            {perks.map((perk, i) => (
+              <div className="adm-repeat__row adm-repeat__row--perk" key={i}>
+                <label className="adm-field">
+                  <span>Icono</span>
+                  <select className="adm-input" value={perk.icon} onChange={(e) => setPerks(perks.map((x, j) => (j === i ? { ...x, icon: e.target.value as PerkIcon } : x)))}>
+                    {PERK_ICON_OPTIONS.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="adm-field">
+                  <span>Texto</span>
+                  <input className="adm-input" value={perk.text} onChange={(e) => setPerks(perks.map((x, j) => (j === i ? { ...x, text: e.target.value } : x)))} />
+                </label>
+                <button type="button" className="adm-btn adm-btn--danger" aria-label="Quitar ventaja" onClick={() => setPerks(perks.filter((_, j) => j !== i))}>
+                  ✕
+                </button>
+              </div>
+            ))}
+            <div className="adm-row">
+              {perks.length < 8 && (
+                <button type="button" className="adm-btn adm-btn--sm" onClick={() => setPerks([...perks, { icon: "leaf", text: "" }])}>
+                  + Añadir ventaja
+                </button>
+              )}
+              <span className="adm-hint">Escribe {"{hora}"} donde quieras la hora límite para entregar en el día.</span>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }

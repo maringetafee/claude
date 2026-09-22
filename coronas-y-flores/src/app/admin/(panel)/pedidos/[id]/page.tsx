@@ -20,7 +20,6 @@ export default async function OrderDetailPage({ params }: Props) {
   const { data } = await sb.from("orders").select("*, items:order_items(*)").eq("id", id).maybeSingle();
   if (!data) notFound();
   const order = data as Order & { items: OrderItem[] };
-  const stripeMode = process.env.STRIPE_SECRET_KEY?.startsWith("sk_test") ? "test/" : "";
 
   return (
     <>
@@ -95,7 +94,14 @@ export default async function OrderDetailPage({ params }: Props) {
                           </div>
                         )}
                       </td>
-                      <td className="num">{formatEUR(i.unit_price_cents * i.quantity)}</td>
+                      <td className="num">
+                        {formatEUR(i.unit_price_cents * i.quantity)}
+                        {i.original_unit_price_cents != null && i.original_unit_price_cents > i.unit_price_cents && (
+                          <div className="adm-muted">
+                            <s>{formatEUR(i.original_unit_price_cents * i.quantity)}</s> oferta
+                          </div>
+                        )}
+                      </td>
                     </tr>
                   ))}
                   <tr>
@@ -166,25 +172,46 @@ export default async function OrderDetailPage({ params }: Props) {
           <section className="adm-card no-print">
             <h2>Pago</h2>
             {order.paid_at ? (
-              <p style={{ margin: 0 }}>
-                Pagado el {new Date(order.paid_at).toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "short", timeStyle: "short" })}
-                {order.stripe_payment_intent && (
+              <dl className="adm-dl" style={{ gridTemplateColumns: "auto 1fr" }}>
+                <dt>Pagado</dt>
+                <dd>{new Date(order.paid_at).toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "short", timeStyle: "short" })}</dd>
+                <dt>Forma</dt>
+                <dd>{order.payment_method === "bizum" ? "Bizum" : "Tarjeta"} · Redsys</dd>
+                {order.redsys_order && (
                   <>
-                    <br />
-                    <a
-                      className="adm-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={`https://dashboard.stripe.com/${stripeMode}payments/${order.stripe_payment_intent}`}
-                    >
-                      Ver en Stripe (reembolsos) ↗
-                    </a>
+                    <dt>Nº operación</dt>
+                    <dd>
+                      <code>{order.redsys_order}</code>
+                    </dd>
                   </>
                 )}
-              </p>
+                {order.payment_auth_code && (
+                  <>
+                    <dt>Autorización</dt>
+                    <dd>
+                      <code>{order.payment_auth_code}</code>
+                    </dd>
+                  </>
+                )}
+                {order.payment_details && (
+                  <>
+                    <dt>Detalle</dt>
+                    <dd className="adm-muted">{order.payment_details}</dd>
+                  </>
+                )}
+              </dl>
             ) : (
               <p className="adm-muted" style={{ margin: 0 }}>
-                Sin pago registrado.
+                Sin pago registrado.{order.payment_details ? ` Último intento: ${order.payment_details}.` : ""}
+              </p>
+            )}
+            {order.paid_at && (
+              <p className="adm-hint" style={{ margin: "12px 0 0" }}>
+                Devoluciones: desde el portal del TPV de Redsys (
+                <a className="adm-link" href="https://canales.redsys.es/" target="_blank" rel="noopener noreferrer">
+                  canales.redsys.es
+                </a>
+                ) buscando el nº de operación.
               </p>
             )}
           </section>

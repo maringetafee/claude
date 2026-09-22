@@ -15,6 +15,7 @@ const Input = z.object({
     telefono: z.string().trim().max(40),
     registro: z.string().trim().max(240),
   }),
+  payments: z.object({ bizum: z.boolean() }),
 });
 
 export async function saveGeneralSettings(raw: z.input<typeof Input>): Promise<{ ok: true } | { ok: false; error: string }> {

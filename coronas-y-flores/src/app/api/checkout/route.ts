@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { BRAND } from "@/lib/brand";
 import { slotsForDate } from "@/lib/delivery";
+import { activeDiscount, applyDiscount } from "@/lib/product-utils";
+import { buildPaymentForm, getRedsysConfig, newRedsysOrder } from "@/lib/redsys";
 import { getSettings } from "@/lib/site-data";
 import { getServiceSupabase } from "@/lib/supabase/admin";
-import { getStripe } from "@/lib/stripe";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { ShippingMethod } from "@/lib/types";
 
 const text = (max: number) => z.string().trim().max(max);
@@ -40,6 +42,8 @@ const CheckoutSchema = z.object({
   slotId: z.string().min(1, "Elige una franja horaria.").max(40),
   cardMessage: text(300).default(""),
   notes: text(500).default(""),
+  payMethod: z.enum(["card", "bizum"]).default("card"),
+  saveProfile: z.boolean().default(false),
   acceptTerms: z.literal(true, "Debes aceptar las condiciones de venta."),
 });
 
@@ -50,6 +54,9 @@ type ProductRow = {
   stock: number | null;
   active: boolean;
   allow_ribbon: boolean;
+  discount_percent: number;
+  sale_starts_on: string | null;
+  sale_ends_on: string | null;
   images: { url: string; sort_order: number }[];
   variants: { id: string; name: string; price_cents: number }[];
 };
@@ -57,9 +64,9 @@ type ProductRow = {
 const fail = (error: string, status: number) => NextResponse.json({ error }, { status });
 
 export async function POST(request: Request) {
-  const stripe = getStripe();
+  const redsys = getRedsysConfig();
   const sb = getServiceSupabase();
-  if (!stripe || !sb) return fail("Los pagos online aún no están activos. Llámanos y te preparamos el pedido.", 503);
+  if (!redsys || !sb) return fail("Los pagos online aún no están activos. Llámanos y te preparamos el pedido.", 503);
 
   let body: unknown;
   try {
@@ -75,7 +82,9 @@ export async function POST(request: Request) {
   const ids = [...new Set(input.items.map((i) => i.productId))];
   const { data: rows, error: productsError } = await sb
     .from("products")
-    .select("id, name, price_cents, stock, active, allow_ribbon, images:product_images(url, sort_order), variants:product_variants(id, name, price_cents)")
+    .select(
+      "id, name, price_cents, stock, active, allow_ribbon, discount_percent, sale_starts_on, sale_ends_on, images:product_images(url, sort_order), variants:product_variants(id, name, price_cents)",
+    )
     .in("id", ids);
   if (productsError) {
     console.error("[checkout] productos:", productsError.message);
@@ -88,6 +97,7 @@ export async function POST(request: Request) {
     variantId: string | null;
     variantName: string | null;
     unit: number;
+    original: number | null;
     qty: number;
     ribbon: string;
     image: string | null;
@@ -107,9 +117,13 @@ export async function POST(request: Request) {
       variantId = v.id;
       variantName = v.name;
     }
+    // Oferta en vigor hoy (hora de Madrid), calculada aquí y no en el navegador
+    const pct = activeDiscount(p);
+    const original = pct > 0 ? unit : null;
+    unit = applyDiscount(unit, pct);
     qtyByProduct.set(p.id, (qtyByProduct.get(p.id) ?? 0) + item.qty);
     const image = [...p.images].sort((a, b) => a.sort_order - b.sort_order)[0]?.url ?? null;
-    lines.push({ product: p, variantId, variantName, unit, qty: item.qty, ribbon: p.allow_ribbon ? item.ribbonText : "", image });
+    lines.push({ product: p, variantId, variantName, unit, original, qty: item.qty, ribbon: p.allow_ribbon ? item.ribbonText : "", image });
   }
 
   for (const [productId, qty] of qtyByProduct) {
@@ -143,11 +157,21 @@ export async function POST(request: Request) {
   const settings = await getSettings();
   const slot = slotsForDate(settings.delivery, input.deliveryDate).find((s) => s.id === input.slotId);
   if (!slot) return fail("La fecha o la franja elegida ya no está disponible. Elige otra, por favor.", 409);
+  if (input.payMethod === "bizum" && !settings.payments.bizum) return fail("El pago con Bizum no está disponible. Elige tarjeta.", 400);
+
+  // Cliente con sesión iniciada: el pedido queda en su cuenta
+  const session = await createSupabaseServerClient();
+  const {
+    data: { user },
+  } = await session.auth.getUser();
 
   // 4) Pedido "pendiente de pago"
   const { data: order, error: orderError } = await sb
     .from("orders")
     .insert({
+      user_id: user?.id ?? null,
+      payment_provider: "redsys",
+      payment_method: input.payMethod,
       customer_name: input.customer.name,
       customer_email: input.customer.email.toLowerCase(),
       customer_phone: input.customer.phone,
@@ -182,6 +206,7 @@ export async function POST(request: Request) {
       product_name: l.product.name,
       variant_name: l.variantName,
       unit_price_cents: l.unit,
+      original_unit_price_cents: l.original,
       quantity: l.qty,
       ribbon_text: l.ribbon,
       image_url: l.image,
@@ -193,46 +218,36 @@ export async function POST(request: Request) {
     return fail("No hemos podido registrar el pedido. Inténtalo de nuevo.", 500);
   }
 
-  // 5) Sesión de pago de Stripe
-  const origin = new URL(request.url).origin;
-  try {
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      locale: "es",
-      customer_email: input.customer.email,
-      client_reference_id: order.id,
-      metadata: { order_id: order.id, order_number: String(order.number) },
-      payment_intent_data: {
-        description: `Pedido #${order.number} · ${BRAND.name}`,
-        metadata: { order_id: order.id, order_number: String(order.number) },
-      },
-      line_items: [
-        ...lines.map((l) => ({
-          quantity: l.qty,
-          price_data: {
-            currency: "eur",
-            unit_amount: l.unit,
-            product_data: {
-              name: l.variantName ? `${l.product.name} · ${l.variantName}` : l.product.name,
-              ...(l.image?.startsWith("https://") ? { images: [l.image] } : {}),
-              ...(l.ribbon ? { description: `Cinta: ${l.ribbon}` } : {}),
-            },
-          },
-        })),
-        ...(shippingCents > 0
-          ? [{ quantity: 1, price_data: { currency: "eur", unit_amount: shippingCents, product_data: { name: method.name } } }]
-          : []),
-      ],
-      success_url: `${origin}/pedido/confirmado?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/checkout?cancelado=1`,
-      expires_at: Math.floor(Date.now() / 1000) + 60 * 60,
-    });
-
-    await sb.from("orders").update({ stripe_session_id: session.id }).eq("id", order.id);
-    return NextResponse.json({ url: session.url });
-  } catch (err) {
-    console.error("[checkout] stripe:", err);
-    await sb.from("orders").update({ status: "cancelled", admin_notes: "No se pudo crear el pago en Stripe." }).eq("id", order.id);
-    return fail("No hemos podido iniciar el pago. Inténtalo de nuevo en unos minutos.", 502);
+  // 5) Guarda los datos en la cuenta del cliente para la próxima vez
+  if (user && input.saveProfile) {
+    const profile: Record<string, string> = { name: input.customer.name, phone: input.customer.phone };
+    if (recipient && recipient.name === input.customer.name) {
+      Object.assign(profile, { address: recipient.address, postal_code: recipient.postalCode, city: recipient.city });
+    }
+    const { error } = await sb.from("customers").update(profile).eq("id", user.id);
+    if (error) console.error("[checkout] perfil:", error.message);
   }
+
+  // 6) Formulario firmado para la pasarela de Redsys
+  const origin = new URL(request.url).origin;
+  const redsysOrder = newRedsysOrder(order.number as number);
+  const { error: refError } = await sb.from("orders").update({ redsys_order: redsysOrder }).eq("id", order.id);
+  if (refError) {
+    console.error("[checkout] redsys_order:", refError.message);
+    await sb.from("orders").update({ status: "cancelled", admin_notes: "No se pudo iniciar el pago." }).eq("id", order.id);
+    return fail("No hemos podido iniciar el pago. Inténtalo de nuevo en unos minutos.", 500);
+  }
+
+  const form = buildPaymentForm(redsys, {
+    order: redsysOrder,
+    amountCents: subtotal + shippingCents,
+    description: `Pedido #${order.number} · ${BRAND.name}`,
+    holder: input.customer.name,
+    merchantName: BRAND.name,
+    notifyUrl: `${origin}/api/redsys/notificacion`,
+    okUrl: `${origin}/pedido/${order.id}`,
+    koUrl: `${origin}/checkout?cancelado=1`,
+    method: input.payMethod,
+  });
+  return NextResponse.json({ redsys: form });
 }

@@ -6,7 +6,7 @@ let client: SupabaseClient | null = null;
 
 /**
  * Cliente con service role (salta RLS). Solo servidor: crear pedidos desde el
- * checkout y confirmarlos desde el webhook de Stripe, donde no hay sesión.
+ * checkout, confirmarlos desde la notificación de Redsys y gestionar cuentas.
  */
 export function getServiceSupabase(): SupabaseClient | null {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;

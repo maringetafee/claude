@@ -163,3 +163,30 @@ ${deliveryBlock(order)}`,
   );
   return sendEmail({ to: order.customer_email, subject: `${copy.subject} · Pedido #${order.number}`, html, replyTo });
 }
+
+const button = (href: string, label: string) =>
+  `<p style="margin:26px 0"><a href="${esc(href)}" style="display:inline-block;padding:13px 24px;border-radius:999px;background:#c2685a;color:#fff;text-decoration:none;font-size:14px">${esc(label)}</a></p>`;
+
+export async function sendWelcomeEmail(to: string, name: string, contact: SiteContent["contact"]) {
+  const first = name.split(" ")[0] || "";
+  const html = layout(
+    `Bienvenida a ${BRAND.name}`,
+    `<h1 style="margin:0;font-family:Georgia,serif;font-weight:normal;font-size:30px">¡Hola${first ? `, ${esc(first)}` : ""}!</h1>
+<p style="font-size:15px;line-height:1.6;color:#4a4a3f">Ya tienes tu cuenta en ${esc(BRAND.name)}. Desde ella puedes ver tus pedidos y guardar tus datos para pedir más rápido la próxima vez.</p>
+${button(`${SITE_URL}/cuenta`, "Ir a mi cuenta")}`,
+    contact,
+  );
+  return sendEmail({ to, subject: `Tu cuenta en ${BRAND.name}`, html, replyTo: contact.email || undefined });
+}
+
+export async function sendPasswordResetEmail(to: string, link: string, contact: SiteContent["contact"]) {
+  const html = layout(
+    "Restablecer contraseña",
+    `<h1 style="margin:0;font-family:Georgia,serif;font-weight:normal;font-size:28px">Restablecer tu contraseña</h1>
+<p style="font-size:15px;line-height:1.6;color:#4a4a3f">Hemos recibido una solicitud para cambiar la contraseña de tu cuenta. Pulsa el botón para elegir una nueva. El enlace caduca en una hora.</p>
+${button(link, "Elegir nueva contraseña")}
+<p style="font-size:13px;line-height:1.6;color:#6b6356">Si no lo has pedido tú, ignora este email: tu contraseña no cambiará.</p>`,
+    contact,
+  );
+  return sendEmail({ to, subject: `Restablecer contraseña · ${BRAND.name}`, html });
+}

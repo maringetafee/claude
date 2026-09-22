@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/admin/auth";
 import { formatEUR } from "@/lib/money";
+import { activeDiscount, applyDiscount } from "@/lib/product-utils";
 import type { Category } from "@/lib/types";
 import { toggleProductFlag } from "./actions";
 
@@ -18,6 +19,9 @@ type Row = {
   category: { name: string } | null;
   images: { url: string; sort_order: number }[];
   variants: { price_cents: number }[];
+  discount_percent: number;
+  sale_starts_on: string | null;
+  sale_ends_on: string | null;
 };
 
 type Props = { searchParams: Promise<{ q?: string; categoria?: string }> };
@@ -28,7 +32,7 @@ export default async function ProductsPage({ searchParams }: Props) {
 
   let query = sb
     .from("products")
-    .select("id, slug, name, price_cents, stock, active, featured, category:categories(name), images:product_images(url, sort_order), variants:product_variants(price_cents)")
+    .select("id, slug, name, price_cents, stock, active, featured, discount_percent, sale_starts_on, sale_ends_on, category:categories(name), images:product_images(url, sort_order), variants:product_variants(price_cents)")
     .order("sort_order")
     .order("created_at", { ascending: false });
   const term = q.trim().replace(/[,()*%]/g, " ").trim();
@@ -86,6 +90,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                 {products.map((p) => {
                   const cover = [...p.images].sort((a, b) => a.sort_order - b.sort_order)[0];
                   const price = p.variants.length ? Math.min(...p.variants.map((v) => v.price_cents)) : p.price_cents;
+                  const pct = activeDiscount(p);
                   return (
                     <tr key={p.id}>
                       <td style={{ width: 62 }}>{cover ? <img className="adm-thumb" src={cover.url} alt="" /> : <div className="adm-thumb" />}</td>
@@ -97,7 +102,14 @@ export default async function ProductsPage({ searchParams }: Props) {
                       </td>
                       <td className="nowrap">
                         {p.variants.length > 1 ? "desde " : ""}
-                        {formatEUR(price)}
+                        {formatEUR(applyDiscount(price, pct))}
+                        {pct > 0 ? (
+                          <div>
+                            <span className="adm-badge adm-badge--paid">-{pct}%</span>
+                          </div>
+                        ) : p.discount_percent > 0 ? (
+                          <div className="adm-muted">Oferta fuera de fechas</div>
+                        ) : null}
                       </td>
                       <td>{p.stock == null ? <span className="adm-muted">—</span> : p.stock === 0 ? <span className="adm-badge adm-badge--cancelled">Agotado</span> : p.stock}</td>
                       <td>

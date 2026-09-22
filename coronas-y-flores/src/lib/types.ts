@@ -41,11 +41,33 @@ export type Product = {
   sort_order: number;
   seo_title: string | null;
   seo_description: string | null;
+  /** 0 = sin oferta. Se aplica al precio base y a todos los tamaños. */
+  discount_percent: number;
+  sale_label: string;
+  sale_starts_on: string | null;
+  sale_ends_on: string | null;
+  /** Textos propios de la ficha; lo que falte sale de Contenido → Ficha de producto */
+  texts: ProductTexts;
   created_at: string;
   updated_at: string;
   category: Pick<Category, "id" | "slug" | "name"> | null;
   images: ProductImage[];
   variants: ProductVariant[];
+};
+
+export type PerkIcon = "truck" | "clock" | "leaf" | "lock" | "gift" | "heart";
+export type Perk = { icon: PerkIcon; text: string };
+
+/** Textos de la ficha de producto. Vacío = se usa el texto general. */
+export type ProductTexts = {
+  perks?: Perk[] | null;
+  sizeLabel?: string;
+  ribbonLabel?: string;
+  ribbonPlaceholder?: string;
+  ribbonHint?: string;
+  addToCart?: string;
+  buyNow?: string;
+  descriptionTitle?: string;
 };
 
 export type ShippingKind = "delivery" | "pickup";
@@ -82,6 +104,19 @@ export type OrderItem = {
   quantity: number;
   ribbon_text: string;
   image_url: string | null;
+  original_unit_price_cents: number | null;
+};
+
+export type Customer = {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  address: string;
+  postal_code: string;
+  city: string;
+  created_at: string;
+  updated_at: string;
 };
 
 export type Order = {
@@ -106,9 +141,13 @@ export type Order = {
   notes: string;
   subtotal_cents: number;
   total_cents: number;
-  stripe_session_id: string | null;
-  stripe_payment_intent: string | null;
   paid_at: string | null;
+  user_id: string | null;
+  payment_provider: string;
+  payment_method: "card" | "bizum" | null;
+  redsys_order: string | null;
+  payment_auth_code: string | null;
+  payment_details: string | null;
   admin_notes: string;
   created_at: string;
   updated_at: string;

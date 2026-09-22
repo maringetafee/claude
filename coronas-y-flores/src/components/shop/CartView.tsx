@@ -6,7 +6,7 @@ import { LockIcon } from "@/components/Icons";
 import { cartSubtotal, MAX_QTY, removeFromCart, setQty, useCart, useMounted } from "@/lib/cart-store";
 import { formatEUR } from "@/lib/money";
 
-export function CartView() {
+export function CartView({ secureNote }: { secureNote: string }) {
   const items = useCart();
   const mounted = useMounted();
 
@@ -86,7 +86,7 @@ export function CartView() {
           Finalizar pedido
         </Link>
         <p className="secure-note">
-          <LockIcon /> Pago seguro con tarjeta, Apple Pay o Google Pay
+          <LockIcon /> {secureNote}
         </p>
       </aside>
     </div>

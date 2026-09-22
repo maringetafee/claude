@@ -14,5 +14,10 @@ export function statusLabel(s: OrderStatus): string {
   return ORDER_STATUSES.find((x) => x.value === s)?.label ?? s;
 }
 
+export function customerStatusLabel(s: OrderStatus): string {
+  const label = ORDER_STATUSES.find((x) => x.value === s)?.customerLabel ?? s;
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
 /** Estados en los que tiene sentido avisar al cliente por email */
 export const NOTIFIABLE_STATUSES: OrderStatus[] = ["preparing", "ready", "shipped", "delivered", "cancelled"];

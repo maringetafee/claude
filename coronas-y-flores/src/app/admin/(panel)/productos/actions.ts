@@ -5,6 +5,23 @@ import { z } from "zod";
 import { requireAdminAction } from "@/lib/admin/auth";
 import { slugify } from "@/lib/product-utils";
 
+const t = (max: number) => z.string().trim().max(max);
+const DateOrNull = z.union([z.null(), z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Fecha no válida.")]);
+
+const TextsInput = z.object({
+  perks: z
+    .array(z.object({ icon: z.enum(["truck", "clock", "leaf", "lock", "gift", "heart"]), text: t(300) }))
+    .max(8)
+    .nullable(),
+  sizeLabel: t(40),
+  ribbonLabel: t(60),
+  ribbonPlaceholder: t(120),
+  ribbonHint: t(200),
+  addToCart: t(40),
+  buyNow: t(40),
+  descriptionTitle: t(60),
+});
+
 const ProductInput = z.object({
   id: z.uuid().nullable(),
   name: z.string().trim().min(2, "El nombre es obligatorio.").max(120),
@@ -21,6 +38,11 @@ const ProductInput = z.object({
   sort_order: z.number().int(),
   seo_title: z.string().trim().max(70, "El título SEO debe tener 70 caracteres como máximo."),
   seo_description: z.string().trim().max(170, "La descripción SEO debe tener 170 caracteres como máximo."),
+  discount_percent: z.number().int().min(0).max(90, "El descuento máximo es del 90 %."),
+  sale_label: t(30),
+  sale_starts_on: DateOrNull,
+  sale_ends_on: DateOrNull,
+  texts: TextsInput,
   variants: z
     .array(
       z.object({
@@ -57,6 +79,13 @@ export async function saveProduct(raw: ProductInput): Promise<ActionResult> {
   const slug = slugify(p.slug || p.name);
   if (!slug) return { ok: false, error: "El slug no es válido." };
   const hasVariants = p.variants.length > 0;
+  if (p.sale_starts_on && p.sale_ends_on && p.sale_ends_on < p.sale_starts_on) {
+    return { ok: false, error: "La oferta termina antes de empezar: revisa las fechas." };
+  }
+  // Solo se guardan los textos rellenados; lo vacío sigue al texto general
+  const texts = Object.fromEntries(
+    Object.entries(p.texts).filter(([k, v]) => (k === "perks" ? Array.isArray(v) : typeof v === "string" && v !== "")),
+  );
 
   const row = {
     name: p.name,
@@ -73,6 +102,11 @@ export async function saveProduct(raw: ProductInput): Promise<ActionResult> {
     sort_order: p.sort_order,
     seo_title: p.seo_title || null,
     seo_description: p.seo_description || null,
+    discount_percent: p.discount_percent,
+    sale_label: p.sale_label,
+    sale_starts_on: p.discount_percent ? p.sale_starts_on : null,
+    sale_ends_on: p.discount_percent ? p.sale_ends_on : null,
+    texts,
   };
 
   let id = p.id;

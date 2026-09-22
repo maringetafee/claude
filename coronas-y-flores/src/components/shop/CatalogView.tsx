@@ -1,24 +1,38 @@
 import Link from "next/link";
 import { ProductGrid } from "@/components/shop/ProductCard";
+import type { ReactNode } from "react";
 import type { Category, Product } from "@/lib/types";
 
 export function CatalogView({
   categories,
   products,
   activeSlug,
+  hasOffers = false,
+  emptyState,
 }: {
   categories: Category[];
   products: Product[];
   activeSlug: string | null;
+  hasOffers?: boolean;
+  emptyState?: ReactNode;
 }) {
   return (
     <section className="section shop" style={{ paddingTop: 70 }}>
       <div className="container">
-        {categories.length > 0 && (
+        {(categories.length > 0 || hasOffers) && (
           <nav className="chip-nav" aria-label="Categorías">
             <Link href="/tienda" className={`chip${activeSlug === null ? " is-active" : ""}`} aria-current={activeSlug === null ? "page" : undefined}>
               Todo
             </Link>
+            {hasOffers && (
+              <Link
+                href="/tienda/ofertas"
+                className={`chip chip--sale${activeSlug === "ofertas" ? " is-active" : ""}`}
+                aria-current={activeSlug === "ofertas" ? "page" : undefined}
+              >
+                Ofertas
+              </Link>
+            )}
             {categories.map((c) => (
               <Link
                 key={c.id}
@@ -33,6 +47,8 @@ export function CatalogView({
         )}
         {products.length ? (
           <ProductGrid products={products} headingLevel="h2" />
+        ) : emptyState ? (
+          emptyState
         ) : (
           <div className="empty">
             <h2>Estamos preparando la tienda</h2>

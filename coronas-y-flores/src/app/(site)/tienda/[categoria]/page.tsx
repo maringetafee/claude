@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CatalogView } from "@/components/shop/CatalogView";
 import { PageHero } from "@/components/shop/PageHero";
 import { BRAND } from "@/lib/brand";
-import { getCategories, getCategoryBySlug, getProducts } from "@/lib/catalog";
+import { getCategories, getCategoryBySlug, getProducts, getSaleProducts } from "@/lib/catalog";
 
 export const revalidate = 300;
 
@@ -28,7 +28,7 @@ export default async function CategoryPage({ params }: Params) {
   const slug = (await params).categoria;
   const category = await getCategoryBySlug(slug);
   if (!category) notFound();
-  const [categories, products] = await Promise.all([getCategories(), getProducts(category.id)]);
+  const [categories, products, sale] = await Promise.all([getCategories(), getProducts(category.id), getSaleProducts()]);
 
   return (
     <main id="main">
@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: Params) {
         title={category.name}
         lead={category.description || undefined}
       />
-      <CatalogView categories={categories} products={products} activeSlug={category.slug} />
+      <CatalogView categories={categories} products={products} activeSlug={category.slug} hasOffers={sale.length > 0} />
     </main>
   );
 }

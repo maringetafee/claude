@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { activeDiscount, isOnSale, isSoldOut } from "@/lib/product-utils";
 import { getPublicSupabase } from "@/lib/supabase/public";
 import type { Category, Product, ProductImage, ProductVariant, ShippingMethod } from "@/lib/types";
 
@@ -91,3 +92,12 @@ export const getShippingMethods = cache(async (): Promise<ShippingMethod[]> => {
   }
   return data as ShippingMethod[];
 });
+
+/** Productos con oferta en vigor (o con precio anterior tachado), primero los de mayor descuento. */
+export async function getSaleProducts(limit?: number): Promise<Product[]> {
+  const all = await getProducts();
+  const onSale = all
+    .filter((p) => isOnSale(p) && !isSoldOut(p))
+    .sort((a, b) => activeDiscount(b) - activeDiscount(a));
+  return limit ? onSale.slice(0, limit) : onSale;
+}

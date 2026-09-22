@@ -15,6 +15,22 @@ const ContentInput = z.object({
   gallery: z.array(z.object({ image: img, alt: t(160), title: t(60), caption: t(160) })).min(1).max(16),
   contact: z.object({ address: t(240), hours: t(160), phone: t(40), email: t(160), instagram: t(240), whatsapp: t(40), area: t(80) }),
   footer: z.object({ tagline: t(240), ordersNote: t(240) }),
+  product: z.object({
+    perks: z.array(z.object({ icon: z.enum(["truck", "clock", "leaf", "lock", "gift", "heart"]), text: t(300) })).max(8),
+    sizeLabel: t(40),
+    ribbonLabel: t(60),
+    ribbonPlaceholder: t(120),
+    ribbonHint: t(200),
+    addToCart: t(40),
+    buyNow: t(40),
+    soldOut: t(40),
+    lowStock: t(80),
+    descriptionTitle: t(60),
+    relatedEyebrow: t(60),
+    relatedTitle: t(80),
+    saleUntil: t(80),
+  }),
+  shop: z.object({ secureNote: t(120), offersEyebrow: t(40), offersTitle: t(80), offersLead: t(300) }),
 });
 
 export async function saveContent(raw: z.input<typeof ContentInput>): Promise<{ ok: true } | { ok: false; error: string }> {

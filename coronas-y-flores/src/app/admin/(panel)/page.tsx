@@ -4,6 +4,7 @@ import { requireAdmin } from "@/lib/admin/auth";
 import { formatDateLong, madridNow } from "@/lib/delivery";
 import { formatEUR } from "@/lib/money";
 import { statusLabel } from "@/lib/order-status";
+import { getRedsysConfig } from "@/lib/redsys";
 import { mergeSettings } from "@/lib/settings-shared";
 import type { Order } from "@/lib/types";
 
@@ -30,8 +31,10 @@ export default async function DashboardPage() {
   const settings = mergeSettings(settingsRes.data?.data);
 
   const pending: string[] = [];
-  if (!process.env.STRIPE_SECRET_KEY) pending.push("Clave secreta de Stripe (STRIPE_SECRET_KEY): sin ella no se puede pagar.");
-  if (!process.env.STRIPE_WEBHOOK_SECRET) pending.push("Webhook de Stripe (STRIPE_WEBHOOK_SECRET): confirma los pagos aunque el cliente cierre la ventana.");
+  const redsys = getRedsysConfig();
+  if (!redsys) pending.push("Claves del TPV de Redsys: está en modo real pero faltan REDSYS_MERCHANT_CODE y REDSYS_SECRET_KEY, no se puede pagar.");
+  else if (redsys.usingTestCredentials) pending.push("Pasarela en modo pruebas (comercio de pruebas de Redsys): falta poner los datos del TPV del banco. Hasta entonces no se cobra nada.");
+  else if (!redsys.live) pending.push("Vuestro TPV de Redsys está en el entorno de pruebas: cuando el banco dé el visto bueno, cambiar REDSYS_ENV a live.");
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) pending.push("Service role de Supabase: necesaria para registrar pedidos.");
   if (!process.env.RESEND_API_KEY) pending.push("Clave de Resend: sin ella no se envían emails de confirmación.");
   if (!settings.notifyEmail) pending.push("Email de avisos de pedidos (Ajustes).");

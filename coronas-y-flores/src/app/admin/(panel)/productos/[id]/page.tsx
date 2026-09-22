@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAdmin } from "@/lib/admin/auth";
 import { normalizeProduct, PRODUCT_SELECT } from "@/lib/catalog";
+import { mergeContent } from "@/lib/content-shared";
 import type { Category, Product } from "@/lib/types";
 import { ProductEditor } from "./ProductEditor";
 
@@ -16,9 +17,10 @@ export default async function ProductEditPage({ params }: Props) {
   const isNew = id === "nuevo";
   if (!isNew && !/^[0-9a-f-]{36}$/i.test(id)) notFound();
 
-  const [productRes, catsRes] = await Promise.all([
+  const [productRes, catsRes, contentRes] = await Promise.all([
     isNew ? Promise.resolve({ data: null }) : sb.from("products").select(PRODUCT_SELECT).eq("id", id).maybeSingle(),
     sb.from("categories").select("*").order("sort_order"),
+    sb.from("site_content").select("data").eq("id", 1).maybeSingle(),
   ]);
   if (!isNew && !productRes.data) notFound();
   const product = productRes.data ? normalizeProduct(productRes.data as Parameters<typeof normalizeProduct>[0]) : null;
@@ -34,7 +36,9 @@ export default async function ProductEditPage({ params }: Props) {
           {product && <p className="adm-sub">/producto/{product.slug}</p>}
         </div>
       </div>
-      <ProductEditor key={product?.updated_at ?? "nuevo"} product={product as Product | null} categories={(catsRes.data ?? []) as Category[]} />
+      <ProductEditor key={product?.updated_at ?? "nuevo"} product={product as Product | null} categories={(catsRes.data ?? []) as Category[]}
+        defaults={mergeContent(contentRes.data?.data).product}
+      />
     </>
   );
 }
