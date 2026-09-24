@@ -284,6 +284,7 @@ export async function ejecutarAnalisis(body) {
     nota,
     ofrecido: resultado.estrategia.ofrecer_ahora,
     respuesta: resultado.respuesta.texto,
+    resultado,
     valor_estimado: resultado.valor_estimado,
   });
   ficha.historial = ficha.historial.slice(-MAX_HISTORIAL);

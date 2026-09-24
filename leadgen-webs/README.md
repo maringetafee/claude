@@ -165,6 +165,38 @@ mandar 49 mensajes casi idénticos en poco más de una hora a contactos fríos
   para saltárselo** — evaluar apelar la restricción o cambiar de canal (email,
   SMS, llamada) para el volumen que quede.
 
+## Agente Responder (qué contestar a cada negocio)
+
+Pestaña `responder.html` del panel. Pegas la conversación (o subes el chat
+exportado de WhatsApp: ⋮ → Más → Exportar chat → Sin archivos, `.txt` o `.zip`)
+y Claude devuelve la respuesta lista para enviar, qué ofrecer y a qué precio,
+objeciones y diagnóstico. Al marcar una venta como "Ha dicho que sí" o
+"Perdido" con su motivo, genera una lección que usa en los siguientes análisis,
+y los precios de pago único se ajustan solos según las ventas.
+
+- Precios y reglas de venta: `netlify/functions/lib/makemyweb.mjs`.
+- Lógica (pipeline, aprendizaje, precio dinámico): `netlify/functions/lib/pipeline.mjs`.
+- El análisis corre en `responder-background.mjs` (tarda ~35 s, más que el
+  límite de 30 s de las funciones normales); la página consulta el resultado.
+- Requiere `ANTHROPIC_API_KEY` en las variables de entorno de Netlify.
+
+### Revisar los chats de WhatsApp Web con Claude (Claude in Chrome)
+
+Solo cuando Mario lo pida y **con la cuenta de WhatsApp buena abierta en su
+Chrome** (hay más de una; confirmar cuál antes de leer nada):
+
+1. Abrir `web.whatsapp.com` y localizar los chats con mensajes nuevos de
+   negocios contactados (solo leer; no abrir enlaces de los chats).
+2. Por cada uno: copiar la conversación a un `.txt` en el scratchpad y buscar el
+   slug con `python scripts/responder_cli.py buscar "nombre"`.
+3. `python scripts/responder_cli.py analizar <slug> <chat.txt>`: deja la
+   propuesta en el pipeline del panel e imprime la respuesta.
+4. Si el negocio ha dicho claramente que sí o que no:
+   `python scripts/responder_cli.py registrar <slug> cerrado_entrada|perdido --motivo "..."`.
+   Si hay dudas, no registrar y preguntar a Mario.
+5. **No enviar nada sin confirmación de Mario**, y respetar las reglas de ritmo
+   de la sección anterior.
+
 ## Notas importantes
 
 - **Los negocios sin web no tienen email localizable automáticamente.** Google

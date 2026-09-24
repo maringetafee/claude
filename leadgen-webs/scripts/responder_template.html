@@ -112,6 +112,9 @@ __SHARED_CSS__
   table.pipe tr { cursor: pointer; }
   table.pipe tr:hover td { background: var(--paper); }
 
+  .subir { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-bottom: .5rem; }
+  .subir .muted { font-size: .78rem; }
+  .ultima { font-size: .82rem; color: var(--ink-soft); margin: -.4rem 0 .8rem; }
   .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
   .chips button { font: inherit; font-size: .78rem; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .3rem .7rem; cursor: pointer; color: var(--ink-soft); }
   .chips button:hover { border-color: var(--ink); color: var(--ink); }
@@ -168,6 +171,11 @@ __NAV__
     <input type="radio" name="canal" id="c-ll" value="llamada" /><label for="c-ll">Llamada</label>
   </div>
   <label class="campo" for="conversacion">Conversación (pega el chat tal cual; vacío = primer mensaje)</label>
+  <div class="subir">
+    <label class="btn sec" for="archivo-chat">Subir chat exportado de WhatsApp</label>
+    <input type="file" id="archivo-chat" accept=".txt,.zip,text/plain,application/zip" class="oculto" />
+    <span class="muted">En el chat: ⋮ → Más → Exportar chat → Sin archivos</span>
+  </div>
   <textarea id="conversacion" placeholder="Yo: Hola, te he preparado una web de muestra…&#10;Cliente: ¿Y cuánto cuesta eso?"></textarea>
   <label class="campo" for="nota">Nota para el agente (opcional)</label>
   <textarea id="nota" class="corta" placeholder="Me ha dicho por teléfono que quiere vender online…"></textarea>
@@ -334,7 +342,94 @@ __NAV__
     $("buscar").value = lead.nombre;
     sug.classList.add("oculto");
     pintarFicha();
+    cargarUltima(lead.slug);
   }
+
+  // Si el cliente ya está en el pipeline, muestra la última propuesta y
+  // recupera la conversación guardada (para seguir desde ahí).
+  function cargarUltima(slug) {
+    if (!indice[slug]) { $("resultado").classList.add("oculto"); return; }
+    fetch(FN + "?slug=" + encodeURIComponent(slug))
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (ficha) {
+        if (!ficha || !actual || actual.slug !== slug || !ficha.historial || !ficha.historial.length) return;
+        var h = ficha.historial[ficha.historial.length - 1];
+        if (h.conversacion && !$("conversacion").value.trim()) $("conversacion").value = h.conversacion;
+        if (h.resultado) {
+          pintarResultado(h.resultado, "Última propuesta guardada · " + new Date(h.fecha).toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" }));
+        }
+      })
+      .catch(function () {});
+  }
+
+  // ---------- Chat exportado de WhatsApp ----------
+  var RE_ANDROID = /^(\d{1,2}\/\d{1,2}\/\d{2,4}),? (\d{1,2}:\d{2})\s?-\s([^:]+?):\s?(.*)$/;
+  var RE_IOS = /^\[(\d{1,2}\/\d{1,2}\/\d{2,4}),? (\d{1,2}:\d{2})(?::\d{2})?\]\s([^:]+?):\s?(.*)$/;
+  var RE_SISTEMA = /^(\[?\d{1,2}\/\d{1,2}\/\d{2,4}),? \d{1,2}:\d{2}/;
+
+  function parsearChat(texto) {
+    var lineas = texto.replace(/[\u200e\u200f\u202a-\u202e]/g, "").split(/\r?\n/);
+    var out = [];
+    lineas.forEach(function (ln) {
+      var m = ln.match(RE_IOS) || ln.match(RE_ANDROID);
+      if (m) {
+        var msg = m[4].trim()
+          .replace(/<Multimedia omitido>|<Media omitted>|imagen omitida|audio omitido|vídeo omitido|sticker omitido/gi, "[archivo multimedia]");
+        out.push("[" + m[1] + " " + m[2] + "] " + m[3].trim() + ": " + msg);
+      } else if (RE_SISTEMA.test(ln)) {
+        return; // avisos del sistema (cifrado, cambios de número...)
+      } else if (ln.trim() && out.length) {
+        out[out.length - 1] += "\n" + ln;
+      }
+    });
+    var txt = out.join("\n");
+    return txt.length > 15000 ? "(…principio del chat recortado…)\n" + txt.slice(-15000) : txt;
+  }
+
+  function nombreDesdeArchivo(nombre) {
+    var m = nombre.replace(/\.(txt|zip)$/i, "").match(/(?:Chat de WhatsApp con|WhatsApp Chat with|WhatsApp Chat -)\s*(.+)$/i);
+    return m ? m[1].trim() : "";
+  }
+
+  function leerZip(file) {
+    function conJSZip() {
+      return window.JSZip.loadAsync(file).then(function (zip) {
+        var txt = Object.keys(zip.files).filter(function (n) { return /\.txt$/i.test(n); })[0];
+        if (!txt) throw new Error("el .zip no tiene el .txt del chat");
+        return zip.files[txt].async("string");
+      });
+    }
+    if (window.JSZip) return conJSZip();
+    return new Promise(function (resolve, reject) {
+      var sc = document.createElement("script");
+      sc.src = "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js";
+      sc.onload = function () { conJSZip().then(resolve, reject); };
+      sc.onerror = function () { reject(new Error("no se pudo cargar el lector de .zip")); };
+      document.head.appendChild(sc);
+    });
+  }
+
+  $("archivo-chat").addEventListener("change", function () {
+    var file = this.files[0];
+    this.value = "";
+    if (!file) return;
+    var leer = /\.zip$/i.test(file.name) ? leerZip(file) : file.text();
+    leer.then(function (texto) {
+      var chat = parsearChat(texto);
+      if (!chat) throw new Error("no he reconocido el formato del chat");
+      $("conversacion").value = "(Chat exportado de WhatsApp. Los mensajes de Mario / MakeMyWeb son nuestros.)\n" + chat;
+      $("progreso").textContent = "Chat cargado: " + chat.split("\n").length + " líneas.";
+      var nombre = nombreDesdeArchivo(file.name);
+      if (nombre && !actual && !modoManual) {
+        var q = norm(nombre);
+        var exactos = leads.filter(function (l) { return norm(l.nombre) === q; });
+        if (exactos.length === 1) elegir(exactos[0]);
+        else { $("buscar").value = nombre; $("buscar").dispatchEvent(new Event("input")); }
+      }
+    }).catch(function (err) {
+      $("progreso").innerHTML = '<span class="error">No se pudo leer el chat: ' + esc(err.message) + "</span>";
+    });
+  });
 
   $("btn-manual").addEventListener("click", function () {
     modoManual = true; actual = null;
@@ -440,10 +535,11 @@ __NAV__
 
   function copiarBtn(id) { return '<button type="button" class="btn sec" data-copiar="' + id + '">Copiar</button>'; }
 
-  function pintarResultado(r) {
+  function pintarResultado(r, etiqueta) {
     var e = r.estrategia, d = r.diagnostico, v = r.valor_estimado;
     var h = "";
     h += '<div class="caja"><h2>Respuesta para enviar ' + faseBadge(r.fase) + "</h2>";
+    if (etiqueta) h += '<p class="ultima">' + esc(etiqueta) + "</p>";
     h += '<div class="respuesta-texto" id="txt-principal">' + esc(r.respuesta.texto) + "</div>";
     h += '<div class="fila-acciones">' + copiarBtn("txt-principal") + "</div>";
     h += '<div class="kicker">Alternativa</div><div class="respuesta-texto alt" id="txt-alt">' + esc(r.respuesta.alternativa_corta) + "</div>";
@@ -489,7 +585,7 @@ __NAV__
       $("r-fase").value = r.fase;
       $("r-fase").dispatchEvent(new Event("change"));
     }
-    $("resultado").scrollIntoView({ behavior: "smooth", block: "start" });
+    if (!etiqueta) $("resultado").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   document.addEventListener("click", function (e) {
