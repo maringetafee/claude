@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Responder — panel interno</title>
+<meta name="robots" content="noindex, nofollow" />
+__HEAD_EXTRA__
+<style>
+__SHARED_CSS__
+  body { padding-bottom: 4rem; }
+  nav.tabs { max-width: 100%; overflow-x: auto; }
+  nav.tabs a { white-space: nowrap; }
+  .caja {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-bottom: 1.25rem;
+  }
+  .caja h2 {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    margin: 0 0 .9rem;
+  }
+  label.campo { display: block; font-size: .8rem; font-weight: 600; color: var(--ink-soft); margin: .9rem 0 .35rem; }
+  input[type=text], input[type=search], input[type=number], textarea, select {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: .65rem .8rem;
+  }
+  textarea { min-height: 9rem; resize: vertical; line-height: 1.45; }
+  textarea.corta { min-height: 4rem; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .buscador { position: relative; }
+  .sugerencias {
+    position: absolute; z-index: 5; left: 0; right: 0; top: calc(100% + 4px);
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.08); list-style: none; margin: 0; padding: .3rem; max-height: 320px; overflow-y: auto;
+  }
+  .sugerencias li { padding: .55rem .6rem; border-radius: 8px; cursor: pointer; }
+  .sugerencias li:hover, .sugerencias li.activa { background: var(--line-soft); }
+  .sugerencias small { color: var(--ink-soft); display: block; }
+  .link-btn { background: none; border: none; color: #1a4fd6; font: inherit; font-size: .85rem; cursor: pointer; padding: 0; margin-top: .6rem; }
+
+  .ficha { border: 1px solid var(--line-soft); background: var(--paper); border-radius: 12px; padding: .9rem 1rem; margin-top: .9rem; }
+  .ficha-top { display: flex; justify-content: space-between; gap: .6rem; align-items: flex-start; }
+  .ficha strong { font-size: 1.02rem; }
+  .ficha .meta { color: var(--ink-soft); font-size: .86rem; margin-top: .2rem; }
+  .ficha .meta a { color: #1a4fd6; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .oculto { display: none !important; }
+
+  .canales { display: grid; grid-template-columns: repeat(4, 1fr); gap: .35rem; }
+  .canales input { position: absolute; opacity: 0; pointer-events: none; }
+  .canales label {
+    text-align: center; font-size: .82rem; font-weight: 500; padding: .55rem .2rem; border-radius: 10px;
+    border: 1px solid var(--line); background: #fff; cursor: pointer; color: var(--ink-soft);
+  }
+  .canales input:checked + label { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .canales input:focus-visible + label { outline: 2px solid var(--accent); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+    font: inherit; font-weight: 600; font-size: .95rem; border-radius: 10px; cursor: pointer;
+    padding: .75rem 1.1rem; border: 1px solid var(--ink); background: var(--ink); color: #fff;
+  }
+  .btn:disabled { opacity: .55; cursor: wait; }
+  .btn.sec { background: #fff; color: var(--ink); border-color: var(--line); font-weight: 500; font-size: .85rem; padding: .45rem .8rem; }
+  .btn.ancho { width: 100%; margin-top: 1.1rem; }
+  .progreso { color: var(--ink-soft); font-size: .88rem; margin-top: .7rem; min-height: 1.2em; }
+  .error { color: #b31a1a; }
+
+  .respuesta-texto {
+    white-space: pre-wrap; background: #e9f7ee; border: 1px solid #c9e9d4; border-radius: 12px;
+    padding: 1rem 1.1rem; font-size: .98rem; line-height: 1.5;
+  }
+  .respuesta-texto.alt { background: var(--paper); border-color: var(--line); font-size: .92rem; }
+  .fila-acciones { display: flex; gap: .5rem; justify-content: flex-end; margin: .5rem 0 1rem; }
+  .kicker { font-size: .7rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); font-weight: 600; margin: 1rem 0 .35rem; }
+  .oferta { border-left: 3px solid var(--accent); padding: .2rem 0 .2rem .8rem; }
+  .oferta .precio { font-family: "Fraunces", serif; font-size: 1.35rem; }
+  ul.lista { margin: .2rem 0 0; padding-left: 1.1rem; }
+  ul.lista li { margin: .35rem 0; }
+  .muted { color: var(--ink-soft); font-size: .88rem; }
+  .urg { font-size: .66rem; font-weight: 700; text-transform: uppercase; border-radius: 999px; padding: .1rem .45rem; margin-right: .3rem; }
+  .urg-alta { background: #fcdcdc; color: #b31a1a; }
+  .urg-media { background: #fcedcf; color: #a3650a; }
+  .urg-baja { background: #ececec; color: #666; }
+  details.obj { border: 1px solid var(--line-soft); border-radius: 10px; padding: .6rem .8rem; margin: .45rem 0; }
+  details.obj summary { cursor: pointer; font-weight: 500; }
+  details.obj p { margin: .5rem 0 .2rem; white-space: pre-wrap; }
+  .alerta { background: #fdf3dc; border: 1px solid #f1dca8; border-radius: 10px; padding: .6rem .8rem; margin: .4rem 0; font-size: .9rem; }
+
+  .fase { font-size: .68rem; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; padding: .22rem .6rem; border-radius: 999px; white-space: nowrap; background: #ececec; color: #555; }
+  .fase-interesado, .fase-negociando { background: #fcedcf; color: #a3650a; }
+  .fase-primer_contacto { background: #dce8fc; color: #1a4fd6; }
+  .fase-cerrado_entrada, .fase-cliente_activo, .fase-upsell { background: #d9f2e1; color: #157a3d; }
+  .fase-perdido { background: #fcdcdc; color: #b31a1a; }
+
+  table.pipe { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  table.pipe th { text-align: left; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); font-weight: 600; padding: .4rem .3rem; border-bottom: 1px solid var(--line); }
+  table.pipe td { padding: .55rem .3rem; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+  table.pipe td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.pipe tr { cursor: pointer; }
+  table.pipe tr:hover td { background: var(--paper); }
+
+  .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+  .chips button { font: inherit; font-size: .78rem; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: .3rem .7rem; cursor: pointer; color: var(--ink-soft); }
+  .chips button:hover { border-color: var(--ink); color: var(--ink); }
+  .leccion { border: 1px solid var(--line-soft); border-radius: 10px; padding: .7rem .85rem; margin: .5rem 0; }
+  .leccion .cab { display: flex; gap: .4rem; flex-wrap: wrap; align-items: center; font-size: .8rem; color: var(--ink-soft); }
+  .leccion p { margin: .35rem 0 0; }
+  .res { font-size: .66rem; font-weight: 700; text-transform: uppercase; border-radius: 999px; padding: .12rem .5rem; }
+  .res-cerrado { background: #d9f2e1; color: #157a3d; }
+  .res-perdido { background: #fcdcdc; color: #b31a1a; }
+
+  @media (max-width: 640px) {
+    body { padding: 1.25rem 1rem 4rem; }
+    .caja { padding: 1.1rem; }
+    .grid2 { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    table.pipe .col-tipo { display: none; }
+  }
+</style>
+</head>
+<body>
+__NAV__
+<h1>Responder</h1>
+<p class="resumen">Pega lo que te ha escrito el negocio y el agente te dice qué contestar, qué ofrecer y a qué precio.</p>
+
+<section class="caja" aria-labelledby="h-cliente">
+  <h2 id="h-cliente">1 · Cliente</h2>
+  <div id="bloque-buscar">
+    <div class="buscador">
+      <input type="search" id="buscar" placeholder="Busca por nombre, tipo o ciudad…" autocomplete="off" aria-label="Buscar lead" />
+      <ul class="sugerencias oculto" id="sugerencias" role="listbox"></ul>
+    </div>
+    <button type="button" class="link-btn" id="btn-manual">¿No está en la lista? Añadir negocio a mano</button>
+  </div>
+
+  <div id="bloque-manual" class="oculto">
+    <div class="grid2">
+      <div><label class="campo" for="m-nombre">Nombre del negocio</label><input type="text" id="m-nombre" /></div>
+      <div><label class="campo" for="m-tipo">Tipo de negocio</label><input type="text" id="m-tipo" placeholder="Peluquería, restaurante…" /></div>
+      <div><label class="campo" for="m-ciudad">Ciudad</label><input type="text" id="m-ciudad" /></div>
+      <div><label class="campo" for="m-web">Web o Instagram</label><input type="text" id="m-web" placeholder="Opcional" /></div>
+    </div>
+    <button type="button" class="link-btn" id="btn-volver">← Buscar en los leads</button>
+  </div>
+
+  <div id="ficha" class="ficha oculto"></div>
+</section>
+
+<section class="caja" aria-labelledby="h-conv">
+  <h2 id="h-conv">2 · Conversación</h2>
+  <div class="canales" role="radiogroup" aria-label="Canal">
+    <input type="radio" name="canal" id="c-wa" value="whatsapp" checked /><label for="c-wa">WhatsApp</label>
+    <input type="radio" name="canal" id="c-ig" value="instagram" /><label for="c-ig">Instagram</label>
+    <input type="radio" name="canal" id="c-em" value="email" /><label for="c-em">Email</label>
+    <input type="radio" name="canal" id="c-ll" value="llamada" /><label for="c-ll">Llamada</label>
+  </div>
+  <label class="campo" for="conversacion">Conversación (pega el chat tal cual; vacío = primer mensaje)</label>
+  <textarea id="conversacion" placeholder="Yo: Hola, te he preparado una web de muestra…&#10;Cliente: ¿Y cuánto cuesta eso?"></textarea>
+  <label class="campo" for="nota">Nota para el agente (opcional)</label>
+  <textarea id="nota" class="corta" placeholder="Me ha dicho por teléfono que quiere vender online…"></textarea>
+  <button type="button" class="btn ancho" id="btn-analizar">Analizar y proponer respuesta</button>
+  <p class="progreso" id="progreso" aria-live="polite"></p>
+</section>
+
+<section id="resultado" class="oculto" aria-live="polite"></section>
+
+<section class="caja oculto" id="caja-registrar" aria-labelledby="h-reg">
+  <h2 id="h-reg">Registrar en el pipeline</h2>
+  <div class="grid2">
+    <div>
+      <label class="campo" for="r-fase">Fase</label>
+      <select id="r-fase">
+        <option value="">(sin cambios)</option>
+        <option value="primer_contacto">Primer contacto</option>
+        <option value="interesado">Interesado</option>
+        <option value="negociando">Negociando</option>
+        <option value="cerrado_entrada">Ha dicho que sí</option>
+        <option value="cliente_activo">Cliente activo</option>
+        <option value="upsell">Ampliando servicios</option>
+        <option value="perdido">Perdido</option>
+      </select>
+    </div>
+    <div><label class="campo" for="r-servicio">Servicio contratado</label><input type="text" id="r-servicio" placeholder="Web de entrada" /></div>
+    <div><label class="campo" for="r-unico">Pago único (€)</label><input type="number" id="r-unico" min="0" step="1" inputmode="numeric" /></div>
+    <div><label class="campo" for="r-mensual">Cuota mensual (€)</label><input type="number" id="r-mensual" min="0" step="1" inputmode="numeric" /></div>
+  </div>
+  <div id="bloque-motivo" class="oculto">
+    <label class="campo" for="r-motivo" id="r-motivo-label">¿Por qué? (el agente aprende de esto)</label>
+    <textarea id="r-motivo" class="corta" placeholder="Qué le hizo decir que sí / por qué no quiso"></textarea>
+    <div class="chips" id="chips-motivo"></div>
+  </div>
+  <label class="campo" for="r-nota">Nota (el agente la tendrá en cuenta la próxima vez)</label>
+  <textarea id="r-nota" class="corta"></textarea>
+  <button type="button" class="btn ancho" id="btn-guardar">Guardar</button>
+  <p class="progreso" id="progreso-guardar" aria-live="polite"></p>
+</section>
+
+<section class="caja" aria-labelledby="h-pipe">
+  <h2 id="h-pipe">Pipeline</h2>
+  <div class="stats-row" id="pipe-stats"></div>
+  <div id="pipe-tabla"><p class="muted">Cargando…</p></div>
+</section>
+
+<section class="caja" aria-labelledby="h-apr">
+  <h2 id="h-apr">Lo que ha aprendido el agente</h2>
+  <p class="muted">Cada venta que marcas como "Ha dicho que sí" o "Perdido" se convierte en una lección que el agente usa en los siguientes análisis.</p>
+  <div class="stats-row" id="apr-stats"></div>
+  <div id="apr-lista"></div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+  var FN = "/.netlify/functions/responder";
+  var FASES = {
+    primer_contacto: "Primer contacto", interesado: "Interesado", negociando: "Negociando",
+    cerrado_entrada: "Ha dicho que sí", cliente_activo: "Cliente activo", upsell: "Ampliando", perdido: "Perdido"
+  };
+  var leads = [];
+  var porSlug = {};
+  var indice = {};
+  var actual = null; // { slug, lead }
+  var modoManual = false;
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function norm(s) { return String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function slugify(s) { return norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 100); }
+  function eur(n) { return (Number(n) || 0).toLocaleString("es-ES", { maximumFractionDigits: 0 }) + " €"; }
+  function faseBadge(f) { return f ? '<span class="fase fase-' + esc(f) + '">' + esc(FASES[f] || f) + "</span>" : ""; }
+
+  // ---------- Datos ----------
+  fetch("responder-leads.json")
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (data) {
+      leads = data;
+      data.forEach(function (l) { l._q = norm(l.nombre + " " + l.tipo + " " + l.ciudad); porSlug[l.slug] = l; });
+      cargarPipeline();
+      cargarAprendizajes();
+    })
+    .catch(function () { cargarPipeline(); cargarAprendizajes(); });
+
+  function cargarAprendizajes() {
+    fetch(FN + "?aprendizajes=1").then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d) return;
+      var st = d.stats;
+      var tasa = st.total ? Math.round(100 * st.cerradas / st.total) + " %" : "—";
+      var top = Object.keys(st.motivosPerdida).sort(function (a, b) { return st.motivosPerdida[b] - st.motivosPerdida[a]; })[0];
+      $("apr-stats").innerHTML =
+        '<div class="stat-card"><strong>' + st.cerradas + "</strong><span>Cerradas</span></div>" +
+        '<div class="stat-card"><strong>' + st.perdidas + "</strong><span>Perdidas</span></div>" +
+        '<div class="stat-card"><strong>' + tasa + "</strong><span>Tasa de cierre</span></div>" +
+        '<div class="stat-card"><strong style="font-size:1.05rem">' + esc(top ? top.replace(/_/g, " ") : "—") + "</strong><span>Motivo de pérdida nº 1</span></div>";
+      $("apr-lista").innerHTML = d.lecciones.length
+        ? d.lecciones.slice(0, 30).map(function (l) {
+            return '<div class="leccion"><div class="cab"><span class="res res-' + esc(l.resultado) + '">' + esc(l.resultado) + "</span>" +
+              esc(l.nombre) + " · " + esc(l.tipo || "") + " · " + esc((l.fecha || "").slice(0, 10)) + "</div>" +
+              "<p><strong>" + esc(l.leccion) + '</strong></p><p class="muted">' + esc(l.motivo_real) + " — " + esc(l.que_paso) + "</p></div>";
+          }).join("")
+        : '<p class="muted">Aún no hay lecciones: aparecerán cuando marques la primera venta cerrada o perdida.</p>';
+    }).catch(function () {});
+  }
+
+  function cargarPipeline() {
+    fetch(FN).then(function (r) { return r.ok ? r.json() : {}; }).then(function (data) {
+      indice = data || {};
+      pintarPipeline();
+    }).catch(function () { $("pipe-tabla").innerHTML = '<p class="muted">No se pudo cargar el pipeline.</p>'; });
+  }
+
+  // ---------- Buscador ----------
+  var sug = $("sugerencias");
+  var resultados = [];
+  var sel = -1;
+  $("buscar").addEventListener("input", function () {
+    var q = norm(this.value).trim();
+    if (q.length < 2) { sug.classList.add("oculto"); return; }
+    var partes = q.split(/\s+/);
+    resultados = leads.filter(function (l) { return partes.every(function (p) { return l._q.indexOf(p) !== -1; }); }).slice(0, 12);
+    sel = -1;
+    sug.innerHTML = resultados.length
+      ? resultados.map(function (l, i) {
+          return '<li role="option" data-i="' + i + '">' + esc(l.nombre) + "<small>" + esc(l.tipo) + " · " + esc(l.ciudad) +
+            (indice[l.slug] ? " · " + esc(FASES[indice[l.slug].fase] || "en pipeline") : "") + "</small></li>";
+        }).join("")
+      : '<li class="muted">Sin resultados</li>';
+    sug.classList.remove("oculto");
+  });
+  $("buscar").addEventListener("keydown", function (e) {
+    if (sug.classList.contains("oculto") || !resultados.length) return;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      sel = (sel + (e.key === "ArrowDown" ? 1 : -1) + resultados.length) % resultados.length;
+      Array.prototype.forEach.call(sug.children, function (li, i) { li.classList.toggle("activa", i === sel); });
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      elegir(resultados[sel >= 0 ? sel : 0]);
+    } else if (e.key === "Escape") {
+      sug.classList.add("oculto");
+    }
+  });
+  sug.addEventListener("click", function (e) {
+    var li = e.target.closest("li[data-i]");
+    if (li) elegir(resultados[Number(li.getAttribute("data-i"))]);
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest(".buscador")) sug.classList.add("oculto"); });
+
+  function elegir(lead) {
+    if (!lead) return;
+    actual = { slug: lead.slug, lead: lead };
+    $("buscar").value = lead.nombre;
+    sug.classList.add("oculto");
+    pintarFicha();
+  }
+
+  $("btn-manual").addEventListener("click", function () {
+    modoManual = true; actual = null;
+    $("bloque-buscar").classList.add("oculto");
+    $("bloque-manual").classList.remove("oculto");
+    $("ficha").classList.add("oculto");
+    $("m-nombre").focus();
+  });
+  $("btn-volver").addEventListener("click", function () {
+    modoManual = false;
+    $("bloque-manual").classList.add("oculto");
+    $("bloque-buscar").classList.remove("oculto");
+  });
+
+  function leadManual() {
+    var nombre = $("m-nombre").value.trim();
+    if (!nombre) return null;
+    var lead = { nombre: nombre, tipo: $("m-tipo").value.trim(), ciudad: $("m-ciudad").value.trim(), web: $("m-web").value.trim(), origen: "añadido a mano" };
+    Object.keys(lead).forEach(function (k) { if (!lead[k]) delete lead[k]; });
+    return { slug: "manual-" + slugify(nombre + " " + (lead.ciudad || "")), lead: lead };
+  }
+
+  function pintarFicha() {
+    var l = actual.lead;
+    var p = indice[actual.slug];
+    var meta = [l.tipo, l.ciudad].filter(Boolean).join(" · ");
+    var extra = [];
+    if (l.valoracion_google) extra.push("★ " + esc(l.valoracion_google) + " (" + esc(l.num_resenas || 0) + " reseñas)");
+    extra.push(esc(l.web_estado || "sin web"));
+    if (l.web) extra.push('<a href="' + esc(l.web) + '" target="_blank" rel="noopener">web actual ↗</a>');
+    if (l.demo) extra.push('<a href="' + esc(l.demo) + '" target="_blank" rel="noopener">su demo ↗</a>');
+    var html = '<div class="ficha-top"><div><strong>' + esc(l.nombre) + '</strong><div class="meta">' + esc(meta) + "</div></div>" +
+      faseBadge(p && p.fase) + "</div>" + '<div class="meta">' + extra.join(" · ") + "</div>";
+    if (p && (p.contratado_unico || p.contratado_mensual)) {
+      html += '<div class="meta">Contratado: ' + eur(p.contratado_unico) + " + " + eur(p.contratado_mensual) + "/mes</div>";
+    }
+    $("ficha").innerHTML = html;
+    $("ficha").classList.remove("oculto");
+  }
+
+  // ---------- Analizar ----------
+  $("btn-analizar").addEventListener("click", function () {
+    var objetivo = modoManual ? leadManual() : actual;
+    if (!objetivo) {
+      $("progreso").innerHTML = '<span class="error">Elige un lead o escribe el nombre del negocio.</span>';
+      return;
+    }
+    actual = objetivo;
+    var btn = this;
+    btn.disabled = true;
+    $("progreso").textContent = "Analizando el negocio…";
+    $("resultado").classList.add("oculto");
+
+    fetch(FN, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        accion: "analizar",
+        slug: objetivo.slug,
+        lead: objetivo.lead,
+        canal: document.querySelector('input[name="canal"]:checked').value,
+        conversacion: $("conversacion").value,
+        nota: $("nota").value
+      })
+    })
+      .then(function (r) {
+        if (!r.ok || !r.body) {
+          return r.json().catch(function () { return {}; }).then(function (d) { throw new Error(d.error || "Error " + r.status); });
+        }
+        return leerStream(r.body);
+      })
+      .then(function (ev) {
+        if (ev.t === "error") throw new Error(ev.error);
+        $("progreso").textContent = "";
+        pintarResultado(ev.resultado);
+        cargarPipeline();
+        setTimeout(function () { if (!modoManual) pintarFicha(); }, 800);
+      })
+      .catch(function (err) {
+        $("progreso").innerHTML = '<span class="error">No se pudo analizar: ' + esc(err.message) + "</span>";
+      })
+      .then(function () { btn.disabled = false; });
+  });
+
+  function leerStream(body) {
+    var reader = body.getReader();
+    var dec = new TextDecoder();
+    var buf = "";
+    var final = null;
+    function paso() {
+      return reader.read().then(function (res) {
+        if (res.value) buf += dec.decode(res.value, { stream: !res.done });
+        var lineas = buf.split("\n");
+        buf = lineas.pop();
+        lineas.forEach(function (ln) {
+          if (!ln.trim()) return;
+          var ev = JSON.parse(ln);
+          if (ev.t === "delta") $("progreso").textContent = "Escribiendo la propuesta… (" + ev.n + " caracteres)";
+          else final = ev;
+        });
+        if (res.done) {
+          if (buf.trim()) final = JSON.parse(buf);
+          if (!final) throw new Error("respuesta incompleta (¿tiempo agotado?)");
+          return final;
+        }
+        return paso();
+      });
+    }
+    return paso();
+  }
+
+  function copiarBtn(id) { return '<button type="button" class="btn sec" data-copiar="' + id + '">Copiar</button>'; }
+
+  function pintarResultado(r) {
+    var e = r.estrategia, d = r.diagnostico, v = r.valor_estimado;
+    var h = "";
+    h += '<div class="caja"><h2>Respuesta para enviar ' + faseBadge(r.fase) + "</h2>";
+    h += '<div class="respuesta-texto" id="txt-principal">' + esc(r.respuesta.texto) + "</div>";
+    h += '<div class="fila-acciones">' + copiarBtn("txt-principal") + "</div>";
+    h += '<div class="kicker">Alternativa</div><div class="respuesta-texto alt" id="txt-alt">' + esc(r.respuesta.alternativa_corta) + "</div>";
+    h += '<div class="fila-acciones">' + copiarBtn("txt-alt") + "</div>";
+    if (r.alertas && r.alertas.length) {
+      h += '<div class="kicker">Ojo</div>' + r.alertas.map(function (a) { return '<div class="alerta">' + esc(a) + "</div>"; }).join("");
+    }
+    h += "</div>";
+
+    h += '<div class="caja"><h2>Estrategia</h2>';
+    h += '<p><strong>Objetivo de este mensaje:</strong> ' + esc(e.objetivo_mensaje) + "</p>";
+    h += '<div class="kicker">Ofrecer ahora</div><div class="oferta"><div class="precio">' + esc(e.ofrecer_ahora.precio) + '</div><div class="muted">' +
+      esc(e.ofrecer_ahora.servicio_id) + "</div><p>" + esc(e.ofrecer_ahora.por_que) + "</p></div>";
+    if (e.guardar_para_despues.length) {
+      h += '<div class="kicker">Guardar para después</div><ul class="lista">' + e.guardar_para_despues.map(function (g) {
+        return "<li><strong>" + esc(g.servicio_id) + "</strong> · " + esc(g.precio) + '<div class="muted">Cuándo: ' + esc(g.cuando_sacarlo) + "</div></li>";
+      }).join("") + "</ul>";
+    }
+    h += '<div class="kicker">Si pide rebaja</div><p>' + esc(e.margen_negociacion) + "</p>";
+    h += '<div class="kicker">Siguiente paso</div><p>' + esc(r.siguiente_paso.accion) + ' <span class="muted">(' + esc(r.siguiente_paso.cuando) + ")</span></p>";
+    h += '<div class="stats-row" style="margin:1rem 0 0">' +
+      '<div class="stat-card"><strong>' + eur(v.entrada_eur) + "</strong><span>Entrada</span></div>" +
+      '<div class="stat-card"><strong>' + eur(v.mensual_eur) + "</strong><span>Al mes</span></div>" +
+      '<div class="stat-card"><strong>' + eur(v.potencial_12m_eur) + "</strong><span>Potencial 12 m</span></div></div>";
+    h += "</div>";
+
+    h += '<div class="caja"><h2>Objeciones probables</h2>' + r.objeciones.map(function (o, i) {
+      return '<details class="obj"><summary>' + esc(o.objecion) + '</summary><p id="obj-' + i + '">' + esc(o.respuesta) +
+        '</p><div class="fila-acciones">' + copiarBtn("obj-" + i) + "</div></details>";
+    }).join("") + "</div>";
+
+    h += '<div class="caja"><h2>Diagnóstico</h2><p>' + esc(d.resumen) + "</p>";
+    h += '<p><strong>Dolor principal:</strong> ' + esc(d.dolor_principal) + "</p>";
+    h += '<ul class="lista">' + d.necesidades.map(function (n) {
+      return '<li><span class="urg urg-' + esc(n.urgencia) + '">' + esc(n.urgencia) + "</span>" + esc(n.necesidad) +
+        ' <span class="muted">→ ' + esc(n.servicio_id) + '</span><div class="muted">' + esc(n.evidencia) + "</div></li>";
+    }).join("") + "</ul></div>";
+
+    $("resultado").innerHTML = h;
+    $("resultado").classList.remove("oculto");
+    $("caja-registrar").classList.remove("oculto");
+    if (r.fase === "cerrado_entrada" || r.fase === "perdido") {
+      $("r-fase").value = r.fase;
+      $("r-fase").dispatchEvent(new Event("change"));
+    }
+    $("resultado").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-copiar]");
+    if (!b) return;
+    var txt = $(b.getAttribute("data-copiar")).textContent;
+    navigator.clipboard.writeText(txt).then(function () {
+      b.textContent = "Copiado ✓";
+      setTimeout(function () { b.textContent = "Copiar"; }, 1500);
+    });
+  });
+
+  // ---------- Registrar ----------
+  var CHIPS = {
+    perdido: ["Le pareció caro", "No lo necesita", "Ya tiene a alguien", "Dejó de contestar", "Se lo va a pensar", "No se fía"],
+    cerrado_entrada: ["Le gustó la demo", "El precio le convenció", "Pagar al final le dio confianza", "La rapidez de entrega", "Lo necesitaba ya"]
+  };
+  $("r-fase").addEventListener("change", function () {
+    var f = this.value;
+    var mostrar = f === "perdido" || f === "cerrado_entrada";
+    $("bloque-motivo").classList.toggle("oculto", !mostrar);
+    if (!mostrar) return;
+    $("r-motivo-label").textContent = f === "perdido" ? "¿Por qué se ha perdido? (el agente aprende de esto)" : "¿Qué le hizo decir que sí? (el agente aprende de esto)";
+    $("chips-motivo").innerHTML = CHIPS[f].map(function (c) { return '<button type="button">' + esc(c) + "</button>"; }).join("");
+  });
+  $("chips-motivo").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    var t = $("r-motivo");
+    t.value = t.value.trim() ? t.value.trim() + ". " + b.textContent : b.textContent;
+  });
+
+  $("btn-guardar").addEventListener("click", function () {
+    if (!actual) return;
+    var btn = this;
+    var body = {
+      accion: "guardar", slug: actual.slug, nombre: actual.lead.nombre, tipo: actual.lead.tipo,
+      fase: $("r-fase").value || undefined, nota: $("r-nota").value, motivo: $("r-motivo").value
+    };
+    var aprende = body.fase === "perdido" || body.fase === "cerrado_entrada";
+    if ($("r-servicio").value.trim()) {
+      body.contratado = { servicio: $("r-servicio").value.trim(), unico: $("r-unico").value, mensual: $("r-mensual").value };
+    }
+    btn.disabled = true;
+    $("progreso-guardar").textContent = aprende ? "Guardando y sacando la lección de esta venta…" : "Guardando…";
+    fetch(FN, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })
+      .then(function (r) { if (!r.ok) throw new Error("Error " + r.status); return r.json(); })
+      .then(function (d) {
+        $("progreso-guardar").innerHTML = d.leccion
+          ? "Guardado ✓ · Lección aprendida: <strong>" + esc(d.leccion.leccion) + "</strong>"
+          : "Guardado ✓";
+        ["r-fase", "r-servicio", "r-unico", "r-mensual", "r-nota", "r-motivo"].forEach(function (id) { $(id).value = ""; });
+        $("bloque-motivo").classList.add("oculto");
+        cargarPipeline();
+        cargarAprendizajes();
+      })
+      .catch(function (err) { $("progreso-guardar").innerHTML = '<span class="error">' + esc(err.message) + "</span>"; })
+      .then(function () { btn.disabled = false; });
+  });
+
+  // ---------- Pipeline ----------
+  function pintarPipeline() {
+    var filas = Object.keys(indice).map(function (slug) { var x = indice[slug]; x.slug = slug; return x; })
+      .sort(function (a, b) { return (b.updatedAt || "").localeCompare(a.updatedAt || ""); });
+    var abiertos = filas.filter(function (x) { return x.fase !== "perdido"; });
+    var mrr = filas.reduce(function (s, x) { return s + (x.contratado_mensual || 0); }, 0);
+    var cobrado = filas.reduce(function (s, x) { return s + (x.contratado_unico || 0); }, 0);
+    var potencial = abiertos.reduce(function (s, x) { return s + (x.potencial_12m_eur || 0); }, 0);
+    $("pipe-stats").innerHTML =
+      '<div class="stat-card"><strong>' + abiertos.length + "</strong><span>Abiertos</span></div>" +
+      '<div class="stat-card"><strong>' + eur(cobrado) + "</strong><span>Pagos únicos</span></div>" +
+      '<div class="stat-card"><strong>' + eur(mrr) + "</strong><span>Cuotas / mes</span></div>" +
+      '<div class="stat-card"><strong>' + eur(potencial) + "</strong><span>Potencial 12 m</span></div>";
+    if (!filas.length) {
+      $("pipe-tabla").innerHTML = '<p class="muted">Todavía no hay nadie. Cada análisis que hagas se guarda aquí.</p>';
+      return;
+    }
+    $("pipe-tabla").innerHTML = '<table class="pipe"><thead><tr><th>Negocio</th><th class="col-tipo">Tipo</th><th>Fase</th><th class="num">Potencial</th></tr></thead><tbody>' +
+      filas.map(function (x) {
+        return '<tr data-slug="' + esc(x.slug) + '"><td>' + esc(x.nombre) + '</td><td class="col-tipo">' + esc(x.tipo) + "</td><td>" + faseBadge(x.fase) +
+          '</td><td class="num">' + (x.potencial_12m_eur != null ? eur(x.potencial_12m_eur) : "—") + "</td></tr>";
+      }).join("") + "</tbody></table>";
+  }
+
+  $("pipe-tabla").addEventListener("click", function (e) {
+    var tr = e.target.closest("tr[data-slug]");
+    if (!tr) return;
+    var slug = tr.getAttribute("data-slug");
+    var lead = porSlug[slug] || { nombre: indice[slug].nombre, tipo: indice[slug].tipo, origen: "añadido a mano" };
+    modoManual = false;
+    $("bloque-manual").classList.add("oculto");
+    $("bloque-buscar").classList.remove("oculto");
+    elegir(Object.assign({ slug: slug }, lead));
+    $("conversacion").value = "";
+    $("nota").value = "";
+    $("h-cliente").scrollIntoView({ behavior: "smooth" });
+  });
+})();
+</script>
+</body>
+</html>

@@ -346,6 +346,7 @@ def nav_tabs(activa):
     return f"""<nav class="tabs">
   <a class="{cls('panel')}" href="index.html">Panel de propuestas</a>
   <a class="{cls('datos')}" href="datos.html">Datos de leads (CSV)</a>
+  <a class="{cls('responder')}" href="responder.html">Responder</a>
 </nav>"""
 
 

@@ -2,8 +2,9 @@
   "name": "leadgen-webs-functions",
   "private": true,
   "version": "1.0.0",
-  "description": "Netlify Function para sincronizar el estado de los leads (checkbox 'marcar como hecho' en el panel).",
+  "description": "Netlify Functions del panel: estado de los leads (estado.mjs) y agente Responder (responder.mjs).",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@netlify/blobs": "^8.1.0"
   }
 }

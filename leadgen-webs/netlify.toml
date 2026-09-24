@@ -17,3 +17,15 @@
 [[edge_functions]]
   path = "/.netlify/functions/estado"
   function = "panel-auth"
+
+[[edge_functions]]
+  path = "/responder.html"
+  function = "panel-auth"
+
+[[edge_functions]]
+  path = "/responder-leads.json"
+  function = "panel-auth"
+
+[[edge_functions]]
+  path = "/.netlify/functions/responder"
+  function = "panel-auth"

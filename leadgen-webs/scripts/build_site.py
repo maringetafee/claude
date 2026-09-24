@@ -18,6 +18,7 @@ import csv
 from pathlib import Path
 
 import build_leads_data
+import build_responder
 from site_common import (
     ESTADO_LABELS,
     ESTADO_ORDEN,
@@ -179,6 +180,7 @@ def build():
     print(f"Indice regenerado: {OUT_SITES / 'index.html'} ({total} leads, {len(por_tipo)} tipos)")
 
     build_leads_data.build()
+    build_responder.build()
 
 
 if __name__ == "__main__":

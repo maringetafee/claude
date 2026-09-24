@@ -1,5 +1,6 @@
-// Protege el panel interno (index.html, datos.html) y la Netlify Function
-// que guarda el estado en vivo (estado.mjs) con HTTP Basic Auth, en vez de
+// Protege el panel interno (index.html, datos.html, responder.html y sus
+// datos) y las Netlify Functions que guardan el estado en vivo (estado.mjs)
+// y el pipeline del agente (responder.mjs) con HTTP Basic Auth, en vez de
 // depender de una ruta secreta no adivinable.
 //
 // El navegador se encarga de pedir usuario/contraseña con su propio dialogo
