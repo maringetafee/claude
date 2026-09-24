@@ -1,9 +1,9 @@
 // Contexto de negocio de MakeMyWeb para el agente "Responder" (responder.mjs).
 //
 // ESTE es el archivo que hay que tocar para cambiar precios, servicios o
-// condiciones: el system prompt se construye a partir de aqui. Los precios
-// marcados `provisional: true` son la propuesta inicial, pendientes de que
-// Mario confirme los reales.
+// condiciones: el system prompt se construye a partir de aqui. Precios
+// acordados con Mario el 2026-09-24; los pagos unicos se ajustan solos
+// (precio dinamico, ver CATALOGO).
 //
 // Importante para la cache de prompts: todo lo de este archivo es estable
 // (no meter fechas ni nada que cambie por peticion), asi el system prompt
@@ -20,88 +20,94 @@ export const EMPRESA = {
 
 // Escalera de servicios. `escalon` ordena la subida: se entra por el 0 y se
 // va ofreciendo el siguiente cuando aparece su disparador.
+//
+// Precio dinamico: `precio_eur` es el precio base del pago unico. Segun los
+// resultados de las ventas (ver precioVigente en responder.mjs) se mueve de
+// `paso_eur` en `paso_eur` entre `min_eur` (suelo, nunca se rompe) y
+// `max_eur` (techo). Las cuotas mensuales son fijas.
 export const CATALOGO = [
   {
-    id: "web-gancho",
+    id: "web-entrada",
     escalon: 0,
     nombre: "Web de una página (la demo que ya le hemos preparado) + ficha de Google Business optimizada",
-    precio: "249 € pago único",
-    cuota: "Cuido Básico 39 €/mes (hosting, copias, seguridad, 1 cambio/mes)",
-    coste_interno: "≈3-4 h (la demo ya está hecha)",
+    precio_eur: 199, min_eur: 199, max_eur: 299, paso_eur: 20,
+    cuota: "Cuido Básico 19 €/mes (hosting, copias de seguridad, seguridad, 1 cambio al mes)",
     para_quien: "Cualquier negocio sin web, con solo Instagram/Facebook, o con web obsoleta",
     disparador: "Primer contacto. No tiene web, o la que tiene no funciona en móvil / está desfasada.",
-    provisional: true,
   },
   {
     id: "captacion-local",
     escalon: 1,
     nombre: "Pack captación local: botón de WhatsApp, reseñas de Google integradas, SEO local (Getafe/Leganés…)",
-    precio: "+99 € o incluido al pasar a Cuido Pro (77 €/mes: cambios ilimitados, soporte prioritario, revisión SEO)",
-    coste_interno: "≈2 h + 1 h/mes",
+    precio_eur: 49, min_eur: 39, max_eur: 99, paso_eur: 10,
+    cuota: "o incluido gratis al pasar a Cuido Pro: 39 €/mes (cambios ilimitados, soporte prioritario, revisión SEO)",
     para_quien: "Negocio que ya tiene la web y quiere que le llegue más gente",
     disparador: "Web publicada y el cliente pregunta cómo conseguir más clientes, o tiene pocas reseñas frente a la competencia.",
-    provisional: true,
   },
   {
     id: "citas-reservas",
     escalon: 2,
     nombre: "Sistema de citas / reservas online (agenda, recordatorios, cancelaciones)",
-    precio: "299 € + 19 €/mes",
-    coste_interno: "≈6-8 h (sale de local-business-system)",
+    precio_eur: 149, min_eur: 119, max_eur: 249, paso_eur: 20,
+    cuota: "+9 €/mes",
     para_quien: "Peluquería, barbería, uñas, estética, dental, veterinario, fisio, taller, autoescuela, restaurante",
     disparador: "Coge el teléfono todo el día, le fallan citas (no-shows), gestiona la agenda por WhatsApp o en papel.",
-    provisional: true,
   },
   {
-    id: "carta-pedidos",
+    id: "carta-qr",
     escalon: 3,
-    nombre: "Carta digital con QR y/o pedidos online para recoger o a domicilio (sin comisión de plataforma)",
-    precio: "199 € (carta QR) · 399 € (pedidos online)",
-    coste_interno: "≈4 h / ≈10 h",
-    para_quien: "Restaurante, bar, hamburguesería, cafetería, panadería con encargos",
-    disparador: "Tiene take-away o delivery, paga comisiones a Glovo/Just Eat/Uber Eats, o cambia la carta a menudo.",
-    provisional: true,
+    nombre: "Carta digital con código QR (se actualiza al momento, sin reimprimir)",
+    precio_eur: 79, min_eur: 59, max_eur: 129, paso_eur: 10,
+    cuota: null,
+    para_quien: "Restaurante, bar, hamburguesería, cafetería",
+    disparador: "Cambia la carta o los precios a menudo, tiene carta en papel gastada, o quiere carta en varios idiomas.",
+  },
+  {
+    id: "pedidos-online",
+    escalon: 3,
+    nombre: "Pedidos online para recoger o a domicilio, sin comisión de plataforma",
+    precio_eur: 199, min_eur: 149, max_eur: 299, paso_eur: 20,
+    cuota: "+9 €/mes",
+    para_quien: "Restaurante, hamburguesería, pizzería, panadería con encargos",
+    disparador: "Tiene take-away o delivery, paga comisiones a Glovo/Just Eat/Uber Eats (30 % aprox.), o recibe encargos por teléfono/WhatsApp.",
   },
   {
     id: "tienda-online",
     escalon: 4,
-    nombre: "Tienda online con pago con tarjeta (Redsys/Bizum), cuentas de cliente y envíos o recogida",
-    precio: "desde 690 € (catálogo pequeño) hasta 1.200 € + 29 €/mes",
-    coste_interno: "≈20-30 h (base: proyecto coronas-y-flores)",
+    nombre: "Tienda online con pago con tarjeta/Bizum, cuentas de cliente y envíos o recogida",
+    precio_eur: 359, min_eur: 299, max_eur: 499, paso_eur: 30,
+    cuota: "+19 €/mes",
     para_quien: "Floristería, panadería/pastelería, tiendas, recambios: quien vende producto físico",
     disparador: "Le piden cosas por WhatsApp/Instagram para pagar por adelantado, vende a gente de fuera del barrio, o tiene temporadas fuertes (San Valentín, Todos los Santos, Navidad).",
-    provisional: true,
   },
   {
     id: "redes",
     escalon: 5,
-    nombre: "Gestión de redes sociales (publicaciones programadas con sus fotos y ofertas)",
-    precio: "99-199 €/mes según frecuencia",
-    coste_interno: "≈3-6 h/mes (apoyado en social-autopilot)",
+    nombre: "Gestión de redes sociales (publicaciones con sus fotos y ofertas)",
+    precio_eur: null,
+    cuota: "59 €/mes (2 publicaciones/semana) · 99 €/mes (4 publicaciones/semana)",
     para_quien: "Negocio con web que no publica o publica sin constancia",
     disparador: "Ya tiene web y la base funcionando, y reconoce que no tiene tiempo para Instagram.",
-    provisional: true,
   },
   {
     id: "extras",
     escalon: 9,
-    nombre: "Extras sueltos: página adicional, cambio de contenido, sesión de fotos, dominio + correo profesional",
-    precio: "página 50 € · cambio 15 € (incluido en Cuido Pro) · dominio+correo 30 €/año",
-    coste_interno: "variable",
+    nombre: "Extras sueltos",
+    precio_eur: null,
+    cuota: "página adicional 29 € · cambio de contenido 10 € (gratis con Cuido Pro) · dominio propio + correo profesional 25 €/año",
     para_quien: "Cualquiera",
     disparador: "Cuando lo pida o cuando la web lo necesite de forma evidente.",
-    provisional: true,
   },
 ];
 
 export const CONDICIONES = {
-  precio_minimo: "199 € la web de entrada: de ahí no se baja nunca.",
+  precio_minimo: "Ningún pago único baja de su suelo (la web de entrada: 199 €, de ahí no se baja nunca).",
   pago: "Se paga todo al final, cuando está todo desplegado y funcionando, y en efectivo. Lo de 'pagas al final, cuando ya lo ves funcionando' es un argumento de venta que se puede usar desde el principio (no arriesga nada). Que el pago es EN EFECTIVO no se menciona hasta el cierre (cuando ya ha dicho que sí y se concreta la entrega); si el cliente pregunta antes cómo se paga, se le contesta con la verdad.",
   plazo_entrega: "24/48 horas desde que tenemos lo necesario (textos, fotos, logo si tiene).",
-  permanencia: "Sin permanencia en la cuota (argumento de venta: 'si no te convence, lo dejas').", // provisional
-  baja: "Si se da de baja de la cuota, la web deja de estar alojada; puede llevarse el dominio.", // provisional
-  descuentos_permitidos: "Bajar la entrada hasta 199 € como mucho, o regalar un extra (p. ej. el pack captación o el primer mes de cuota) para cerrar o si trae a otro negocio (referido).", // provisional
-  historial_precios: "Antes pedíamos 479 € por la web y la mayoría se iba por el precio. Por eso ahora se entra barato. La objeción de precio es LA objeción más habitual: anticípala y desactívala (precio bajo, pago al final cuando lo ve funcionando, entrega en 24/48 h, sin riesgo).",
+  permanencia: "Sin permanencia en la cuota (argumento de venta: 'si no te convence, lo dejas').",
+  baja: "Si se da de baja de la cuota, la web deja de estar publicada; puede llevarse su dominio.",
+  descuentos_permitidos: "No se rebajan los precios vigentes. Para cerrar se puede regalar UN extra: el pack captación, el primer mes de cuota o la carta QR (también si trae a otro negocio como referido).",
+  historial_precios: "Antes pedíamos 479 € por la web y la mayoría se iba por el precio. Por eso ahora se entra muy barato. La objeción de precio es LA objeción más habitual: anticípala y desactívala (precio bajo, pago al final cuando lo ve funcionando, entrega en 24/48 h, sin permanencia, sin riesgo).",
 };
 
 // Fases del pipeline que usa el agente. Se mapean a los estados del panel
@@ -130,8 +136,7 @@ function renderCatalogo() {
   return CATALOGO.map(
     (s) =>
       `- [${s.id}] Escalón ${s.escalon}: ${s.nombre}\n` +
-      `  Precio: ${s.precio}${s.cuota ? ` · Cuota: ${s.cuota}` : ""}\n` +
-      `  Coste interno: ${s.coste_interno}\n` +
+      `  Precio base: ${s.precio_eur != null ? `${s.precio_eur} € (suelo ${s.min_eur} €)` : "solo cuota"}${s.cuota ? ` · ${s.cuota}` : ""}\n` +
       `  Para quién: ${s.para_quien}\n` +
       `  Cuándo ofrecerlo: ${s.disparador}`,
   ).join("\n");
@@ -152,7 +157,7 @@ El modelo es "entrar barato y crecer con el cliente":
 
 # Reglas que no se rompen
 - Honestidad: no inventes datos, clientes, casos de éxito, cifras de facturación ni funciones que no tenemos. No uses urgencia o escasez falsas ("solo hoy", "últimas plazas") ni presiones. Si un servicio no le hace falta a este negocio, no se lo ofrezcas: se nota y quema la relación.
-- Precios: usa los del catálogo. Precio mínimo: ${c.precio_minimo} Descuentos permitidos: ${c.descuentos_permitidos} Si el cliente pide algo fuera del catálogo, da una horquilla razonable y márcalo en "alertas" para que ${EMPRESA.persona} lo confirme.
+- Precios: usa SIEMPRE los "precios vigentes" que te paso en cada consulta (se ajustan solos según las ventas cerradas y perdidas); si no llegan, los del catálogo. Precio mínimo: ${c.precio_minimo} Descuentos permitidos: ${c.descuentos_permitidos} Si el cliente pide algo fuera del catálogo, da una horquilla razonable y márcalo en "alertas" para que ${EMPRESA.persona} lo confirme.
 - Si hay que ceder, cede antes en extras (primer mes de cuota, pack captación) que en el precio, y nunca por debajo del mínimo.
 - Contexto de precios: ${c.historial_precios}
 - Mensajes cortos, en el tono del canal: WhatsApp/Instagram = 2-5 líneas, cercano, sin tecnicismos, como escribe una persona; email = algo más completo pero igual de claro. Trato de ${EMPRESA.trato}. Nada de "¡Hola! 😊 ¡Espero que estés genial!" ni frases de plantilla. Como mucho un emoji y solo si encaja.
@@ -218,10 +223,11 @@ export const ESQUEMA_SALIDA = {
         ofrecer_ahora: {
           type: "object",
           additionalProperties: false,
-          required: ["servicio_id", "precio", "por_que"],
+          required: ["servicio_id", "precio", "precio_eur", "por_que"],
           properties: {
             servicio_id: { type: "string", description: "id del catálogo, o 'nada' si todavía no toca hablar de precio" },
             precio: { type: "string" },
+            precio_eur: { type: "number", description: "Pago único ofrecido en euros (0 si no hay pago único o no se habla de precio)" },
             por_que: { type: "string" },
           },
         },

@@ -25,7 +25,7 @@
 // Requiere la variable de entorno ANTHROPIC_API_KEY en Netlify.
 import Anthropic from "@anthropic-ai/sdk";
 import { getStore } from "@netlify/blobs";
-import { ESQUEMA_LECCION, ESQUEMA_SALIDA, FASES, FASE_A_ESTADO_PANEL, promptLeccion, systemPrompt } from "./lib/makemyweb.mjs";
+import { CATALOGO, ESQUEMA_LECCION, ESQUEMA_SALIDA, FASES, FASE_A_ESTADO_PANEL, promptLeccion, systemPrompt } from "./lib/makemyweb.mjs";
 
 const MODELO = "claude-opus-5";
 const MAX_HISTORIAL = 20;
@@ -141,9 +141,14 @@ function calcularStats(lecciones) {
 // Texto que se inyecta en cada analisis: stats + lecciones (primero las del
 // mismo tipo de negocio). Va en el mensaje de usuario, no en el system, para
 // no romper la cache del system prompt cada vez que se aprende algo.
+function bloquePrecios(lecciones) {
+  const lineas = preciosVigentes(lecciones).map((p) => `- ${p.id}: ${p.precio} € (${p.motivo})`);
+  return `## Precios vigentes hoy (pago único; ajustados automáticamente según las ventas; las cuotas mensuales no cambian)\n${lineas.join("\n")}\nOfrece estos precios, no los del catálogo si difieren.`;
+}
+
 function bloqueAprendizajes(lecciones, tipo) {
   if (!lecciones.length) {
-    return "## Lo aprendido de ventas anteriores\nTodavía no hay ventas cerradas ni perdidas registradas.";
+    return `${bloquePrecios(lecciones)}\n\n## Lo aprendido de ventas anteriores\nTodavía no hay ventas cerradas ni perdidas registradas.`;
   }
   const st = calcularStats(lecciones);
   const tasa = (c, p) => (c + p ? Math.round((100 * c) / (c + p)) + " %" : "—");
@@ -162,6 +167,8 @@ function bloqueAprendizajes(lecciones, tipo) {
     `- [${l.resultado.toUpperCase()} · ${l.tipo || "?"} · ${l.fecha.slice(0, 10)}] ${l.leccion} (motivo: ${l.motivo_real}; qué pasó: ${l.que_paso})`;
 
   return [
+    bloquePrecios(lecciones),
+    "",
     `## Lo aprendido de ventas anteriores (${st.total} registradas: ${st.cerradas} cerradas, ${st.perdidas} perdidas)`,
     `Tasa de cierre por tipo: ${lineasTipo}`,
     `Motivos de pérdida más frecuentes: ${motivos || "—"}`,
@@ -169,6 +176,43 @@ function bloqueAprendizajes(lecciones, tipo) {
     otras.length ? `\nLecciones generales:\n${otras.map(fmt).join("\n")}` : "",
     "\nAplica estas lecciones: repite lo que ha hecho cerrar ventas y evita lo que las ha hecho perder. Si una lección contradice la estrategia general, manda la lección (viene de datos reales) y dilo en \"alertas\".",
   ].filter(Boolean).join("\n");
+}
+
+// Precio dinamico por servicio, calculado en codigo (no a criterio del
+// modelo) con las ultimas VENTANA ventas decididas de ese servicio:
+//  - >= 30 % perdidas por precio           -> baja un paso (sin romper el suelo)
+//  - >= 60 % cerradas y 0 perdidas por precio -> sube un paso (sin pasar del techo)
+//  - si no, o con menos de MIN_MUESTRA ventas -> se mantiene
+// El punto de partida es el precio al que se ofrecio en la ultima venta.
+const VENTANA = 10;
+const MIN_MUESTRA = 5;
+
+function precioVigente(servicio, lecciones) {
+  if (servicio.precio_eur == null) return null;
+  const decididas = lecciones.filter((l) => l.ofrecido?.servicio_id === servicio.id).slice(-VENTANA);
+  const base = { id: servicio.id, precio: servicio.precio_eur, muestra: decididas.length, motivo: "precio base" };
+  if (decididas.length < MIN_MUESTRA) return { ...base, motivo: `precio base (${decididas.length}/${MIN_MUESTRA} ventas para empezar a ajustar)` };
+
+  const ultimo = Number(decididas[decididas.length - 1].ofrecido?.precio_eur) || servicio.precio_eur;
+  const actual = Math.min(servicio.max_eur, Math.max(servicio.min_eur, ultimo));
+  const cerradas = decididas.filter((l) => l.resultado === "cerrado").length;
+  const porPrecio = decididas.filter((l) => l.resultado === "perdido" && l.categoria_motivo === "precio").length;
+  const n = decididas.length;
+  const resumen = `${cerradas}/${n} cerradas, ${porPrecio} perdidas por precio`;
+
+  if (porPrecio / n >= 0.3) {
+    const precio = Math.max(servicio.min_eur, actual - servicio.paso_eur);
+    return { ...base, precio, motivo: precio < actual ? `bajado: ${resumen}` : `en el suelo: ${resumen}` };
+  }
+  if (cerradas / n >= 0.6 && porPrecio === 0) {
+    const precio = Math.min(servicio.max_eur, actual + servicio.paso_eur);
+    return { ...base, precio, motivo: precio > actual ? `subido: ${resumen}` : `en el techo: ${resumen}` };
+  }
+  return { ...base, precio: actual, motivo: `se mantiene: ${resumen}` };
+}
+
+function preciosVigentes(lecciones) {
+  return CATALOGO.map((s) => precioVigente(s, lecciones)).filter(Boolean);
 }
 
 // Al cerrar o perder una venta: Claude revisa la conversacion completa y el
@@ -334,7 +378,7 @@ export default async (req) => {
     const params = new URL(req.url).searchParams;
     if (params.get("aprendizajes")) {
       const lecciones = await leerAprendizajes(store);
-      return json({ lecciones: lecciones.slice().reverse(), stats: calcularStats(lecciones) });
+      return json({ lecciones: lecciones.slice().reverse(), stats: calcularStats(lecciones), precios: preciosVigentes(lecciones) });
     }
     const slug = params.get("slug");
     if (slug) {

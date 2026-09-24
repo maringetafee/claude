@@ -217,6 +217,9 @@ __NAV__
 <section class="caja" aria-labelledby="h-apr">
   <h2 id="h-apr">Lo que ha aprendido el agente</h2>
   <p class="muted">Cada venta que marcas como "Ha dicho que sí" o "Perdido" se convierte en una lección que el agente usa en los siguientes análisis.</p>
+  <div class="kicker">Precios vigentes (pago único, se ajustan solos)</div>
+  <div id="apr-precios"><p class="muted">Cargando…</p></div>
+  <div class="kicker">Resultados</div>
   <div class="stats-row" id="apr-stats"></div>
   <div id="apr-lista"></div>
 </section>
@@ -268,6 +271,9 @@ __NAV__
         '<div class="stat-card"><strong>' + st.perdidas + "</strong><span>Perdidas</span></div>" +
         '<div class="stat-card"><strong>' + tasa + "</strong><span>Tasa de cierre</span></div>" +
         '<div class="stat-card"><strong style="font-size:1.05rem">' + esc(top ? top.replace(/_/g, " ") : "—") + "</strong><span>Motivo de pérdida nº 1</span></div>";
+      $("apr-precios").innerHTML = '<table class="pipe"><tbody>' + (d.precios || []).map(function (p) {
+        return "<tr><td>" + esc(p.id.replace(/-/g, " ")) + '</td><td class="num"><strong>' + eur(p.precio) + '</strong></td><td class="muted">' + esc(p.motivo) + "</td></tr>";
+      }).join("") + "</tbody></table>";
       $("apr-lista").innerHTML = d.lecciones.length
         ? d.lecciones.slice(0, 30).map(function (l) {
             return '<div class="leccion"><div class="cab"><span class="res res-' + esc(l.resultado) + '">' + esc(l.resultado) + "</span>" +
