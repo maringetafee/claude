@@ -8,7 +8,9 @@ import { normalizeHeader, normalizeKey, parseNumber } from "./values.ts";
 export const REL_SEP = " › ";
 
 /** "2026", "2026-03" o "2026-T1": periodos que salen de agrupar fechas (se ordenan como tiempo). */
-export const PERIOD_RE = /^\d{4}(-\d{2}|-T[1-4])?$/;
+export const PERIOD_RE = /^\d{4}(-\d{2}|-T[1-4]|[-/]\d{4})?$/;
+/** Valores con orden propio ("Año 1", "2019-2020", "T2"): se ordenan por nombre, no por valor. */
+const ORDINAL_RE = /^(\d{4}([-/]\d{2,4}|-T[1-4])?|(a[nñ]o|year|mes|trimestre|semana|curso|t|q)\s*\d+)$/i;
 
 export function isPeriodColumn(t: TableData, i: number): boolean {
   if (t.columns[i]?.type !== "text") return false;
@@ -305,7 +307,9 @@ export function groupForChart(
     g.push(measure.column === null ? 1 : mi < 0 ? null : r[mi]);
   }
   let out = [...groups.entries()].map(([name, vals]) => ({ name, value: aggregate(vals, measure.agg) ?? 0 }));
-  if (isDate || isPeriod) out.sort((a, b) => a.name.localeCompare(b.name));
+  if (isDate || isPeriod || (out.length > 1 && out.every((x) => ORDINAL_RE.test(x.name)))) {
+    out.sort((a, b) => a.name.localeCompare(b.name, "es", { numeric: true }));
+  }
   else {
     out.sort((a, b) => b.value - a.value);
     if (topN > 0 && out.length > topN) {

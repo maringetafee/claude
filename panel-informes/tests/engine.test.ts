@@ -138,3 +138,13 @@ test("informe automático: KPIs de importe, evolución temporal y filtros", () =
   assert.equal(r.charts[0].type, "line");
   assert.ok(r.slicers.includes("Clientes › Zona"));
 });
+
+test("cohortes y años de seguimiento se ordenan cronológicamente", () => {
+  const t: TableData = {
+    id: "ds_x", name: "x", area: "a",
+    columns: [{ name: "Cohorte", type: "text" }, { name: "Año", type: "text" }, { name: "Valor", type: "number" }],
+    rows: [["2019-2020", "Año 10", 1], ["2009-2010", "Año 2", 5], ["2014-2015", "Año 1", 3]],
+  };
+  assert.deepEqual(groupForChart(t, "Cohorte", undefined, { column: "Valor", agg: "sum" }, 10).map((x) => x.name), ["2009-2010", "2014-2015", "2019-2020"]);
+  assert.deepEqual(groupForChart(t, "Año", undefined, { column: "Valor", agg: "sum" }, 10).map((x) => x.name), ["Año 1", "Año 2", "Año 10"]);
+});
