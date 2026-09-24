@@ -37,6 +37,17 @@
         "leadgen-webs/output/sites"
       ],
       "port": 8765
+    },
+    {
+      "name": "panel-informes",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "panel-informes"
+      ],
+      "port": 8888
     }
   ]
 }
