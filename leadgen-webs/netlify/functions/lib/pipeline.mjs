@@ -13,7 +13,9 @@ import Anthropic from "@anthropic-ai/sdk";
 import { getStore } from "@netlify/blobs";
 import { CATALOGO, ESQUEMA_LECCION, ESQUEMA_SALIDA, FASES, FASE_A_ESTADO_PANEL, promptLeccion, systemPrompt } from "./makemyweb.mjs";
 
-const MODELO = "claude-opus-5";
+// Sonnet 5: ~2,5 veces más barato que Opus y más rápido; de sobra para
+// redactar respuestas comerciales y sacar lecciones.
+const MODELO = "claude-sonnet-5";
 const MAX_HISTORIAL = 20;
 export const INDICE = "_indice";
 const APRENDIZAJES = "_aprendizajes";
@@ -259,11 +261,9 @@ export async function ejecutarAnalisis(body) {
 
   const aprendizajes = bloqueAprendizajes(await leerAprendizajes(store), lead?.tipo || ficha.tipo);
   const client = new Anthropic();
-  const stream = client.beta.messages.stream({
+  const stream = client.messages.stream({
     model: MODELO,
     max_tokens: 16000,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
     output_config: { effort: "medium", format: { type: "json_schema", schema: ESQUEMA_SALIDA } },
     system: [{ type: "text", text: systemPrompt(), cache_control: { type: "ephemeral" } }],
     messages: [{ role: "user", content: mensajeUsuario({ lead, ficha, canal, conversacion, nota, aprendizajes }) }],
