@@ -388,11 +388,12 @@ __NAV__
     $("progreso").textContent = "Analizando el negocio…";
     $("resultado").classList.add("oculto");
 
-    fetch(FN, {
+    var jobId = (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(36).slice(2)).toLowerCase();
+    fetch(FN + "-background", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        accion: "analizar",
+        jobId: jobId,
         slug: objetivo.slug,
         lead: objetivo.lead,
         canal: document.querySelector('input[name="canal"]:checked').value,
@@ -401,15 +402,12 @@ __NAV__
       })
     })
       .then(function (r) {
-        if (!r.ok || !r.body) {
-          return r.json().catch(function () { return {}; }).then(function (d) { throw new Error(d.error || "Error " + r.status); });
-        }
-        return leerStream(r.body);
+        if (r.status !== 202 && !r.ok) throw new Error("Error " + r.status + " al lanzar el análisis");
+        return esperarJob(jobId);
       })
-      .then(function (ev) {
-        if (ev.t === "error") throw new Error(ev.error);
+      .then(function (d) {
         $("progreso").textContent = "";
-        pintarResultado(ev.resultado);
+        pintarResultado(d.resultado);
         cargarPipeline();
         setTimeout(function () { if (!modoManual) pintarFicha(); }, 800);
       })
@@ -419,31 +417,25 @@ __NAV__
       .then(function () { btn.disabled = false; });
   });
 
-  function leerStream(body) {
-    var reader = body.getReader();
-    var dec = new TextDecoder();
-    var buf = "";
-    var final = null;
-    function paso() {
-      return reader.read().then(function (res) {
-        if (res.value) buf += dec.decode(res.value, { stream: !res.done });
-        var lineas = buf.split("\n");
-        buf = lineas.pop();
-        lineas.forEach(function (ln) {
-          if (!ln.trim()) return;
-          var ev = JSON.parse(ln);
-          if (ev.t === "delta") $("progreso").textContent = "Escribiendo la propuesta… (" + ev.n + " caracteres)";
-          else final = ev;
-        });
-        if (res.done) {
-          if (buf.trim()) final = JSON.parse(buf);
-          if (!final) throw new Error("respuesta incompleta (¿tiempo agotado?)");
-          return final;
-        }
-        return paso();
-      });
-    }
-    return paso();
+  // El análisis corre en una función en segundo plano (tarda ~30-60 s); aquí
+  // se consulta su estado cada 3 s hasta que está listo.
+  function esperarJob(jobId) {
+    var inicio = Date.now();
+    return new Promise(function (resolve, reject) {
+      (function consultar() {
+        var seg = Math.round((Date.now() - inicio) / 1000);
+        $("progreso").textContent = "Analizando el negocio y preparando la respuesta… (" + seg + " s)";
+        fetch(FN + "?job=" + encodeURIComponent(jobId), { cache: "no-store" })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d.estado === "listo") return resolve(d);
+            if (d.estado === "error") return reject(new Error(d.error || "error desconocido"));
+            if (Date.now() - inicio > 6 * 60 * 1000) return reject(new Error("ha tardado demasiado"));
+            setTimeout(consultar, 3000);
+          })
+          .catch(function () { setTimeout(consultar, 3000); });
+      })();
+    });
   }
 
   function copiarBtn(id) { return '<button type="button" class="btn sec" data-copiar="' + id + '">Copiar</button>'; }

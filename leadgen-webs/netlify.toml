@@ -29,3 +29,7 @@
 [[edge_functions]]
   path = "/.netlify/functions/responder"
   function = "panel-auth"
+
+[[edge_functions]]
+  path = "/.netlify/functions/responder-background"
+  function = "panel-auth"
