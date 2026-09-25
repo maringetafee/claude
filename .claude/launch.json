@@ -39,6 +39,18 @@
       "port": 8765
     },
     {
+      "name": "web-lolita",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8766",
+        "--directory",
+        "web-lolita"
+      ],
+      "port": 8766
+    },
+    {
       "name": "panel-informes",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
