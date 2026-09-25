@@ -1,6 +1,8 @@
 // Protege /admin con usuario/contraseña (HTTP Basic Auth).
 // La contraseña está en la variable de entorno ADMIN_PASSWORD de Netlify (no en el repo).
-// El usuario puede ser cualquiera; solo se comprueba la contraseña.
+// Sin ADMIN_PASSWORD definida, /admin queda siempre cerrado.
+
+const USUARIO = "lolita";
 
 export default async (req, context) => {
   const password = Netlify.env.get("ADMIN_PASSWORD");
@@ -9,8 +11,8 @@ export default async (req, context) => {
   if (password && auth.startsWith("Basic ")) {
     try {
       const decoded = atob(auth.slice(6));
-      const given = decoded.slice(decoded.indexOf(":") + 1);
-      if (given === password) return context.next();
+      const sep = decoded.indexOf(":");
+      if (decoded.slice(0, sep) === USUARIO && decoded.slice(sep + 1) === password) return context.next();
     } catch (e) {
       // cabecera mal formada: se trata como no autorizado
     }
